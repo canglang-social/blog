@@ -8,10 +8,13 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://canglang.netlify.app',
   integrations: [mdx(), sitemap()],
 
   vite: {
     plugins: [tailwindcss()],
+  },
+  redirects: {
+    '/': '/blog',
   },
 });
