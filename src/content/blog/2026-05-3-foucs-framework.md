@@ -2,8 +2,6 @@
 title: 'The Architecture of Absolute Focus: Reclaiming Cognitive Control in a Fragmented World'
 description: "How to apply Jobs's radical reduction, Musk's micro-time-boxing, and systems thinking to eliminate cognitive overload and master deep work."
 pubDate: 2026-05-30
-tags: ['productivity', 'systems-thinking', 'focus', 'career-growth']
-layout: '../../layouts/MarkdownPostLayout.astro'
 ---
 
 In an era of infinite notifications and endless professional demands, the greatest bottleneck to high performance is not a lack of ambition, but the fragmentation of attention. Most ambitious individuals treat their energy as an infinite resource, scattering it casually across competing goals. This approach triggers severe "attention residue"—a psychological state where the uncompleted loops of one task contaminate your execution in another, leaving you in a state of chronic anxiety and execution paralysis.
