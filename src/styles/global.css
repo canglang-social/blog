@@ -14,6 +14,10 @@
   --font-mono:
     ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
     'Liberation Mono', monospace;
+  /* Calligraphic Kai face for classical poetry (CJK) */
+  --font-poem:
+    'STKaiti', 'KaiTi', 'Kaiti SC', 'Kaiti TC', 'STSong', 'Songti SC',
+    'Noto Serif SC', 'Source Han Serif SC', serif;
 
   /* Light palette */
   --bg: #fcfcfd;
