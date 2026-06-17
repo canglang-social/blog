@@ -2,6 +2,7 @@
 title: 'Overcoming "Builder’s Guilt"'
 description: 'Why Programmers Don’t Always Need to Build Their Own Tools'
 pubDate: 'Mar 31 2026'
+tags: ['reflection', 'mindset']
 ---
 
 I have felt guilty as a programmer for a long time. The source of this guilt? I haven't spent my days building my own custom tools from scratch. For years, I believed that relying on off-the-shelf software was a sign of weakness—that a "true" programmer would simply code their way out of every inconvenience.

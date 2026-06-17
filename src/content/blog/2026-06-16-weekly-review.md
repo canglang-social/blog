@@ -2,6 +2,7 @@
 title: 'Weekly Review: The Week Certainty Beat Avoidance'
 description: "Last week a project sat untouched because I kept avoiding it. This week the same project finally moved — not by trying harder, but by removing every decision standing in front of it."
 pubDate: 2026-06-16
+tags: ['weekly-review', 'career', 'rag']
 ---
 
 Last week I caught myself avoiding the work that mattered by staying busy with easier things. The headline casualty was my portfolio project: never started. This week, the very same project moved — I finished about half of RAGX v1. What changed wasn't willpower. It was the environment around the work.

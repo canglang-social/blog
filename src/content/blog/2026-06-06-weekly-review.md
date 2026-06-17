@@ -2,6 +2,7 @@
 title: 'Weekly Review: The Week I Caught Avoidance Wearing a Productive Disguise'
 description: "A job-hunt week where the finished tasks were the easy ones and the main tasks went untouched — and what that taught me about deciding instead of keeping every door open."
 pubDate: 2026-06-06
+tags: ['weekly-review', 'career', 'reflection']
 ---
 
 This was my first week of actively looking for a job, and my first weekly review. I didn't set goals formally, but I had a clear list in my head: draft my resume, update LinkedIn, start an agent project for my portfolio, test my English, work out, and build a list of target roles. By Saturday the pattern was impossible to miss — the tasks I finished were the easy ones, and the two that mattered most never got started.

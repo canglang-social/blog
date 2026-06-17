@@ -9,6 +9,17 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// Unique tags, ordered by frequency then alphabetically.
+const counts = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags ?? []) {
+    counts.set(tag, (counts.get(tag) ?? 0) + 1);
+  }
+}
+const tags = [...counts.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .map(([tag]) => tag);
 ---
 
 <!doctype html>
@@ -26,10 +37,26 @@ const posts = (await getCollection('blog')).sort(
         <h1>Writing</h1>
         <p>{SITE_DESCRIPTION}</p>
       </header>
+
+      {
+        tags.length > 0 && (
+          <div class="filters" role="group" aria-label="Filter posts by tag">
+            <button class="chip is-active" data-filter="*" type="button">
+              All
+            </button>
+            {tags.map((tag) => (
+              <button class="chip" data-filter={tag} type="button">
+                {tag}
+              </button>
+            ))}
+          </div>
+        )
+      }
+
       <ul class="post-list">
         {
           posts.map((post) => (
-            <li>
+            <li data-tags={(post.data.tags ?? []).join(' ')}>
               <a href={`/blog/${post.id}/`}>
                 <time class="date">
                   <FormattedDate date={post.data.pubDate} />
@@ -38,19 +65,58 @@ const posts = (await getCollection('blog')).sort(
                 {post.data.description && (
                   <p class="desc">{post.data.description}</p>
                 )}
+                {(post.data.tags ?? []).length > 0 && (
+                  <div class="tags">
+                    {post.data.tags.map((tag) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
               </a>
             </li>
           ))
         }
       </ul>
+      <p class="empty" hidden>No posts with this tag yet.</p>
     </main>
     <Footer />
+
+    <script is:inline>
+      (() => {
+        const chips = document.querySelectorAll('.chip');
+        const items = document.querySelectorAll('.post-list li');
+        const empty = document.querySelector('.empty');
+        const apply = (filter) => {
+          chips.forEach((c) =>
+            c.classList.toggle('is-active', c.getAttribute('data-filter') === filter),
+          );
+          let visible = 0;
+          items.forEach((li) => {
+            const tags = (li.getAttribute('data-tags') || '').split(' ');
+            const show = filter === '*' || tags.includes(filter);
+            li.hidden = !show;
+            if (show) visible++;
+          });
+          if (empty) empty.hidden = visible !== 0;
+        };
+        chips.forEach((chip) => {
+          chip.addEventListener('click', () =>
+            apply(chip.getAttribute('data-filter')),
+          );
+        });
+        // Honor a ?tag= link coming from a post page.
+        const wanted = new URLSearchParams(location.search).get('tag');
+        if (wanted && [...chips].some((c) => c.getAttribute('data-filter') === wanted)) {
+          apply(wanted);
+        }
+      })();
+    </script>
   </body>
 </html>
 
 <style>
   .page-head {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.75rem;
   }
   .page-head h1 {
     margin-bottom: 0.25rem;
@@ -59,12 +125,41 @@ const posts = (await getCollection('blog')).sort(
     color: var(--muted);
     margin: 0;
   }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .chip {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .chip:hover {
+    color: var(--heading);
+    border-color: var(--muted);
+  }
+  .chip.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
   .post-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
+  }
+  .post-list li[hidden] {
+    display: none;
   }
   .post-list li + li {
     border-top: 1px solid var(--border);
@@ -96,9 +191,25 @@ const posts = (await getCollection('blog')).sort(
     color: var(--accent);
   }
   .post-list .desc {
-    margin: 0;
+    margin: 0 0 0.75rem;
     color: var(--muted);
     font-size: 0.98rem;
     line-height: 1.6;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tag {
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--surface-hover);
+    border-radius: 6px;
+    padding: 0.15rem 0.55rem;
+  }
+  .empty {
+    color: var(--muted);
+    padding: 2rem 0;
   }
 </style>
