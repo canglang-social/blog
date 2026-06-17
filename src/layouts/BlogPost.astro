@@ -18,42 +18,39 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
       description={description}
     />
     <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
-      }
       .hero-image {
-        width: 100%;
+        margin-bottom: 2.5rem;
       }
       .hero-image img {
         display: block;
-        margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
-      }
-      .prose {
-        width: 720px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 1em;
-        color: rgb(var(--gray-dark));
+        width: 100%;
+        border-radius: 14px;
+        box-shadow: var(--shadow);
       }
       .title {
-        margin-bottom: 1em;
-        padding: 1em 0;
-        text-align: center;
-        line-height: 1;
+        margin-bottom: 2.5rem;
       }
       .title h1 {
-        margin: 0 0 0.5em 0;
+        margin: 0.5rem 0 0;
+        font-size: 2.4rem;
+        line-height: 1.15;
       }
       .date {
-        margin-bottom: 0.5em;
-        color: rgb(var(--gray));
+        color: var(--muted);
+        font-size: 0.9rem;
       }
       .last-updated-on {
         font-style: italic;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: 2rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+        text-decoration: none;
+      }
+      .back-link:hover {
+        color: var(--accent);
       }
     </style>
   </head>
@@ -62,33 +59,33 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     <Header />
     <main>
       <article>
-        <div class="hero-image">
-          {
-            heroImage && (
+        <a class="back-link" href="/blog">← Back to writing</a>
+        {
+          heroImage && (
+            <div class="hero-image">
               <Image
                 width={1020}
                 height={510}
                 src={heroImage}
                 alt=""
               />
-            )
-          }
+            </div>
+          )
+        }
+        <div class="title">
+          <div class="date">
+            <FormattedDate date={pubDate} />
+            {
+              updatedDate && (
+                <span class="last-updated-on">
+                  {' · '}Last updated on <FormattedDate date={updatedDate} />
+                </span>
+              )
+            }
+          </div>
+          <h1>{title}</h1>
         </div>
         <div class="prose">
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1>{title}</h1>
-            <hr />
-          </div>
           <slot />
         </div>
       </article>

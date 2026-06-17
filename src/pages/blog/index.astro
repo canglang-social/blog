@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -19,48 +18,87 @@ const posts = (await getCollection('blog')).sort(
       title={SITE_TITLE}
       description={SITE_DESCRIPTION}
     />
-    <style>
-      main {
-        width: 960px;
-      }
-      ul {
-        display: flex;
-        flex-direction: column; /* Force items to stack in a single column */
-        gap: 2rem;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      ul li {
-        width: 100%; /* Make every list item take up full width */
-      }
-      ul li * {
-        text-decoration: none;
-        transition: 0.2s ease;
-      }
-      /* ... rest of your existing CSS remains the same ... */
-    </style>
   </head>
   <body>
     <Header />
     <main>
-      <section>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <a href={`/blog/${post.id}/`}>
-                  <h4 class="title">{post.data.title}</h4>
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
+      <header class="page-head">
+        <h1>Writing</h1>
+        <p>{SITE_DESCRIPTION}</p>
+      </header>
+      <ul class="post-list">
+        {
+          posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>
+                <time class="date">
+                  <FormattedDate date={post.data.pubDate} />
+                </time>
+                <h2 class="title">{post.data.title}</h2>
+                {post.data.description && (
+                  <p class="desc">{post.data.description}</p>
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  .page-head {
+    margin-bottom: 2.5rem;
+  }
+  .page-head h1 {
+    margin-bottom: 0.25rem;
+  }
+  .page-head p {
+    color: var(--muted);
+    margin: 0;
+  }
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .post-list li + li {
+    border-top: 1px solid var(--border);
+  }
+  .post-list a {
+    display: block;
+    padding: 1.5rem 1.25rem;
+    margin-inline: -1.25rem;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+  .post-list a:hover {
+    background: var(--surface-hover);
+  }
+  .post-list .date {
+    display: block;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.35rem;
+  }
+  .post-list .title {
+    font-size: 1.3rem;
+    margin: 0 0 0.4rem;
+    color: var(--heading);
+    transition: color 0.15s ease;
+  }
+  .post-list a:hover .title {
+    color: var(--accent);
+  }
+  .post-list .desc {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+</style>
