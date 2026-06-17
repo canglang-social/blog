@@ -75,11 +75,16 @@ B) Write TWO files, built ONLY from what I recalled in the session. These files 
     outputs, blockers, wins, next week, and the learning cards.
 2.  Astro post → <the collection folder you found>/YYYY-MM-DD-weekly-review.md
     Frontmatter matching the schema you read (fill every required field, correct date
-    type). Body = a short, curated PUBLIC write-up — exclude private blockers and raw
-    flashcards.
+    type). The schema has a `tags` array: always include `weekly-review`, plus 1–3
+    relevant topic tags drawn from this week (e.g. `career`, `rag`, `reflection`,
+    `focus`) — reuse existing tag names from recent posts where they fit rather than
+    inventing near-duplicates. Body = a short, curated PUBLIC write-up — exclude private
+    blockers and raw flashcards.
 
 C) Show me the Astro post, then STOP and ask before any git command.
-On my "yes": run my build command (e.g. `npm run build`) to confirm it compiles.
+On my "yes": run my build command (`pnpm build`) to confirm it compiles. Note `pnpm dev`
+and `pnpm preview` are long-running servers that never exit — use `pnpm build` to verify,
+not those.
 
 - If the build passes: `git add` the two files, commit "weekly review YYYY-MM-DD",
   and `git push`.
