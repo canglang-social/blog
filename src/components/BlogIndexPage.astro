@@ -43,6 +43,7 @@ const tags = [...counts.entries()]
     <BaseHead
       title={SITE_TITLE}
       description={SITE_DESCRIPTION}
+      lang={lang}
     />
     <link rel="alternate" hreflang="en" href={new URL('/blog/', Astro.site)} />
     <link rel="alternate" hreflang="zh" href={new URL('/zh/blog/', Astro.site)} />
