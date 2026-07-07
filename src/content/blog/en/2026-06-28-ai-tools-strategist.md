@@ -7,53 +7,39 @@ tags: ['ai', 'tools', 'workflow', 'reflection']
 
 Somewhere in the middle of my job search, I realized I needed one more tool — not another resume helper or interview coach, but something stranger: a tool to tell me *which* AI tool to use.
 
-在找工作的途中，我意识到自己还缺一件工具——不是又一个简历助手或面试教练，而是更奇怪的东西：一个告诉我*该用哪个* AI 工具的工具。
-
 I'd already tried plenty. Each of these started from a prompt my prompt engineer wrote first:
 
-我已经试过不少了。下面每一个都先从我的提示词工程师写的提示词开始：
-
-1. **Career Pivot / 职业转向** — a single Claude chat. / 一次性的 Claude 对话。
-   ![Career Pivot](../../assets/ai-tools-strategist/career-pivot.png)
+1. **Career Pivot** — a single Claude chat.
+   ![Career Pivot](../../../assets/ai-tools-strategist/career-pivot.png)
    https://claude.ai/share/4e00b3a9-2360-41f8-a233-fd05d529ac16
-2. **Job Search Plan / 求职计划** — drafted in a Claude chat, then moved into a Claude Project. / 在 Claude 对话中起草，再迁移到 Claude Project。
-   ![Job Search Plan](../../assets/ai-tools-strategist/job-search-plan.png)
+2. **Job Search Plan** — drafted in a Claude chat, then moved into a Claude Project.
+   ![Job Search Plan](../../../assets/ai-tools-strategist/job-search-plan.png)
    https://claude.ai/share/558a7b6e-badb-48f2-8e15-debf70593d8a
-3. **Job Search Strategy / 求职策略** — drafted in a Claude chat, run in Claude Cowork. / 在 Claude 对话中起草，在 Claude Cowork 中运行。
-   ![Job Search Strategy](../../assets/ai-tools-strategist/job-search-strategy.png)
+3. **Job Search Strategy** — drafted in a Claude chat, run in Claude Cowork.
+   ![Job Search Strategy](../../../assets/ai-tools-strategist/job-search-strategy.png)
    https://claude.ai/share/a9f5fa9e-bee2-476e-9b37-0f7fe9ced80e
-4. **Crafting a Resume / 撰写简历** — Claude chat, imported into a Claude Project. / Claude 对话，导入到 Claude Project。
-   ![Crafting a Resume](../../assets/ai-tools-strategist/crafting-resume.png)
+4. **Crafting a Resume** — Claude chat, imported into a Claude Project.
+   ![Crafting a Resume](../../../assets/ai-tools-strategist/crafting-resume.png)
    https://claude.ai/share/b870eb4b-8155-474c-a1d1-5dcb39e50c7e
-5. **Resume Review / 简历评审** — Claude chat, imported into a Claude Project. / Claude 对话，导入到 Claude Project。
-   ![Resume Review](../../assets/ai-tools-strategist/resume-review.png)
+5. **Resume Review** — Claude chat, imported into a Claude Project.
+   ![Resume Review](../../../assets/ai-tools-strategist/resume-review.png)
    https://claude.ai/share/bfcb7a43-0da5-4146-937b-a45030412b6e
 
 On the project side, I kept experimenting for several weeks:
 
-在 Project 这一侧，我又持续折腾了好几周：
-
-![Project experiment 1](../../assets/ai-tools-strategist/project-experiment-1.png)
-![Project experiment 2](../../assets/ai-tools-strategist/project-experiment-2.png)
-![Project experiment 3](../../assets/ai-tools-strategist/project-experiment-3.png)
+![Project experiment 1](../../../assets/ai-tools-strategist/project-experiment-1.png)
+![Project experiment 2](../../../assets/ai-tools-strategist/project-experiment-2.png)
+![Project experiment 3](../../../assets/ai-tools-strategist/project-experiment-3.png)
 
 and a Claude Cowork setup:
 
-还有一套 Claude Cowork 的配置：
-
-![Claude Cowork setup](../../assets/ai-tools-strategist/cowork-setup.png)
+![Claude Cowork setup](../../../assets/ai-tools-strategist/cowork-setup.png)
 
 Then I stopped, because I realized I didn't actually need to keep doing this. So many of these chats shared the same context, and I was copying that context from one to the next by hand. Worse — and this is the part that nagged at me — **as an ordinary person, I had no real way to judge whether a single chat was enough for a given task.** I only found out after the fact, from what the chat produced and how the work went. The whole decision rested on experience that most people simply don't have.
 
-然后我停了下来，因为我意识到自己其实没必要一直这么干。这些对话里有太多共享着相同的上下文，而我却在用手把上下文从一个搬到另一个。更糟的是——也正是这点一直让我别扭——**作为一个普通人，我根本没有办法判断单次对话是否足以完成某项任务。** 我只能事后才知道答案，从对话产出的结果和我实际的使用中去倒推。整个决定全然依赖大多数人压根没有的经验。
-
 I'd hit this wall again and again. A friend and I argued over which tool a gaokao advisor should use: a single Claude chat, a single Doubao chat, or something heavier. I built a code project for it with Claude Code; he was sure a single Doubao chat did the job just as well. Then I watched another group have the exact same argument about the exact same kind of task — only with different tools. That's when it clicked. The hard part isn't doing the task. The hard part is choosing the right *level* of machinery for it, and I wanted something that could make that call for me.
 
-这堵墙我撞了一次又一次。我和一个朋友争论一个高考志愿顾问该用什么工具：单次 Claude 对话、单次豆包对话，还是更重的方案。我用 Claude Code 给它搭了一个代码项目；而他笃定单次豆包对话做得一样好。后来我又看到另一个群在为同一类任务吵着同样的问题——只是换了不同的工具。就在那一刻我想通了：难的不是把任务做出来，难的是为它选对*那一层*机器，而我想要的，正是一个能替我做这个判断的东西。
-
 So I wrote one. I call it the AI Tools Strategist. Here's the prompt:
-
-于是我写了一个，叫它 AI Tools Strategist（AI 工具策略师）。这是它的提示词：
 
 ```
 # MY STANDING CONTEXT (defaults — override per task when needed)
@@ -177,8 +163,6 @@ detail in both. This applies to the intake questions and to all three output sec
 
 And here's what it produced:
 
-它产出的结果如下：
-
-![AI Tools Strategist result 1](../../assets/ai-tools-strategist/strategist-result-1.png)
-![AI Tools Strategist result 2](../../assets/ai-tools-strategist/strategist-result-2.png)
+![AI Tools Strategist result 1](../../../assets/ai-tools-strategist/strategist-result-1.png)
+![AI Tools Strategist result 2](../../../assets/ai-tools-strategist/strategist-result-2.png)
 https://claude.ai/share/d11dcc4d-2d88-4de0-8958-d03e43a49e3a
