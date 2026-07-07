@@ -14,6 +14,9 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
+			// Share-card image for social crawlers; use a raster format (SVG
+			// heroes don't render in link previews). Falls back to heroImage.
+			ogImage: z.optional(image()),
 			tags: z.array(z.string()).default([]),
 		}),
 });
