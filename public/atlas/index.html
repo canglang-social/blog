@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The System Atlas — how Felix works with AI</title>
+<script>(()=>{const s=localStorage.getItem("theme");document.documentElement.dataset.theme=s||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
+</head><body>
+<style>
+  :root {
+    --page:      #f7f5ef;
+    --panel:     #fbfaf6;
+    --ink:       #1e1c17;
+    --ink-2:     #5b5850;
+    --muted:     #8b877c;
+    --hairline:  #e3e0d4;
+    --baseline:  #c9c5b8;
+
+    --agentkit:  #2a78d6;
+    --forge:     #1baf7a;
+    --jobhunt:   #eda100;
+    --vault:     #008300;
+    --blog:      #4a3aa7;
+    --chief:     #e34948;
+    --chief-text:#b52f2e;
+    --ghost:     #8b877c;
+
+    --edge:      #a49f92;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page:      #121210;
+      --panel:     #191917;
+      --ink:       #f0eee5;
+      --ink-2:     #b8b4a7;
+      --muted:     #8b877c;
+      --hairline:  #2c2b26;
+      --baseline:  #3a3933;
+
+      --agentkit:  #3987e5;
+      --forge:     #199e70;
+      --jobhunt:   #c98500;
+      --vault:     #4d9c3a;
+      --blog:      #9085e9;
+      --chief:     #e66767;
+      --chief-text:#e66767;
+
+      --edge:      #6d6a60;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page:      #121210;
+    --panel:     #191917;
+    --ink:       #f0eee5;
+    --ink-2:     #b8b4a7;
+    --muted:     #8b877c;
+    --hairline:  #2c2b26;
+    --baseline:  #3a3933;
+    --agentkit:  #3987e5;
+    --forge:     #199e70;
+    --jobhunt:   #c98500;
+    --vault:     #4d9c3a;
+    --blog:      #9085e9;
+    --chief:     #e66767;
+    --chief-text:#e66767;
+    --edge:      #6d6a60;
+  }
+  :root[data-theme="light"] {
+    --page:      #f7f5ef;
+    --panel:     #fbfaf6;
+    --ink:       #1e1c17;
+    --ink-2:     #5b5850;
+    --muted:     #8b877c;
+    --hairline:  #e3e0d4;
+    --baseline:  #c9c5b8;
+    --agentkit:  #2a78d6;
+    --forge:     #1baf7a;
+    --jobhunt:   #eda100;
+    --vault:     #008300;
+    --blog:      #4a3aa7;
+    --chief:     #e34948;
+    --chief-text:#b52f2e;
+    --edge:      #a49f92;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: Charter, "Iowan Old Style", "Palatino Nova", Palatino, Georgia, serif;
+    line-height: 1.55;
+    margin: 0;
+    padding: 0 1.25rem 6rem;
+  }
+  .mono, .chip, .tag, .pill, .step, .eyebrow, .edge-label, .home-name, .stat b, figcaption {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  .col { max-width: 44rem; margin-inline: auto; }
+  .wide { max-width: 72rem; margin-inline: auto; }
+
+  h1, h2, h3 { text-wrap: balance; line-height: 1.15; }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; margin: .4rem 0 .8rem; letter-spacing: -0.015em; }
+  h2 { font-size: 1.55rem; margin: 0 0 .35rem; }
+  h3 { font-size: 1.08rem; margin: 1.4rem 0 .4rem; }
+  p  { margin: .55rem 0; }
+  .lede { font-size: 1.13rem; color: var(--ink-2); max-width: 38rem; }
+
+  .eyebrow {
+    font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); display: block; margin-bottom: .3rem;
+  }
+  .eyebrow .thread { color: var(--chief-text); }
+
+  header.mast { padding: 3.2rem 0 1rem; border-bottom: 1px solid var(--hairline); margin-bottom: 2.6rem; }
+  .stats { display: flex; flex-wrap: wrap; gap: 0; margin: 1.6rem 0 .4rem; border: 1px solid var(--hairline); background: var(--panel); }
+  .stat { flex: 1 1 100px; padding: .7rem .9rem; border-right: 1px solid var(--hairline); min-width: 96px; }
+  .stat:last-child { border-right: 0; }
+  .stat b { display: block; font-size: 1.45rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  section { margin-block: 4.5rem; }
+  .secno { color: var(--chief-text); }
+  .kicker { color: var(--ink-2); max-width: 40rem; }
+
+  figure { margin: 1.4rem 0; }
+  figcaption { font-size: .72rem; color: var(--muted); margin-top: .55rem; letter-spacing: .02em; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--hairline);
+    padding: 1rem; overflow-x: auto;
+  }
+  .fig-breakout { width: min(62rem, calc(100vw - 2.5rem)); margin-left: 50%; transform: translateX(-50%); }
+  .panel > svg { display: block; width: 100%; height: auto; min-width: 760px; }
+
+  svg text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th { text-align: left; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: .45rem .6rem; border-bottom: 1px solid var(--baseline); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  td { padding: .5rem .6rem; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  td.mono { font-size: .8rem; }
+
+  .dot { display: inline-block; width: .62em; height: .62em; border-radius: 50%; margin-right: .38em; vertical-align: baseline; position: relative; top: .02em; }
+
+  /* home cards */
+  .homes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .home { background: var(--panel); padding: 1rem 1.1rem 1.15rem; }
+  .home-name { font-size: .85rem; font-weight: 600; letter-spacing: .02em; }
+  .home-role { font-size: .78rem; color: var(--ink-2); margin: .15rem 0 .6rem; }
+  .home ul { margin: 0; padding: 0; list-style: none; }
+  .home li { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .74rem; color: var(--ink-2); padding: .22rem 0; border-top: 1px dotted var(--hairline); }
+  .home li b { color: var(--ink); font-weight: 600; }
+
+  /* workflow rows */
+  .flows { border: 1px solid var(--hairline); background: var(--panel); }
+  .flow { padding: 1rem 1.15rem; border-bottom: 1px solid var(--hairline); }
+  .flow:last-child { border-bottom: 0; }
+  .flow-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .55rem; }
+  .flow-name { font-weight: 700; font-size: 1.02rem; }
+  .tag { font-size: .68rem; color: var(--ink-2); letter-spacing: .03em; }
+  .pill { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: .1rem .5rem; border: 1px solid var(--baseline); color: var(--ink-2); }
+  .pill.running { border-style: solid; }
+  .pill.wanted { border-style: dashed; color: var(--muted); }
+  .flow-sum { font-size: .92rem; color: var(--ink-2); margin: .3rem 0 .5rem; max-width: 60rem; }
+  .steps { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .15rem; }
+  .step { font-size: .72rem; background: var(--page); border: 1px solid var(--hairline); padding: .12rem .45rem; white-space: nowrap; }
+  .step.loopback { border-style: dashed; color: var(--muted); background: transparent; }
+  .arr { color: var(--muted); font-size: .72rem; font-family: ui-monospace, Menlo, monospace; padding: 0 .12rem; }
+
+  /* system map */
+  .map-scroll { overflow-x: auto; border: 1px solid var(--hairline); background: var(--panel); }
+  .map { position: relative; width: 1080px; height: 916px; margin: 0 auto; }
+  .map svg.underlay { position: absolute; inset: 0; }
+  .node {
+    position: absolute; width: 204px; background: var(--page);
+    border: 1px solid var(--baseline); border-radius: 2px;
+    padding: .5rem .65rem .55rem; font-size: .78rem;
+  }
+  .node .nn { font-weight: 700; font-size: .84rem; font-family: Charter, Georgia, serif; }
+  .node .nh { font-family: ui-monospace, Menlo, monospace; font-size: .62rem; letter-spacing: .06em; margin-top: .1rem; }
+  .node .nd { color: var(--ink-2); font-size: .7rem; line-height: 1.35; margin-top: .25rem; font-family: ui-monospace, Menlo, monospace; }
+  .node.wanted { border-style: dashed; background: transparent; }
+  .node.meta { border-color: var(--chief); border-width: 1.5px; }
+  .band {
+    position: absolute; border: 1px solid var(--vault); border-radius: 2px;
+    background: color-mix(in srgb, var(--vault) 4%, var(--page));
+    padding: .55rem .7rem; font-size: .74rem;
+  }
+  .edge-label { font-size: .62rem; fill: var(--ink-2); }
+  .legend { display: flex; flex-wrap: wrap; gap: .9rem 1.4rem; padding: .8rem 1rem; border: 1px solid var(--hairline); border-top: 0; background: var(--panel); font-family: ui-monospace, Menlo, monospace; font-size: .68rem; color: var(--ink-2); align-items: center; }
+  .lg { display: inline-flex; align-items: center; gap: .4rem; }
+  .lg svg { display: block; }
+
+  .rolecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .75rem; margin-top: 1.2rem; }
+  .rolecard { background: var(--panel); border: 1px solid var(--hairline); padding: 1rem 1.1rem; font-size: .88rem; }
+  .rolecard h4 { margin: 0 0 .3rem; font-size: 1rem; }
+  .rolecard p { color: var(--ink-2); font-size: .84rem; margin: .25rem 0; }
+  .rolecard .mono { font-size: .7rem; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--hairline); margin-top: 4rem; padding-top: 1.2rem; font-size: .8rem; color: var(--muted); }
+  footer .mono { font-size: .72rem; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--chief); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<header class="mast col">
+  <p style="margin:0 0 1.2rem"><a href="/" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a></p>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">system atlas</span> · compiled 2026-07-07 from inventory.yaml, workflows.md, primitives.md</span>
+  <h1>The System Atlas</h1>
+  <p class="lede">One person, six homes, twelve loops, four judgment-roles — and a meta-loop that audits all of it. Everything below is, at bottom, text Claude reads and follows; the pieces differ in their <em>job</em>, not their substance. Rows win over diagrams: <span class="mono" style="font-size:.85em">inventory.yaml</span> is canonical, this page is its map.</p>
+  <div class="stats" role="group" aria-label="System counts">
+    <div class="stat"><b>5</b><span>primitives</span></div>
+    <div class="stat"><b>4</b><span>roles</span></div>
+    <div class="stat"><b>12</b><span>workflows</span></div>
+    <div class="stat"><b>10</b><span>running</span></div>
+    <div class="stat"><b>2</b><span>wanted</span></div>
+    <div class="stat"><b>6</b><span>homes</span></div>
+  </div>
+</header>
+
+<!-- ============ 1 · PRIMITIVES ============ -->
+<section class="col" id="primitives">
+  <span class="eyebrow"><span class="secno">§1</span> · the vocabulary</span>
+  <h2>Five primitives, one anatomy</h2>
+  <p class="kicker">A <strong>prompt</strong> is stored text — raw material. A <strong>command</strong> is the thin loader that deploys it as fixed steps. A command usually <em>wears</em> a <strong>role</strong> — a standing identity with judgment and boundaries. A <strong>workflow</strong> is the recurring loop that composes all three; a <strong>project</strong> is the built thing that comes out the other end.</p>
+
+  <figure class="fig-breakout">
+    <div class="panel">
+      <svg viewBox="0 0 940 290" width="940" height="290" role="img" aria-label="Anatomy of the five primitives: a prompt is deployed by a command, which wears a role, all inside a workflow loop that produces a project.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
+          </marker>
+        </defs>
+        <!-- workflow container -->
+        <rect x="18" y="52" width="650" height="196" rx="4" fill="none" stroke="var(--ink-2)" stroke-width="1.4"/>
+        <text x="34" y="80" font-size="13" font-weight="700" fill="var(--ink)">WORKFLOW</text>
+        <text x="34" y="97" font-size="10.5" fill="var(--ink-2)">the recurring loop — the unit the inventory tracks</text>
+        <text x="34" y="230" font-size="10" fill="var(--muted)">e.g. project-loop · learning-loop · workflow-audit</text>
+
+        <!-- prompt -->
+        <rect x="46" y="122" width="146" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
+        <text x="60" y="146" font-size="12" font-weight="700" fill="var(--ink)">PROMPT</text>
+        <text x="60" y="163" font-size="10" fill="var(--ink-2)">stored text · asset</text>
+        <text x="60" y="178" font-size="10" fill="var(--muted)">agent-kit prompts/*</text>
+
+        <!-- command -->
+        <rect x="268" y="122" width="146" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
+        <text x="282" y="146" font-size="12" font-weight="700" fill="var(--ink)">COMMAND</text>
+        <text x="282" y="163" font-size="10" fill="var(--ink-2)">loader · fixed steps</text>
+        <text x="282" y="178" font-size="10" fill="var(--muted)">/audit · /review</text>
+
+        <!-- role -->
+        <rect x="482" y="122" width="168" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
+        <text x="496" y="146" font-size="12" font-weight="700" fill="var(--ink)">ROLE</text>
+        <text x="496" y="163" font-size="10" fill="var(--ink-2)">judgment + bounds</text>
+        <text x="496" y="178" font-size="9.5" fill="var(--muted)">the four judgment-roles</text>
+
+        <!-- arrows inside -->
+        <line x1="192" y1="157" x2="264" y2="157" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
+        <text x="228" y="147" font-size="9" fill="var(--ink-2)" text-anchor="middle">deployed by</text>
+        <line x1="414" y1="157" x2="478" y2="157" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
+        <text x="446" y="147" font-size="9" fill="var(--ink-2)" text-anchor="middle">wears</text>
+
+        <!-- produces -->
+        <line x1="668" y1="150" x2="756" y2="150" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
+        <text x="712" y="141" font-size="9" fill="var(--ink-2)" text-anchor="middle">produces</text>
+
+        <!-- project -->
+        <rect x="760" y="115" width="170" height="70" rx="2" fill="var(--page)" stroke="var(--ink-2)" stroke-width="1.4"/>
+        <text x="774" y="139" font-size="12" font-weight="700" fill="var(--ink)">PROJECT</text>
+        <text x="774" y="156" font-size="10" fill="var(--ink-2)">a built thing · output</text>
+        <text x="770" y="171" font-size="9.5" fill="var(--muted)">ragx · logx · learn-to-ship</text>
+
+        <!-- loop-back hint -->
+        <path d="M 343,52 C 343,26 343,26 370,26 L 560,26 C 590,26 590,26 590,52" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+        <text x="466" y="20" font-size="9" fill="var(--muted)" text-anchor="middle">…and loops again</text>
+      </svg>
+    </div>
+    <figcaption>fig. 1 — the anatomy. prompt → command → role compose inside a workflow; projects are the output, a different axis entirely. (primitives.md)</figcaption>
+  </figure>
+
+  <table>
+    <thead><tr><th>Primitive</th><th>Answers</th><th>Nature</th><th>Invoked by</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Role</strong></td><td>WHO acts, by what judgment</td><td>a standing identity</td><td class="mono">"act as X" / a command wearing it</td></tr>
+      <tr><td><strong>Command</strong></td><td>WHAT procedure runs</td><td>a repeatable task</td><td class="mono">/command</td></tr>
+      <tr><td><strong>Prompt</strong></td><td>the stored instruction text</td><td>an asset (raw material)</td><td class="mono">a loader/command deploys it</td></tr>
+      <tr><td><strong>Workflow</strong></td><td>the recurring loop + purpose</td><td>a process</td><td class="mono">runs via its commands/roles</td></tr>
+      <tr><td><strong>Project</strong></td><td>a built thing</td><td>an artifact (output)</td><td class="mono">you use it</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 2 · ROLES ============ -->
+<section class="col" id="roles">
+  <span class="eyebrow"><span class="secno">§2</span> · where judgment lives</span>
+  <h2>Four judgment-roles</h2>
+  <p class="kicker">Roles appear where judgment concentrates; commands suffice where the task is procedural. That is why the system is mostly workflows + commands with exactly four roles — and why <span class="mono" style="font-size:.85em">/scout</span> or <span class="mono" style="font-size:.85em">/tailor</span> never needed a persona. The Chief audits the other three from outside — <em>chief, not auditor</em> of its own doing.</p>
+
+  <figure class="fig-breakout">
+    <div class="panel">
+      <svg viewBox="0 0 940 400" width="940" height="400" role="img" aria-label="Role graph: the Chief of Staff audits the Librarian, the Editor, the Brand Coach, and its own row. Commands and sessions wear each role; the Brand Coach routes blog-copy fixes to the Editor.">
+        <defs>
+          <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--chief)" stroke-width="1.6"/>
+          </marker>
+          <marker id="ahd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
+          </marker>
+        </defs>
+
+        <!-- chief -->
+        <rect x="358" y="34" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--chief)" stroke-width="1.6"/>
+        <circle cx="378" cy="56" r="4" fill="var(--chief)"/>
+        <text x="390" y="60" font-size="13" font-weight="700" fill="var(--ink)">Chief of Staff</text>
+        <text x="374" y="80" font-size="10" fill="var(--ink-2)">workflow inventory + meta-strategy</text>
+        <text x="374" y="95" font-size="10" fill="var(--muted)">keep · merge · automate · retire</text>
+
+        <!-- self-audit loop -->
+        <path d="M 588,56 C 660,42 660,110 592,100" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="668" y="80" font-size="9.5" fill="var(--chief-text)">audits (own row)</text>
+
+        <!-- /audit wears chief -->
+        <rect x="120" y="52" width="150" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="195" y="73" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/audit</text>
+        <path d="M 274,69 L 354,72" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <text x="298" y="60" font-size="9" fill="var(--muted)">wears</text>
+
+        <!-- librarian -->
+        <rect x="46" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--vault)" stroke-width="1.4"/>
+        <circle cx="66" cy="218" r="4" fill="var(--vault)"/>
+        <text x="78" y="222" font-size="13" font-weight="700" fill="var(--ink)">Librarian</text>
+        <text x="62" y="242" font-size="10" fill="var(--ink-2)">conventions · drift · capture</text>
+        <text x="62" y="257" font-size="10" fill="var(--muted)">self-hosted: [[Wiki/Librarian]]</text>
+
+        <!-- editor -->
+        <rect x="355" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--blog)" stroke-width="1.4"/>
+        <circle cx="375" cy="218" r="4" fill="var(--blog)"/>
+        <text x="387" y="222" font-size="13" font-weight="700" fill="var(--ink)">Editor</text>
+        <text x="371" y="242" font-size="10" fill="var(--ink-2)">voice · drafts · curation</text>
+        <text x="371" y="257" font-size="10" fill="var(--muted)">editor.md · never ghostwrites</text>
+
+        <!-- brand coach (staged, no own home yet) -->
+        <rect x="664" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--baseline)" stroke-width="1.4" stroke-dasharray="6 4"/>
+        <circle cx="684" cy="218" r="4" fill="var(--ghost)"/>
+        <text x="696" y="222" font-size="13" font-weight="700" fill="var(--ink)">Brand Coach</text>
+        <text x="680" y="242" font-size="10" fill="var(--ink-2)">image · charisma · social strategy</text>
+        <text x="680" y="257" font-size="10" fill="var(--muted)">brand-coach.md · staged</text>
+
+        <!-- audit edges -->
+        <path d="M 392,118 C 320,150 260,168 200,192" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="272" y="152" font-size="9.5" fill="var(--chief-text)">audits</text>
+        <line x1="472" y1="118" x2="471" y2="192" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="479" y="152" font-size="9.5" fill="var(--chief-text)">audits</text>
+        <path d="M 556,118 C 640,150 700,168 762,192" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="672" y="152" font-size="9.5" fill="var(--chief-text)">audits</text>
+
+        <!-- brand coach routes fixes to editor -->
+        <path d="M 700,284 C 650,306 540,306 496,288" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <text x="600" y="316" font-size="9" fill="var(--muted)" text-anchor="middle">routes fixes: blog copy → Editor</text>
+
+        <!-- wear chips -->
+        <rect x="46" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="161" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">Librarian sessions</text>
+        <path d="M 161,332 L 161,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+
+        <rect x="355" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="470" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/draft · /refine · /publish</text>
+        <path d="M 400,332 L 400,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+
+        <rect x="664" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="779" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">Brand Coach sessions</text>
+        <path d="M 779,332 L 779,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+      </svg>
+    </div>
+    <figcaption>fig. 2 — the role graph, earned 2026-07-07 when the Editor became the third role; the Brand Coach joined the same day. solid red = audits · dashed = a command/session wearing the role. (workflows.md)</figcaption>
+  </figure>
+
+  <div class="rolecards">
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--chief)"></span>Chief of Staff</h4>
+      <p>Owns the inventory and the meta-calls: keep, merge, automate, retire; which tool for a role. Advises first, never touches; on Felix's confirmation, executes via worktree branch + draft PR — or better, delegates to the owning workflow with a brief.</p>
+      <p class="mono">home: ai-chief-of-staff · chief-of-staff.md</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--vault)"></span>Librarian</h4>
+      <p>Owns vault conventions, drift cleanup, and the mobile capture pipeline (Siri → [[inbox/mobile]] → [[inbox]]). Conventions, not content — producer loops own what they append; the vault is a sink.</p>
+      <p class="mono">home: the vault itself · [[Wiki/Librarian]] + [[Wiki/Conventions]]</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--blog)"></span>Editor</h4>
+      <p>Owns blog voice and style, the draft pipeline, /writing curation, and the language policy: one language per published page, always a native-English refine pass. Critiques and refines — never ghostwrites.</p>
+      <p class="mono">home: blog · editor.md (staged 2026-07-07)</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--ghost)"></span>Brand Coach</h4>
+      <p>Owns public image and charisma (positioning, image pillars, per-platform bios), social-media strategy, and the outside-in surface audit — a recruiter's eyes on how it all comes across. Drafts frames; Felix writes the words. Routes blog-copy fixes to the Editor.</p>
+      <p class="mono">home: staged in ai-chief-of-staff · brand-coach.md (2026-07-07)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · HOMES & ASSETS ============ -->
+<section class="wide" id="homes">
+  <div class="col" style="margin-bottom:1.3rem">
+    <span class="eyebrow"><span class="secno">§3</span> · where things live</span>
+    <h2>Six homes and their assets</h2>
+    <p class="kicker">Every workflow has an <span class="mono" style="font-size:.85em">owner_repo</span> — its home — and every home shelves the assets its loops run on: commands, prompts, registries, doctrine files. Color follows the home everywhere on this page.</p>
+  </div>
+
+  <div class="homes">
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--agentkit)"></span>agent-kit</div>
+      <div class="home-role">the shared toolbox — prompts, skills, snippets; 4 loops live here</div>
+      <ul>
+        <li><b>prompts/</b> — about-me · daily-review · chief-of-staff · prompt-engineer (the library)</li>
+        <li><b>snippets/</b> — about-me.md (CC @import) · deployment-loaders</li>
+        <li><b>plugins/core/skills/</b> — learn · explain · prompt-engineer</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--forge)"></span>forge</div>
+      <div class="home-role">the workshop — projects registered, reviewed, mined for reuse</div>
+      <ul>
+        <li><b>registry/projects.yaml</b> — every project, one row</li>
+        <li><b>/ideate /register /review /new-project /wrap-mcp /health</b></li>
+        <li><b>career/portfolio/</b> — case studies (the facts live here)</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</div>
+      <div class="home-role">the campaign — resume content + the application pipeline</div>
+      <ul>
+        <li><b>master.md</b> — the only fact source resumes draw from</li>
+        <li><b>build_resumes.py</b> + base/ per-track resumes</li>
+        <li><b>/scout /match /tailor /interview</b> + /daily /review /audit /rubric-drift /strategist /strategy</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--vault)"></span>Logseq vault</div>
+      <div class="home-role">the sink — durable knowledge lands here; conventions self-hosted</div>
+      <ul>
+        <li><b>journals/</b> — daily pages; #inbox capture · session logs · daily review</li>
+        <li><b>pages/</b> — topic pages · [[Tasks]] dashboard · [[Wiki/Librarian]] + [[Wiki/Conventions]]</li>
+        <li><b>#card</b> — native SRS (the reason Obsidian was rejected)</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--blog)"></span>blog</div>
+      <div class="home-role">the stage — Astro 6 personal site; projects lead, posts in /writing</div>
+      <ul>
+        <li><b>editor.md</b> — the Editor's doctrine</li>
+        <li><b>/draft /refine /publish</b> + drafts/ (outside the content glob)</li>
+        <li><b>weekly-review</b> — owns the Astro publish step</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</div>
+      <div class="home-role">the office — the inventory and the audit machinery</div>
+      <ul>
+        <li><b>inventory.yaml</b> — single source of truth ("inventory or it doesn't exist")</li>
+        <li><b>python -m ai_chief_of_staff</b> — mechanical checks · <b>/audit</b> — judgment</li>
+        <li><b>chief-of-staff.md · brand-coach.md (staged) · primitives.md · workflows.md</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · WORKFLOWS ============ -->
+<section class="wide" id="workflows">
+  <div class="col" style="margin-bottom:1.3rem">
+    <span class="eyebrow"><span class="secno">§4</span> · the loops</span>
+    <h2>Twelve workflows</h2>
+    <p class="kicker">Ten running, two wanted. Each row mirrors its <span class="mono" style="font-size:.85em">summary:</span> in the inventory; the step chips are the loop's actual shape from workflows.md.</p>
+  </div>
+
+  <div class="flows">
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--forge)"></span><span class="flow-name">project-loop</span><span class="tag">forge</span><span class="pill running">running</span></div>
+      <p class="flow-sum">WHAT I've built and how to decide + build the next — the next project chosen by a demand × supply brainstorm, then registered, reviewed, mined for reuse tiers, and scaffolded from them.</p>
+      <div class="steps"><span class="step">/ideate</span><span class="arr">→</span><span class="step">/register</span><span class="arr">→</span><span class="step">/review</span><span class="arr">→</span><span class="step">reuse tiers: templates/ · components/ · /wrap-mcp</span><span class="arr">→</span><span class="step">/new-project</span><span class="arr">→</span><span class="step loopback">↺ back to /register</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">learning-loop</span><span class="tag">agent-kit</span><span class="pill running">running</span></div>
+      <p class="flow-sum">Anything interesting becomes durable knowledge — capture one #inbox line from any session, triage to a route, and end every route in the retrieval tail. Three rules: attention is all I need · output is the only thing that matters · retrieval IS the studying.</p>
+      <div class="steps"><span class="step">capture #inbox</span><span class="arr">→</span><span class="step">triage</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B practice (ragx → ragr)</span><span class="arr">·</span><span class="step">C material</span><span class="arr">·</span><span class="step">D dose</span><span class="arr">→</span><span class="step">recall</span><span class="arr">→</span><span class="step">cards (human-gated)</span><span class="arr">→</span><span class="step">journal log</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-loop</span><span class="tag">job_hunting</span><span class="pill running">running</span></div>
+      <p class="flow-sum">Evidence of what I've done — reviewed projects become case studies, distilled into master.md, the only fact source resumes draw from.</p>
+      <div class="steps"><span class="step">registry facts + /review findings</span><span class="arr">→</span><span class="step">case study (forge career/portfolio/)</span><span class="arr">→</span><span class="step">master.md</span><span class="arr">→</span><span class="step">base/ per-track resumes</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">profile-loop</span><span class="tag">agent-kit</span><span class="pill running">running</span></div>
+      <p class="flow-sum">WHO I am, in every session — one interviewed master profile, distilled into the CC snippet and its Drive mirror; career facts enter job_hunting only via master.md, so no second profile exists to drift.</p>
+      <div class="steps"><span class="step">"About me" interview</span><span class="arr">→</span><span class="step">master-profile.md</span><span class="arr">→</span><span class="step">snippets/about-me.md</span><span class="arr">→</span><span class="step">CC @import</span><span class="arr">·</span><span class="step">Drive mirror</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">job_hunting</span><span class="pill running">running</span></div>
+      <p class="flow-sum">GETTING the job — scout, match, tailor, and interview against real JDs. Scouting is now Felix-run manual (the scheduled agent was retired — scouting is judgment work).</p>
+      <div class="steps"><span class="step">/scout</span><span class="arr">→</span><span class="step">/match</span><span class="arr">→</span><span class="step">/tailor</span><span class="arr">→</span><span class="step">/interview</span><span class="arr">+</span><span class="step">cadence: /daily · /review (Sat) · /strategy</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">prompt-lifecycle</span><span class="tag">agent-kit</span><span class="pill running">running</span></div>
+      <p class="flow-sum">Prompts as versioned assets — engineered once, kept in one library, deployed via thin loaders, never pasted copies.</p>
+      <div class="steps"><span class="step">rough idea</span><span class="arr">→</span><span class="step">core:prompt-engineer</span><span class="arr">→</span><span class="step">prompts/ library</span><span class="arr">→</span><span class="step">thin loaders</span><span class="arr">→</span><span class="step">real session → bump last-tested</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">daily-review</span><span class="tag">agent-kit → Cowork</span><span class="pill running">running</span></div>
+      <p class="flow-sum">Close each day deliberately — an evening guided review, Felix-run in Claude Cowork (de-automated 2026-07-07: reflection is judgment work, not a cron agent). Task triage folded in: Phase 1b sweeps today+yesterday TODOs; Saturdays sweep [[Tasks]].</p>
+      <div class="steps"><span class="step">prompts/daily-review.md</span><span class="arr">→</span><span class="step">guided review</span><span class="arr">+</span><span class="step">Phase 1b: do · schedule · kill</span><span class="arr">→</span><span class="step">append to Logseq journal</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--vault)"></span><span class="flow-name">wiki-management</span><span class="tag">the vault · Librarian</span><span class="pill running">running</span></div>
+      <p class="flow-sum">HOW the vault stays coherent — page naming, journal format, the capture pipeline, content ownership. Conventions, not content: a standard, not a step loop, so it runs without a flow diagram.</p>
+      <div class="steps"><span class="step">[[Wiki/Conventions]]</span><span class="arr">·</span><span class="step">drift sweeps</span><span class="arr">·</span><span class="step">Siri capture → [[inbox/mobile]] → [[inbox]]</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">workflow-audit</span><span class="tag">ai-chief-of-staff · meta</span><span class="pill running">running</span></div>
+      <p class="flow-sum">HOW I work with AI — the meta-loop that keeps every flow inventoried, fact-checked, and judged. Listed in its own inventory, because a behavior can only be audited if it is listed.</p>
+      <div class="steps"><span class="step">inventory.yaml</span><span class="arr">→</span><span class="step">mechanical checks</span><span class="arr">→</span><span class="step">/audit judgment</span><span class="arr">→</span><span class="step">proposals</span><span class="arr">→</span><span class="step">Felix confirms</span><span class="arr">→</span><span class="step">worktree + draft PR</span><span class="arr">→</span><span class="step loopback">↺ back into the inventory</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--blog)"></span><span class="flow-name">publishing-loop</span><span class="tag">blog · the Editor</span><span class="pill running">running · first cycle</span></div>
+      <p class="flow-sum">WHAT I say in public — drafts refined into native-English posts, curated into the project-led site, one language per page. Shown ahead of the inventory row: its first post — "How I Work with AI" — embeds this atlas, so the loop is running wherever you're reading this; the row flips on publish. Three more drafts already queued.</p>
+      <div class="steps"><span class="step">/draft</span><span class="arr">→</span><span class="step">/refine (Editor pass)</span><span class="arr">→</span><span class="step">/publish (astro check → build)</span><span class="arr">→</span><span class="step">curate /writing</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">personal-brand</span><span class="tag">no home yet · the Brand Coach</span><span class="pill wanted">wanted · designed</span></div>
+      <p class="flow-sum">HOW I come across — a deliberate public image and charisma, built from profile facts, presented across social platforms, and audited outside-in on a cadence. Flips to running on the first real BUILD or AUDIT session.</p>
+      <div class="steps"><span class="step">BUILD: positioning · image pillars · bios · charisma reps</span><span class="arr">→</span><span class="step">PRESENT: platform strategy · distribute posts/case studies</span><span class="arr">→</span><span class="step">AUDIT: outside-in, a recruiter's eyes</span><span class="arr">→</span><span class="step loopback">↺ back to BUILD</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">file-management</span><span class="tag">no home yet</span><span class="pill wanted">wanted · undesigned</span></div>
+      <p class="flow-sum">WHERE files live — one placement policy across Drive, GitHub, and local/external volumes. No entry points, no diagram until designed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · PROJECTS & OUTPUTS ============ -->
+<section class="col" id="projects">
+  <span class="eyebrow"><span class="secno">§5</span> · what comes out</span>
+  <h2>Projects and other outputs</h2>
+  <p class="kicker">The loops exist to produce things. Projects are the project-loop's outputs, registered in <span class="mono" style="font-size:.85em">forge/registry/projects.yaml</span>; every other loop ends in an artifact too — Felix's rule 2: <em>output is the only thing that matters, and only output I generated.</em></p>
+  <table>
+    <thead><tr><th>Output</th><th>Produced by</th><th>Lands in</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Projects</strong> — ragx (RAG practice build) · ragr (the rebuild exam) · logx · learn-to-ship (first /ideate pick)</td><td class="mono"><span class="dot" style="background:var(--forge)"></span>project-loop + learning-loop route B</td><td class="mono">forge registry</td></tr>
+      <tr><td><strong>Case studies</strong> — reviewed projects written up as evidence</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>career-loop</td><td class="mono">forge career/portfolio/</td></tr>
+      <tr><td><strong>Tailored resumes</strong> — dated, linted, per-JD</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline (from career-loop bases)</td><td class="mono">job_hunting</td></tr>
+      <tr><td><strong>Anki cards + session logs</strong> — human-gated, journal-logged</td><td class="mono"><span class="dot" style="background:var(--agentkit)"></span>learning-loop retrieval tail</td><td class="mono">vault journals/ + deck</td></tr>
+      <tr><td><strong>Posts + the personal site</strong> — native-English, one language per page</td><td class="mono"><span class="dot" style="background:var(--blog)"></span>publishing-loop (staged)</td><td class="mono">blog src/content/</td></tr>
+      <tr><td><strong>Brand surfaces</strong> — LinkedIn + per-platform bios, platform-native distribution</td><td class="mono"><span class="dot" style="background:var(--ghost)"></span>personal-brand (staged)</td><td class="mono">the platforms</td></tr>
+      <tr><td><strong>Audit reports + proposals</strong> — keep / merge / automate / retire</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>workflow-audit</td><td class="mono">ai-chief-of-staff reports/</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 6 · SYSTEM MAP ============ -->
+<section class="wide" id="map">
+  <div class="col" style="margin-bottom:1.3rem">
+    <span class="eyebrow"><span class="secno">§6</span> · <span class="thread">the whole board</span></span>
+    <h2>The system map</h2>
+    <p class="kicker">How the loops feed each other: agent-kit's producer loops on the left, the forge workshop in the middle, the job-hunting campaign on the right, the vault as the sink underneath — and the chief-of-staff's <span style="color:var(--chief-text)">audit perimeter</span> around everything. Every node inside it is a row in the inventory.</p>
+  </div>
+
+  <div class="map-scroll">
+    <div class="map" role="img" aria-label="System map: eleven workflow nodes grouped by home, connected by feed arrows, enclosed in the chief-of-staff audit perimeter, with the Logseq vault as a sink band at the bottom.">
+      <svg class="underlay" viewBox="0 0 1080 916" width="1080" height="916" aria-hidden="true">
+        <defs>
+          <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
+          </marker>
+          <marker id="mv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--vault)" stroke-width="1.6"/>
+          </marker>
+        </defs>
+
+        <!-- audit perimeter -->
+        <rect x="20" y="60" width="1040" height="830" rx="6" fill="none" stroke="var(--chief)" stroke-width="1.3" stroke-dasharray="7 5"/>
+        <text x="1046" y="84" font-size="10" fill="var(--chief-text)" text-anchor="end">every node inside is a row in inventory.yaml</text>
+
+        <!-- 1 prompt-lifecycle -> profile-loop -->
+        <line x1="150" y1="282" x2="150" y2="326" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="160" y="310" font-size="10" fill="var(--ink-2)">prompts power the deployments</text>
+
+        <!-- 2 profile-loop -> career-loop (routed above the project-loop card) -->
+        <path d="M 256,366 C 400,300 520,170 786,230" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="430" y="188" font-size="10" fill="var(--ink-2)">career facts — via master.md only</text>
+
+        <!-- 3 learning-loop -> career-loop -->
+        <path d="M 256,500 C 560,510 720,330 788,256" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="400" y="490" font-size="10" fill="var(--ink-2)">vocabulary for interviews / JDs</text>
+
+        <!-- 4 project-loop -> career-loop -->
+        <path d="M 648,300 C 710,290 740,262 786,246" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="652" y="320" font-size="10" fill="var(--ink-2)">reviewed projects → case studies</text>
+
+        <!-- 5 career-loop -> job-pipeline -->
+        <line x1="894" y1="288" x2="894" y2="366" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="904" y="332" font-size="10" fill="var(--ink-2)">base resumes</text>
+
+        <!-- 6 job-pipeline -> project-loop (dashed, demand) -->
+        <path d="M 786,430 C 720,444 690,412 654,380" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="636" y="450" font-size="10" fill="var(--muted)">demand signal → /ideate</text>
+
+        <!-- 7 career-loop -> publishing-loop (right channel) -->
+        <path d="M 998,252 C 1040,330 1040,480 1000,556" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="1014" y="516" font-size="10" fill="var(--ink-2)" text-anchor="end">case-study copy → site</text>
+
+        <!-- 8 learning-loop -> publishing-loop (dashed) -->
+        <path d="M 256,522 C 520,606 660,600 784,578" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="500" y="618" font-size="10" fill="var(--muted)">learn-in-public drafts</text>
+
+        <!-- 9 learning-loop -> vault -->
+        <path d="M 152,540 C 168,630 240,724 326,760" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
+        <text x="176" y="584" font-size="10" fill="var(--vault)">retrieval tail → journal + cards</text>
+
+        <!-- 10 daily-review -> vault -->
+        <path d="M 256,656 C 292,692 310,722 328,748" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
+
+        <!-- 11 publishing-loop -> personal-brand -->
+        <line x1="890" y1="626" x2="890" y2="694" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="900" y="664" font-size="10" fill="var(--ink-2)">posts → distribution</text>
+
+        <!-- 12 personal-brand -> job-pipeline (right channel) -->
+        <path d="M 996,738 C 1058,660 1058,510 998,446" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="1010" y="494" font-size="10" fill="var(--ink-2)" text-anchor="end">recruiter-facing surface (LinkedIn)</text>
+
+        <!-- 13 profile-loop -> personal-brand (read-only, along the bottom) -->
+        <path d="M 256,396 C 300,540 302,700 344,858 C 500,886 720,878 868,798" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="470" y="876" font-size="10" fill="var(--muted)">profile facts ground the persona — never invent</text>
+      </svg>
+
+      <!-- meta node on the perimeter -->
+      <div class="node meta" style="left:428px; top:22px; width:230px">
+        <div class="nn">workflow-audit <span style="color:var(--chief-text)">· meta</span></div>
+        <div class="nh" style="color:var(--chief-text)">ai-chief-of-staff</div>
+        <div class="nd">inventory → checks → /audit → proposals → Felix confirms → draft PR</div>
+      </div>
+
+      <!-- ghost: file-management -->
+      <div class="node wanted" style="left:48px; top:96px; width:190px">
+        <div class="nn" style="color:var(--ink-2)">file-management</div>
+        <div class="nh" style="color:var(--muted)">no home yet · wanted</div>
+        <div class="nd">WHERE files live — Drive · GitHub · volumes</div>
+      </div>
+
+      <!-- agent-kit column -->
+      <div class="node" style="left:48px; top:206px">
+        <div class="nn">prompt-lifecycle</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit</div>
+        <div class="nd">idea → prompts/ library → thin loaders</div>
+      </div>
+      <div class="node" style="left:48px; top:330px">
+        <div class="nn">profile-loop</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit</div>
+        <div class="nd">interview → master-profile → CC snippet + Drive mirror</div>
+      </div>
+      <div class="node" style="left:48px; top:452px">
+        <div class="nn">learning-loop</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit</div>
+        <div class="nd">#inbox → triage → routes A–D → recall · cards · journal</div>
+      </div>
+      <div class="node" style="left:48px; top:592px">
+        <div class="nn">daily-review</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit · Felix-run in Cowork</div>
+        <div class="nd">evening review + task triage (Phase 1b)</div>
+      </div>
+
+      <!-- forge center -->
+      <div class="node" style="left:428px; top:268px; width:220px">
+        <div class="nn">project-loop</div>
+        <div class="nh" style="color:var(--forge)">forge</div>
+        <div class="nd">/ideate → /register → /review → reuse tiers → /new-project ↺</div>
+        <div class="nd" style="border-top:1px dotted var(--hairline); margin-top:.35rem; padding-top:.3rem">outputs: ragx · ragr · logx · learn-to-ship</div>
+      </div>
+
+      <!-- job_hunting column -->
+      <div class="node" style="left:790px; top:206px">
+        <div class="nn">career-loop</div>
+        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nd">case studies → master.md → base resumes</div>
+      </div>
+      <div class="node" style="left:790px; top:370px">
+        <div class="nn">job-pipeline</div>
+        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nd">/scout → /match → /tailor → /interview · daily/weekly cadence</div>
+      </div>
+      <div class="node" style="left:790px; top:534px">
+        <div class="nn">publishing-loop</div>
+        <div class="nh" style="color:var(--blog)">blog · the Editor</div>
+        <div class="nd">/draft → /refine → /publish → curate /writing · first output: this atlas + its post</div>
+      </div>
+
+      <!-- personal-brand (wanted, designed) -->
+      <div class="node wanted" style="left:790px; top:698px">
+        <div class="nn">personal-brand</div>
+        <div class="nh" style="color:var(--muted)">the Brand Coach · staged</div>
+        <div class="nd">BUILD → PRESENT → AUDIT ↺ · image · platforms · outside-in</div>
+      </div>
+
+      <!-- vault band -->
+      <div class="band" style="left:330px; top:740px; width:430px; min-height:104px">
+        <div style="font-weight:700; font-family:Charter,Georgia,serif; font-size:.86rem">The vault — a sink <span style="font-weight:400; color:var(--ink-2)">(Logseq)</span></div>
+        <div class="nh" style="color:var(--vault); font-family:ui-monospace,Menlo,monospace; font-size:.62rem; letter-spacing:.06em; margin-top:.1rem">wiki-management · the Librarian</div>
+        <div class="nd" style="color:var(--ink-2); font-size:.7rem; font-family:ui-monospace,Menlo,monospace; margin-top:.3rem">journals/ · pages/ · [[Tasks]] · #card SRS — producer loops own the content they append; the Librarian owns the conventions</div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <span class="lg"><span class="dot" style="background:var(--agentkit)"></span>agent-kit</span>
+    <span class="lg"><span class="dot" style="background:var(--forge)"></span>forge</span>
+    <span class="lg"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</span>
+    <span class="lg"><span class="dot" style="background:var(--vault)"></span>vault</span>
+    <span class="lg"><span class="dot" style="background:var(--blog)"></span>blog</span>
+    <span class="lg"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</span>
+    <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--edge)" stroke-width="1.5"/></svg>feeds</span>
+    <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--edge)" stroke-width="1.5" stroke-dasharray="4 3"/></svg>read-only / aspirational</span>
+    <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--chief)" stroke-width="1.5" stroke-dasharray="6 4"/></svg>audit perimeter</span>
+    <span class="lg">solid card = running · dashed card = wanted</span>
+  </div>
+  <p class="kicker" style="margin-top:1rem; font-size:.9rem">Reading the map: evidence flows left-to-right — learning and profile knowledge feed the career loop, the career loop feeds the job pipeline, and the pipeline's demand data flows back (dashed) into <span class="mono" style="font-size:.85em">/ideate</span>, closing the outer circle: <em>what the market wants shapes what gets built next</em>. Published work flows on into the brand loop, which distributes it platform-natively and maintains the recruiter-facing surface the pipeline depends on. Everything durable drains down into the vault.</p>
+</section>
+
+<footer class="col">
+  <p><span class="mono">sources: inventory.yaml (canonical — rows win over diagrams) · workflows.md · primitives.md · chief-of-staff.md</span></p>
+  <p>Compiled by the Chief of Staff, 2026-07-07; regenerated the same day when the personal-brand loop and the Brand Coach joined. If this page and a row disagree, the row wins — fix the page.</p>
+</footer>
+
+</body></html>
