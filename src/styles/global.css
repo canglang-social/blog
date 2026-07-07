@@ -1,5 +1,6 @@
 /*
-  Modern minimal theme — system sans, airy spacing, light + dark.
+  Atlas theme — warm paper, serif prose, mono labels, hairline borders.
+  Matches the system-atlas diagrams (atlas-*.svg in post assets).
   Tailwind v4 + typography plugin stay wired in below.
  */
 @import 'tailwindcss';
@@ -7,6 +8,9 @@
 
 :root {
   /* Type */
+  --font-serif:
+    Charter, 'Iowan Old Style', 'Palatino Nova', Palatino, Georgia,
+    'Songti SC', 'Noto Serif SC', 'Source Han Serif SC', serif;
   --font-sans:
     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
@@ -19,33 +23,35 @@
     'STKaiti', 'KaiTi', 'Kaiti SC', 'Kaiti TC', 'STSong', 'Songti SC',
     'Noto Serif SC', 'Source Han Serif SC', serif;
 
-  /* Light palette */
-  --bg: #fcfcfd;
-  --surface: #ffffff;
-  --surface-hover: #f6f7f9;
-  --text: #2b2f36;
-  --heading: #14171c;
-  --muted: #6b7280;
-  --border: #ececef;
-  --accent: #3056ff;
-  --accent-soft: rgba(48, 86, 255, 0.1);
-  --code-bg: #f3f4f6;
-  --shadow: 0 1px 2px rgba(20, 23, 28, 0.04), 0 6px 24px rgba(20, 23, 28, 0.06);
+  /* Light palette — warm paper + ink, chief-red accent */
+  --bg: #f7f5ef;
+  --surface: #fbfaf6;
+  --surface-hover: #f2f0e8;
+  --text: #1e1c17;
+  --heading: #1e1c17;
+  --muted: #8b877c;
+  --border: #e3e0d4;
+  --accent: #b52f2e;
+  --accent-soft: rgba(181, 47, 46, 0.08);
+  --code-bg: #efede4;
+  --shadow: none; /* hairline borders carry depth instead */
+  --wave: #a49f92; /* ink-wash water for the poem, independent of accent */
   --max: 44rem;
 }
 
 html[data-theme='dark'] {
-  --bg: #0e0f13;
-  --surface: #16181d;
-  --surface-hover: #1c1f26;
-  --text: #c9cdd6;
-  --heading: #f1f3f7;
-  --muted: #8b909c;
-  --border: #24262d;
-  --accent: #8aa2ff;
-  --accent-soft: rgba(138, 162, 255, 0.12);
-  --code-bg: #1c1f26;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 24px rgba(0, 0, 0, 0.35);
+  --bg: #121210;
+  --surface: #191917;
+  --surface-hover: #201f1c;
+  --text: #c9c5b8;
+  --heading: #f0eee5;
+  --muted: #8b877c;
+  --border: #2c2b26;
+  --accent: #e66767;
+  --accent-soft: rgba(230, 103, 103, 0.12);
+  --code-bg: #201f1c;
+  --shadow: none;
+  --wave: #6d6a60;
 }
 
 html {
@@ -53,7 +59,7 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   margin: 0;
   padding: 0;
   text-align: left;
@@ -65,7 +71,6 @@ body {
   overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
@@ -133,7 +138,7 @@ table {
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 2px;
 }
 
 code {
@@ -141,11 +146,11 @@ code {
   font-size: 0.875em;
   padding: 0.15em 0.4em;
   background-color: var(--code-bg);
-  border-radius: 5px;
+  border-radius: 3px;
 }
 pre {
   padding: 1.25rem 1.5rem;
-  border-radius: 12px;
+  border-radius: 2px;
   border: 1px solid var(--border);
   overflow-x: auto;
 }
