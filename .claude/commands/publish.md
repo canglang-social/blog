@@ -14,8 +14,11 @@ bypass it.
 2. **Frontmatter finalize.** Set `pubDate` to today (YYYY-MM-DD). Validate
    every field against the Zod schema in `src/content.config.ts` — schema
    drift fails the build, so check the schema file itself, not memory.
-3. **Move** the file to `src/content/blog/YYYY-MM-DD-<slug>.md` (matching
-   the existing filename convention) and delete it from `drafts/`.
+3. **Move** the file to `src/content/blog/en/YYYY-MM-DD-<slug>.md` (English
+   is the default locale; a Chinese version, if one exists, goes to
+   `src/content/blog/zh/` under the SAME filename so the language switch
+   links them). Relative asset paths from a post are `../../../assets/...`.
+   Delete the draft from `drafts/`.
 4. **Verify:** `pnpm astro check` then `pnpm build`. Both must pass; on
    failure, fix or move the file back to `drafts/` and report — never leave
    a broken collection.

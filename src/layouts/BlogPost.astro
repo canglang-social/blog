@@ -5,18 +5,49 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import { defaultLang, localeUrl, useTranslations, type Lang } from '../i18n/ui';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+  lang?: Lang;
+  /** URL of this post in the other language, when a translation exists. */
+  translationUrl?: string;
+};
 
-const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  tags,
+  lang = defaultLang,
+  translationUrl,
+} = Astro.props;
+const t = useTranslations(lang);
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
     <BaseHead
       title={title}
       description={description}
     />
+    {
+      translationUrl && (
+        <>
+          <link
+            rel="alternate"
+            hreflang={lang}
+            href={new URL(Astro.url.pathname, Astro.site)}
+          />
+          <link
+            rel="alternate"
+            hreflang={lang === 'zh' ? 'en' : 'zh'}
+            href={new URL(translationUrl, Astro.site)}
+          />
+        </>
+      )
+    }
     <style>
       .hero-image {
         margin-bottom: 2.5rem;
@@ -77,10 +108,10 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
   </head>
 
   <body>
-    <Header />
+    <Header lang={lang} switchUrl={translationUrl} />
     <main>
       <article>
-        <a class="back-link" href="/blog">← Back to writing</a>
+        <a class="back-link" href={localeUrl(lang, '/blog')}>{t('post.back')}</a>
         {
           heroImage && (
             <div class="hero-image">
@@ -95,11 +126,11 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
         }
         <div class="title">
           <div class="date">
-            <FormattedDate date={pubDate} />
+            <FormattedDate date={pubDate} lang={lang} />
             {
               updatedDate && (
                 <span class="last-updated-on">
-                  {' · '}Last updated on <FormattedDate date={updatedDate} />
+                  {' · '}{t('post.updated')} <FormattedDate date={updatedDate} lang={lang} />
                 </span>
               )
             }
@@ -109,7 +140,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
             tags && tags.length > 0 && (
               <div class="post-tags">
                 {tags.map((tag) => (
-                  <a class="post-tag" href={`/blog/?tag=${tag}`}>
+                  <a class="post-tag" href={localeUrl(lang, `/blog/?tag=${tag}`)}>
                     {tag}
                   </a>
                 ))}

@@ -30,8 +30,10 @@ is a doctrine, not code — a Claude session "wears" it by reading this file.
    HANDOFF-portfolio-site: English-first).
 3. **A language SWITCH is the only multilingual form ever allowed** —
    separate per-language versions of a post behind an i18n toggle, never
-   bilingual paragraphs. Deferred: do not build i18n machinery until a real
-   Chinese version of a real post demands it.
+   bilingual paragraphs. Built 2026-07-07 at Felix's request: posts live in
+   `src/content/blog/en/` and `src/content/blog/zh/` (same slug = linked
+   translations), English at `/blog/...`, Chinese at `/zh/blog/...`, with a
+   header language switch. A Chinese version is optional per post.
 4. **Every English post gets a native-English refinement pass** (`/refine`).
    Felix is not a native speaker; the pass upgrades grammar, phrasing, and
    idiom to native-sounding prose, briefly noting what changed and why so

@@ -11,7 +11,7 @@ Input: a file in `drafts/` (ask which if not given). The draft stays in
 Run the pass in this order, showing work at each step:
 
 1. **Calibrate voice.** Skim the 2–3 strongest published posts in
-   `src/content/blog/` first so refinement pulls toward Felix's voice, not
+   `src/content/blog/en/` first so refinement pulls toward Felix's voice, not
    generic AI prose.
 2. **Structure critique.** Does the piece open with the point? Is anything
    listicle filler? What would myself-3-months-ago actually need? Propose

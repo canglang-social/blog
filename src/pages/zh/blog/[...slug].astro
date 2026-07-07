@@ -1,22 +1,22 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import { localeFromId, slugFromId } from '../../i18n/ui';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { localeFromId, slugFromId } from '../../../i18n/ui';
+import BlogPost from '../../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
-	const zhSlugs = new Set(
-		posts.filter((p) => localeFromId(p.id) === 'zh').map((p) => slugFromId(p.id)),
+	const enSlugs = new Set(
+		posts.filter((p) => localeFromId(p.id) === 'en').map((p) => slugFromId(p.id)),
 	);
 	return posts
-		.filter((post) => localeFromId(post.id) === 'en')
+		.filter((post) => localeFromId(post.id) === 'zh')
 		.map((post) => {
 			const slug = slugFromId(post.id);
 			return {
 				params: { slug },
 				props: {
 					post,
-					translationUrl: zhSlugs.has(slug) ? `/zh/blog/${slug}/` : undefined,
+					translationUrl: enSlugs.has(slug) ? `/blog/${slug}/` : undefined,
 				},
 			};
 		});
@@ -30,6 +30,6 @@ const { post, translationUrl } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data} lang="en" translationUrl={translationUrl}>
+<BlogPost {...post.data} lang="zh" translationUrl={translationUrl}>
 	<Content />
 </BlogPost>

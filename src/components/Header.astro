@@ -1,18 +1,33 @@
 ---
 import { SITE_TITLE } from '../consts';
+import { defaultLang, localeUrl, useTranslations, type Lang } from '../i18n/ui';
 import HeaderLink from './HeaderLink.astro';
+
+interface Props {
+  lang?: Lang;
+  /** Where the language toggle should go; defaults to the other locale's blog index. */
+  switchUrl?: string;
+}
+
+const { lang = defaultLang, switchUrl } = Astro.props;
+const t = useTranslations(lang);
+const otherLang: Lang = lang === 'zh' ? 'en' : 'zh';
+const switchHref = switchUrl ?? localeUrl(otherLang, '/blog/');
 ---
 
 <header>
   <nav>
-    <a class="site-title" href="/blog">{SITE_TITLE}</a>
+    <a class="site-title" href={localeUrl(lang, '/blog')}>{SITE_TITLE}</a>
     <div class="links">
       <div class="internal-links">
-        <HeaderLink href="/blog">Blog</HeaderLink>
-        <HeaderLink href="/atlas/">Atlas</HeaderLink>
-        <HeaderLink href="/about">About</HeaderLink>
+        <HeaderLink href={localeUrl(lang, '/blog')}>{t('nav.blog')}</HeaderLink>
+        <HeaderLink href="/atlas/">{t('nav.atlas')}</HeaderLink>
+        <HeaderLink href="/about">{t('nav.about')}</HeaderLink>
       </div>
       <div class="social-links">
+        <a class="lang-switch" href={switchHref} aria-label={t('switch.aria')}>
+          {t('switch.label')}
+        </a>
         <a href="https://x.com/canglang_so" target="_blank" rel="noopener">
           <span class="sr-only">X (Twitter)</span>
           <svg viewBox="0 0 16 16" aria-hidden="true" width="18" height="18"
@@ -117,7 +132,23 @@ import HeaderLink from './HeaderLink.astro';
     align-items: center;
     gap: 0.25rem;
   }
-  .social-links a,
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    height: 1.6rem;
+    padding: 0 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .lang-switch:hover {
+    color: var(--heading);
+    border-color: var(--muted);
+  }
+  .social-links a:not(.lang-switch),
   #theme-toggle {
     display: inline-flex;
     align-items: center;
@@ -131,7 +162,7 @@ import HeaderLink from './HeaderLink.astro';
     cursor: pointer;
     transition: color 0.15s ease, background-color 0.15s ease;
   }
-  .social-links a:hover,
+  .social-links a:not(.lang-switch):hover,
   #theme-toggle:hover {
     color: var(--heading);
     background: var(--surface-hover);
@@ -146,7 +177,7 @@ import HeaderLink from './HeaderLink.astro';
     display: inline;
   }
   @media (max-width: 520px) {
-    .social-links a:not(#theme-toggle) {
+    .social-links a:not(#theme-toggle):not(.lang-switch) {
       display: none;
     }
   }
