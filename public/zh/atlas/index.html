@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>系统图谱 — Felix 如何与 AI 协作</title>
+<link rel="alternate" hreflang="en" href="https://canglang.netlify.app/atlas/">
+<link rel="alternate" hreflang="zh" href="https://canglang.netlify.app/zh/atlas/">
+<script>(()=>{const s=localStorage.getItem("theme");document.documentElement.dataset.theme=s||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
+</head><body>
+<style>
+  :root {
+    --page:      #f7f5ef;
+    --panel:     #fbfaf6;
+    --ink:       #1e1c17;
+    --ink-2:     #5b5850;
+    --muted:     #8b877c;
+    --hairline:  #e3e0d4;
+    --baseline:  #c9c5b8;
+
+    --agentkit:  #2a78d6;
+    --forge:     #1baf7a;
+    --jobhunt:   #eda100;
+    --vault:     #008300;
+    --blog:      #4a3aa7;
+    --chief:     #e34948;
+    --chief-text:#b52f2e;
+    --ghost:     #8b877c;
+
+    --edge:      #a49f92;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --page:      #121210;
+      --panel:     #191917;
+      --ink:       #f0eee5;
+      --ink-2:     #b8b4a7;
+      --muted:     #8b877c;
+      --hairline:  #2c2b26;
+      --baseline:  #3a3933;
+
+      --agentkit:  #3987e5;
+      --forge:     #199e70;
+      --jobhunt:   #c98500;
+      --vault:     #4d9c3a;
+      --blog:      #9085e9;
+      --chief:     #e66767;
+      --chief-text:#e66767;
+
+      --edge:      #6d6a60;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page:      #121210;
+    --panel:     #191917;
+    --ink:       #f0eee5;
+    --ink-2:     #b8b4a7;
+    --muted:     #8b877c;
+    --hairline:  #2c2b26;
+    --baseline:  #3a3933;
+    --agentkit:  #3987e5;
+    --forge:     #199e70;
+    --jobhunt:   #c98500;
+    --vault:     #4d9c3a;
+    --blog:      #9085e9;
+    --chief:     #e66767;
+    --chief-text:#e66767;
+    --edge:      #6d6a60;
+  }
+  :root[data-theme="light"] {
+    --page:      #f7f5ef;
+    --panel:     #fbfaf6;
+    --ink:       #1e1c17;
+    --ink-2:     #5b5850;
+    --muted:     #8b877c;
+    --hairline:  #e3e0d4;
+    --baseline:  #c9c5b8;
+    --agentkit:  #2a78d6;
+    --forge:     #1baf7a;
+    --jobhunt:   #eda100;
+    --vault:     #008300;
+    --blog:      #4a3aa7;
+    --chief:     #e34948;
+    --chief-text:#b52f2e;
+    --edge:      #a49f92;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: Charter, "Iowan Old Style", "Palatino Nova", Palatino, Georgia, "Songti SC", "Noto Serif CJK SC", serif;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 1.25rem 6rem;
+  }
+  .mono, .chip, .tag, .pill, .step, .eyebrow, .edge-label, .home-name, .stat b, figcaption {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  .col { max-width: 44rem; margin-inline: auto; }
+  .wide { max-width: 72rem; margin-inline: auto; }
+
+  h1, h2, h3 { text-wrap: balance; line-height: 1.15; }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; margin: .4rem 0 .8rem; letter-spacing: -0.015em; }
+  h2 { font-size: 1.55rem; margin: 0 0 .35rem; }
+  h3 { font-size: 1.08rem; margin: 1.4rem 0 .4rem; }
+  p  { margin: .55rem 0; }
+  .lede { font-size: 1.13rem; color: var(--ink-2); max-width: 38rem; }
+
+  .eyebrow {
+    font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); display: block; margin-bottom: .3rem;
+  }
+  .eyebrow .thread { color: var(--chief-text); }
+
+  header.mast { padding: 3.2rem 0 1rem; border-bottom: 1px solid var(--hairline); margin-bottom: 2.6rem; }
+  .stats { display: flex; flex-wrap: wrap; gap: 0; margin: 1.6rem 0 .4rem; border: 1px solid var(--hairline); background: var(--panel); }
+  .stat { flex: 1 1 100px; padding: .7rem .9rem; border-right: 1px solid var(--hairline); min-width: 96px; }
+  .stat:last-child { border-right: 0; }
+  .stat b { display: block; font-size: 1.45rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  section { margin-block: 4.5rem; }
+  .secno { color: var(--chief-text); }
+  .kicker { color: var(--ink-2); max-width: 40rem; }
+
+  figure { margin: 1.4rem 0; }
+  figcaption { font-size: .72rem; color: var(--muted); margin-top: .55rem; letter-spacing: .02em; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--hairline);
+    padding: 1rem; overflow-x: auto;
+  }
+  .fig-breakout { width: min(62rem, calc(100vw - 2.5rem)); margin-left: 50%; transform: translateX(-50%); }
+  .panel > svg { display: block; width: 100%; height: auto; min-width: 760px; }
+
+  svg text { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+  th { text-align: left; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: .45rem .6rem; border-bottom: 1px solid var(--baseline); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  td { padding: .5rem .6rem; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+  td.mono { font-size: .8rem; }
+
+  .dot { display: inline-block; width: .62em; height: .62em; border-radius: 50%; margin-right: .38em; vertical-align: baseline; position: relative; top: .02em; }
+
+  /* home cards */
+  .homes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .home { background: var(--panel); padding: 1rem 1.1rem 1.15rem; }
+  .home-name { font-size: .85rem; font-weight: 600; letter-spacing: .02em; }
+  .home-role { font-size: .78rem; color: var(--ink-2); margin: .15rem 0 .6rem; }
+  .home ul { margin: 0; padding: 0; list-style: none; }
+  .home li { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .74rem; color: var(--ink-2); padding: .22rem 0; border-top: 1px dotted var(--hairline); }
+  .home li b { color: var(--ink); font-weight: 600; }
+
+  /* workflow rows */
+  .flows { border: 1px solid var(--hairline); background: var(--panel); }
+  .flow { padding: 1rem 1.15rem; border-bottom: 1px solid var(--hairline); }
+  .flow:last-child { border-bottom: 0; }
+  .flow-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .55rem; }
+  .flow-name { font-weight: 700; font-size: 1.02rem; }
+  .tag { font-size: .68rem; color: var(--ink-2); letter-spacing: .03em; }
+  .pill { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; padding: .1rem .5rem; border: 1px solid var(--baseline); color: var(--ink-2); }
+  .pill.running { border-style: solid; }
+  .pill.wanted { border-style: dashed; color: var(--muted); }
+  .flow-sum { font-size: .92rem; color: var(--ink-2); margin: .3rem 0 .5rem; max-width: 60rem; }
+  .steps { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .15rem; }
+  .step { font-size: .72rem; background: var(--page); border: 1px solid var(--hairline); padding: .12rem .45rem; white-space: nowrap; }
+  .step.loopback { border-style: dashed; color: var(--muted); background: transparent; }
+  .arr { color: var(--muted); font-size: .72rem; font-family: ui-monospace, Menlo, monospace; padding: 0 .12rem; }
+
+  /* system map */
+  .map-scroll { overflow-x: auto; border: 1px solid var(--hairline); background: var(--panel); }
+  .map { position: relative; width: 1080px; height: 916px; margin: 0 auto; }
+  .map svg.underlay { position: absolute; inset: 0; }
+  .node {
+    position: absolute; width: 204px; background: var(--page);
+    border: 1px solid var(--baseline); border-radius: 2px;
+    padding: .5rem .65rem .55rem; font-size: .78rem;
+  }
+  .node .nn { font-weight: 700; font-size: .84rem; font-family: Charter, Georgia, serif; }
+  .node .nh { font-family: ui-monospace, Menlo, monospace; font-size: .62rem; letter-spacing: .06em; margin-top: .1rem; }
+  .node .nd { color: var(--ink-2); font-size: .7rem; line-height: 1.35; margin-top: .25rem; font-family: ui-monospace, Menlo, monospace; }
+  .node.wanted { border-style: dashed; background: transparent; }
+  .node.meta { border-color: var(--chief); border-width: 1.5px; }
+  .band {
+    position: absolute; border: 1px solid var(--vault); border-radius: 2px;
+    background: color-mix(in srgb, var(--vault) 4%, var(--page));
+    padding: .55rem .7rem; font-size: .74rem;
+  }
+  .edge-label { font-size: .62rem; fill: var(--ink-2); }
+  .legend { display: flex; flex-wrap: wrap; gap: .9rem 1.4rem; padding: .8rem 1rem; border: 1px solid var(--hairline); border-top: 0; background: var(--panel); font-family: ui-monospace, Menlo, monospace; font-size: .68rem; color: var(--ink-2); align-items: center; }
+  .lg { display: inline-flex; align-items: center; gap: .4rem; }
+  .lg svg { display: block; }
+
+  .rolecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .75rem; margin-top: 1.2rem; }
+  .rolecard { background: var(--panel); border: 1px solid var(--hairline); padding: 1rem 1.1rem; font-size: .88rem; }
+  .rolecard h4 { margin: 0 0 .3rem; font-size: 1rem; }
+  .rolecard p { color: var(--ink-2); font-size: .84rem; margin: .25rem 0; }
+  .rolecard .mono { font-size: .7rem; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--hairline); margin-top: 4rem; padding-top: 1.2rem; font-size: .8rem; color: var(--muted); }
+  footer .mono { font-size: .72rem; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--chief); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<header class="mast col">
+  <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译自 inventory.yaml、workflows.md、primitives.md</span>
+  <h1>系统图谱</h1>
+  <p class="lede">一个人、六个驻地、十二个循环、四个判断型角色——外加一个审计这一切的元循环。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
+  <div class="stats" role="group" aria-label="系统统计">
+    <div class="stat"><b>5</b><span>原语</span></div>
+    <div class="stat"><b>4</b><span>角色</span></div>
+    <div class="stat"><b>12</b><span>工作流</span></div>
+    <div class="stat"><b>10</b><span>运行中</span></div>
+    <div class="stat"><b>2</b><span>待建</span></div>
+    <div class="stat"><b>6</b><span>驻地</span></div>
+  </div>
+</header>
+
+<!-- ============ 1 · PRIMITIVES ============ -->
+<section class="col" id="primitives">
+  <span class="eyebrow"><span class="secno">§1</span> · 词汇表</span>
+  <h2>五个原语，一副解剖图</h2>
+  <p class="kicker"><strong>提示词（prompt）</strong>是存储的文本——原材料。<strong>命令（command）</strong>是把它按固定步骤部署出去的薄加载器。命令通常会<em>扮演</em>一个<strong>角色（role）</strong>——一个带判断力与边界的常设身份。<strong>工作流（workflow）</strong>是把三者组合起来的循环；<strong>项目（project）</strong>则是从另一端产出的成品。</p>
+
+  <figure class="fig-breakout">
+    <div class="panel">
+      <svg viewBox="0 0 940 290" width="940" height="290" role="img" aria-label="五个原语的解剖图：提示词由命令部署，命令扮演角色，三者都在一个工作流循环之内，循环产出项目。">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
+          </marker>
+        </defs>
+        <!-- workflow container -->
+        <rect x="18" y="52" width="650" height="196" rx="4" fill="none" stroke="var(--ink-2)" stroke-width="1.4"/>
+        <text x="34" y="80" font-size="13" font-weight="700" fill="var(--ink)">工作流 WORKFLOW</text>
+        <text x="34" y="97" font-size="10.5" fill="var(--ink-2)">周而复始的循环——清单追踪的基本单元</text>
+        <text x="34" y="230" font-size="10" fill="var(--muted)">例：project-loop · learning-loop · workflow-audit</text>
+
+        <!-- prompt -->
+        <rect x="46" y="122" width="146" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
+        <text x="60" y="146" font-size="12" font-weight="700" fill="var(--ink)">提示词 PROMPT</text>
+        <text x="60" y="163" font-size="10" fill="var(--ink-2)">存储文本 · 资产</text>
+        <text x="60" y="178" font-size="10" fill="var(--muted)">agent-kit prompts/*</text>
+
+        <!-- command -->
+        <rect x="268" y="122" width="146" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
+        <text x="282" y="146" font-size="12" font-weight="700" fill="var(--ink)">命令 COMMAND</text>
+        <text x="282" y="163" font-size="10" fill="var(--ink-2)">加载器 · 固定步骤</text>
+        <text x="282" y="178" font-size="10" fill="var(--muted)">/audit · /review</text>
+
+        <!-- role -->
+        <rect x="482" y="122" width="168" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
+        <text x="496" y="146" font-size="12" font-weight="700" fill="var(--ink)">角色 ROLE</text>
+        <text x="496" y="163" font-size="10" fill="var(--ink-2)">判断力 + 边界</text>
+        <text x="496" y="178" font-size="9.5" fill="var(--muted)">四个判断型角色</text>
+
+        <!-- arrows inside -->
+        <line x1="192" y1="157" x2="264" y2="157" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
+        <text x="228" y="147" font-size="9" fill="var(--ink-2)" text-anchor="middle">由其部署</text>
+        <line x1="414" y1="157" x2="478" y2="157" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
+        <text x="446" y="147" font-size="9" fill="var(--ink-2)" text-anchor="middle">扮演</text>
+
+        <!-- produces -->
+        <line x1="668" y1="150" x2="756" y2="150" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
+        <text x="712" y="141" font-size="9" fill="var(--ink-2)" text-anchor="middle">产出</text>
+
+        <!-- project -->
+        <rect x="760" y="115" width="170" height="70" rx="2" fill="var(--page)" stroke="var(--ink-2)" stroke-width="1.4"/>
+        <text x="774" y="139" font-size="12" font-weight="700" fill="var(--ink)">项目 PROJECT</text>
+        <text x="774" y="156" font-size="10" fill="var(--ink-2)">造出来的东西 · 产出</text>
+        <text x="770" y="171" font-size="9.5" fill="var(--muted)">ragx · logx · learn-to-ship</text>
+
+        <!-- loop-back hint -->
+        <path d="M 343,52 C 343,26 343,26 370,26 L 560,26 C 590,26 590,26 590,52" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+        <text x="466" y="20" font-size="9" fill="var(--muted)" text-anchor="middle">……并再次循环</text>
+      </svg>
+    </div>
+    <figcaption>图 1 —— 解剖图。提示词 → 命令 → 角色在工作流内组合；项目是产出，完全是另一条轴。（primitives.md）</figcaption>
+  </figure>
+
+  <table>
+    <thead><tr><th>原语</th><th>回答什么</th><th>本质</th><th>由谁调用</th></tr></thead>
+    <tbody>
+      <tr><td><strong>角色</strong></td><td>「谁」来行动、依据什么判断</td><td>常设身份</td><td class="mono">"act as X" / 由命令扮演</td></tr>
+      <tr><td><strong>命令</strong></td><td>运行「什么」程序</td><td>可重复的任务</td><td class="mono">/command</td></tr>
+      <tr><td><strong>提示词</strong></td><td>存储的指令文本</td><td>资产（原材料）</td><td class="mono">由加载器/命令部署</td></tr>
+      <tr><td><strong>工作流</strong></td><td>循环本身 + 它的目的</td><td>过程</td><td class="mono">经由其命令/角色运行</td></tr>
+      <tr><td><strong>项目</strong></td><td>造出来的东西</td><td>制品（产出）</td><td class="mono">你直接使用</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 2 · ROLES ============ -->
+<section class="col" id="roles">
+  <span class="eyebrow"><span class="secno">§2</span> · 判断力所在</span>
+  <h2>四个判断型角色</h2>
+  <p class="kicker">角色出现在判断力汇聚的地方；任务是程序性的地方，命令就够了。这就是为什么系统大体是「工作流 + 命令」、角色恰好只有四个——也是为什么 <span class="mono" style="font-size:.85em">/scout</span> 或 <span class="mono" style="font-size:.85em">/tailor</span> 从来不需要人格面具。幕僚长从外部审计其余三个——对自己的作为，它是<em>幕僚长，而非审计员</em>。</p>
+
+  <figure class="fig-breakout">
+    <div class="panel">
+      <svg viewBox="0 0 940 400" width="940" height="400" role="img" aria-label="角色图谱：幕僚长审计图书馆员、编辑、品牌教练，以及它自己那一行。命令与会话扮演各个角色；品牌教练把博客文案的修改转交编辑。">
+        <defs>
+          <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--chief)" stroke-width="1.6"/>
+          </marker>
+          <marker id="ahd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
+          </marker>
+        </defs>
+
+        <!-- chief -->
+        <rect x="358" y="34" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--chief)" stroke-width="1.6"/>
+        <circle cx="378" cy="56" r="4" fill="var(--chief)"/>
+        <text x="390" y="60" font-size="13" font-weight="700" fill="var(--ink)">幕僚长 Chief of Staff</text>
+        <text x="374" y="80" font-size="10" fill="var(--ink-2)">工作流清单 + 元策略</text>
+        <text x="374" y="95" font-size="10" fill="var(--muted)">保留 · 合并 · 自动化 · 退役</text>
+
+        <!-- self-audit loop -->
+        <path d="M 588,56 C 660,42 660,110 592,100" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="668" y="80" font-size="9.5" fill="var(--chief-text)">审计（自己那行）</text>
+
+        <!-- /audit wears chief -->
+        <rect x="120" y="52" width="150" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="195" y="73" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/audit</text>
+        <path d="M 274,69 L 354,72" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <text x="298" y="60" font-size="9" fill="var(--muted)">扮演</text>
+
+        <!-- librarian -->
+        <rect x="46" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--vault)" stroke-width="1.4"/>
+        <circle cx="66" cy="218" r="4" fill="var(--vault)"/>
+        <text x="78" y="222" font-size="13" font-weight="700" fill="var(--ink)">图书馆员 Librarian</text>
+        <text x="62" y="242" font-size="10" fill="var(--ink-2)">约定 · 漂移 · 采集</text>
+        <text x="62" y="257" font-size="10" fill="var(--muted)">自托管：[[Wiki/Librarian]]</text>
+
+        <!-- editor -->
+        <rect x="355" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--blog)" stroke-width="1.4"/>
+        <circle cx="375" cy="218" r="4" fill="var(--blog)"/>
+        <text x="387" y="222" font-size="13" font-weight="700" fill="var(--ink)">编辑 Editor</text>
+        <text x="371" y="242" font-size="10" fill="var(--ink-2)">风格 · 草稿 · 策展</text>
+        <text x="371" y="257" font-size="10" fill="var(--muted)">editor.md · 绝不代笔</text>
+
+        <!-- brand coach (staged, no own home yet) -->
+        <rect x="664" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--baseline)" stroke-width="1.4" stroke-dasharray="6 4"/>
+        <circle cx="684" cy="218" r="4" fill="var(--ghost)"/>
+        <text x="696" y="222" font-size="13" font-weight="700" fill="var(--ink)">品牌教练 Brand Coach</text>
+        <text x="680" y="242" font-size="10" fill="var(--ink-2)">形象 · 魅力 · 社交策略</text>
+        <text x="680" y="257" font-size="10" fill="var(--muted)">brand-coach.md · 已就绪</text>
+
+        <!-- audit edges -->
+        <path d="M 392,118 C 320,150 260,168 200,192" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="272" y="152" font-size="9.5" fill="var(--chief-text)">审计</text>
+        <line x1="472" y1="118" x2="471" y2="192" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="479" y="152" font-size="9.5" fill="var(--chief-text)">审计</text>
+        <path d="M 556,118 C 640,150 700,168 762,192" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="672" y="152" font-size="9.5" fill="var(--chief-text)">审计</text>
+
+        <!-- brand coach routes fixes to editor -->
+        <path d="M 700,284 C 650,306 540,306 496,288" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <text x="600" y="316" font-size="9" fill="var(--muted)" text-anchor="middle">转交修改：博客文案 → 编辑</text>
+
+        <!-- wear chips -->
+        <rect x="46" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="161" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">图书馆员会话</text>
+        <path d="M 161,332 L 161,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+
+        <rect x="355" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="470" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/draft · /refine · /publish</text>
+        <path d="M 400,332 L 400,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+
+        <rect x="664" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="779" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">品牌教练会话</text>
+        <path d="M 779,332 L 779,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+      </svg>
+    </div>
+    <figcaption>图 2 —— 角色图谱，2026-07-07 编辑成为第三个角色时定型；品牌教练同日加入。红实线 = 审计 · 虚线 = 命令/会话扮演该角色。（workflows.md）</figcaption>
+  </figure>
+
+  <div class="rolecards">
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--chief)"></span>幕僚长</h4>
+      <p>拥有清单和各项元决策：保留、合并、自动化、退役；某个角色该配哪种工具。先建议、绝不直接动手；经 Felix 确认后，通过 worktree 分支 + 草稿 PR 执行——或者更好：带着任务简报，委派给拥有该事务的工作流。</p>
+      <p class="mono">驻地：ai-chief-of-staff · chief-of-staff.md</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--vault)"></span>图书馆员</h4>
+      <p>拥有知识库的约定、漂移清理，以及移动端采集流水线（Siri → [[inbox/mobile]] → [[inbox]]）。管约定，不管内容——生产循环拥有各自追加的内容；知识库是汇聚点。</p>
+      <p class="mono">驻地：知识库本身 · [[Wiki/Librarian]] + [[Wiki/Conventions]]</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--blog)"></span>编辑</h4>
+      <p>拥有博客的声音与风格、草稿流水线、/writing 的策展，以及语言政策：每个发布页面只用一种语言，全部经过母语级英文润色。批评与润色——绝不代笔。</p>
+      <p class="mono">驻地：blog · editor.md（2026-07-07 就绪）</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--ghost)"></span>品牌教练</h4>
+      <p>拥有公开形象与魅力（定位、形象支柱、各平台简介）、社交媒体策略，以及由外向内的界面审计——用一双招聘官的眼睛看这一切给人的观感。教练搭框架；文字由 Felix 来写。博客文案的修改转交编辑。</p>
+      <p class="mono">驻地：暂驻 ai-chief-of-staff · brand-coach.md（2026-07-07）</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · HOMES & ASSETS ============ -->
+<section class="wide" id="homes">
+  <div class="col" style="margin-bottom:1.3rem">
+    <span class="eyebrow"><span class="secno">§3</span> · 东西住在哪里</span>
+    <h2>六个驻地及其资产</h2>
+    <p class="kicker">每个工作流都有一个 <span class="mono" style="font-size:.85em">owner_repo</span>——它的驻地——每个驻地存放着它的循环所依赖的资产：命令、提示词、登记表、守则文件。本页处处以颜色标识驻地。</p>
+  </div>
+
+  <div class="homes">
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--agentkit)"></span>agent-kit</div>
+      <div class="home-role">共享工具箱——提示词、技能、片段；4 个循环住在这里</div>
+      <ul>
+        <li><b>prompts/</b> — about-me · daily-review · chief-of-staff · prompt-engineer（提示词库）</li>
+        <li><b>snippets/</b> — about-me.md（CC @import）· 部署加载器</li>
+        <li><b>plugins/core/skills/</b> — learn · explain · prompt-engineer</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--forge)"></span>forge</div>
+      <div class="home-role">工坊——项目在此登记、评审、挖掘复用</div>
+      <ul>
+        <li><b>registry/projects.yaml</b> — 每个项目，一行</li>
+        <li><b>/ideate /register /review /new-project /wrap-mcp /health</b></li>
+        <li><b>career/portfolio/</b> — 案例研究（事实存放于此）</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</div>
+      <div class="home-role">战役——简历内容 + 求职申请流水线</div>
+      <ul>
+        <li><b>master.md</b> — 简历唯一取材的事实来源</li>
+        <li><b>build_resumes.py</b> + base/ 分赛道简历</li>
+        <li><b>/scout /match /tailor /interview</b> + /daily /review /audit /rubric-drift /strategist /strategy</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--vault)"></span>Logseq 知识库</div>
+      <div class="home-role">汇聚点——持久知识落在这里；约定自托管</div>
+      <ul>
+        <li><b>journals/</b> — 每日页面；#inbox 采集 · 会话日志 · 每日回顾</li>
+        <li><b>pages/</b> — 主题页 · [[Tasks]] 看板 · [[Wiki/Librarian]] + [[Wiki/Conventions]]</li>
+        <li><b>#card</b> — 原生 SRS（当初拒绝 Obsidian 的原因）</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--blog)"></span>blog</div>
+      <div class="home-role">舞台——Astro 6 个人站点；项目打头，文章在 /writing</div>
+      <ul>
+        <li><b>editor.md</b> — 编辑的守则</li>
+        <li><b>/draft /refine /publish</b> + drafts/（在内容 glob 之外）</li>
+        <li><b>weekly-review</b> — 拥有 Astro 发布步骤</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</div>
+      <div class="home-role">办公室——清单与审计机器</div>
+      <ul>
+        <li><b>inventory.yaml</b> — 唯一事实来源（「不在清单上，就不存在」）</li>
+        <li><b>python -m ai_chief_of_staff</b> — 机械检查 · <b>/audit</b> — 判断</li>
+        <li><b>chief-of-staff.md · brand-coach.md（已就绪）· primitives.md · workflows.md</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · WORKFLOWS ============ -->
+<section class="wide" id="workflows">
+  <div class="col" style="margin-bottom:1.3rem">
+    <span class="eyebrow"><span class="secno">§4</span> · 循环</span>
+    <h2>十二个工作流</h2>
+    <p class="kicker">十个运行中，两个待建。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
+  </div>
+
+  <div class="flows">
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--forge)"></span><span class="flow-name">project-loop</span><span class="tag">forge</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">我造过什么、以及如何决定并建造下一个——下一个项目由「需求 × 供给」的头脑风暴选出，然后登记、评审、挖掘复用层级、并从这些层级搭建起来。</p>
+      <div class="steps"><span class="step">/ideate</span><span class="arr">→</span><span class="step">/register</span><span class="arr">→</span><span class="step">/review</span><span class="arr">→</span><span class="step">复用层级: templates/ · components/ · /wrap-mcp</span><span class="arr">→</span><span class="step">/new-project</span><span class="arr">→</span><span class="step loopback">↺ 回到 /register</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">learning-loop</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">任何有趣的东西都变成持久知识——在任意会话里采集一行 #inbox，分诊到一条路线，且每条路线都终结于检索尾巴。三条规则：注意力就是我的全部所需 · 产出是唯一重要的东西 · 检索本身就是学习。</p>
+      <div class="steps"><span class="step">采集 #inbox</span><span class="arr">→</span><span class="step">分诊</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B 练习（ragx → ragr）</span><span class="arr">·</span><span class="step">C 材料</span><span class="arr">·</span><span class="step">D 剂量</span><span class="arr">→</span><span class="step">回忆</span><span class="arr">→</span><span class="step">卡片（人工把关）</span><span class="arr">→</span><span class="step">日志记录</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-loop</span><span class="tag">job_hunting</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">「我做过什么」的证据——评审过的项目写成案例研究，提炼进 master.md，简历唯一的事实来源。</p>
+      <div class="steps"><span class="step">登记事实 + /review 发现</span><span class="arr">→</span><span class="step">案例研究（forge career/portfolio/）</span><span class="arr">→</span><span class="step">master.md</span><span class="arr">→</span><span class="step">base/ 分赛道简历</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">profile-loop</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">每个会话里的「我是谁」——一份访谈得来的主档案，蒸馏成 CC 片段及其 Drive 镜像；职业事实只经 master.md 进入 job_hunting，因此不存在第二份会漂移的档案。</p>
+      <div class="steps"><span class="step">"About me" 访谈</span><span class="arr">→</span><span class="step">master-profile.md</span><span class="arr">→</span><span class="step">snippets/about-me.md</span><span class="arr">→</span><span class="step">CC @import</span><span class="arr">·</span><span class="step">Drive 镜像</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">job_hunting</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">拿下工作——对着真实 JD 侦察、匹配、定制、面试。侦察现已改为 Felix 手动执行（定时 agent 已退役——侦察是判断型工作）。</p>
+      <div class="steps"><span class="step">/scout</span><span class="arr">→</span><span class="step">/match</span><span class="arr">→</span><span class="step">/tailor</span><span class="arr">→</span><span class="step">/interview</span><span class="arr">+</span><span class="step">节奏: /daily · /review（周六）· /strategy</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">prompt-lifecycle</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">提示词作为有版本的资产——工程化一次，存进一个库，经薄加载器部署，绝不复制粘贴。</p>
+      <div class="steps"><span class="step">粗糙想法</span><span class="arr">→</span><span class="step">core:prompt-engineer</span><span class="arr">→</span><span class="step">prompts/ 库</span><span class="arr">→</span><span class="step">薄加载器</span><span class="arr">→</span><span class="step">真实会话 → 更新 last-tested</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">daily-review</span><span class="tag">agent-kit → Cowork</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">有意识地收束每一天——晚间引导式回顾，由 Felix 在 Claude Cowork 里运行（2026-07-07 去自动化：反思是判断型工作，不是 cron agent 的活）。任务分诊并入其中：Phase 1b 清扫今昨两天的 TODO；周六清扫 [[Tasks]]。</p>
+      <div class="steps"><span class="step">prompts/daily-review.md</span><span class="arr">→</span><span class="step">引导式回顾</span><span class="arr">+</span><span class="step">Phase 1b: 去做 · 排期 · 砍掉</span><span class="arr">→</span><span class="step">追加进 Logseq 日志</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--vault)"></span><span class="flow-name">wiki-management</span><span class="tag">知识库 · 图书馆员</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">知识库如何保持一致——页面命名、日志格式、采集流水线、内容归属。管约定，不管内容：它是一套标准，不是步骤循环，所以没有流程图也照样运行。</p>
+      <div class="steps"><span class="step">[[Wiki/Conventions]]</span><span class="arr">·</span><span class="step">漂移清扫</span><span class="arr">·</span><span class="step">Siri 采集 → [[inbox/mobile]] → [[inbox]]</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">workflow-audit</span><span class="tag">ai-chief-of-staff · 元循环</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">我如何与 AI 协作——让每个流程都入册、经事实核查、被判断的元循环。它列在自己的清单里，因为一种行为只有先列出来，才谈得上被审计。</p>
+      <div class="steps"><span class="step">inventory.yaml</span><span class="arr">→</span><span class="step">机械检查</span><span class="arr">→</span><span class="step">/audit 判断</span><span class="arr">→</span><span class="step">提案</span><span class="arr">→</span><span class="step">Felix 确认</span><span class="arr">→</span><span class="step">worktree + 草稿 PR</span><span class="arr">→</span><span class="step loopback">↺ 回到清单</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--blog)"></span><span class="flow-name">publishing-loop</span><span class="tag">blog · 编辑</span><span class="pill running">运行中 · 第一轮</span></div>
+      <p class="flow-sum">我在公开场合说什么——草稿被润色成母语级英文文章，策展进以项目为主的站点，每页一种语言。先于清单行展示：它的第一篇文章——《How I Work with AI》——内嵌了这份图谱，所以无论你在哪里读到这段话，这个循环就正在运行；发布时该行翻转。还有三份草稿在排队。</p>
+      <div class="steps"><span class="step">/draft</span><span class="arr">→</span><span class="step">/refine（编辑过审）</span><span class="arr">→</span><span class="step">/publish（astro check → build）</span><span class="arr">→</span><span class="step">策展 /writing</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">personal-brand</span><span class="tag">尚无驻地 · 品牌教练</span><span class="pill wanted">待建 · 已设计</span></div>
+      <p class="flow-sum">我给人的观感——一个刻意经营的公开形象与魅力：取材自档案事实，呈现于各社交平台，并按节奏做由外向内的审计。首次真实的 BUILD 或 AUDIT 会话时翻转为运行中。</p>
+      <div class="steps"><span class="step">BUILD: 定位 · 形象支柱 · 简介 · 魅力练习</span><span class="arr">→</span><span class="step">PRESENT: 平台策略 · 分发文章/案例研究</span><span class="arr">→</span><span class="step">AUDIT: 由外向内，一双招聘官的眼睛</span><span class="arr">→</span><span class="step loopback">↺ 回到 BUILD</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">file-management</span><span class="tag">尚无驻地</span><span class="pill wanted">待建 · 未设计</span></div>
+      <p class="flow-sum">文件住在哪里——一套横跨 Drive、GitHub 和本地/外置卷的统一存放策略。设计出来之前：没有入口，也没有图。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · PROJECTS & OUTPUTS ============ -->
+<section class="col" id="projects">
+  <span class="eyebrow"><span class="secno">§5</span> · 产出什么</span>
+  <h2>项目与其他产出</h2>
+  <p class="kicker">循环存在，就是为了产出东西。项目是 project-loop 的产出，登记在 <span class="mono" style="font-size:.85em">forge/registry/projects.yaml</span>；其他每个循环也都终结于一件制品——Felix 的规则 2：<em>产出是唯一重要的东西，而且只算我自己生成的产出。</em></p>
+  <table>
+    <thead><tr><th>产出</th><th>由谁产出</th><th>落在哪里</th></tr></thead>
+    <tbody>
+      <tr><td><strong>项目</strong> — ragx（RAG 练习构建）· ragr（重建考试）· logx · learn-to-ship（首个 /ideate 选中项）</td><td class="mono"><span class="dot" style="background:var(--forge)"></span>project-loop + learning-loop 路线 B</td><td class="mono">forge registry</td></tr>
+      <tr><td><strong>案例研究</strong> — 评审过的项目写成的证据</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>career-loop</td><td class="mono">forge career/portfolio/</td></tr>
+      <tr><td><strong>定制简历</strong> — 带日期、经 lint、按 JD 定制</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline（基于 career-loop 的底版）</td><td class="mono">job_hunting</td></tr>
+      <tr><td><strong>Anki 卡片 + 会话日志</strong> — 人工把关、记入日志</td><td class="mono"><span class="dot" style="background:var(--agentkit)"></span>learning-loop 检索尾巴</td><td class="mono">知识库 journals/ + 卡组</td></tr>
+      <tr><td><strong>文章 + 个人站点</strong> — 母语级英文，每页一种语言</td><td class="mono"><span class="dot" style="background:var(--blog)"></span>publishing-loop（就绪）</td><td class="mono">blog src/content/</td></tr>
+      <tr><td><strong>品牌界面</strong> — LinkedIn + 各平台简介，平台原生分发</td><td class="mono"><span class="dot" style="background:var(--ghost)"></span>personal-brand（就绪）</td><td class="mono">各平台</td></tr>
+      <tr><td><strong>审计报告 + 提案</strong> — 保留 / 合并 / 自动化 / 退役</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>workflow-audit</td><td class="mono">ai-chief-of-staff reports/</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 6 · SYSTEM MAP ============ -->
+<section class="wide" id="map">
+  <div class="col" style="margin-bottom:1.3rem">
+    <span class="eyebrow"><span class="secno">§6</span> · <span class="thread">全局棋盘</span></span>
+    <h2>系统地图</h2>
+    <p class="kicker">循环之间如何互相喂养：agent-kit 的生产循环在左，forge 工坊居中，求职战役在右，知识库作为汇聚点垫底——外面围着幕僚长的<span style="color:var(--chief-text)">审计边界</span>。边界内的每个节点，都是清单里的一行。</p>
+  </div>
+
+  <div class="map-scroll">
+    <div class="map" role="img" aria-label="系统地图：十一个工作流节点按驻地分组，由喂养箭头相连，整体包在幕僚长的审计边界内，Logseq 知识库作为汇聚带垫底。">
+      <svg class="underlay" viewBox="0 0 1080 916" width="1080" height="916" aria-hidden="true">
+        <defs>
+          <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
+          </marker>
+          <marker id="mv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--vault)" stroke-width="1.6"/>
+          </marker>
+        </defs>
+
+        <!-- audit perimeter -->
+        <rect x="20" y="60" width="1040" height="830" rx="6" fill="none" stroke="var(--chief)" stroke-width="1.3" stroke-dasharray="7 5"/>
+        <text x="1046" y="84" font-size="10" fill="var(--chief-text)" text-anchor="end">边界内每个节点都是 inventory.yaml 里的一行</text>
+
+        <!-- 1 prompt-lifecycle -> profile-loop -->
+        <line x1="150" y1="282" x2="150" y2="326" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="160" y="310" font-size="10" fill="var(--ink-2)">提示词驱动各处部署</text>
+
+        <!-- 2 profile-loop -> career-loop (routed above the project-loop card) -->
+        <path d="M 256,366 C 400,300 520,170 786,230" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="430" y="188" font-size="10" fill="var(--ink-2)">职业事实——只经 master.md</text>
+
+        <!-- 3 learning-loop -> career-loop -->
+        <path d="M 256,500 C 560,510 720,330 788,256" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="400" y="490" font-size="10" fill="var(--ink-2)">面试 / JD 所需的词汇</text>
+
+        <!-- 4 project-loop -> career-loop -->
+        <path d="M 648,300 C 710,290 740,262 786,246" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="652" y="320" font-size="10" fill="var(--ink-2)">评审过的项目 → 案例研究</text>
+
+        <!-- 5 career-loop -> job-pipeline -->
+        <line x1="894" y1="288" x2="894" y2="366" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="904" y="332" font-size="10" fill="var(--ink-2)">简历底版</text>
+
+        <!-- 6 job-pipeline -> project-loop (dashed, demand) -->
+        <path d="M 786,430 C 720,444 690,412 654,380" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="636" y="450" font-size="10" fill="var(--muted)">需求信号 → /ideate</text>
+
+        <!-- 7 career-loop -> publishing-loop (right channel) -->
+        <path d="M 998,252 C 1040,330 1040,480 1000,556" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="1014" y="516" font-size="10" fill="var(--ink-2)" text-anchor="end">案例文案 → 站点</text>
+
+        <!-- 8 learning-loop -> publishing-loop (dashed) -->
+        <path d="M 256,522 C 520,606 660,600 784,578" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="500" y="618" font-size="10" fill="var(--muted)">公开学习的草稿</text>
+
+        <!-- 9 learning-loop -> vault -->
+        <path d="M 152,540 C 168,630 240,724 326,760" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
+        <text x="176" y="584" font-size="10" fill="var(--vault)">检索尾巴 → 日志 + 卡片</text>
+
+        <!-- 10 daily-review -> vault -->
+        <path d="M 256,656 C 292,692 310,722 328,748" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
+
+        <!-- 11 publishing-loop -> personal-brand -->
+        <line x1="890" y1="626" x2="890" y2="694" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="900" y="664" font-size="10" fill="var(--ink-2)">文章 → 分发</text>
+
+        <!-- 12 personal-brand -> job-pipeline (right channel) -->
+        <path d="M 996,738 C 1058,660 1058,510 998,446" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="1010" y="494" font-size="10" fill="var(--ink-2)" text-anchor="end">面向招聘官的界面（LinkedIn）</text>
+
+        <!-- 13 profile-loop -> personal-brand (read-only, along the bottom) -->
+        <path d="M 256,396 C 300,540 302,700 344,858 C 500,886 720,878 868,798" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="470" y="876" font-size="10" fill="var(--muted)">档案事实为人设托底——绝不编造</text>
+      </svg>
+
+      <!-- meta node on the perimeter -->
+      <div class="node meta" style="left:428px; top:22px; width:230px">
+        <div class="nn">workflow-audit <span style="color:var(--chief-text)">· 元循环</span></div>
+        <div class="nh" style="color:var(--chief-text)">ai-chief-of-staff</div>
+        <div class="nd">清单 → 检查 → /audit → 提案 → Felix 确认 → 草稿 PR</div>
+      </div>
+
+      <!-- ghost: file-management -->
+      <div class="node wanted" style="left:48px; top:96px; width:190px">
+        <div class="nn" style="color:var(--ink-2)">file-management</div>
+        <div class="nh" style="color:var(--muted)">尚无驻地 · 待建</div>
+        <div class="nd">文件住在哪里 — Drive · GitHub · 本地卷</div>
+      </div>
+
+      <!-- agent-kit column -->
+      <div class="node" style="left:48px; top:206px">
+        <div class="nn">prompt-lifecycle</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit</div>
+        <div class="nd">想法 → prompts/ 库 → 薄加载器</div>
+      </div>
+      <div class="node" style="left:48px; top:330px">
+        <div class="nn">profile-loop</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit</div>
+        <div class="nd">访谈 → master-profile → CC 片段 + Drive 镜像</div>
+      </div>
+      <div class="node" style="left:48px; top:452px">
+        <div class="nn">learning-loop</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit</div>
+        <div class="nd">#inbox → 分诊 → 路线 A–D → 回忆 · 卡片 · 日志</div>
+      </div>
+      <div class="node" style="left:48px; top:592px">
+        <div class="nn">daily-review</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit · Felix 在 Cowork 运行</div>
+        <div class="nd">晚间回顾 + 任务分诊（Phase 1b）</div>
+      </div>
+
+      <!-- forge center -->
+      <div class="node" style="left:428px; top:268px; width:220px">
+        <div class="nn">project-loop</div>
+        <div class="nh" style="color:var(--forge)">forge</div>
+        <div class="nd">/ideate → /register → /review → 复用层级 → /new-project ↺</div>
+        <div class="nd" style="border-top:1px dotted var(--hairline); margin-top:.35rem; padding-top:.3rem">产出：ragx · ragr · logx · learn-to-ship</div>
+      </div>
+
+      <!-- job_hunting column -->
+      <div class="node" style="left:790px; top:206px">
+        <div class="nn">career-loop</div>
+        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nd">案例研究 → master.md → 简历底版</div>
+      </div>
+      <div class="node" style="left:790px; top:370px">
+        <div class="nn">job-pipeline</div>
+        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nd">/scout → /match → /tailor → /interview · 每日/每周节奏</div>
+      </div>
+      <div class="node" style="left:790px; top:534px">
+        <div class="nn">publishing-loop</div>
+        <div class="nh" style="color:var(--blog)">blog · 编辑</div>
+        <div class="nd">/draft → /refine → /publish → 策展 /writing · 首个产出：本图谱 + 它的文章</div>
+      </div>
+
+      <!-- personal-brand (wanted, designed) -->
+      <div class="node wanted" style="left:790px; top:698px">
+        <div class="nn">personal-brand</div>
+        <div class="nh" style="color:var(--muted)">品牌教练 · 就绪</div>
+        <div class="nd">BUILD → PRESENT → AUDIT ↺ · 形象 · 平台 · 由外向内</div>
+      </div>
+
+      <!-- vault band -->
+      <div class="band" style="left:330px; top:740px; width:430px; min-height:104px">
+        <div style="font-weight:700; font-family:Charter,Georgia,serif; font-size:.86rem">知识库——汇聚点 <span style="font-weight:400; color:var(--ink-2)">（Logseq）</span></div>
+        <div class="nh" style="color:var(--vault); font-family:ui-monospace,Menlo,monospace; font-size:.62rem; letter-spacing:.06em; margin-top:.1rem">wiki-management · 图书馆员</div>
+        <div class="nd" style="color:var(--ink-2); font-size:.7rem; font-family:ui-monospace,Menlo,monospace; margin-top:.3rem">journals/ · pages/ · [[Tasks]] · #card SRS——生产循环拥有各自追加的内容；图书馆员拥有约定</div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <span class="lg"><span class="dot" style="background:var(--agentkit)"></span>agent-kit</span>
+    <span class="lg"><span class="dot" style="background:var(--forge)"></span>forge</span>
+    <span class="lg"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</span>
+    <span class="lg"><span class="dot" style="background:var(--vault)"></span>知识库</span>
+    <span class="lg"><span class="dot" style="background:var(--blog)"></span>blog</span>
+    <span class="lg"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</span>
+    <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--edge)" stroke-width="1.5"/></svg>喂养</span>
+    <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--edge)" stroke-width="1.5" stroke-dasharray="4 3"/></svg>只读 / 愿景</span>
+    <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--chief)" stroke-width="1.5" stroke-dasharray="6 4"/></svg>审计边界</span>
+    <span class="lg">实线卡 = 运行中 · 虚线卡 = 待建</span>
+  </div>
+  <p class="kicker" style="margin-top:1rem; font-size:.9rem">读图方法：证据自左向右流动——学习与档案知识喂养 career-loop，career-loop 喂养 job-pipeline，而流水线的需求数据（虚线）流回 <span class="mono" style="font-size:.85em">/ideate</span>，合上最外圈：<em>市场想要什么，决定接下来造什么</em>。发布的作品继续流入品牌循环，由它按平台原生方式分发，并维护流水线所依赖的、面向招聘官的界面。所有持久的东西，最终都沉入知识库。</p>
+</section>
+
+<footer class="col">
+  <p><span class="mono">来源：inventory.yaml（权威——行胜过图）· workflows.md · primitives.md · chief-of-staff.md</span></p>
+  <p>由幕僚长编译于 2026-07-07；同日 personal-brand 循环与品牌教练加入时重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+</footer>
+
+</body></html>

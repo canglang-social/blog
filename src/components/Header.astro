@@ -21,7 +21,7 @@ const switchHref = switchUrl ?? localeUrl(otherLang, '/blog/');
     <div class="links">
       <div class="internal-links">
         <HeaderLink href={localeUrl(lang, '/blog')}>{t('nav.blog')}</HeaderLink>
-        <HeaderLink href="/atlas/">{t('nav.atlas')}</HeaderLink>
+        <HeaderLink href={localeUrl(lang, '/atlas/')}>{t('nav.atlas')}</HeaderLink>
         <HeaderLink href="/about">{t('nav.about')}</HeaderLink>
       </div>
       <div class="social-links">
