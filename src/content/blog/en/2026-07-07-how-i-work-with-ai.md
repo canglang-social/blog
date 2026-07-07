@@ -2,7 +2,7 @@
 title: "How I Work with AI"
 description: "I was using AI every day and none of it accumulated. The fix was three layers — and an inventory that catches me lying to myself."
 pubDate: "2026-07-07"
-heroImage: "../../assets/how-i-work-with-ai/hero.svg"
+heroImage: "../../../assets/how-i-work-with-ai/hero.svg"
 tags: ["ai", "workflow", "reflection"]
 ---
 
@@ -109,7 +109,7 @@ from the inventory whenever the system changes. A catalog frozen inside
 a blog post starts drifting the day it ships; the atlas can't drift,
 because it's rebuilt from the same rows it audits.
 
-![The full system map from the atlas: twelve workflows grouped by the repo that owns them, the edges between them, and the audit perimeter around everything — every node a row in inventory.yaml.](../../assets/how-i-work-with-ai/atlas-system-map.svg)
+![The full system map from the atlas: twelve workflows grouped by the repo that owns them, the edges between them, and the audit perimeter around everything — every node a row in inventory.yaml.](../../../assets/how-i-work-with-ai/atlas-system-map.svg)
 
 As of today the map holds twelve workflows and four judgment-roles —
 three running the operation, one auditing it. The pieces that deserve
