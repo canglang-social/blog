@@ -3,6 +3,7 @@ title: "我如何与 AI 协作"
 description: "我每天都在用 AI，却几乎什么都没沉淀下来。解法是三层架构——外加一份能抓住我自欺的清单。"
 pubDate: "2026-07-07"
 heroImage: "../../../assets/how-i-work-with-ai/hero.svg"
+ogImage: "../../../assets/how-i-work-with-ai/hero-og.png"
 tags: ["ai", "workflow", "reflection"]
 ---
 

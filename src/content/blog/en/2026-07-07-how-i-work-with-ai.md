@@ -3,6 +3,7 @@ title: "How I Work with AI"
 description: "I was using AI every day and none of it accumulated. The fix was three layers — and an inventory that catches me lying to myself."
 pubDate: "2026-07-07"
 heroImage: "../../../assets/how-i-work-with-ai/hero.svg"
+ogImage: "../../../assets/how-i-work-with-ai/hero-og.png"
 tags: ["ai", "workflow", "reflection"]
 ---
 

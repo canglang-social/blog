@@ -19,6 +19,7 @@ const {
   pubDate,
   updatedDate,
   heroImage,
+  ogImage,
   tags,
   lang = defaultLang,
   translationUrl,
@@ -31,7 +32,7 @@ const t = useTranslations(lang);
     <BaseHead
       title={title}
       description={description}
-      image={heroImage}
+      image={ogImage ?? heroImage}
       type="article"
       lang={lang}
       publishedTime={pubDate}
