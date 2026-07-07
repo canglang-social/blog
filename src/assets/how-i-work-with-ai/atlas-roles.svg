@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 400" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" role="img" aria-label="Role graph: the Chief of Staff audits the Librarian, the Editor, the Brand Coach, and its own row. Commands and sessions wear each role; the Brand Coach routes blog-copy fixes to the Editor.">
+  <style>
+    svg { --ink:#1e1c17; --ink2:#5b5850; --muted:#8b877c; --card:#f7f5ef; --line:#c9c5b8; --edge:#a49f92;
+          --chief:#e34948; --chief-t:#b52f2e; --vault:#008300; --blog:#4a3aa7; }
+    @media (prefers-color-scheme: dark) {
+      svg { --ink:#f0eee5; --ink2:#b8b4a7; --muted:#8b877c; --card:#191917; --line:#3a3933; --edge:#6d6a60;
+            --chief:#e66767; --chief-t:#e66767; --vault:#4d9c3a; --blog:#9085e9; }
+    }
+    .name { fill:var(--ink); font-weight:700; font-size:13px; }
+    .d { fill:var(--ink2); font-size:10px; }
+    .m { fill:var(--muted); font-size:10px; }
+    .chip { fill:none; stroke:var(--line); stroke-dasharray:4 3; }
+    .chiptext { fill:var(--ink2); font-size:10.5px; text-anchor:middle; }
+    .audit { fill:none; stroke:var(--chief); stroke-width:1.3; }
+    .wear { fill:none; stroke:var(--edge); stroke-width:1.2; stroke-dasharray:4 3; }
+  </style>
+  <defs>
+    <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--chief)" stroke-width="1.6"/>
+    </marker>
+    <marker id="ahw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
+    </marker>
+  </defs>
+
+  <rect x="358" y="34" width="230" height="84" rx="2" fill="var(--card)" stroke="var(--chief)" stroke-width="1.6"/>
+  <circle cx="378" cy="56" r="4" fill="var(--chief)"/>
+  <text x="390" y="60" class="name">Chief of Staff</text>
+  <text x="374" y="80" class="d">workflow inventory + meta-strategy</text>
+  <text x="374" y="95" class="m">keep · merge · automate · retire</text>
+
+  <path d="M 588,56 C 660,42 660,110 592,100" class="audit" marker-end="url(#ahr)"/>
+  <text x="668" y="80" font-size="9.5" fill="var(--chief-t)">audits (own row)</text>
+
+  <rect x="120" y="52" width="150" height="34" rx="2" class="chip"/>
+  <text x="195" y="73" class="chiptext">/audit</text>
+  <path d="M 274,69 L 354,72" class="wear" marker-end="url(#ahw)"/>
+  <text x="298" y="60" font-size="9" fill="var(--muted)">wears</text>
+
+  <rect x="46" y="196" width="230" height="84" rx="2" fill="var(--card)" stroke="var(--vault)" stroke-width="1.4"/>
+  <circle cx="66" cy="218" r="4" fill="var(--vault)"/>
+  <text x="78" y="222" class="name">Librarian</text>
+  <text x="62" y="242" class="d">conventions · drift · capture</text>
+  <text x="62" y="257" class="m">self-hosted: [[Wiki/Librarian]]</text>
+
+  <rect x="355" y="196" width="230" height="84" rx="2" fill="var(--card)" stroke="var(--blog)" stroke-width="1.4"/>
+  <circle cx="375" cy="218" r="4" fill="var(--blog)"/>
+  <text x="387" y="222" class="name">Editor</text>
+  <text x="371" y="242" class="d">voice · drafts · curation</text>
+  <text x="371" y="257" class="m">editor.md · never ghostwrites</text>
+
+  <rect x="664" y="196" width="230" height="84" rx="2" fill="var(--card)" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <circle cx="684" cy="218" r="4" fill="var(--muted)"/>
+  <text x="696" y="222" class="name">Brand Coach</text>
+  <text x="680" y="242" class="d">image · charisma · social strategy</text>
+  <text x="680" y="257" class="m">brand-coach.md · staged</text>
+
+  <path d="M 392,118 C 320,150 260,168 200,192" class="audit" marker-end="url(#ahr)"/>
+  <text x="272" y="152" font-size="9.5" fill="var(--chief-t)">audits</text>
+  <line x1="472" y1="118" x2="471" y2="192" class="audit" marker-end="url(#ahr)"/>
+  <text x="479" y="152" font-size="9.5" fill="var(--chief-t)">audits</text>
+  <path d="M 556,118 C 640,150 700,168 762,192" class="audit" marker-end="url(#ahr)"/>
+  <text x="672" y="152" font-size="9.5" fill="var(--chief-t)">audits</text>
+
+  <path d="M 700,284 C 650,306 540,306 496,288" class="wear" marker-end="url(#ahw)"/>
+  <text x="600" y="316" font-size="9" fill="var(--muted)" text-anchor="middle">routes fixes: blog copy → Editor</text>
+
+  <rect x="46" y="336" width="230" height="34" rx="2" class="chip"/>
+  <text x="161" y="357" class="chiptext">Librarian sessions</text>
+  <path d="M 161,332 L 161,286" class="wear" marker-end="url(#ahw)"/>
+
+  <rect x="355" y="336" width="230" height="34" rx="2" class="chip"/>
+  <text x="470" y="357" class="chiptext">/draft · /refine · /publish</text>
+  <path d="M 400,332 L 400,286" class="wear" marker-end="url(#ahw)"/>
+
+  <rect x="664" y="336" width="230" height="34" rx="2" class="chip"/>
+  <text x="779" y="357" class="chiptext">Brand Coach sessions</text>
+  <path d="M 779,332 L 779,286" class="wear" marker-end="url(#ahw)"/>
+</svg>

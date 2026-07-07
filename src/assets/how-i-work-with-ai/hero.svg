@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">How I work with AI — three layers</title>
+  <desc id="hero-desc">A decision layer (the Chief of Staff) audits an operation layer (two repos and three roles), which reads and writes a data layer (vault, projects, career facts, blog, profile).</desc>
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+    .bg   { fill: #fcfcfb; }
+    .ink  { fill: #0b0b0b; }
+    .ink2 { fill: #52514e; }
+    .mut  { fill: #898781; }
+    .chip { fill: #ffffff; stroke: rgba(11,11,11,0.12); }
+    .arrow { stroke: #52514e; }
+    .ah   { fill: #52514e; }
+    .yl-band { fill: #faf0d9; stroke: rgba(11,11,11,0.08); }
+    .bl-band { fill: #e4eefb; stroke: rgba(11,11,11,0.08); }
+    .aq-band { fill: #e0f4eb; stroke: rgba(11,11,11,0.08); }
+    .yl-bar { fill: #eda100; }
+    .bl-bar { fill: #2a78d6; }
+    .aq-bar { fill: #1baf7a; }
+    @media (prefers-color-scheme: dark) {
+      .bg   { fill: #1a1a19; }
+      .ink  { fill: #ffffff; }
+      .ink2 { fill: #c3c2b7; }
+      .mut  { fill: #898781; }
+      .chip { fill: #232322; stroke: rgba(255,255,255,0.12); }
+      .arrow { stroke: #c3c2b7; }
+      .ah   { fill: #c3c2b7; }
+      .yl-band { fill: #33290f; stroke: rgba(255,255,255,0.08); }
+      .bl-band { fill: #1c2b40; stroke: rgba(255,255,255,0.08); }
+      .aq-band { fill: #142e24; stroke: rgba(255,255,255,0.08); }
+      .yl-bar { fill: #c98500; }
+      .bl-bar { fill: #3987e5; }
+      .aq-bar { fill: #199e70; }
+    }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="630"/>
+
+  <text class="ink" x="56" y="72" font-size="30" font-weight="700">How I work with AI</text>
+  <text class="ink2" x="56" y="100" font-size="16">too many kinds of work, one system — three layers</text>
+
+  <!-- Decision band -->
+  <g>
+    <rect class="yl-band" x="56" y="132" width="1088" height="126" rx="12"/>
+    <rect class="yl-bar" x="56" y="132" width="6" height="126" rx="3"/>
+    <text class="ink" x="92" y="172" font-size="22" font-weight="700">Decision</text>
+    <text class="ink2" x="200" y="172" font-size="15">the Chief of Staff — “if it isn’t inventoried, it doesn’t exist”</text>
+    <g font-size="14">
+      <rect class="chip" x="92" y="194" width="140" height="32" rx="8"/>
+      <text class="ink mono" x="106" y="215">inventory.yaml</text>
+      <rect class="chip" x="244" y="194" width="122" height="32" rx="8"/>
+      <text class="ink" x="258" y="215">checker script</text>
+      <rect class="chip" x="378" y="194" width="252" height="32" rx="8"/>
+      <text class="ink" x="392" y="215">keep · merge · automate · retire</text>
+    </g>
+  </g>
+
+  <!-- audits arrow -->
+  <line class="arrow" x1="1080" y1="262" x2="1080" y2="294" stroke-width="2" marker-end="url(#ah)"/>
+  <text class="mut" x="1064" y="284" font-size="13" text-anchor="end">audits</text>
+
+  <!-- Operation band -->
+  <g>
+    <rect class="bl-band" x="56" y="300" width="1088" height="126" rx="12"/>
+    <rect class="bl-bar" x="56" y="300" width="6" height="126" rx="3"/>
+    <text class="ink" x="92" y="340" font-size="22" font-weight="700">Operation</text>
+    <text class="ink2" x="216" y="340" font-size="15">where the work happens — two repos, three roles</text>
+    <g font-size="14">
+      <rect class="chip" x="92" y="362" width="180" height="32" rx="8"/>
+      <text class="ink" x="106" y="383"><tspan class="mono" font-weight="600">forge</tspan> — projects</text>
+      <rect class="chip" x="284" y="362" width="190" height="32" rx="8"/>
+      <text class="ink" x="298" y="383"><tspan class="mono" font-weight="600">agent-kit</tspan> — reuse</text>
+      <rect class="chip" x="486" y="362" width="170" height="32" rx="8"/>
+      <text class="ink" x="500" y="383"><tspan font-weight="600">Editor</tspan> — this blog</text>
+      <rect class="chip" x="668" y="362" width="196" height="32" rx="8"/>
+      <text class="ink" x="682" y="383"><tspan font-weight="600">Librarian</tspan> — the vault</text>
+      <rect class="chip" x="876" y="362" width="186" height="32" rx="8"/>
+      <text class="ink" x="890" y="383"><tspan font-weight="600">About me</tspan> (Cowork)</text>
+    </g>
+  </g>
+
+  <!-- reads/writes arrow -->
+  <line class="arrow" x1="1080" y1="434" x2="1080" y2="462" stroke-width="2" marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <text class="mut" x="1064" y="454" font-size="13" text-anchor="end">reads · writes</text>
+
+  <!-- Data band -->
+  <g>
+    <rect class="aq-band" x="56" y="468" width="1088" height="126" rx="12"/>
+    <rect class="aq-bar" x="56" y="468" width="6" height="126" rx="3"/>
+    <text class="ink" x="92" y="508" font-size="22" font-weight="700">Data</text>
+    <text class="ink2" x="152" y="508" font-size="15">what everything reads and writes — the facts, kept where a session can find them</text>
+    <g font-size="14">
+      <rect class="chip" x="92" y="530" width="122" height="32" rx="8"/>
+      <text class="ink" x="106" y="551">Logseq vault</text>
+      <rect class="chip" x="226" y="530" width="140" height="32" rx="8"/>
+      <text class="ink" x="240" y="551">project registry</text>
+      <rect class="chip" x="378" y="530" width="216" height="32" rx="8"/>
+      <text class="ink" x="392" y="551"><tspan class="mono">master.md</tspan> (career facts)</text>
+      <rect class="chip" x="606" y="530" width="102" height="32" rx="8"/>
+      <text class="ink" x="620" y="551">blog posts</text>
+      <rect class="chip" x="720" y="530" width="130" height="32" rx="8"/>
+      <text class="ink" x="734" y="551">master profile</text>
+    </g>
+  </g>
+</svg>
