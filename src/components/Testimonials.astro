@@ -1,0 +1,94 @@
+---
+// Blurb-style testimonial cards for the About pages. All entries are
+// server-rendered; a client script shows two at random per page view
+// (the first two stay visible when JS is off).
+import { testimonials } from '../data/testimonials';
+
+interface Props {
+  lang?: 'en' | 'zh';
+}
+const { lang = 'en' } = Astro.props;
+---
+
+<div class="testimonials">
+  {
+    testimonials.map((t, i) => (
+      <figure class="testimonial-card" hidden={i >= 2}>
+        <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+        <blockquote>{lang === 'zh' ? t.quoteZh : t.quote}</blockquote>
+        <figcaption>
+          — <strong>{lang === 'zh' ? t.nameZh : t.name}</strong>
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  @media (max-width: 720px) {
+    .testimonials {
+      grid-template-columns: 1fr;
+    }
+  }
+  .testimonial-card {
+    margin: 0;
+    padding: 1.1rem 1.4rem 1.15rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+  }
+  .quote-mark {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    height: 1.5rem;
+    color: var(--accent);
+    user-select: none;
+  }
+  /* Neutralize the global blockquote treatment inside cards */
+  .testimonial-card blockquote {
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: var(--heading);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    flex: 1 0 auto;
+  }
+  .testimonial-card figcaption {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .testimonial-card figcaption strong {
+    color: var(--heading);
+    font-weight: 700;
+  }
+</style>
+
+<script>
+  // Show two random cards per view; the rest stay hidden.
+  const root = document.querySelector('.testimonials');
+  if (root) {
+    const cards = [...root.querySelectorAll<HTMLElement>('.testimonial-card')];
+    if (cards.length > 2) {
+      const picks = new Set<number>();
+      while (picks.size < 2) {
+        picks.add(Math.floor(Math.random() * cards.length));
+      }
+      cards.forEach((card, i) => {
+        card.hidden = !picks.has(i);
+      });
+    }
+  }
+</script>
