@@ -1,12 +1,112 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
 import Layout from '../layouts/BlogPost.astro';
+// Hero image pending (see drafts discussion): when decided, drop the file in
+// src/assets/about/ and import it here, then pass heroImage={AboutHero}.
 ---
 
 <Layout
   title="About Me"
-  description="A coder"
-  pubDate={new Date('August 08 2021')}
-  heroImage={AboutHeroImage}
+  description="Project manager turned engineer turned AI application builder — who I am, what this blog promises, and the work that backs it up."
+  pubDate={new Date('2026-07-09')}
   tags={[]}
-/>
+>
+  <h2>Who I am</h2>
+  <p>
+    I'm Felix Han — 韩海涛 in Chinese. My given name means "sea waves," and
+    the handle this blog lives under, 沧浪 (canglang), keeps the water. I'm
+    in my late twenties, based in Wuxi, China, and I build AI applications.
+  </p>
+  <p>
+    The route here wasn't straight. I joined FanRuan, a Chinese BI company,
+    as a project manager on the client-delivery team. After a year and a
+    half of managing implementations, I wanted to be the person building
+    the software instead — so I took four months off, taught myself
+    front-end and Java, and rejoined the same company as an engineer. Over
+    the next three years I was the front-end and design lead on a
+    three-person core team that built FDI-WEB, an internal platform a
+    ~3,000-person delivery organization uses to track 10,000+ projects.
+    Along the way I prototyped the company's first LLM tools — a RAG
+    knowledge assistant and an OCR pipeline that turned screenshot bug
+    reports into structured JSON.
+  </p>
+  <p>
+    Since March 2025 I've been on a self-directed break: shipping AI
+    projects, studying CS fundamentals through OSSU, and aiming for
+    AI/agent application engineer roles — remote-first. Before any of this,
+    I sang bass in my university choir and ended up running it. The pattern
+    is apparently permanent: I join things, then I can't help organizing
+    them.
+  </p>
+
+  <h2>Why this blog exists</h2>
+  <p>
+    I'm learning in public. The test I hold every post to is borrowed from
+    swyx: would this have been useful to me three months ago? If yes,
+    someone three months behind me needs it now.
+  </p>
+  <p>
+    What I promise: real numbers (eval scores, before-and-after metrics),
+    real failures (prototypes that never reached production, claims I had
+    to walk back), and the specific thing that changed my mind. What I
+    don't promise: tool roundups, hot takes on model releases, or
+    motivation. There are better places for all three.
+  </p>
+
+  <h2>How I work with AI</h2>
+  <p>
+    Claude Code does most of my typing; I own the architecture and the
+    evals. The clearest example is ragx: the AI wrote most of the code, but
+    every retrieval trick was accepted or rejected by a 45-case eval
+    harness I designed — the numbers decided, not the vibes. I even encode
+    the division of labor in my repo names: a suffix of "x" means
+    AI-assisted, "r" means hand-written. The full system — every workflow,
+    role, and asset, kept current and audited — is in
+    <a href="/blog/2026-07-07-how-i-work-with-ai/">How I Work with AI</a>.
+  </p>
+
+  <h2>Selected work</h2>
+  <ul>
+    <li>
+      <strong><a href="https://ragx-rosy.vercel.app">ragx</a></strong> — a
+      RAG system that answers questions across four corporate annual
+      reports with cited sources, built around its own 45-case eval
+      harness. Retrieval went 0.63 → 0.97 and answer accuracy 0.78 → 0.98
+      by iterating against the numbers. What it proved: AI quality can be a
+      measurement, not a feeling.
+    </li>
+    <li>
+      <strong>FDI-WEB</strong> (at FanRuan) — the internal delivery
+      platform above: ~3,000-person org, 10,000+ projects tracked. What it
+      proved: I can ship production software people rely on daily.
+    </li>
+    <li>
+      <strong>logx</strong> — a small Rust log-parsing CLI, my first
+      project built by directing an AI agent end to end. The honest story:
+      the first README overclaimed, so I audited it, cut the features that
+      didn't exist, and published the measured numbers instead (~100–150
+      MB/s, under 5 MB of memory). What it proved: I'd rather ship a small
+      true thing than a big claimed one.
+    </li>
+    <li>
+      <strong
+        ><a href="https://github.com/canglang-social/learn-to-ship"
+          >learn-to-ship</a
+        ></strong
+      >
+      — a LangGraph agent that ranks what I should study next by which
+      job-role gap it closes; v0 is live, gated by a CI eval harness. Its
+      first useful output was telling me to build itself — the full story
+      is in <a href="/blog/2026-07-06-learning-to-ship/">Learning to Ship</a>.
+      What it proved: learning can be pointed at output instead of
+      collected.
+    </li>
+  </ul>
+
+  <h2>Elsewhere</h2>
+  <p>
+    <a href="https://github.com/canglang-social">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/felix-han-854726413">LinkedIn</a> ·
+    <a href="https://x.com/canglang_so">X</a> ·
+    <a href="mailto:canglangzhuoxi@gmail.com">email</a>
+  </p>
+</Layout>
