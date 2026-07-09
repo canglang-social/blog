@@ -28,7 +28,7 @@ export const ui = {
   zh: {
     'nav.blog': '文章',
     'nav.atlas': 'Atlas',
-    'nav.about': 'About',
+    'nav.about': '关于',
     'blog.heading': '文章',
     'blog.filterLabel': '按标签筛选文章',
     'blog.all': '全部',

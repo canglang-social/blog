@@ -22,7 +22,7 @@ const switchHref = switchUrl ?? localeUrl(otherLang, '/blog/');
       <div class="internal-links">
         <HeaderLink href={localeUrl(lang, '/blog')}>{t('nav.blog')}</HeaderLink>
         <HeaderLink href={localeUrl(lang, '/atlas/')}>{t('nav.atlas')}</HeaderLink>
-        <HeaderLink href="/about">{t('nav.about')}</HeaderLink>
+        <HeaderLink href={localeUrl(lang, '/about/')}>{t('nav.about')}</HeaderLink>
       </div>
       <div class="social-links">
         <a class="lang-switch" href={switchHref} aria-label={t('switch.aria')}>
