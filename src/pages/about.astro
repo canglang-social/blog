@@ -1,13 +1,29 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
 import Layout from '../layouts/BlogPost.astro';
-// Hero image pending (see drafts discussion): when decided, drop the file in
-// src/assets/about/ and import it here, then pass heroImage={AboutHero}.
+import DefaultHero from '../assets/about/frieren1.jpeg';
+
+// Every image in src/assets/about/ joins the hero pool; a client-side
+// script picks one at random per page view. The share-card (OG) image
+// stays fixed to DefaultHero — crawlers don't run the script.
+const heroModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/about/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+const heroPool = await Promise.all(
+  Object.values(heroModules).map((mod) =>
+    getImage({ src: mod.default, width: 1020, height: 510 })
+  )
+);
+const heroUrls = heroPool.map((img) => img.src);
 ---
 
 <Layout
   title="About Me"
   description="Project manager turned engineer turned AI application builder — who I am, what this blog promises, and the work that backs it up."
   pubDate={new Date('2026-07-09')}
+  heroImage={DefaultHero}
   tags={[]}
 >
   <h2>Who I am</h2>
@@ -102,6 +118,33 @@ import Layout from '../layouts/BlogPost.astro';
     </li>
   </ul>
 
+  <h2>Off the clock</h2>
+  <p>Work and AI are a part of me, not the whole of me. The rest, concretely:</p>
+  <ul>
+    <li>
+      <strong>League of Legends</strong>, since 2012 — a support main
+      (Braum and Poppy), peak Diamond II. Apparently even in games I pick
+      the role whose job is making other people succeed.
+    </li>
+    <li>
+      <strong>Boxing, then the gym.</strong> A year of boxing that settled
+      into weight training. Badminton too; tennis I like more than I
+      practice.
+    </li>
+    <li>
+      <strong>Board games</strong> with friends — Werewords, Flip 7, and
+      Texas Hold'em are the regulars.
+    </li>
+    <li>
+      <strong>Punk.</strong> Start where I'd start you: "未来的主人翁" by
+      柏林护士 (Berlin Nurses).
+    </li>
+  </ul>
+  <p>
+    And the hero image up top? It's drawn at random from a small pool —
+    Frieren included — so refresh and you may meet a different one.
+  </p>
+
   <h2>Elsewhere</h2>
   <p>
     <a href="https://github.com/canglang-social">GitHub</a> ·
@@ -109,4 +152,14 @@ import Layout from '../layouts/BlogPost.astro';
     <a href="https://x.com/canglang_so">X</a> ·
     <a href="mailto:canglangzhuoxi@gmail.com">email</a>
   </p>
+
+  <script is:inline define:vars={{ heroUrls }}>
+    // Swap the layout-rendered hero for a random pool member on each view.
+    const heroImg = document.querySelector('.hero-image img');
+    if (heroImg && heroUrls.length > 1) {
+      const pick = heroUrls[Math.floor(Math.random() * heroUrls.length)];
+      heroImg.removeAttribute('srcset');
+      heroImg.src = pick;
+    }
+  </script>
 </Layout>
