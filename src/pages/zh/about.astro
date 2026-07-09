@@ -3,7 +3,7 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import Layout from '../../layouts/BlogPost.astro';
 import DefaultHero from '../../assets/about/frieren1.jpeg';
-import { testimonials } from '../../data/testimonials';
+import Testimonials from '../../components/Testimonials.astro';
 
 // 与英文版共用同一个 hero 图池：src/assets/about/ 下的每张图在构建时
 // 优化，浏览时由内联脚本随机换上。分享卡（OG）固定为 DefaultHero。
@@ -133,17 +133,10 @@ const heroUrls = heroPool.map((img) => img.src);
   <h2>朋友眼中的我</h2>
   <p>
     我请几位朋友形容一下我，并承诺原话照登。署名是他们自己挑的。
-    其中一条原话就是英文——应本人要求，原样保留。
+    其中一条原话就是英文——应本人要求，原样保留。每次访问随机抽两条，
+    刷新可以遇见其他人。
   </p>
-  <ul>
-    {
-      testimonials.map((t) => (
-        <li>
-          "{t.quoteZh}"——<strong>{t.nameZh}</strong>，{t.relationZh}
-        </li>
-      ))
-    }
-  </ul>
+  <Testimonials lang="zh" />
 
   <h2>其他地方</h2>
   <p>

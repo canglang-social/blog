@@ -3,7 +3,7 @@ import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import Layout from '../layouts/BlogPost.astro';
 import DefaultHero from '../assets/about/frieren1.jpeg';
-import { testimonials } from '../data/testimonials';
+import Testimonials from '../components/Testimonials.astro';
 
 // Every image in src/assets/about/ joins the hero pool; a client-side
 // script picks one at random per page view. The share-card (OG) image
@@ -153,17 +153,10 @@ const heroUrls = heroPool.map((img) => img.src);
     answers verbatim. The names are the ones they picked for themselves;
     the quotes are translated from Chinese (except one that arrived in
     English and stays untouched) — the originals are on the
-    <a href="/zh/about/">Chinese page</a>.
+    <a href="/zh/about/">Chinese page</a>. Two are drawn at random per
+    visit; refresh to meet the others.
   </p>
-  <ul>
-    {
-      testimonials.map((t) => (
-        <li>
-          "{t.quote}" — <strong>{t.name}</strong>, {t.relation}
-        </li>
-      ))
-    }
-  </ul>
+  <Testimonials />
 
   <h2>Elsewhere</h2>
   <p>
