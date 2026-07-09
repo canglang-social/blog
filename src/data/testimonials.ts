@@ -75,4 +75,14 @@ export const testimonials: Testimonial[] = [
     quote: 'Funny, empathetic, and takes real care of his friends.',
     quoteZh: '幽默，有同理心，很照顾朋友',
   },
+  // 345's quote was given in English and stays verbatim on both pages —
+  // his own request: a Chinese rendering would lose the ambiguity.
+  {
+    name: '345',
+    nameZh: '345',
+    relation: 'coworker and kindred spirit; deep conversations are the bond',
+    relationZh: '同事，磁场相吸，深度思考是纽带',
+    quote: 'This person seems to be exploring a new and intriguing way of life🤔.',
+    quoteZh: 'This person seems to be exploring a new and intriguing way of life🤔.',
+  },
 ];
