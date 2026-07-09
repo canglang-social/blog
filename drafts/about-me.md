@@ -1,62 +1,116 @@
 ---
 title: "About Me"
-description: "TODO — one sentence; fine to write last"
+description: "Who I am, why this blog exists, and how I work with AI."
 pubDate: "TODO-set-at-publish"
 tags: []
 ---
 
 <!--
 Working title: About Me
-One-line idea (proposed — edit freely): Who I am, why this blog exists, and
-how I work with AI — the front door for a hiring manager or a new reader
-landing here for the first time.
+One-line idea: Who I am, why this blog exists, and how I work with AI — the
+front door for a hiring manager or a new reader landing here for the first
+time.
 
 Editor notes (delete before publish):
-- Prose below is Felix's to write. The outline is a scaffold, not copy.
-- Facts about projects/career come from forge/career/portfolio/ — the Editor
-  packages copy but never invents facts. Pull the real numbers from there.
-- OPEN DECISION: should this ship as a dated blog post, or as a standalone
-  /about page (src/pages/about.astro) linked from the header? An "about"
-  page usually isn't a chronological post. Decide at publish time; the
-  draft content works for either.
+- STATUS 2026-07-09: prose below is a DRAFT written at Felix's request
+  (chief-of-staff session), grounded in job_hunting/master.md (numbers) and
+  the About Me master profile (story/human side). Nothing invented; every
+  figure traces to the Metrics Bank in master.md.
+- BEFORE PUBLISH, in order: (1) Felix's rewrite-in-own-words pass — read
+  aloud, change what doesn't sound like you, cut what feels like bragging;
+  (2) Editor /refine native-English pass; (3) set pubDate + description.
+- OPEN DECISION (unchanged): dated blog post vs standalone /about page
+  (src/pages/about.astro) linked from the header. Decide at publish time;
+  this content works for either.
+- logx repo is PRIVATE as of 2026-07-05 — the text below deliberately does
+  not deep-link it. If it goes public first, add the link.
 - Voice check (editor.md): reflective, learn-in-public, concrete over
-  abstract — real numbers, real failures, what changed my mind. Useful to
-  myself-3-months-ago. No motivational fluff.
+  abstract — real numbers, real failures, what changed my mind. No
+  motivational fluff.
 -->
 
-## Outline (scaffold — replace with your prose)
+## Who I am
 
-### 1. Who I am
+I'm Felix Han — 韩海涛 in Chinese. My given name means "sea waves," and the
+handle this blog lives under, 沧浪 (canglang), keeps the water. I'm in my
+late twenties, based in Wuxi, China, and I build AI applications.
 
-TODO(Felix): 2–3 short paragraphs. Name (Felix / 沧浪浊兮?), where you are in
-the career pivot, what you're aiming at. Concrete, not a resume summary.
+The route here wasn't straight. I joined FanRuan, a Chinese BI company, as
+a project manager on the client-delivery team. After a year and a half of
+managing implementations, I wanted to be the person building the software
+instead — so I took four months off, taught myself front-end and Java, and
+rejoined the same company as an engineer. Over the next three years I was
+the front-end and design lead in a three-person core team that built
+FDI-WEB, an internal platform a ~3,000-person delivery organization uses to
+track 10,000+ projects. Along the way I prototyped the company's first LLM
+tools — a RAG knowledge assistant and an OCR pipeline that turned
+screenshot bug reports into structured JSON.
 
-### 2. Why this blog exists
+Since March 2025 I've been on a self-directed break: shipping AI projects,
+studying CS fundamentals through OSSU, and aiming at AI/agent application
+engineer roles — remote-first. Before any of this, I sang bass in my
+university choir and ended up running it. The pattern is apparently
+permanent: I join things, then I can't help organizing them.
 
-TODO(Felix): learning in public; the test is "useful to myself 3 months
-ago" (swyx). What you promise a reader — and what you don't.
+## Why this blog exists
 
-### 3. How I work with AI
+I'm learning in public. The test I hold every post to is borrowed from
+swyx: would this have been useful to me three months ago? If yes, someone
+three months behind me needs it now.
 
-TODO(Felix): 1 paragraph + a link to the System Atlas / "How I work with
-AI" post rather than repeating it. One concrete example beats a tool list.
+What I promise: real numbers (eval scores, before-and-after metrics), real
+failures (prototypes that never reached production, claims I had to walk
+back), and the specific thing that changed my mind. What I don't promise:
+tool roundups, hot takes on model releases, or motivation. There are
+better places for all three.
 
-### 4. What I've built / selected work
+## How I work with AI
 
-TODO(Felix): 2–4 items max, each one line: what it is, what it proved.
-Facts from forge/career/portfolio/ — verify before publishing.
+Claude Code does most of my typing; I own the architecture and the evals.
+The clearest example is ragx: the AI wrote the majority of the code, but
+every retrieval trick was accepted or rejected by a 45-case eval harness I
+designed — the numbers decided, not the vibes. I even encode the division
+of labor in my repo names: a suffix of "x" means AI-assisted, "r" means
+hand-written. The full system — every workflow, role, and asset, kept
+current and audited — is in [How I Work with
+AI](/blog/2026-07-07-how-i-work-with-ai).
 
-### 5. Elsewhere / contact
+## Selected work
 
-TODO(Felix): GitHub, email, anything else. Keep it to one short block.
+- **[ragx](https://ragx-rosy.vercel.app)** — a RAG system answering cited
+  questions across four corporate annual reports, with its own 45-case
+  eval harness. Retrieval went 0.63 → 0.97 and answer accuracy 0.78 → 0.98
+  by iterating against the numbers. What it proved: AI quality can be a
+  measurement, not a feeling.
+- **FDI-WEB** (at FanRuan) — the internal delivery platform above:
+  ~3,000-person org, 10,000+ projects tracked. What it proved: I can ship
+  production software people rely on daily.
+- **logx** — a small Rust log-parsing CLI, my first project built by
+  directing an AI agent end to end. The honest story: the first README
+  overclaimed, so I audited it, cut the features that didn't exist, and
+  published the measured numbers instead (~100–150 MB/s, under 5 MB of
+  memory). What it proved: I'd rather ship a small true thing than a big
+  claimed one.
+- **learn-to-ship** (in progress) — a LangGraph agent that turns a
+  learning goal into a shipped deliverable, starting with my own job-role
+  gaps.
+
+## Elsewhere
+
+[GitHub](https://github.com/canglang-social) ·
+[LinkedIn](https://www.linkedin.com/in/felix-han-854726413) ·
+[X](https://x.com/canglang_so) ·
+[email](mailto:canglangzhuoxi@gmail.com)
 
 <!-- source material -->
 <!--
-Candidate sources to pull from when writing (none pasted in yet):
-- Published posts for voice + linkable context:
-  src/content/blog/en/2026-07-07-how-i-work-with-ai.md (the atlas post)
-  src/content/blog/en/2026-07-06-learning-to-ship.md
-  src/content/blog/en/2026-03-31-builder-guilt.md (the origin story?)
-- forge/career/portfolio/ — the factual record for section 4.
-- Logseq vault pages if an intro/self-description page already exists.
+Sources actually used (2026-07-09 draft):
+- job_hunting/master.md — career facts, Metrics Bank, honesty notes
+  (logx superseded numbers, learn-to-ship no-shipped-claims rule).
+- /Users/hang/Claude/Projects/About me/master-profile.md — story arc,
+  choir/music detail, name meaning.
+- ai-chief-of-staff/brand-records.md — positioning + pillars this page
+  must stay consistent with (next brand AUDIT checks it).
+Deliberately NOT used: master-profile's logx "multi-GB in seconds" claim
+(superseded 2026-07-05) and anything from its Theme 11 (private).
 -->
