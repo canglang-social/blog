@@ -13,6 +13,7 @@ export const defaultLang: Lang = 'en';
 
 export const ui = {
   en: {
+    'site.title': 'canglang',
     'nav.blog': 'Blog',
     'nav.atlas': 'Atlas',
     'nav.about': 'About',
@@ -26,10 +27,11 @@ export const ui = {
     'switch.aria': 'Switch to Chinese',
   },
   zh: {
-    'nav.blog': '文章',
-    'nav.atlas': 'Atlas',
-    'nav.about': 'About',
-    'blog.heading': '文章',
+    'site.title': '沧浪',
+    'nav.blog': '知',
+    'nav.atlas': '行',
+    'nav.about': '吾',
+    'blog.heading': '知',
     'blog.filterLabel': '按标签筛选文章',
     'blog.all': '全部',
     'blog.empty': '这个标签下还没有文章。',

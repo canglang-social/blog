@@ -1,0 +1,149 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import Layout from '../../layouts/BlogPost.astro';
+import DefaultHero from '../../assets/about/frieren1.jpeg';
+
+// 与英文版共用同一个 hero 图池：src/assets/about/ 下的每张图在构建时
+// 优化，浏览时由内联脚本随机换上。分享卡（OG）固定为 DefaultHero。
+const heroModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/about/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+const heroPool = await Promise.all(
+  Object.values(heroModules).map((mod) =>
+    getImage({ src: mod.default, width: 1020, height: 510 })
+  )
+);
+const heroUrls = heroPool.map((img) => img.src);
+---
+
+<Layout
+  title="吾"
+  description="从项目经理到工程师，再到 AI 应用开发者——我是谁、这个博客承诺什么、以及支撑它的作品。"
+  pubDate={new Date('2026-07-09')}
+  heroImage={DefaultHero}
+  tags={[]}
+  lang="zh"
+  translationUrl="/about/"
+>
+  <h2>我是谁</h2>
+  <p>
+    我是 Felix Han，中文名韩海涛。名字里带着"海涛"，这个博客的笔名
+    "沧浪"也没离开水。我年近三十，住在无锡，做 AI 应用开发。
+  </p>
+  <p>
+    这条路并不直。我最初以项目经理的身份加入帆软（一家国产 BI
+    公司）的客户交付团队。做了一年半的实施管理之后，我想成为写软件的那个人
+    ——于是脱产四个月，自学前端和 Java，再以工程师的身份回到同一家公司。
+    之后的三年里，我在一个三人核心小组中担任前端与设计负责人，做出了
+    FDI-WEB：一个约 3000 人的交付组织用来跟踪一万多个项目的内部平台。
+    其间我还做出了公司最早的 LLM 工具原型——一个 RAG 知识助手，和一条把
+    截图 bug 报告转成结构化 JSON 的 OCR 流水线。
+  </p>
+  <p>
+    从 2025 年 3 月起，我进入一段自主安排的间隔期：发布 AI 项目、通过
+    OSSU 补计算机科学基础，目标是 AI/agent 应用工程师岗位——远程优先。
+    在这一切之前，我在大学合唱团唱男低音，最后成了管理合唱团的人。
+    这个模式看来是改不掉了：我加入什么，就忍不住把它组织起来。
+  </p>
+
+  <h2>这个博客为什么存在</h2>
+  <p>
+    我在公开地学习。每篇文章都要过一道从 swyx 那里借来的检验：这篇东西
+    对三个月前的我有用吗？如果有，那么比我晚三个月的人现在正需要它。
+  </p>
+  <p>
+    我承诺的：真实的数字（评测分数、前后对比的指标）、真实的失败
+    （从未进入生产的原型、不得不收回的说法），以及让我改变想法的那个
+    具体的点。我不承诺的：工具盘点、模型发布的热评、以及打鸡血。
+    这三样都有更好的去处。
+  </p>
+
+  <h2>我如何与 AI 协作</h2>
+  <p>
+    大部分代码由 Claude Code 敲出来；架构和评测归我。最清楚的例子是
+    ragx：AI 写了大部分代码，但每一个检索技巧都要经过我设计的 45 例
+    评测集的裁决——由数字说了算，而不是感觉。我甚至把这种分工写进了
+    仓库命名：后缀 "x" 表示 AI 辅助，"r" 表示手写。完整的系统——每个
+    工作流、角色和资产，持续更新并接受审计——在
+    <a href="/zh/blog/2026-07-07-how-i-work-with-ai/">我如何与 AI 协作</a>里。
+  </p>
+
+  <h2>精选作品</h2>
+  <ul>
+    <li>
+      <strong><a href="https://ragx-rosy.vercel.app">ragx</a></strong>
+      ——一个跨四份企业年报、带引用来源回答问题的 RAG 系统，围绕自己的
+      45 例评测集构建。对着数字迭代，检索从 0.63 → 0.97，回答准确率从
+      0.78 → 0.98。它证明了：AI 的质量可以是一个测量值，而不是一种感觉。
+    </li>
+    <li>
+      <strong>FDI-WEB</strong>（帆软）——上文那个内部交付平台：约 3000
+      人的组织，跟踪一万多个项目。它证明了：我能做出人们每天依赖的
+      生产级软件。
+    </li>
+    <li>
+      <strong>logx</strong>——一个小小的 Rust 日志解析
+      CLI，我第一个全程指挥 AI agent 完成的项目。诚实的版本是：第一版
+      README 夸大了，于是我审计了它，砍掉不存在的功能，改为发布实测数字
+      （约 100–150 MB/s，内存低于 5 MB）。它证明了：我宁可发布一个小而
+      真实的东西，也不要一个大而空的说法。
+    </li>
+    <li>
+      <strong
+        ><a href="https://github.com/canglang-social/learn-to-ship"
+          >learn-to-ship</a
+        ></strong
+      >
+      ——一个 LangGraph agent，按"能解开哪个求职缺口"给我的学习清单排序；
+      v0 已上线，由 CI 评测把关。它的第一个有用输出是让我把它自己造出来
+      ——完整故事在
+      <a href="/zh/blog/2026-07-06-learning-to-ship/">Learning to Ship</a>。
+      它证明了：学习可以指向产出，而不是囤积。
+    </li>
+  </ul>
+
+  <h2>下班之后</h2>
+  <p>工作和 AI 只是我的一部分，不是全部。其余的，说具体的：</p>
+  <ul>
+    <li>
+      <strong>英雄联盟</strong>，从 2012 年玩到现在——辅助主玩（布隆和
+      波比），最高钻二。看来连打游戏，我都会选那个职责是让别人成功的位置。
+    </li>
+    <li>
+      <strong>拳击，然后是健身。</strong>练了一年拳击，后来沉淀成撸铁。
+      也打羽毛球；网球是喜欢大于练习。
+    </li>
+    <li>
+      <strong>桌游</strong>，和朋友们——常玩的是 Werewords、Flip 7
+      和德州扑克。
+    </li>
+    <li>
+      <strong>朋克。</strong>入坑曲目我会推这一首：柏林护士的
+      《未来的主人翁》。
+    </li>
+  </ul>
+  <p>
+    页首的图？从一个小图池里随机抽——芙莉莲也在里面——刷新一下，
+    也许会遇见另一张。
+  </p>
+
+  <h2>其他地方</h2>
+  <p>
+    <a href="https://github.com/canglang-social">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/felix-han-854726413">LinkedIn</a> ·
+    <a href="https://x.com/canglang_so">X</a> ·
+    <a href="mailto:canglangzhuoxi@gmail.com">邮箱</a>
+  </p>
+
+  <script is:inline define:vars={{ heroUrls }}>
+    // 每次浏览时把布局渲染的 hero 换成图池中的随机一张。
+    const heroImg = document.querySelector('.hero-image img');
+    if (heroImg && heroUrls.length > 1) {
+      const pick = heroUrls[Math.floor(Math.random() * heroUrls.length)];
+      heroImg.removeAttribute('srcset');
+      heroImg.src = pick;
+    }
+  </script>
+</Layout>

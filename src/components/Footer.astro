@@ -1,11 +1,18 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { defaultLang, useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
 const today = new Date();
 ---
 
 <footer>
   <div class="inner">
-    <span>&copy; {today.getFullYear()} {SITE_TITLE}</span>
+    <span>&copy; {today.getFullYear()} {t('site.title')}</span>
     <div class="social-links">
       <a href="https://x.com/canglang_so" target="_blank" rel="noopener">
         <span class="sr-only">X (Twitter)</span>
