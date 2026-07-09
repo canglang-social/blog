@@ -1,5 +1,4 @@
 ---
-import { SITE_TITLE } from '../consts';
 import { defaultLang, localeUrl, useTranslations, type Lang } from '../i18n/ui';
 import HeaderLink from './HeaderLink.astro';
 
@@ -17,7 +16,7 @@ const switchHref = switchUrl ?? localeUrl(otherLang, '/blog/');
 
 <header>
   <nav>
-    <a class="site-title" href={localeUrl(lang, '/blog')}>{SITE_TITLE}</a>
+    <a class="site-title" href={localeUrl(lang, '/blog')}>{t('site.title')}</a>
     <div class="links">
       <div class="internal-links">
         <HeaderLink href={localeUrl(lang, '/blog')}>{t('nav.blog')}</HeaderLink>
