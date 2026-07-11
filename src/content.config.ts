@@ -18,6 +18,9 @@ const blog = defineCollection({
 			// heroes don't render in link previews). Falls back to heroImage.
 			ogImage: z.optional(image()),
 			tags: z.array(z.string()).default([]),
+			// Earns a slot in the landing's Writing section — the Editor's
+			// curation call (portfolio step 5), not a chronological feed.
+			featured: z.boolean().default(false),
 		}),
 });
 
