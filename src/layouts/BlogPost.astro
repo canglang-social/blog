@@ -7,7 +7,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { defaultLang, localeUrl, useTranslations, type Lang } from '../i18n/ui';
 
-type Props = CollectionEntry<'blog'>['data'] & {
+// `featured` only drives the landing's Writing section; pages like About
+// that hand-build these props shouldn't have to pass it.
+type Props = Omit<CollectionEntry<'blog'>['data'], 'featured'> & {
+  featured?: boolean;
   lang?: Lang;
   /** URL of this post in the other language, when a translation exists. */
   translationUrl?: string;

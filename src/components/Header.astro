@@ -16,7 +16,9 @@ const switchHref = switchUrl ?? localeUrl(otherLang, '/blog/');
 
 <header>
   <nav>
-    <a class="site-title" href={localeUrl(lang, '/blog')}>{t('site.title')}</a>
+    <a class="site-title" href={lang === 'en' ? '/' : localeUrl(lang, '/blog')}
+      >{t('site.title')}</a
+    >
     <div class="links">
       <div class="internal-links">
         <HeaderLink href={localeUrl(lang, '/blog')}>{t('nav.blog')}</HeaderLink>

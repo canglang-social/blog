@@ -1,4 +1,5 @@
 ---
+featured: true
 title: 'Learning to Ship'
 description: 'I built an agent to tell me what to study next. Its first answer was: build this.'
 pubDate: 'Jul 6 2026'

@@ -1,4 +1,5 @@
 ---
+featured: true
 title: 'The AI Tools Strategist'
 description: 'Building a tool to tell me which AI tool to use — and why an ordinary person needs one.'
 pubDate: 'Jun 28 2026'
