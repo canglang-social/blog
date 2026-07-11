@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+// Portfolio pages are English-only (multilingual ruled out for the site).
+type Props = CollectionEntry<'projects'>['data'];
+
+const { title, tagline, stack, metric, metricNote, demoUrl, repoUrl } =
+  Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={tagline} lang="en" />
+    <style>
+      .project-head {
+        margin-bottom: 2.5rem;
+      }
+      .project-head h1 {
+        margin: 0 0 0.75rem;
+        font-size: 2.2rem;
+        line-height: 1.15;
+      }
+      .tagline {
+        margin: 0 0 1rem;
+        font-size: 1.15rem;
+        line-height: 1.6;
+        color: var(--heading);
+        font-weight: 600;
+      }
+      .stack {
+        margin: 0 0 0.75rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .metric-block {
+        border-left: 3px solid var(--accent);
+        background: var(--accent-soft);
+        padding: 0.9rem 1.1rem;
+        border-radius: 2px;
+      }
+      .metric {
+        display: block;
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: var(--heading);
+      }
+      .metric-note {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header lang="en" />
+    <main>
+      <article>
+        <header class="project-head">
+          <h1>{title}</h1>
+          <p class="tagline">{tagline}</p>
+          <p class="stack">{stack}</p>
+          <div class="project-links">
+            {
+              demoUrl && (
+                <a href={demoUrl} target="_blank" rel="noopener">
+                  Live demo ↗
+                </a>
+              )
+            }
+            {
+              repoUrl && (
+                <a href={repoUrl} target="_blank" rel="noopener">
+                  GitHub ↗
+                </a>
+              )
+            }
+          </div>
+          <p class="metric-block">
+            <strong class="metric">{metric}</strong>
+            {metricNote && <span class="metric-note">{metricNote}</span>}
+          </p>
+        </header>
+        <div class="prose">
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer lang="en" />
+  </body>
+</html>
