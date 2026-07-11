@@ -21,4 +21,22 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+const projects = defineCollection({
+	// Case-study pages for the project-led site. Copy is packaged upstream in
+	// forge (career/portfolio/public/) — facts are fixed there, never here.
+	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+	schema: z.object({
+		// Short name for cards; title is the full case-study heading.
+		name: z.string(),
+		title: z.string(),
+		tagline: z.string(),
+		stack: z.string(),
+		metric: z.string(),
+		metricNote: z.string().optional(),
+		demoUrl: z.url().optional(),
+		repoUrl: z.url().optional(),
+		order: z.number().default(0),
+	}),
+});
+
+export const collections = { blog, projects };
