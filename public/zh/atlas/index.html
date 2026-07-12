@@ -206,14 +206,14 @@
 
 <header class="mast col">
   <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译自 inventory.yaml、workflows.md、primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-07-12 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
   <h1>行 <span style="font-size:0.5em;color:inherit;opacity:0.6">系统图谱</span></h1>
-  <p class="lede">一个人、六个驻地、十二个循环、四个判断型角色——外加一个审计这一切的元循环。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
+  <p class="lede">一个人、六个驻地、十三个循环、四个判断型角色——外加一个审计这一切的元循环。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
   <div class="stats" role="group" aria-label="系统统计">
     <div class="stat"><b>5</b><span>原语</span></div>
     <div class="stat"><b>4</b><span>角色</span></div>
-    <div class="stat"><b>12</b><span>工作流</span></div>
-    <div class="stat"><b>10</b><span>运行中</span></div>
+    <div class="stat"><b>13</b><span>工作流</span></div>
+    <div class="stat"><b>11</b><span>运行中</span></div>
     <div class="stat"><b>2</b><span>待建</span></div>
     <div class="stat"><b>6</b><span>驻地</span></div>
   </div>
@@ -436,6 +436,7 @@
         <li><b>master.md</b> — 简历唯一取材的事实来源</li>
         <li><b>build_resumes.py</b> + base/ 分赛道简历</li>
         <li><b>/scout /match /tailor /interview</b> + /daily /review /audit /rubric-drift /strategist /strategy</li>
+        <li><b>data/career-map.yaml</b> + /crossroads——人生路径层（career-strategy）</li>
       </ul>
     </div>
     <div class="home">
@@ -472,8 +473,8 @@
 <section class="wide" id="workflows">
   <div class="col" style="margin-bottom:1.3rem">
     <span class="eyebrow"><span class="secno">§4</span> · 循环</span>
-    <h2>十二个工作流</h2>
-    <p class="kicker">十个运行中，两个待建。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
+    <h2>十三个工作流</h2>
+    <p class="kicker">十一个运行中，两个待建。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
   </div>
 
   <div class="flows">
@@ -486,7 +487,7 @@
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">learning-loop</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
       <p class="flow-sum">任何有趣的东西都变成持久知识——在任意会话里采集一行 #inbox，分诊到一条路线，且每条路线都终结于检索尾巴。三条规则：注意力就是我的全部所需 · 产出是唯一重要的东西 · 检索本身就是学习。</p>
-      <div class="steps"><span class="step">采集 #inbox</span><span class="arr">→</span><span class="step">分诊</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B 练习（ragx → ragr）</span><span class="arr">·</span><span class="step">C 材料</span><span class="arr">·</span><span class="step">D 剂量</span><span class="arr">→</span><span class="step">回忆</span><span class="arr">→</span><span class="step">卡片（人工把关）</span><span class="arr">→</span><span class="step">日志记录</span></div>
+      <div class="steps"><span class="step">采集 #inbox</span><span class="arr">→</span><span class="step">分诊</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B 练习——/aim 选题（ragx → ragr）</span><span class="arr">·</span><span class="step">C 材料</span><span class="arr">·</span><span class="step">D 剂量</span><span class="arr">→</span><span class="step">回忆</span><span class="arr">→</span><span class="step">卡片（人工把关）</span><span class="arr">→</span><span class="step">日志记录</span></div>
     </div>
 
     <div class="flow">
@@ -532,15 +533,21 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--blog)"></span><span class="flow-name">publishing-loop</span><span class="tag">blog · 编辑</span><span class="pill running">运行中 · 第一轮</span></div>
-      <p class="flow-sum">我在公开场合说什么——草稿被润色成母语级英文文章，策展进以项目为主的站点，每页一种语言。先于清单行展示：它的第一篇文章——《How I Work with AI》——内嵌了这份图谱，所以无论你在哪里读到这段话，这个循环就正在运行；发布时该行翻转。还有三份草稿在排队。</p>
+      <div class="flow-head"><span class="dot" style="background:var(--blog)"></span><span class="flow-name">publishing-loop</span><span class="tag">blog · 编辑</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">我在公开场合说什么——草稿被润色成母语级英文文章，策展进以项目为主的站点，每页一种语言。第一个完整循环已跑通：《How I Work with AI》（英文 + 中文）内嵌了这份图谱；站点现以案例研究页领衔（ragx · learn-to-ship），并配有策展的 /writing。</p>
       <div class="steps"><span class="step">/draft</span><span class="arr">→</span><span class="step">/refine（编辑过审）</span><span class="arr">→</span><span class="step">/publish（astro check → build）</span><span class="arr">→</span><span class="step">策展 /writing</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">personal-brand</span><span class="tag">尚无驻地 · 品牌教练</span><span class="pill wanted">待建 · 已设计</span></div>
-      <p class="flow-sum">我给人的观感——一个刻意经营的公开形象与魅力：取材自档案事实，呈现于各社交平台，并按节奏做由外向内的审计。首次真实的 BUILD 或 AUDIT 会话时翻转为运行中。</p>
+      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">personal-brand</span><span class="tag">尚无驻地 · 品牌教练</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">我给人的观感——一个刻意经营的公开形象与魅力：取材自档案事实，呈现于各社交平台，并按节奏做由外向内的审计。2026-07-07 起运行中：首次 BUILD 会话已把定位、形象支柱与各平台简介写入 brand-records.md。</p>
       <div class="steps"><span class="step">BUILD: 定位 · 形象支柱 · 简介 · 魅力练习</span><span class="arr">→</span><span class="step">PRESENT: 平台策略 · 分发文章/案例研究</span><span class="arr">→</span><span class="step">AUDIT: 由外向内，一双招聘官的眼睛</span><span class="arr">→</span><span class="step loopback">↺ 回到 BUILD</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">job_hunting · 战略师席位</span><span class="pill wanted">待建 · 已设计</span></div>
+      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。第一条诚实的行：进行中的 Toptal 之注（2026-07-29 前提交）。凭使用证据翻转为运行中：v1 地图 + 一次执行过的重评分 + 一次真实的 /crossroads。</p>
+      <div class="steps"><span class="step">data/career-map.yaml</span><span class="arr">→</span><span class="step">/crossroads——重型测绘，约每年两次，Felix 亲自运行</span><span class="arr">→</span><span class="step">每月重评分（约 10 分钟）</span><span class="arr">→</span><span class="step">pursuing 姿态 → strategy.md 使命行</span><span class="arr">→</span><span class="step loopback">↺ 打分后的检查点重绘地图</span></div>
     </div>
 
     <div class="flow">
@@ -562,8 +569,8 @@
       <tr><td><strong>案例研究</strong> — 评审过的项目写成的证据</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>career-loop</td><td class="mono">forge career/portfolio/</td></tr>
       <tr><td><strong>定制简历</strong> — 带日期、经 lint、按 JD 定制</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline（基于 career-loop 的底版）</td><td class="mono">job_hunting</td></tr>
       <tr><td><strong>Anki 卡片 + 会话日志</strong> — 人工把关、记入日志</td><td class="mono"><span class="dot" style="background:var(--agentkit)"></span>learning-loop 检索尾巴</td><td class="mono">知识库 journals/ + 卡组</td></tr>
-      <tr><td><strong>文章 + 个人站点</strong> — 母语级英文，每页一种语言</td><td class="mono"><span class="dot" style="background:var(--blog)"></span>publishing-loop（就绪）</td><td class="mono">blog src/content/</td></tr>
-      <tr><td><strong>品牌界面</strong> — LinkedIn + 各平台简介，平台原生分发</td><td class="mono"><span class="dot" style="background:var(--ghost)"></span>personal-brand（就绪）</td><td class="mono">各平台</td></tr>
+      <tr><td><strong>文章 + 个人站点</strong> — 母语级英文，每页一种语言</td><td class="mono"><span class="dot" style="background:var(--blog)"></span>publishing-loop</td><td class="mono">blog src/content/</td></tr>
+      <tr><td><strong>品牌界面</strong> — LinkedIn + 各平台简介，平台原生分发</td><td class="mono"><span class="dot" style="background:var(--ghost)"></span>personal-brand</td><td class="mono">各平台</td></tr>
       <tr><td><strong>审计报告 + 提案</strong> — 保留 / 合并 / 自动化 / 退役</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>workflow-audit</td><td class="mono">ai-chief-of-staff reports/</td></tr>
     </tbody>
   </table>
@@ -578,7 +585,7 @@
   </div>
 
   <div class="map-scroll">
-    <div class="map" role="img" aria-label="系统地图：十一个工作流节点按驻地分组，由喂养箭头相连，整体包在幕僚长的审计边界内，Logseq 知识库作为汇聚带垫底。">
+    <div class="map" role="img" aria-label="系统地图：十二个工作流节点按驻地分组，由喂养箭头相连，整体包在幕僚长的审计边界内，Logseq 知识库作为汇聚带垫底。">
       <svg class="underlay" viewBox="0 0 1080 916" width="1080" height="916" aria-hidden="true">
         <defs>
           <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -643,6 +650,23 @@
         <!-- 13 profile-loop -> personal-brand (read-only, along the bottom) -->
         <path d="M 256,396 C 300,540 302,700 344,858 C 500,886 720,878 868,798" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
         <text x="470" y="876" font-size="10" fill="var(--muted)">档案事实为人设托底——绝不编造</text>
+
+        <!-- 14 project-loop -> learning-loop (chief /aim is Route B's focus-director) -->
+        <path d="M 430,332 C 372,372 320,432 258,470" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="268" y="402" font-size="10" fill="var(--ink-2)">/aim 选出下一个练习主题</text>
+
+        <!-- 15 career-loop -> career-strategy (read-only: fit facts) -->
+        <line x1="800" y1="202" x2="800" y2="170" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="810" y="190" font-size="10" fill="var(--muted)">契合度事实——只引用，不复制</text>
+
+        <!-- 16 profile-loop -> career-strategy (read-only: identity facts) -->
+        <path d="M 256,344 C 340,180 440,100 668,124" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="300" y="262" font-size="10" fill="var(--muted)">身份事实（只读）</text>
+
+        <!-- 17 career-strategy -> job-pipeline (pursuing stance -> strategy.md mandate) -->
+        <path d="M 906,140 C 1040,170 1046,300 998,388" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="1056" y="128" font-size="10" fill="var(--ink-2)" text-anchor="end">pursuing 姿态</text>
+        <text x="1056" y="141" font-size="10" fill="var(--ink-2)" text-anchor="end">→ /strategy 使命行</text>
       </svg>
 
       <!-- meta node on the perimeter -->
@@ -689,6 +713,13 @@
         <div class="nd" style="border-top:1px dotted var(--hairline); margin-top:.35rem; padding-top:.3rem">产出：ragx · ragr · logx · learn-to-ship</div>
       </div>
 
+      <!-- career-strategy (wanted, designed) — the life-path layer above the campaign -->
+      <div class="node wanted" style="left:672px; top:84px; width:230px">
+        <div class="nn">career-strategy</div>
+        <div class="nh" style="color:var(--jobhunt)">job_hunting · 战略师席位</div>
+        <div class="nd">career-map.yaml → /crossroads → 每月重评分</div>
+      </div>
+
       <!-- job_hunting column -->
       <div class="node" style="left:790px; top:206px">
         <div class="nn">career-loop</div>
@@ -706,10 +737,10 @@
         <div class="nd">/draft → /refine → /publish → 策展 /writing · 首个产出：本图谱 + 它的文章</div>
       </div>
 
-      <!-- personal-brand (wanted, designed) -->
-      <div class="node wanted" style="left:790px; top:698px">
+      <!-- personal-brand (running; doctrine staged in ai-chief-of-staff, no home repo yet) -->
+      <div class="node" style="left:790px; top:698px">
         <div class="nn">personal-brand</div>
-        <div class="nh" style="color:var(--muted)">品牌教练 · 就绪</div>
+        <div class="nh" style="color:var(--ghost)">品牌教练 · 尚无驻地</div>
         <div class="nd">BUILD → PRESENT → AUDIT ↺ · 形象 · 平台 · 由外向内</div>
       </div>
 
@@ -738,7 +769,7 @@
 
 <footer class="col">
   <p><span class="mono">来源：inventory.yaml（权威——行胜过图）· workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>由幕僚长编译于 2026-07-07；同日 personal-brand 循环与品牌教练加入时重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者）两次重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
 </footer>
 
 </body></html>
