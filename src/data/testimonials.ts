@@ -68,6 +68,15 @@ export const testimonials: Testimonial[] = [
     quoteZh: '有想法，立场坚定',
   },
   {
+    name: 'Linning',
+    nameZh: '林柠',
+    relation: 'college choir',
+    relationZh: '大学合唱团认识',
+    quote:
+      'Haitao has a mind of his own and a free spirit — he took a two-year gap to go live the life he actually wanted. That takes something.',
+    quoteZh: '海涛是一个很有想法很自由的人，敢 gap 两年去过自己想要的生活，很厉害',
+  },
+  {
     name: 'Veronica',
     nameZh: 'Veronica',
     relation: 'coworker and kindred spirit — we share a birthday',
