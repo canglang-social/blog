@@ -206,9 +206,9 @@
 
 <header class="mast col">
   <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/zh/atlas/" hreflang="zh" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">中文</a></p>
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">system atlas</span> · compiled 2026-07-07, regenerated 2026-07-12, from inventory.yaml, workflows.md, primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">system atlas</span> · compiled 2026-07-07, regenerated 2026-07-20, from inventory.yaml, workflows.md, primitives.md</span>
   <h1>The System Atlas</h1>
-  <p class="lede">One person, six homes, thirteen loops, four judgment-roles — and a meta-loop that audits all of it. Everything below is, at bottom, text Claude reads and follows; the pieces differ in their <em>job</em>, not their substance. Rows win over diagrams: <span class="mono" style="font-size:.85em">inventory.yaml</span> is canonical, this page is its map.</p>
+  <p class="lede">One person, six homes, fifteen loops, five judgment-roles — and a meta-loop that audits all of it. Everything below is, at bottom, text Claude reads and follows; the pieces differ in their <em>job</em>, not their substance. Rows win over diagrams: <span class="mono" style="font-size:.85em">inventory.yaml</span> is canonical, this page is its map.</p>
   <div class="stats" role="group" aria-label="System counts">
     <div class="stat"><b>5</b><span>primitives</span></div>
     <div class="stat"><b>4</b><span>roles</span></div>
@@ -255,7 +255,7 @@
         <rect x="482" y="122" width="168" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
         <text x="496" y="146" font-size="12" font-weight="700" fill="var(--ink)">ROLE</text>
         <text x="496" y="163" font-size="10" fill="var(--ink-2)">judgment + bounds</text>
-        <text x="496" y="178" font-size="9.5" fill="var(--muted)">the four judgment-roles</text>
+        <text x="496" y="178" font-size="9.5" fill="var(--muted)">the five judgment-roles</text>
 
         <!-- arrows inside -->
         <line x1="192" y1="157" x2="264" y2="157" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
@@ -296,7 +296,7 @@
 <!-- ============ 2 · ROLES ============ -->
 <section class="col" id="roles">
   <span class="eyebrow"><span class="secno">§2</span> · where judgment lives</span>
-  <h2>Four judgment-roles</h2>
+  <h2>Five judgment-roles</h2>
   <p class="kicker">Roles appear where judgment concentrates; commands suffice where the task is procedural. That is why the system is mostly workflows + commands with exactly four roles — and why <span class="mono" style="font-size:.85em">/scout</span> or <span class="mono" style="font-size:.85em">/tailor</span> never needed a persona. The Chief audits the other three from outside — <em>chief, not auditor</em> of its own doing.</p>
 
   <figure class="fig-breakout">
@@ -375,7 +375,7 @@
         <path d="M 779,332 L 779,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
       </svg>
     </div>
-    <figcaption>fig. 2 — the role graph, earned 2026-07-07 when the Editor became the third role; the Brand Coach joined the same day. solid red = audits · dashed = a command/session wearing the role. (workflows.md)</figcaption>
+    <figcaption>fig. 2 — the role graph, earned 2026-07-07 when the Editor became the third role; the Brand Coach joined the same day. The Treasurer (2026-07-12) is the fifth seat and is carded below, but stays out of this graph until the money loop is running — the graph draws roles in use, not roles designed. solid red = audits · dashed = a command/session wearing the role. (workflows.md)</figcaption>
   </figure>
 
   <div class="rolecards">
@@ -398,6 +398,11 @@
       <h4><span class="dot" style="background:var(--ghost)"></span>Brand Coach</h4>
       <p>Owns public image and charisma (positioning, image pillars, per-platform bios), social-media strategy, and the outside-in surface audit — a recruiter's eyes on how it all comes across. Drafts frames; Felix writes the words. Routes blog-copy fixes to the Editor.</p>
       <p class="mono">home: staged in ai-chief-of-staff · brand-coach.md (2026-07-07)</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--forge)"></span>Treasurer</h4>
+      <p>Owns the money facts file, threshold memos (every outflow at or above ¥5,000, and every big decision), and the monthly review that re-asks what "rich" means. Life-scope, not work: no daily expense tracking, no alpha — income as a lever stays career-strategy's. Nothing here ever graduates public.</p>
+      <p class="mono">home: money · treasurer.md (2026-07-12)</p>
     </div>
   </div>
 </section>
@@ -545,9 +550,21 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">job_hunting · the strategist seat</span><span class="pill wanted">wanted · designed</span></div>
-      <p class="flow-sum">WHERE the whole thing is going — every life path (employ, freelance, build, study, relocate) held as falsifiable dated checkpoints that get scored, with stances set by Felix alone. First honest row: the in-flight Toptal bet (submit by 2026-07-29). Flips to running on usage evidence: the v1 map + one executed re-score + a real /crossroads run.</p>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">job_hunting · the strategist seat</span><span class="pill running">running</span></div>
+      <p class="flow-sum">WHERE the whole thing is going — every life path (employ, freelance, build, study, relocate) held as falsifiable dated checkpoints that get scored, with stances set by Felix alone. Running since 2026-07-20 on its three pieces of usage evidence: the v1 map, one executed re-score (the Toptal gate, scored <em>right</em>), and the first full /crossroads run — which diverged seven paths and pulled the Toptal-screen checkpoint forward to 2026-09-30.</p>
       <div class="steps"><span class="step">data/career-map.yaml</span><span class="arr">→</span><span class="step">/crossroads — heavy mapping, ~2×/yr, Felix-run</span><span class="arr">→</span><span class="step">monthly re-score (~10 min)</span><span class="arr">→</span><span class="step">pursuing stance → strategy.md mandate</span><span class="arr">→</span><span class="step loopback">↺ scored checkpoints redraw the map</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · own repo</span><span class="pill wanted">wanted · designed</span></div>
+      <p class="flow-sum">WHAT my free time is for — favorites and reading data distilled into a taste map, tested against unforced-hours evidence in a quarterly audit, and allocated as weekly hours, with verdicts set by Felix alone. The third decision layer, so it shares the anatomy: an options inventory the chief never edits, a Felix-only verdict enum, and a self-kill criterion.</p>
+      <div class="steps"><span class="step">COLLECT: platform exports · OSS routes</span><span class="arr">→</span><span class="step">DISTILL: topic clusters, volume × recency × cross-surface</span><span class="arr">→</span><span class="step">AUDIT: unforced time in the last 30 days</span><span class="arr">→</span><span class="step">ALLOCATE: weekly hours</span><span class="arr">→</span><span class="step loopback">↺ quarterly, Felix-run</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">money</span><span class="tag">money · the Treasurer</span><span class="pill wanted">wanted · designed</span></div>
+      <p class="flow-sum">WHAT keeps me solvent — money facts owned in one file, every outflow over the threshold decided by memo, and a monthly review that re-asks what "rich" means and appends the dated answer. Life-scope, not work; no daily expense tracking and no alpha. The fifth judgment-role seat.</p>
+      <div class="steps"><span class="step">facts.yaml — the one owner of money facts</span><span class="arr">→</span><span class="step">threshold memo (≥ ¥5,000 or a big decision)</span><span class="arr">→</span><span class="step">monthly review: snapshot + "what does rich mean now"</span><span class="arr">→</span><span class="step loopback">↺ dated answers append, never overwrite</span></div>
     </div>
 
     <div class="flow">
@@ -769,7 +786,8 @@
 
 <footer class="col">
   <p><span class="mono">sources: inventory.yaml (canonical — rows win over diagrams) · workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>Compiled by the Chief of Staff, 2026-07-07; regenerated 2026-07-07 (personal-brand and the Brand Coach join) and 2026-07-12 (career-strategy joins with its three edges; personal-brand flips to running; /aim replaces the frozen learn-to-ship agent as Route B's topic-picker). If this page and a row disagree, the row wins — fix the page.</p>
+  <p>Compiled by the Chief of Staff, 2026-07-07; regenerated 2026-07-07 (personal-brand and the Brand Coach join), 2026-07-12 (career-strategy joins with its three edges; personal-brand flips to running; /aim replaces the frozen learn-to-ship agent as Route B's topic-picker), and 2026-07-20 (career-strategy flips to running on its three pieces of usage evidence; attention-portfolio and money join — both designed 07-12 but missed by that regeneration, which is why the audit now checks atlas coverage against the inventory; the Treasurer is carded as the fifth judgment-role). If this page and a row disagree, the row wins — fix the page.</p>
 </footer>
+
 
 </body></html>
