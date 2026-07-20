@@ -111,10 +111,15 @@ from the inventory whenever the system changes. A catalog frozen inside
 a blog post starts drifting the day it ships; the atlas can't drift,
 because it's rebuilt from the same rows it audits.
 
-![The full system map from the atlas: twelve workflows grouped by the repo that owns them, the edges between them, and the audit perimeter around everything — every node a row in inventory.yaml.](../../../assets/how-i-work-with-ai/atlas-system-map.svg)
+![The system map as it stood on July 7, 2026: twelve workflows grouped by the repo that owns them, the edges between them, and the audit perimeter around everything — every node a row in inventory.yaml.](../../../assets/how-i-work-with-ai/atlas-system-map.svg)
 
-As of today the map holds twelve workflows and four judgment-roles —
-three running the operation, one auditing it. The pieces that deserve
+*The map as it stood when this post shipped. For the current version,
+see the [live atlas](/atlas) — rebuilt from the inventory whenever the
+system changes.*
+
+As of July 7, 2026 — the day this post shipped — the map held twelve
+workflows and four judgment-roles — three running the operation, one
+auditing it. The pieces that deserve
 depth — how I study, how the job pipeline runs, how I decide which tier
 of AI tool gets a task — will get posts of their own. This one is just
 the tour.
