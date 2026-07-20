@@ -206,9 +206,9 @@
 
 <header class="mast col">
   <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-07-12 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-07-20 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
   <h1>行 <span style="font-size:0.5em;color:inherit;opacity:0.6">系统图谱</span></h1>
-  <p class="lede">一个人、六个驻地、十三个循环、四个判断型角色——外加一个审计这一切的元循环。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
+  <p class="lede">一个人、六个驻地、十五个循环、五个判断型角色——外加一个审计这一切的元循环。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
   <div class="stats" role="group" aria-label="系统统计">
     <div class="stat"><b>5</b><span>原语</span></div>
     <div class="stat"><b>4</b><span>角色</span></div>
@@ -255,7 +255,7 @@
         <rect x="482" y="122" width="168" height="70" rx="2" fill="var(--page)" stroke="var(--baseline)"/>
         <text x="496" y="146" font-size="12" font-weight="700" fill="var(--ink)">角色 ROLE</text>
         <text x="496" y="163" font-size="10" fill="var(--ink-2)">判断力 + 边界</text>
-        <text x="496" y="178" font-size="9.5" fill="var(--muted)">四个判断型角色</text>
+        <text x="496" y="178" font-size="9.5" fill="var(--muted)">五个判断型角色</text>
 
         <!-- arrows inside -->
         <line x1="192" y1="157" x2="264" y2="157" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ah)"/>
@@ -296,8 +296,8 @@
 <!-- ============ 2 · ROLES ============ -->
 <section class="col" id="roles">
   <span class="eyebrow"><span class="secno">§2</span> · 判断力所在</span>
-  <h2>四个判断型角色</h2>
-  <p class="kicker">角色出现在判断力汇聚的地方；任务是程序性的地方，命令就够了。这就是为什么系统大体是「工作流 + 命令」、角色恰好只有四个——也是为什么 <span class="mono" style="font-size:.85em">/scout</span> 或 <span class="mono" style="font-size:.85em">/tailor</span> 从来不需要人格面具。幕僚长从外部审计其余三个——对自己的作为，它是<em>幕僚长，而非审计员</em>。</p>
+  <h2>五个判断型角色</h2>
+  <p class="kicker">角色出现在判断力汇聚的地方；任务是程序性的地方，命令就够了。这就是为什么系统大体是「工作流 + 命令」、角色恰好只有五个——也是为什么 <span class="mono" style="font-size:.85em">/scout</span> 或 <span class="mono" style="font-size:.85em">/tailor</span> 从来不需要人格面具。幕僚长从外部审计其余几个——对自己的作为，它是<em>幕僚长，而非审计员</em>。</p>
 
   <figure class="fig-breakout">
     <div class="panel">
@@ -375,7 +375,7 @@
         <path d="M 779,332 L 779,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
       </svg>
     </div>
-    <figcaption>图 2 —— 角色图谱，2026-07-07 编辑成为第三个角色时定型；品牌教练同日加入。红实线 = 审计 · 虚线 = 命令/会话扮演该角色。（workflows.md）</figcaption>
+    <figcaption>图 2 —— 角色图谱，2026-07-07 编辑成为第三个角色时定型；品牌教练同日加入。司库（2026-07-12）是第五个席位，已列于下方卡片，但在 money 循环真正运行前不进入本图——本图画的是在用的角色，不是设计出来的角色。红实线 = 审计 · 虚线 = 命令/会话扮演该角色。（workflows.md）</figcaption>
   </figure>
 
   <div class="rolecards">
@@ -398,6 +398,11 @@
       <h4><span class="dot" style="background:var(--ghost)"></span>品牌教练</h4>
       <p>拥有公开形象与魅力（定位、形象支柱、各平台简介）、社交媒体策略，以及由外向内的界面审计——用一双招聘官的眼睛看这一切给人的观感。教练搭框架；文字由 Felix 来写。博客文案的修改转交编辑。</p>
       <p class="mono">驻地：暂驻 ai-chief-of-staff · brand-coach.md（2026-07-07）</p>
+    </div>
+    <div class="rolecard">
+      <h4><span class="dot" style="background:var(--forge)"></span>司库 Treasurer</h4>
+      <p>拥有金钱事实文件、门槛备忘录（每笔 ¥5,000 及以上的支出，以及每个重大决策），还有每月复盘中"当下'富有'意味着什么"这一追问。范围是生活而非工作：不做日常记账，不追求超额收益——把收入当作杠杆来用，那是 career-strategy 的事。这里的一切永不公开。</p>
+      <p class="mono">驻地：money · treasurer.md（2026-07-12）</p>
     </div>
   </div>
 </section>
@@ -473,7 +478,7 @@
 <section class="wide" id="workflows">
   <div class="col" style="margin-bottom:1.3rem">
     <span class="eyebrow"><span class="secno">§4</span> · 循环</span>
-    <h2>十三个工作流</h2>
+    <h2>十五个工作流</h2>
     <p class="kicker">十一个运行中，两个待建。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
   </div>
 
@@ -545,9 +550,21 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">job_hunting · 战略师席位</span><span class="pill wanted">待建 · 已设计</span></div>
-      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。第一条诚实的行：进行中的 Toptal 之注（2026-07-29 前提交）。凭使用证据翻转为运行中：v1 地图 + 一次执行过的重评分 + 一次真实的 /crossroads。</p>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">job_hunting · 战略师席位</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。自 2026-07-20 起运行，凭三项使用证据：v1 地图、一次执行过的重评分（Toptal 关口，判定<em>正确</em>），以及首次完整的 /crossroads——它分出七条路径，并把 Toptal 筛选检查点提前到 2026-09-30。</p>
       <div class="steps"><span class="step">data/career-map.yaml</span><span class="arr">→</span><span class="step">/crossroads——重型测绘，约每年两次，Felix 亲自运行</span><span class="arr">→</span><span class="step">每月重评分（约 10 分钟）</span><span class="arr">→</span><span class="step">pursuing 姿态 → strategy.md 使命行</span><span class="arr">→</span><span class="step loopback">↺ 打分后的检查点重绘地图</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · 独立仓库</span><span class="pill wanted">待建 · 已设计</span></div>
+      <p class="flow-sum">我的空闲时间用来做什么——把收藏与阅读数据蒸馏成一张品味地图，在季度审计中用"无人强迫的时间"这一证据检验它，再折算成每周小时数；裁定只由 Felix 一人设定。它是第三个决策层，因而共用同一套解剖结构：一份幕僚长从不编辑的选项清单、一个仅限 Felix 的裁定枚举，以及一条自杀判据。</p>
+      <div class="steps"><span class="step">采集：平台导出 · 开源路线</span><span class="arr">→</span><span class="step">蒸馏：主题聚类，数量 × 新近度 × 跨平台</span><span class="arr">→</span><span class="step">审计：近 30 天里无人强迫的时间</span><span class="arr">→</span><span class="step">分配：每周小时数</span><span class="arr">→</span><span class="step loopback">↺ 每季一次，Felix 亲自运行</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">money</span><span class="tag">money · 司库</span><span class="pill wanted">待建 · 已设计</span></div>
+      <p class="flow-sum">什么让我保持偿付能力——金钱事实由一个文件独家持有，每一笔超过门槛的支出都以备忘录决策，每月复盘重新追问"当下'富有'意味着什么"，并把有日期的答案追加进去。范围是生活，不是工作：不做日常记账，也不追求超额收益。第五个判断型角色席位。</p>
+      <div class="steps"><span class="step">facts.yaml——金钱事实的唯一所有者</span><span class="arr">→</span><span class="step">门槛备忘录（≥ ¥5,000 或重大决策）</span><span class="arr">→</span><span class="step">月度复盘：快照 +「现在'富有'意味着什么」</span><span class="arr">→</span><span class="step loopback">↺ 有日期的答案只追加，不覆盖</span></div>
     </div>
 
     <div class="flow">
@@ -769,7 +786,7 @@
 
 <footer class="col">
   <p><span class="mono">来源：inventory.yaml（权威——行胜过图）· workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者）两次重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者），以及 2026-07-20（career-strategy 凭三项使用证据翻转为运行中；attention-portfolio 与 money 加入——两者均于 07-12 设计，却被那次重新生成漏掉，这也是审计从此开始校验图对清单的覆盖的原因；司库作为第五个判断型角色列卡）三次重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
 </footer>
 
 </body></html>
