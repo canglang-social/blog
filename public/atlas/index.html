@@ -7,6 +7,8 @@
 <link rel="alternate" hreflang="zh" href="https://canglang.netlify.app/zh/atlas/">
 <script>(()=>{const s=localStorage.getItem("theme");document.documentElement.dataset.theme=s||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
 </head><body>
+  <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/zh/atlas/" hreflang="zh" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">中文</a></p>
+
 <style>
   :root {
     --page:      #f7f5ef;
@@ -205,16 +207,15 @@
 </style>
 
 <header class="mast col">
-  <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/zh/atlas/" hreflang="zh" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">中文</a></p>
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">system atlas</span> · compiled 2026-07-07, regenerated 2026-07-20, from inventory.yaml, workflows.md, primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">system atlas</span> · compiled 2026-07-07, regenerated 2026-08-03, from inventory.yaml, workflows.md, primitives.md</span>
   <h1>The System Atlas</h1>
   <p class="lede">One person, six homes, fifteen loops, five judgment-roles — and a meta-loop that audits all of it. Everything below is, at bottom, text Claude reads and follows; the pieces differ in their <em>job</em>, not their substance. Rows win over diagrams: <span class="mono" style="font-size:.85em">inventory.yaml</span> is canonical, this page is its map.</p>
   <div class="stats" role="group" aria-label="System counts">
     <div class="stat"><b>5</b><span>primitives</span></div>
     <div class="stat"><b>4</b><span>roles</span></div>
-    <div class="stat"><b>13</b><span>workflows</span></div>
-    <div class="stat"><b>11</b><span>running</span></div>
-    <div class="stat"><b>2</b><span>wanted</span></div>
+    <div class="stat"><b>15</b><span>workflows</span></div>
+    <div class="stat"><b>14</b><span>running</span></div>
+    <div class="stat"><b>1</b><span>wanted</span></div>
     <div class="stat"><b>6</b><span>homes</span></div>
   </div>
 </header>
@@ -435,7 +436,7 @@
       </ul>
     </div>
     <div class="home">
-      <div class="home-name"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</div>
+      <div class="home-name"><span class="dot" style="background:var(--jobhunt)"></span>career</div>
       <div class="home-role">the campaign — resume content + the application pipeline</div>
       <ul>
         <li><b>master.md</b> — the only fact source resumes draw from</li>
@@ -479,7 +480,7 @@
   <div class="col" style="margin-bottom:1.3rem">
     <span class="eyebrow"><span class="secno">§4</span> · the loops</span>
     <h2>Thirteen workflows</h2>
-    <p class="kicker">Eleven running, two wanted. Each row mirrors its <span class="mono" style="font-size:.85em">summary:</span> in the inventory; the step chips are the loop's actual shape from workflows.md.</p>
+    <p class="kicker">Fourteen running, one wanted. Each row mirrors its <span class="mono" style="font-size:.85em">summary:</span> in the inventory; the step chips are the loop's actual shape from workflows.md.</p>
   </div>
 
   <div class="flows">
@@ -496,19 +497,19 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-loop</span><span class="tag">job_hunting</span><span class="pill running">running</span></div>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-loop</span><span class="tag">career</span><span class="pill running">running</span></div>
       <p class="flow-sum">Evidence of what I've done — reviewed projects become case studies, distilled into master.md, the only fact source resumes draw from.</p>
       <div class="steps"><span class="step">registry facts + /review findings</span><span class="arr">→</span><span class="step">case study (forge career/portfolio/)</span><span class="arr">→</span><span class="step">master.md</span><span class="arr">→</span><span class="step">base/ per-track resumes</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">profile-loop</span><span class="tag">agent-kit</span><span class="pill running">running</span></div>
-      <p class="flow-sum">WHO I am, in every session — one interviewed master profile, distilled into the CC snippet and its Drive mirror; career facts enter job_hunting only via master.md, so no second profile exists to drift.</p>
+      <p class="flow-sum">WHO I am, in every session — one interviewed master profile, distilled into the CC snippet and its Drive mirror; career facts enter the career repo only via master.md, so no second profile exists to drift.</p>
       <div class="steps"><span class="step">"About me" interview</span><span class="arr">→</span><span class="step">master-profile.md</span><span class="arr">→</span><span class="step">snippets/about-me.md</span><span class="arr">→</span><span class="step">CC @import</span><span class="arr">·</span><span class="step">Drive mirror</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">job_hunting</span><span class="pill running">running</span></div>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">career</span><span class="pill running">running</span></div>
       <p class="flow-sum">GETTING the job — scout, match, tailor, and interview against real JDs. Scouting is now Felix-run manual (the scheduled agent was retired — scouting is judgment work).</p>
       <div class="steps"><span class="step">/scout</span><span class="arr">→</span><span class="step">/match</span><span class="arr">→</span><span class="step">/tailor</span><span class="arr">→</span><span class="step">/interview</span><span class="arr">+</span><span class="step">cadence: /daily · /review (Sat) · /strategy</span></div>
     </div>
@@ -520,9 +521,9 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">daily-review</span><span class="tag">agent-kit → Cowork</span><span class="pill running">running</span></div>
-      <p class="flow-sum">Close each day deliberately — an evening guided review, Felix-run in Claude Cowork (de-automated 2026-07-07: reflection is judgment work, not a cron agent). Task triage folded in: Phase 1b sweeps today+yesterday TODOs; Saturdays sweep [[Tasks]].</p>
-      <div class="steps"><span class="step">prompts/daily-review.md</span><span class="arr">→</span><span class="step">guided review</span><span class="arr">+</span><span class="step">Phase 1b: do · schedule · kill</span><span class="arr">→</span><span class="step">append to Logseq journal</span></div>
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">review-cadence</span><span class="tag">agent-kit + ai-chief-of-staff</span><span class="pill running">running</span></div>
+      <p class="flow-sum">Close each day, week, and month deliberately — the evening guided review (Felix-run in Cowork; de-automated 2026-07-07: reflection is judgment work), the Saturday /weekly-review with its chief facts block, and the monthly /monthly-review life pass. Widened from daily-only 2026-08-03, when the weekly and monthly rituals were found real but unlisted.</p>
+      <div class="steps"><span class="step">prompts/daily-review.md — evening close</span><span class="arr">→</span><span class="step">/weekly-review (Sat) → vault page + blog PR</span><span class="arr">→</span><span class="step">/monthly-review → reports/ + next anchor</span></div>
     </div>
 
     <div class="flow">
@@ -550,20 +551,20 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">job_hunting · the strategist seat</span><span class="pill running">running</span></div>
-      <p class="flow-sum">WHERE the whole thing is going — every life path (employ, freelance, build, study, relocate) held as falsifiable dated checkpoints that get scored, with stances set by Felix alone. Running since 2026-07-20 on its three pieces of usage evidence: the v1 map, one executed re-score (the Toptal gate, scored <em>right</em>), and the first full /crossroads run — which diverged seven paths and pulled the Toptal-screen checkpoint forward to 2026-09-30.</p>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">career · the strategist seat</span><span class="pill running">running</span></div>
+      <p class="flow-sum">WHERE the whole thing is going — every life path (employ, freelance, build, study, relocate) held as falsifiable dated checkpoints that get scored, with stances set by Felix alone. Running since 2026-07-20; three re-scores executed, including the honest kill: the Toptal screen rejected 2026-07-21, scored <em>wrong</em> with its parked default executed, while fte-human-contact scored <em>right</em> 119 days early. The layer renamed its own home 2026-08-03: job_hunting → career.</p>
       <div class="steps"><span class="step">data/career-map.yaml</span><span class="arr">→</span><span class="step">/crossroads — heavy mapping, ~2×/yr, Felix-run</span><span class="arr">→</span><span class="step">monthly re-score (~10 min)</span><span class="arr">→</span><span class="step">pursuing stance → strategy.md mandate</span><span class="arr">→</span><span class="step loopback">↺ scored checkpoints redraw the map</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · own repo</span><span class="pill wanted">wanted · designed</span></div>
-      <p class="flow-sum">WHAT my free time is for — favorites and reading data distilled into a taste map, tested against unforced-hours evidence in a quarterly audit, and allocated as weekly hours, with verdicts set by Felix alone. The third decision layer, so it shares the anatomy: an options inventory the chief never edits, a Felix-only verdict enum, and a self-kill criterion.</p>
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · own repo</span><span class="pill running">running</span></div>
+      <p class="flow-sum">WHAT my free time is for — favorites and reading data distilled into a taste map, tested against unforced-hours evidence in a quarterly audit, and allocated as weekly hours, with verdicts set by Felix alone. The third decision layer, so it shares the anatomy: an options inventory the chief never edits, a Felix-only verdict enum, and a self-kill criterion. Running since 2026-07-23: 4,616 items collected across 7 surfaces, a 15-topic taste map, and the first quarterly audit with 10 Felix-set verdicts.</p>
       <div class="steps"><span class="step">COLLECT: platform exports · OSS routes</span><span class="arr">→</span><span class="step">DISTILL: topic clusters, volume × recency × cross-surface</span><span class="arr">→</span><span class="step">AUDIT: unforced time in the last 30 days</span><span class="arr">→</span><span class="step">ALLOCATE: weekly hours</span><span class="arr">→</span><span class="step loopback">↺ quarterly, Felix-run</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">money</span><span class="tag">money · the Treasurer</span><span class="pill wanted">wanted · designed</span></div>
-      <p class="flow-sum">WHAT keeps me solvent — money facts owned in one file, every outflow over the threshold decided by memo, and a monthly review that re-asks what "rich" means and appends the dated answer. Life-scope, not work; no daily expense tracking and no alpha. The fifth judgment-role seat.</p>
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">money</span><span class="tag">money · the Treasurer</span><span class="pill running">running</span></div>
+      <p class="flow-sum">WHAT keeps me solvent — money facts owned in one file, every outflow over the threshold decided by memo, and a monthly review that re-asks what "rich" means and appends the dated answer. Life-scope, not work; no daily expense tracking and no alpha. The fifth judgment-role seat. Running since 2026-08-02: runway trio filled, three dated memos decided, monthly review #1 executed.</p>
       <div class="steps"><span class="step">facts.yaml — the one owner of money facts</span><span class="arr">→</span><span class="step">threshold memo (≥ ¥5,000 or a big decision)</span><span class="arr">→</span><span class="step">monthly review: snapshot + "what does rich mean now"</span><span class="arr">→</span><span class="step loopback">↺ dated answers append, never overwrite</span></div>
     </div>
 
@@ -584,7 +585,7 @@
     <tbody>
       <tr><td><strong>Projects</strong> — ragx (RAG practice build) · ragr (the rebuild exam) · logx · learn-to-ship (first /ideate pick)</td><td class="mono"><span class="dot" style="background:var(--forge)"></span>project-loop + learning-loop route B</td><td class="mono">forge registry</td></tr>
       <tr><td><strong>Case studies</strong> — reviewed projects written up as evidence</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>career-loop</td><td class="mono">forge career/portfolio/</td></tr>
-      <tr><td><strong>Tailored resumes</strong> — dated, linted, per-JD</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline (from career-loop bases)</td><td class="mono">job_hunting</td></tr>
+      <tr><td><strong>Tailored resumes</strong> — dated, linted, per-JD</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline (from career-loop bases)</td><td class="mono">career</td></tr>
       <tr><td><strong>Anki cards + session logs</strong> — human-gated, journal-logged</td><td class="mono"><span class="dot" style="background:var(--agentkit)"></span>learning-loop retrieval tail</td><td class="mono">vault journals/ + deck</td></tr>
       <tr><td><strong>Posts + the personal site</strong> — native-English, one language per page</td><td class="mono"><span class="dot" style="background:var(--blog)"></span>publishing-loop</td><td class="mono">blog src/content/</td></tr>
       <tr><td><strong>Brand surfaces</strong> — LinkedIn + per-platform bios, platform-native distribution</td><td class="mono"><span class="dot" style="background:var(--ghost)"></span>personal-brand</td><td class="mono">the platforms</td></tr>
@@ -653,7 +654,7 @@
         <path d="M 152,540 C 168,630 240,724 326,760" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
         <text x="176" y="584" font-size="10" fill="var(--vault)">retrieval tail → journal + cards</text>
 
-        <!-- 10 daily-review -> vault -->
+        <!-- 10 review-cadence -> vault -->
         <path d="M 256,656 C 292,692 310,722 328,748" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
 
         <!-- 11 publishing-loop -> personal-brand -->
@@ -717,9 +718,9 @@
         <div class="nd">#inbox → triage → routes A–D → recall · cards · journal</div>
       </div>
       <div class="node" style="left:48px; top:592px">
-        <div class="nn">daily-review</div>
-        <div class="nh" style="color:var(--agentkit)">agent-kit · Felix-run in Cowork</div>
-        <div class="nd">evening review + task triage (Phase 1b)</div>
+        <div class="nn">review-cadence</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit + chief · Felix-run</div>
+        <div class="nd">evening close → Sat weekly → monthly review</div>
       </div>
 
       <!-- forge center -->
@@ -730,22 +731,22 @@
         <div class="nd" style="border-top:1px dotted var(--hairline); margin-top:.35rem; padding-top:.3rem">outputs: ragx · ragr · logx · learn-to-ship</div>
       </div>
 
-      <!-- career-strategy (wanted, designed) — the life-path layer above the campaign -->
-      <div class="node wanted" style="left:672px; top:84px; width:230px">
+      <!-- career-strategy (running) — the life-path layer above the campaign -->
+      <div class="node" style="left:672px; top:84px; width:230px">
         <div class="nn">career-strategy</div>
-        <div class="nh" style="color:var(--jobhunt)">job_hunting · strategist seat</div>
+        <div class="nh" style="color:var(--jobhunt)">career · strategist seat</div>
         <div class="nd">career-map.yaml → /crossroads → monthly re-score</div>
       </div>
 
-      <!-- job_hunting column -->
+      <!-- career column -->
       <div class="node" style="left:790px; top:206px">
         <div class="nn">career-loop</div>
-        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nh" style="color:var(--jobhunt)">career</div>
         <div class="nd">case studies → master.md → base resumes</div>
       </div>
       <div class="node" style="left:790px; top:370px">
         <div class="nn">job-pipeline</div>
-        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nh" style="color:var(--jobhunt)">career</div>
         <div class="nd">/scout → /match → /tailor → /interview · daily/weekly cadence</div>
       </div>
       <div class="node" style="left:790px; top:534px">
@@ -772,7 +773,7 @@
   <div class="legend">
     <span class="lg"><span class="dot" style="background:var(--agentkit)"></span>agent-kit</span>
     <span class="lg"><span class="dot" style="background:var(--forge)"></span>forge</span>
-    <span class="lg"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</span>
+    <span class="lg"><span class="dot" style="background:var(--jobhunt)"></span>career</span>
     <span class="lg"><span class="dot" style="background:var(--vault)"></span>vault</span>
     <span class="lg"><span class="dot" style="background:var(--blog)"></span>blog</span>
     <span class="lg"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</span>
@@ -786,8 +787,6 @@
 
 <footer class="col">
   <p><span class="mono">sources: inventory.yaml (canonical — rows win over diagrams) · workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>Compiled by the Chief of Staff, 2026-07-07; regenerated 2026-07-07 (personal-brand and the Brand Coach join), 2026-07-12 (career-strategy joins with its three edges; personal-brand flips to running; /aim replaces the frozen learn-to-ship agent as Route B's topic-picker), and 2026-07-20 (career-strategy flips to running on its three pieces of usage evidence; attention-portfolio and money join — both designed 07-12 but missed by that regeneration, which is why the audit now checks atlas coverage against the inventory; the Treasurer is carded as the fifth judgment-role). If this page and a row disagree, the row wins — fix the page.</p>
+  <p>Compiled by the Chief of Staff, 2026-07-07; regenerated 2026-07-07 (personal-brand and the Brand Coach join), 2026-07-12 (career-strategy joins with its three edges; personal-brand flips to running; /aim replaces the frozen learn-to-ship agent as Route B's topic-picker), 2026-07-20 (career-strategy flips to running on its three pieces of usage evidence; attention-portfolio and money join — both designed 07-12 but missed by that regeneration, which is why the audit now checks atlas coverage against the inventory; the Treasurer is carded as the fifth judgment-role), and 2026-08-03 (daily-review widens to review-cadence — the Saturday weekly and monthly life review join the row; attention-portfolio and money flip to running on their usage evidence; job_hunting is renamed career everywhere the map names a home). If this page and a row disagree, the row wins — fix the page.</p>
 </footer>
-
-
 </body></html>

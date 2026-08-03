@@ -206,15 +206,15 @@
 
 <header class="mast col">
   <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-07-20 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-08-03 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
   <h1>行 <span style="font-size:0.5em;color:inherit;opacity:0.6">系统图谱</span></h1>
   <p class="lede">一个人、六个驻地、十五个循环、五个判断型角色——外加一个审计这一切的元循环。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
   <div class="stats" role="group" aria-label="系统统计">
     <div class="stat"><b>5</b><span>原语</span></div>
     <div class="stat"><b>4</b><span>角色</span></div>
-    <div class="stat"><b>13</b><span>工作流</span></div>
-    <div class="stat"><b>11</b><span>运行中</span></div>
-    <div class="stat"><b>2</b><span>待建</span></div>
+    <div class="stat"><b>15</b><span>工作流</span></div>
+    <div class="stat"><b>14</b><span>运行中</span></div>
+    <div class="stat"><b>1</b><span>待建</span></div>
     <div class="stat"><b>6</b><span>驻地</span></div>
   </div>
 </header>
@@ -435,7 +435,7 @@
       </ul>
     </div>
     <div class="home">
-      <div class="home-name"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</div>
+      <div class="home-name"><span class="dot" style="background:var(--jobhunt)"></span>career</div>
       <div class="home-role">战役——简历内容 + 求职申请流水线</div>
       <ul>
         <li><b>master.md</b> — 简历唯一取材的事实来源</li>
@@ -479,7 +479,7 @@
   <div class="col" style="margin-bottom:1.3rem">
     <span class="eyebrow"><span class="secno">§4</span> · 循环</span>
     <h2>十五个工作流</h2>
-    <p class="kicker">十一个运行中，两个待建。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
+    <p class="kicker">十四个运行中，一个待建。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
   </div>
 
   <div class="flows">
@@ -496,19 +496,19 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-loop</span><span class="tag">job_hunting</span><span class="pill running">运行中</span></div>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-loop</span><span class="tag">career</span><span class="pill running">运行中</span></div>
       <p class="flow-sum">「我做过什么」的证据——评审过的项目写成案例研究，提炼进 master.md，简历唯一的事实来源。</p>
       <div class="steps"><span class="step">登记事实 + /review 发现</span><span class="arr">→</span><span class="step">案例研究（forge career/portfolio/）</span><span class="arr">→</span><span class="step">master.md</span><span class="arr">→</span><span class="step">base/ 分赛道简历</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">profile-loop</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">每个会话里的「我是谁」——一份访谈得来的主档案，蒸馏成 CC 片段及其 Drive 镜像；职业事实只经 master.md 进入 job_hunting，因此不存在第二份会漂移的档案。</p>
+      <p class="flow-sum">每个会话里的「我是谁」——一份访谈得来的主档案，蒸馏成 CC 片段及其 Drive 镜像；职业事实只经 master.md 进入 career 仓库，因此不存在第二份会漂移的档案。</p>
       <div class="steps"><span class="step">"About me" 访谈</span><span class="arr">→</span><span class="step">master-profile.md</span><span class="arr">→</span><span class="step">snippets/about-me.md</span><span class="arr">→</span><span class="step">CC @import</span><span class="arr">·</span><span class="step">Drive 镜像</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">job_hunting</span><span class="pill running">运行中</span></div>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">career</span><span class="pill running">运行中</span></div>
       <p class="flow-sum">拿下工作——对着真实 JD 侦察、匹配、定制、面试。侦察现已改为 Felix 手动执行（定时 agent 已退役——侦察是判断型工作）。</p>
       <div class="steps"><span class="step">/scout</span><span class="arr">→</span><span class="step">/match</span><span class="arr">→</span><span class="step">/tailor</span><span class="arr">→</span><span class="step">/interview</span><span class="arr">+</span><span class="step">节奏: /daily · /review（周六）· /strategy</span></div>
     </div>
@@ -520,9 +520,9 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">daily-review</span><span class="tag">agent-kit → Cowork</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">有意识地收束每一天——晚间引导式回顾，由 Felix 在 Claude Cowork 里运行（2026-07-07 去自动化：反思是判断型工作，不是 cron agent 的活）。任务分诊并入其中：Phase 1b 清扫今昨两天的 TODO；周六清扫 [[Tasks]]。</p>
-      <div class="steps"><span class="step">prompts/daily-review.md</span><span class="arr">→</span><span class="step">引导式回顾</span><span class="arr">+</span><span class="step">Phase 1b: 去做 · 排期 · 砍掉</span><span class="arr">→</span><span class="step">追加进 Logseq 日志</span></div>
+      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">review-cadence</span><span class="tag">agent-kit + ai-chief-of-staff</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">有意识地收束每一天、每一周、每一月——晚间引导式回顾（由 Felix 在 Cowork 里运行；2026-07-07 去自动化：反思是判断型工作）、带幕僚长事实块的周六 /weekly-review，以及 /monthly-review 月度人生复盘。2026-08-03 从仅每日扩展而来：那天发现周与月两个仪式真实存在，却未入册。</p>
+      <div class="steps"><span class="step">prompts/daily-review.md——晚间收束</span><span class="arr">→</span><span class="step">/weekly-review（周六）→ 知识库页 + blog PR</span><span class="arr">→</span><span class="step">/monthly-review → reports/ + 下一个锚点</span></div>
     </div>
 
     <div class="flow">
@@ -550,20 +550,20 @@
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">job_hunting · 战略师席位</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。自 2026-07-20 起运行，凭三项使用证据：v1 地图、一次执行过的重评分（Toptal 关口，判定<em>正确</em>），以及首次完整的 /crossroads——它分出七条路径，并把 Toptal 筛选检查点提前到 2026-09-30。</p>
+      <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">career · 战略师席位</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。自 2026-07-20 起运行；已执行三次重评分，包括一次诚实的判负：Toptal 筛选 2026-07-21 被拒，判定<em>错误</em>并执行了预设的搁置默认；而 fte-human-contact 提前 119 天判定<em>正确</em>。这一层还在 2026-08-03 给自己的驻地改了名：job_hunting → career。</p>
       <div class="steps"><span class="step">data/career-map.yaml</span><span class="arr">→</span><span class="step">/crossroads——重型测绘，约每年两次，Felix 亲自运行</span><span class="arr">→</span><span class="step">每月重评分（约 10 分钟）</span><span class="arr">→</span><span class="step">pursuing 姿态 → strategy.md 使命行</span><span class="arr">→</span><span class="step loopback">↺ 打分后的检查点重绘地图</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · 独立仓库</span><span class="pill wanted">待建 · 已设计</span></div>
-      <p class="flow-sum">我的空闲时间用来做什么——把收藏与阅读数据蒸馏成一张品味地图，在季度审计中用"无人强迫的时间"这一证据检验它，再折算成每周小时数；裁定只由 Felix 一人设定。它是第三个决策层，因而共用同一套解剖结构：一份幕僚长从不编辑的选项清单、一个仅限 Felix 的裁定枚举，以及一条自杀判据。</p>
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · 独立仓库</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">我的空闲时间用来做什么——把收藏与阅读数据蒸馏成一张品味地图，在季度审计中用"无人强迫的时间"这一证据检验它，再折算成每周小时数；裁定只由 Felix 一人设定。它是第三个决策层，因而共用同一套解剖结构：一份幕僚长从不编辑的选项清单、一个仅限 Felix 的裁定枚举，以及一条自杀判据。自 2026-07-23 起运行：跨 7 个平台采集 4,616 条数据，生成 15 个主题的品味地图，并完成了首次季度审计——10 项裁定由 Felix 亲自设定。</p>
       <div class="steps"><span class="step">采集：平台导出 · 开源路线</span><span class="arr">→</span><span class="step">蒸馏：主题聚类，数量 × 新近度 × 跨平台</span><span class="arr">→</span><span class="step">审计：近 30 天里无人强迫的时间</span><span class="arr">→</span><span class="step">分配：每周小时数</span><span class="arr">→</span><span class="step loopback">↺ 每季一次，Felix 亲自运行</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">money</span><span class="tag">money · 司库</span><span class="pill wanted">待建 · 已设计</span></div>
-      <p class="flow-sum">什么让我保持偿付能力——金钱事实由一个文件独家持有，每一笔超过门槛的支出都以备忘录决策，每月复盘重新追问"当下'富有'意味着什么"，并把有日期的答案追加进去。范围是生活，不是工作：不做日常记账，也不追求超额收益。第五个判断型角色席位。</p>
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">money</span><span class="tag">money · 司库</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">什么让我保持偿付能力——金钱事实由一个文件独家持有，每一笔超过门槛的支出都以备忘录决策，每月复盘重新追问"当下'富有'意味着什么"，并把有日期的答案追加进去。范围是生活，不是工作：不做日常记账，也不追求超额收益。第五个判断型角色席位。自 2026-08-02 起运行：跑道三数已填、三份带日期的备忘录已决策、首次月度复盘已执行。</p>
       <div class="steps"><span class="step">facts.yaml——金钱事实的唯一所有者</span><span class="arr">→</span><span class="step">门槛备忘录（≥ ¥5,000 或重大决策）</span><span class="arr">→</span><span class="step">月度复盘：快照 +「现在'富有'意味着什么」</span><span class="arr">→</span><span class="step loopback">↺ 有日期的答案只追加，不覆盖</span></div>
     </div>
 
@@ -584,7 +584,7 @@
     <tbody>
       <tr><td><strong>项目</strong> — ragx（RAG 练习构建）· ragr（重建考试）· logx · learn-to-ship（首个 /ideate 选中项）</td><td class="mono"><span class="dot" style="background:var(--forge)"></span>project-loop + learning-loop 路线 B</td><td class="mono">forge registry</td></tr>
       <tr><td><strong>案例研究</strong> — 评审过的项目写成的证据</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>career-loop</td><td class="mono">forge career/portfolio/</td></tr>
-      <tr><td><strong>定制简历</strong> — 带日期、经 lint、按 JD 定制</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline（基于 career-loop 的底版）</td><td class="mono">job_hunting</td></tr>
+      <tr><td><strong>定制简历</strong> — 带日期、经 lint、按 JD 定制</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline（基于 career-loop 的底版）</td><td class="mono">career</td></tr>
       <tr><td><strong>Anki 卡片 + 会话日志</strong> — 人工把关、记入日志</td><td class="mono"><span class="dot" style="background:var(--agentkit)"></span>learning-loop 检索尾巴</td><td class="mono">知识库 journals/ + 卡组</td></tr>
       <tr><td><strong>文章 + 个人站点</strong> — 母语级英文，每页一种语言</td><td class="mono"><span class="dot" style="background:var(--blog)"></span>publishing-loop</td><td class="mono">blog src/content/</td></tr>
       <tr><td><strong>品牌界面</strong> — LinkedIn + 各平台简介，平台原生分发</td><td class="mono"><span class="dot" style="background:var(--ghost)"></span>personal-brand</td><td class="mono">各平台</td></tr>
@@ -653,7 +653,7 @@
         <path d="M 152,540 C 168,630 240,724 326,760" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
         <text x="176" y="584" font-size="10" fill="var(--vault)">检索尾巴 → 日志 + 卡片</text>
 
-        <!-- 10 daily-review -> vault -->
+        <!-- 10 review-cadence -> vault -->
         <path d="M 256,656 C 292,692 310,722 328,748" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
 
         <!-- 11 publishing-loop -> personal-brand -->
@@ -717,9 +717,9 @@
         <div class="nd">#inbox → 分诊 → 路线 A–D → 回忆 · 卡片 · 日志</div>
       </div>
       <div class="node" style="left:48px; top:592px">
-        <div class="nn">daily-review</div>
-        <div class="nh" style="color:var(--agentkit)">agent-kit · Felix 在 Cowork 运行</div>
-        <div class="nd">晚间回顾 + 任务分诊（Phase 1b）</div>
+        <div class="nn">review-cadence</div>
+        <div class="nh" style="color:var(--agentkit)">agent-kit + 幕僚长 · Felix 亲自运行</div>
+        <div class="nd">晚间收束 → 周六周回顾 → 月度复盘</div>
       </div>
 
       <!-- forge center -->
@@ -730,22 +730,22 @@
         <div class="nd" style="border-top:1px dotted var(--hairline); margin-top:.35rem; padding-top:.3rem">产出：ragx · ragr · logx · learn-to-ship</div>
       </div>
 
-      <!-- career-strategy (wanted, designed) — the life-path layer above the campaign -->
-      <div class="node wanted" style="left:672px; top:84px; width:230px">
+      <!-- career-strategy (running) — the life-path layer above the campaign -->
+      <div class="node" style="left:672px; top:84px; width:230px">
         <div class="nn">career-strategy</div>
-        <div class="nh" style="color:var(--jobhunt)">job_hunting · 战略师席位</div>
+        <div class="nh" style="color:var(--jobhunt)">career · 战略师席位</div>
         <div class="nd">career-map.yaml → /crossroads → 每月重评分</div>
       </div>
 
-      <!-- job_hunting column -->
+      <!-- career column -->
       <div class="node" style="left:790px; top:206px">
         <div class="nn">career-loop</div>
-        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nh" style="color:var(--jobhunt)">career</div>
         <div class="nd">案例研究 → master.md → 简历底版</div>
       </div>
       <div class="node" style="left:790px; top:370px">
         <div class="nn">job-pipeline</div>
-        <div class="nh" style="color:var(--jobhunt)">job_hunting</div>
+        <div class="nh" style="color:var(--jobhunt)">career</div>
         <div class="nd">/scout → /match → /tailor → /interview · 每日/每周节奏</div>
       </div>
       <div class="node" style="left:790px; top:534px">
@@ -772,7 +772,7 @@
   <div class="legend">
     <span class="lg"><span class="dot" style="background:var(--agentkit)"></span>agent-kit</span>
     <span class="lg"><span class="dot" style="background:var(--forge)"></span>forge</span>
-    <span class="lg"><span class="dot" style="background:var(--jobhunt)"></span>job_hunting</span>
+    <span class="lg"><span class="dot" style="background:var(--jobhunt)"></span>career</span>
     <span class="lg"><span class="dot" style="background:var(--vault)"></span>知识库</span>
     <span class="lg"><span class="dot" style="background:var(--blog)"></span>blog</span>
     <span class="lg"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</span>
@@ -786,7 +786,7 @@
 
 <footer class="col">
   <p><span class="mono">来源：inventory.yaml（权威——行胜过图）· workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者），以及 2026-07-20（career-strategy 凭三项使用证据翻转为运行中；attention-portfolio 与 money 加入——两者均于 07-12 设计，却被那次重新生成漏掉，这也是审计从此开始校验图对清单的覆盖的原因；司库作为第五个判断型角色列卡）三次重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者），2026-07-20（career-strategy 凭三项使用证据翻转为运行中；attention-portfolio 与 money 加入——两者均于 07-12 设计，却被那次重新生成漏掉，这也是审计从此开始校验图对清单的覆盖的原因；司库作为第五个判断型角色列卡），以及 2026-08-03（daily-review 扩展为 review-cadence——周六周回顾与月度复盘并入该行；attention-portfolio 与 money 凭各自的使用证据翻转为运行中；地图上凡提及驻地处 job_hunting 均改名为 career）四次重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
 </footer>
 
 </body></html>
