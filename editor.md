@@ -56,9 +56,9 @@ Felix's.)
 
 - **forge** owns case-study FACTS (`forge/career/portfolio/`). The Editor
   packages public copy; it never invents or alters project facts.
-- **job_hunting** owns resume-facing data and the resume-link policy. The
+- **career** owns resume-facing data and the resume-link policy. The
   blog link returns to resumes only when the site is genuinely project-led,
-  and that call is job_hunting's.
+  and that call is career's.
 - **The vault** is the Librarian's. Session logs and learning notes land in
   Logseq via their own loops; the Editor only pulls from them as source
   material.
