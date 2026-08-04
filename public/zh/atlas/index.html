@@ -212,8 +212,9 @@
 <header class="mast col">
   <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
   <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译 · 2026-08-04 重新生成——自 inventory.yaml、workflows.md、primitives.md</span>
+  <!-- 行 = xíng（知行合一：博客是知，图谱是行）。Felix 定名 2026-08-04 — 不是"行胜过图"的 háng，永不"修正"为其他标题；表格行一律写作 表行/那一行。 -->
   <h1>行 <span style="font-size:0.5em;color:inherit;opacity:0.6">系统图谱</span></h1>
-  <p class="lede">一个人、八个驻地、十五个循环、五个判断型角色、七种有名字的协作模式——外加一个审计这一切的元循环；自 2026-08-04 起，它还能把各角色召集为<em>议会</em>，就同一个决定进行审议——异议被保留，决定由 Felix 做出。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
+  <p class="lede">一个人、八个驻地、十五个循环、五个判断型角色、七种有名字的协作模式——外加一个审计这一切的元循环；自 2026-08-04 起，它还能把各角色召集为<em>议会</em>，就某一项决定进行审议——异议被保留，决定由 Felix 做出。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。表行胜过图示：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
   <div class="stats" role="group" aria-label="系统统计">
     <div class="stat"><b>5</b><span>原语</span></div>
     <div class="stat"><b>5</b><span>角色</span></div>
@@ -303,7 +304,7 @@
 <section class="col" id="roles">
   <span class="eyebrow"><span class="secno">§2</span> · 判断力所在</span>
   <h2>五个判断型角色</h2>
-  <p class="kicker">角色出现在判断力汇聚的地方；任务是程序性的地方，命令就够了。这就是为什么系统大体是「工作流 + 命令」、角色恰好只有五个——也是为什么 <span class="mono" style="font-size:.85em">/scout</span> 或 <span class="mono" style="font-size:.85em">/tailor</span> 从来不需要人格面具。幕僚长从外部审计其余四个——对自己的作为，它是<em>幕僚长，而非审计员</em>——并且自 2026-08-04 起，还能以主席身份把它们召集成一个议会：各席位盲写立场、一轮交叉质询、异议被保留，决定只由 Felix 一人做出。</p>
+  <p class="kicker">角色出现在判断力汇聚的地方；任务是程序性的地方，命令就够了。这就是为什么系统大体是「工作流 + 命令」、角色恰好只有五个——也是为什么 <span class="mono" style="font-size:.85em">/scout</span> 或 <span class="mono" style="font-size:.85em">/tailor</span> 从来不需要一个专属人设。幕僚长从外部审计其余四个——对自己的作为，它是<em>幕僚长，而非审计员</em>——并且自 2026-08-04 起，还能以主席身份把它们召集成一个议会：各席位盲写立场、一轮交叉质询、异议被保留，决定只由 Felix 一人做出。</p>
 
   <figure class="fig-breakout">
     <div class="panel">
@@ -354,12 +355,12 @@
         <circle cx="508" cy="238" r="4" fill="var(--ghost)"/>
         <text x="520" y="242" font-size="13" font-weight="700" fill="var(--ink)">品牌教练 Brand Coach</text>
         <text x="504" y="262" font-size="10" fill="var(--ink-2)">形象 · 魅力 · 社交策略</text>
-        <text x="504" y="277" font-size="9.5" fill="var(--muted)">brand-coach.md · 已就绪</text>
+        <text x="504" y="277" font-size="9.5" fill="var(--muted)">brand-coach.md · 暂存</text>
 
         <!-- treasurer -->
         <rect x="718" y="216" width="205" height="84" rx="2" fill="var(--page)" stroke="var(--forge)" stroke-width="1.4"/>
         <circle cx="738" cy="238" r="4" fill="var(--forge)"/>
-        <text x="750" y="242" font-size="13" font-weight="700" fill="var(--ink)">司库 Treasurer</text>
+        <text x="750" y="242" font-size="13" font-weight="700" fill="var(--ink)">司库</text>
         <text x="734" y="262" font-size="10" fill="var(--ink-2)">跑道 · 门槛备忘录</text>
         <text x="734" y="277" font-size="9.5" fill="var(--muted)">money/treasurer.md · 私有</text>
 
@@ -401,7 +402,7 @@
   <div class="rolecards">
     <div class="rolecard">
       <h4><span class="dot" style="background:var(--chief)"></span>幕僚长</h4>
-      <p>拥有清单和各项元决策：保留、合并、自动化、退役；某个角色该配哪种工具；决策层的解剖结构。先建议、绝不直接动手；经 Felix 确认后，通过 worktree 分支 + 草稿 PR 执行——或者更好：带着任务简报，委派给拥有该事务的工作流。同时也是横跨各决策层的地面策略（ground-strategy）席位。</p>
+      <p>拥有清单和各项元决策：保留、合并、自动化、退役；某个角色该配哪种工具；决策层的解剖结构。先建议、绝不直接动手；经 Felix 确认后，通过 worktree 分支 + 草稿 PR 执行——或者更好：带着任务简报，委派给拥有该事务的工作流。同时也是横跨各决策层的底层战略（ground-strategy）席位。</p>
       <p class="mono">驻地：ai-chief-of-staff · chief-of-staff.md</p>
     </div>
     <div class="rolecard">
@@ -412,7 +413,7 @@
     <div class="rolecard">
       <h4><span class="dot" style="background:var(--blog)"></span>编辑</h4>
       <p>拥有博客的声音与风格、草稿流水线、/writing 的策展，以及语言政策：每个发布页面只用一种语言，全部经过母语级英文润色。批评与润色——绝不代笔。</p>
-      <p class="mono">驻地：blog · editor.md（2026-07-07 就绪）</p>
+      <p class="mono">驻地：blog · editor.md（2026-07-07 就位）</p>
     </div>
     <div class="rolecard">
       <h4><span class="dot" style="background:var(--ghost)"></span>品牌教练</h4>
@@ -420,7 +421,7 @@
       <p class="mono">驻地：暂驻 ai-chief-of-staff · brand-coach.md（2026-07-07）</p>
     </div>
     <div class="rolecard">
-      <h4><span class="dot" style="background:var(--forge)"></span>司库 Treasurer</h4>
+      <h4><span class="dot" style="background:var(--forge)"></span>司库</h4>
       <p>拥有金钱事实文件、门槛备忘录（每笔 ¥5,000 及以上的支出，以及每个重大决策），还有每月复盘中「当下『富有』意味着什么」这一追问——有日期的答案只追加、不覆盖。范围是生活而非工作：不做日常记账，不追求超额收益——把收入当作杠杆来用，那是 career-strategy 的事。这里的一切永不公开。</p>
       <p class="mono">驻地：money · treasurer.md（2026-07-12；循环自 2026-08-02 起运行）</p>
     </div>
@@ -431,7 +432,7 @@
 <section class="col" id="modes">
   <span class="eyebrow"><span class="secno">§3</span> · 各席位如何协作</span>
   <h2>七种协作模式</h2>
-  <p class="kicker">2026-08-04 命名——模式是一个工作流<em>形状</em>的一部分，所以它住在 workflows.md 里、紧挨着各循环图。先问「这是哪种模式？」，再问「用哪个工具？」。五种在运行，一种部分实现，一种刻意未建。每种模式下，决定都只由 Felix 一人做出。</p>
+  <p class="kicker">2026-08-04 命名——模式是一个工作流<em>形状</em>的一部分，所以它住在 workflows.md 里，紧挨着各循环图。先问「这是哪种模式？」，再问「用哪个工具？」。五种在运行，一种部分实现，一种刻意未建。每种模式下，决定都只由 Felix 一人做出。</p>
 
   <div class="tablewrap">
   <table>
@@ -440,7 +441,7 @@
       <tr><td class="mono">1</td><td><strong>委派</strong></td><td class="mono">运行中</td><td>简报 → 拥有者在自己的仓库里执行</td><td class="mono">TODO.md 条目，经草稿 PR 送达（载体规则见下）</td></tr>
       <tr><td class="mono">2</td><td><strong>审计</strong></td><td class="mono">运行中</td><td>从外部核查事实；绝不编辑对方拥有的文件</td><td class="mono">/audit + 机械检查器</td></tr>
       <tr><td class="mono">3</td><td><strong>裁断</strong></td><td class="mono">运行中</td><td>幕僚长裁定两个席位互相重叠的主张</td><td class="mono">行级重叠：条目 / 边界规则——首例：learning-loop vs wiki-management，2026-07-05；直到 2026-08-04 才得名</td></tr>
-      <tr><td class="mono">4</td><td><strong>审议</strong></td><td class="mono">运行中</td><td>席位盲启动，一轮交叉质询，异议被保留</td><td class="mono">/council——首次召集 2026-08-04（拥有-还是-使用权）</td></tr>
+      <tr><td class="mono">4</td><td><strong>审议</strong></td><td class="mono">运行中</td><td>席位盲启动，一轮交叉质询，异议被保留</td><td class="mono">/council——首次召集 2026-08-04（拥有 vs 使用权）</td></tr>
       <tr><td class="mono">5</td><td><strong>流水线</strong></td><td class="mono">运行中</td><td>单向数据边；以制品协作，不共享会话</td><td class="mono">权威边表（§7）</td></tr>
       <tr><td class="mono">6</td><td><strong>广播</strong></td><td class="mono">部分实现</td><td>事实变更向依赖它的各界面传播</td><td class="mono">/next 的到期扫描（仅限日期）</td></tr>
       <tr><td class="mono">7</td><td><strong>咨询</strong></td><td class="mono">未建</td><td>一个席位、一个问题，不开全体议会</td><td class="mono">改走拥有席位自己的仪式（司库备忘录、/crossroads）</td></tr>
@@ -516,7 +517,7 @@
         <li><b>inventory.yaml</b> — 唯一事实来源（「不在清单上，就不存在」）</li>
         <li><b>python -m ai_chief_of_staff</b> — 机械检查（audit-kernel）· <b>/audit</b> — 判断 · <b>/council</b> — 审议</li>
         <li><b>/daily-review /weekly-review /monthly-review</b> — 全部三级回顾节奏 · <b>/triage /aim /card-check /next</b> — 学习循环的薄命令</li>
-        <li><b>chief-of-staff.md · brand-coach.md（已就绪）· decision-layers.md · primitives.md · workflows.md</b></li>
+        <li><b>chief-of-staff.md · brand-coach.md（暂存）· decision-layers.md · primitives.md · workflows.md</b></li>
       </ul>
     </div>
     <div class="home">
@@ -552,12 +553,12 @@
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--forge)"></span><span class="flow-name">project-loop</span><span class="tag">forge</span><span class="pill running">运行中</span></div>
       <p class="flow-sum">我造过什么、以及如何决定并建造下一个——下一个项目由「需求 × 供给」的头脑风暴选出，然后登记、评审、挖掘复用层级、并从这些层级搭建起来。</p>
-      <div class="steps"><span class="step">/ideate</span><span class="arr">→</span><span class="step">/register</span><span class="arr">→</span><span class="step">/review</span><span class="arr">→</span><span class="step">复用层级: templates/ · components/ · /wrap-mcp</span><span class="arr">→</span><span class="step">/new-project</span><span class="arr">→</span><span class="step loopback">↺ 回到 /register</span></div>
+      <div class="steps"><span class="step">/ideate</span><span class="arr">→</span><span class="step">/register</span><span class="arr">→</span><span class="step">/review</span><span class="arr">→</span><span class="step">复用层级：templates/ · components/ · /wrap-mcp</span><span class="arr">→</span><span class="step">/new-project</span><span class="arr">→</span><span class="step loopback">↺ 回到 /register</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">learning-loop</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">任何有趣的东西都变成持久知识——在任意会话里采集一行 #inbox，分诊到一条路线，且每条路线都终结于检索尾巴。三条规则：注意力就是我的全部所需 · 产出是唯一重要的东西 · 检索本身就是学习。幕僚长借给这个循环四条薄命令：<span class="mono" style="font-size:.85em">/triage · /aim · /card-check · /next</span>——从已冻结的 learn-to-ship agent 中去自动化出来的判断型工作。</p>
+      <p class="flow-sum">任何有趣的东西都变成持久知识——在任意会话里采集一行 #inbox，分诊到一条路线，且每条路线都终结于检索尾巴。三条规则：注意力就是我的全部所需 · 产出是唯一重要的东西 · 检索本身就是学习。幕僚长借给这个循环四条薄命令：<span class="mono" style="font-size:.85em">/triage · /aim · /card-check · /next</span>——从已冻结的 learn-to-ship agent 中收回人工判断（去自动化）的工作。</p>
       <div class="steps"><span class="step">采集 #inbox</span><span class="arr">→</span><span class="step">/triage</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B 练习——/aim 选题（ragx → ragr）</span><span class="arr">·</span><span class="step">C 材料</span><span class="arr">·</span><span class="step">D 剂量</span><span class="arr">→</span><span class="step">回忆</span><span class="arr">→</span><span class="step">卡片（人工把关）</span><span class="arr">→</span><span class="step">日志记录</span></div>
     </div>
 
@@ -576,7 +577,7 @@
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">career</span><span class="pill running">运行中</span></div>
       <p class="flow-sum">拿下工作——对着真实 JD 侦察、匹配、定制、面试。侦察由 Felix 手动执行（定时 agent 已退役——侦察是判断型工作）。</p>
-      <div class="steps"><span class="step">/scout</span><span class="arr">→</span><span class="step">/match</span><span class="arr">→</span><span class="step">/tailor</span><span class="arr">→</span><span class="step">/interview</span><span class="arr">+</span><span class="step">节奏: /daily · /review（周六）· /strategy</span></div>
+      <div class="steps"><span class="step">/scout</span><span class="arr">→</span><span class="step">/match</span><span class="arr">→</span><span class="step">/tailor</span><span class="arr">→</span><span class="step">/interview</span><span class="arr">+</span><span class="step">节奏：/daily · /review（周六）· /strategy</span></div>
     </div>
 
     <div class="flow">
@@ -587,7 +588,7 @@
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">review-cadence</span><span class="tag">ai-chief-of-staff 命令 · Felix 亲自运行</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">有意识地收束每一天、每一周、每一月——每一级喂养下一级。三级现在都是幕僚长命令：晚间 <span class="mono" style="font-size:.85em">/daily-review</span>（2026-08-04 从 Cowork 迁来；agent-kit 里的提示词已退役——只留一个家，不留粘贴副本）、周六 <span class="mono" style="font-size:.85em">/weekly-review</span>（2026-07-12 从 blog 毕业）、月度 <span class="mono" style="font-size:.85em">/monthly-review</span>（2026-08-02/03 首跑）。全程 Felix 亲自运行：反思是判断型工作，2026-07-07 去自动化——而且在回顾之内，每个日期与钟点都由 Felix 指定，绝不由 AI 指定。</p>
+      <p class="flow-sum">有意识地收束每一天、每一周、每一月——每一级喂养下一级。三级现在都是幕僚长命令：晚间 <span class="mono" style="font-size:.85em">/daily-review</span>（2026-08-04 从 Cowork 迁来；agent-kit 里的提示词已退役——只留一个驻地，不留粘贴副本）、周六 <span class="mono" style="font-size:.85em">/weekly-review</span>（2026-07-12 从 blog 毕业）、月度 <span class="mono" style="font-size:.85em">/monthly-review</span>（2026-08-02/03 首跑）。全程 Felix 亲自运行：反思是判断型工作，2026-07-07 去自动化——而且在回顾之内，每个日期与钟点都由 Felix 指定，绝不由 AI 指定。</p>
       <div class="steps"><span class="step">/daily-review——晚间收束 → 日志</span><span class="arr">→</span><span class="step">/weekly-review（周六）→ 知识库页 + blog 草稿 PR</span><span class="arr">→</span><span class="step">/monthly-review → reports/ + 下一个锚点</span></div>
     </div>
 
@@ -605,19 +606,19 @@
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">personal-brand</span><span class="tag">尚无驻地 · 品牌教练</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我给人的观感——一个刻意经营的公开形象与魅力：取材自档案事实，呈现于各社交平台，并按节奏做由外向内的审计。2026-07-07 起运行：首次 BUILD 会话已把定位、形象支柱与各平台简介写入 brand-records.md。品牌检查搭载在月度复盘上（2026-08-03）。</p>
+      <p class="flow-sum">我给人的观感——一个刻意经营的公开形象与魅力：取材自档案事实，呈现于各社交平台，并按节奏做由外向内的审计。2026-07-07 起运行：首次 BUILD 会话已把定位、形象支柱与各平台简介写入 brand-records.md。品牌检查搭载在月度回顾（/monthly-review）上（2026-08-03）。</p>
       <div class="steps"><span class="step">BUILD: 定位 · 形象支柱 · 简介 · 魅力练习</span><span class="arr">→</span><span class="step">PRESENT: 平台策略 · 分发文章/案例研究</span><span class="arr">→</span><span class="step">AUDIT: 由外向内，一双招聘官的眼睛</span><span class="arr">→</span><span class="step loopback">↺ 回到 BUILD</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">career · 战略师席位</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。自 2026-07-20 起运行；地图上有 7 条路径，重评分是诚实的：Toptal 筛选判定<em>错误</em>（2026-07-21 被拒，执行了预设的搁置默认），fte-human-contact 提前 119 天判定<em>正确</em>。这一层还在 2026-08-03 给自己的驻地改了名：job_hunting → career。</p>
+      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。自 2026-07-20 起运行；地图上有 7 条路径，重评分是诚实的：Toptal 筛选判定<em>错误</em>（2026-07-21 被拒，按预设执行了「搁置」这一默认动作），fte-human-contact 提前 119 天判定<em>正确</em>。这一层还在 2026-08-03 给自己的驻地改了名：job_hunting → career。</p>
       <div class="steps"><span class="step">data/career-map.yaml</span><span class="arr">→</span><span class="step">/crossroads——重型测绘，约每年两次，Felix 亲自运行</span><span class="arr">→</span><span class="step">每月重评分（约 10 分钟）</span><span class="arr">→</span><span class="step">pursuing 姿态 → strategy.md 使命行</span><span class="arr">→</span><span class="step loopback">↺ 打分后的检查点重绘地图</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · 独立仓库</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我的空闲时间用来做什么——把收藏与阅读数据蒸馏成一张品味地图，在季度审计中用「无人强迫的时间」这一证据检验它，再折算成每周小时数；裁定只由 Felix 一人设定。它是第三个决策层，因而共用同一套解剖结构：一份幕僚长从不编辑的选项清单、一个仅限 Felix 的裁定枚举，以及一条自杀判据。自 2026-07-23 起运行：跨 7 个平台的 4,616 条数据、15 个主题的品味地图，以及首次季度审计——10 项裁定，其中 invest：workout 5.5 小时 + english 5 小时。</p>
+      <p class="flow-sum">我的空闲时间用来做什么——把收藏与阅读数据蒸馏成一张品味地图，在季度审计中用「无人强迫的时间」这一证据检验它，再折算成每周小时数；裁定只由 Felix 一人设定。它是第三个决策层，因而共用同一套解剖结构：一份幕僚长从不编辑的选项清单、一个仅限 Felix 的裁定枚举，以及一条自我终结判据。自 2026-07-23 起运行：跨 7 个平台的 4,616 条数据、15 个主题的品味地图，以及首次季度审计——10 项裁定，其中 invest：workout 5.5 小时 + english 5 小时。</p>
       <div class="steps"><span class="step">采集：平台导出 · 开源路线</span><span class="arr">→</span><span class="step">蒸馏：主题聚类，数量 × 新近度 × 跨平台</span><span class="arr">→</span><span class="step">审计：近 30 天里无人强迫的时间</span><span class="arr">→</span><span class="step">分配：每周小时数</span><span class="arr">→</span><span class="step loopback">↺ 每季一次，Felix 亲自运行</span></div>
     </div>
 
@@ -634,7 +635,7 @@
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">workflow-audit</span><span class="tag">ai-chief-of-staff · 元循环</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我如何与 AI 协作——让每个流程都入册、经事实核查、被判断的元循环。它列在自己的清单里，因为一种行为只有先列出来，才谈得上被审计；机械检查器已于 2026-08-03 采用共享的 audit-kernel。自 2026-08-04 起，这一行还承载 <span class="mono" style="font-size:.85em">/council</span>——按需审议：拥有职责文与自有事实底座的席位被盲启动（事实以证人身份列席；入席的只有判断），一轮交叉质询，然后是保留异议的综合稿——一份带分级收束、立场翻转记录与重启条件的决策包，绝不是裁决。首次召集于 2026-08-04（拥有-还是-使用权）；决定只由 Felix 做出，且决定回流到拥有它的仪式。</p>
+      <p class="flow-sum">我如何与 AI 协作——让每个流程都入册、经事实核查、被判断的元循环。它列在自己的清单里，因为一种行为只有先列出来，才谈得上被审计；机械检查器已于 2026-08-03 采用共享的 audit-kernel。自 2026-08-04 起，这一行还承载 <span class="mono" style="font-size:.85em">/council</span>——按需审议：拥有职责文与自有事实底座的席位被盲启动（事实以证人身份列席；入席的只有判断），一轮交叉质询，然后是保留异议的综合稿——一份带收束等级、立场翻转记录与重启条件的决策包，绝不是裁决。首次召集于 2026-08-04（拥有 vs 使用权）；决定只由 Felix 做出，且决定回流到拥有它的仪式。</p>
       <div class="steps"><span class="step">inventory.yaml</span><span class="arr">→</span><span class="step">机械检查（audit-kernel）</span><span class="arr">→</span><span class="step">/audit 判断</span><span class="arr">·</span><span class="step">/council 审议（按需）</span><span class="arr">→</span><span class="step">提案</span><span class="arr">→</span><span class="step">Felix 确认</span><span class="arr">→</span><span class="step">worktree + 草稿 PR</span><span class="arr">→</span><span class="step loopback">↺ 回到清单</span></div>
     </div>
   </div>
@@ -776,7 +777,7 @@
       <div class="node wanted" style="left:48px; top:96px; width:190px">
         <div class="nn" style="color:var(--ink-2)">file-management</div>
         <div class="nh" style="color:var(--muted)">尚无驻地 · 待建</div>
-        <div class="nd">文件住在哪里 — Drive · GitHub · 本地卷</div>
+        <div class="nd">文件住在哪里——Drive · GitHub · 本地卷</div>
       </div>
 
       <!-- agent-kit column -->
@@ -910,8 +911,8 @@
 </section>
 
 <footer class="col">
-  <p><span class="mono">来源：inventory.yaml（权威——行胜过图）· workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>由幕僚长编译于 2026-07-07；历次重新生成：2026-07-07（personal-brand 与品牌教练加入）、2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship agent 出任路线 B 的选题者）、2026-07-20（career-strategy 翻转为运行中；attention-portfolio 与 money 以流程卡形式加入；司库作为第五个判断型角色列卡）、2026-08-03（daily-review 扩展为 review-cadence；attention-portfolio 与 money 翻转为运行中；job_hunting 改名 career）、2026-08-04（定向更新：/council 加入导语与各卡），以及同日 2026-08-04 的一次完整重建：协作模式分类法获得自己的一节（§3）；money 已在运行，司库随之加入角色图谱；回顾节奏搬家为幕僚长命令（/daily-review 同日从 Cowork 迁来）；attention-portfolio 与 money 终于获得地图节点及其权威边（补上 2026-08-03 记录在案的布局缺口）；驻地从六个增至八个；权威边表印在它所治理的地图旁边。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+  <p><span class="mono">来源：inventory.yaml（权威——表行胜过图示）· workflows.md · primitives.md · chief-of-staff.md</span></p>
+  <p>由幕僚长编译于 2026-07-07；历次重新生成：2026-07-07（personal-brand 与品牌教练加入）、2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship agent 出任路线 B 的选题者）、2026-07-20（career-strategy 翻转为运行中；attention-portfolio 与 money 以流程卡形式加入；司库作为第五个判断型角色以卡片列入）、2026-08-03（daily-review 扩展为 review-cadence；attention-portfolio 与 money 翻转为运行中；job_hunting 改名 career）、2026-08-04（定向更新：/council 加入导语与各卡），以及同日 2026-08-04 的一次完整重建：协作模式分类法获得自己的一节（§3）；money 已在运行，司库随之加入角色图谱；回顾节奏搬家为幕僚长命令（/daily-review 同日从 Cowork 迁来）；attention-portfolio 与 money 终于获得地图节点及其权威边（补上 2026-08-03 记录在案的布局缺口）；驻地从六个增至八个；权威边表印在它所治理的地图旁边。若本页与清单中的某一行不一致，以那一行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
 </footer>
 
 </body></html>
