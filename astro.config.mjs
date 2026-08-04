@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://canglang.netlify.app',
+  site: 'https://felixhan.dev',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh'],
