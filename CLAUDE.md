@@ -29,7 +29,7 @@ Astro 6 static blog. Tailwind CSS v4 is wired in through the Vite plugin (`@tail
 
 **Important:** collection posts are always rendered through `BlogPost.astro` via the `[...slug]` routes. A `layout:` key in a post's own frontmatter (some existing posts have one) is ignored, as are fields not in the schema. To support a new field, add it to the schema in `src/content.config.ts` first or `astro check` / the build will fail.
 
-**Routing.** `astro.config.mjs` redirects `/` → `/blog`, so the blog index is the home page, and declares `i18n` locales `en` (default, unprefixed) and `zh`. `site` is set to `https://canglang.netlify.app` (deploy target; used for canonical URLs, sitemap, and RSS).
+**Routing.** `astro.config.mjs` redirects `/` → `/blog`, so the blog index is the home page, and declares `i18n` locales `en` (default, unprefixed) and `zh`. `site` is set to `https://felixhan.dev` (custom apex domain, Cloudflare DNS → Netlify; used for canonical URLs, sitemap, and RSS — `canglang.netlify.app` remains the underlying Netlify deploy target).
 
 **Shared bits.** `src/consts.ts` holds `SITE_TITLE` / `SITE_DESCRIPTION` (imported by pages and the RSS feed). `src/components/BaseHead.astro` centralizes `<head>` (SEO, Open Graph). Static assets that need processing go in `src/assets/`; pass-through files go in `public/`.
 
