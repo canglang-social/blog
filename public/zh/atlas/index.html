@@ -206,9 +206,9 @@
 
 <header class="mast col">
   <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-08-03 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-08-04 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
   <h1>行 <span style="font-size:0.5em;color:inherit;opacity:0.6">系统图谱</span></h1>
-  <p class="lede">一个人、六个驻地、十五个循环、五个判断型角色——外加一个审计这一切的元循环。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
+  <p class="lede">一个人、六个驻地、十五个循环、五个判断型角色——外加一个审计这一切的元循环；自 2026-08-04 起，它还能把各角色召集为<em>议会</em>，就同一个决定进行审议——异议被保留，决定只由 Felix 做出。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
   <div class="stats" role="group" aria-label="系统统计">
     <div class="stat"><b>5</b><span>原语</span></div>
     <div class="stat"><b>4</b><span>角色</span></div>
@@ -381,7 +381,7 @@
   <div class="rolecards">
     <div class="rolecard">
       <h4><span class="dot" style="background:var(--chief)"></span>幕僚长</h4>
-      <p>拥有清单和各项元决策：保留、合并、自动化、退役；某个角色该配哪种工具。先建议、绝不直接动手；经 Felix 确认后，通过 worktree 分支 + 草稿 PR 执行——或者更好：带着任务简报，委派给拥有该事务的工作流。</p>
+      <p>拥有清单和各项元决策：保留、合并、自动化、退役；某个角色该配哪种工具。先建议、绝不直接动手；经 Felix 确认后，通过 worktree 分支 + 草稿 PR 执行——或者更好：带着任务简报，委派给拥有该事务的工作流。三种协作模式：<em>委派</em>（把简报交给唯一的拥有者）·<em>审计</em>（从外部核查事实）·<em>审议</em>（<span class="mono" style="font-size:.85em">/council</span>——各角色席位只凭自己的事实底座盲写立场；决定只由 Felix 做出）。</p>
       <p class="mono">驻地：ai-chief-of-staff · chief-of-staff.md</p>
     </div>
     <div class="rolecard">
@@ -467,7 +467,7 @@
       <div class="home-role">办公室——清单与审计机器</div>
       <ul>
         <li><b>inventory.yaml</b> — 唯一事实来源（「不在清单上，就不存在」）</li>
-        <li><b>python -m ai_chief_of_staff</b> — 机械检查 · <b>/audit</b> — 判断</li>
+        <li><b>python -m ai_chief_of_staff</b> — 机械检查 · <b>/audit</b> — 判断 · <b>/council</b> — 审议</li>
         <li><b>chief-of-staff.md · brand-coach.md（已就绪）· primitives.md · workflows.md</b></li>
       </ul>
     </div>
@@ -533,7 +533,7 @@
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">workflow-audit</span><span class="tag">ai-chief-of-staff · 元循环</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我如何与 AI 协作——让每个流程都入册、经事实核查、被判断的元循环。它列在自己的清单里，因为一种行为只有先列出来，才谈得上被审计。</p>
+      <p class="flow-sum">我如何与 AI 协作——让每个流程都入册、经事实核查、被判断的元循环。它列在自己的清单里，因为一种行为只有先列出来，才谈得上被审计。自 2026-08-04 起，它还召集 <span class="mono" style="font-size:.85em">/council</span>——审议模式：各角色席位仅凭自身职责文与事实底座盲写立场，一轮交叉质询，综合稿保留异议；首次召集于 2026-08-04（拥有-还是-使用权）。</p>
       <div class="steps"><span class="step">inventory.yaml</span><span class="arr">→</span><span class="step">机械检查</span><span class="arr">→</span><span class="step">/audit 判断</span><span class="arr">→</span><span class="step">提案</span><span class="arr">→</span><span class="step">Felix 确认</span><span class="arr">→</span><span class="step">worktree + 草稿 PR</span><span class="arr">→</span><span class="step loopback">↺ 回到清单</span></div>
     </div>
 
@@ -786,7 +786,7 @@
 
 <footer class="col">
   <p><span class="mono">来源：inventory.yaml（权威——行胜过图）· workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者），2026-07-20（career-strategy 凭三项使用证据翻转为运行中；attention-portfolio 与 money 加入——两者均于 07-12 设计，却被那次重新生成漏掉，这也是审计从此开始校验图对清单的覆盖的原因；司库作为第五个判断型角色列卡），以及 2026-08-03（daily-review 扩展为 review-cadence——周六周回顾与月度复盘并入该行；attention-portfolio 与 money 凭各自的使用证据翻转为运行中；地图上凡提及驻地处 job_hunting 均改名为 career）四次重新生成。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者），2026-07-20（career-strategy 凭三项使用证据翻转为运行中；attention-portfolio 与 money 加入——两者均于 07-12 设计，却被那次重新生成漏掉，这也是审计从此开始校验图对清单的覆盖的原因；司库作为第五个判断型角色列卡），以及 2026-08-03（daily-review 扩展为 review-cadence——周六周回顾与月度复盘并入该行；attention-portfolio 与 money 凭各自的使用证据翻转为运行中；地图上凡提及驻地处 job_hunting 均改名为 career）四次重新生成；另于 2026-08-04 定向更新：/council（审议模式）加入导语、幕僚长角色卡、驻地卡与 workflow-audit 流程卡——它是该行的一个入口点，不是新循环。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
 </footer>
 
 </body></html>

@@ -207,9 +207,9 @@
 </style>
 
 <header class="mast col">
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">system atlas</span> · compiled 2026-07-07, regenerated 2026-08-03, from inventory.yaml, workflows.md, primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">system atlas</span> · compiled 2026-07-07, regenerated 2026-08-04, from inventory.yaml, workflows.md, primitives.md</span>
   <h1>The System Atlas</h1>
-  <p class="lede">One person, six homes, fifteen loops, five judgment-roles — and a meta-loop that audits all of it. Everything below is, at bottom, text Claude reads and follows; the pieces differ in their <em>job</em>, not their substance. Rows win over diagrams: <span class="mono" style="font-size:.85em">inventory.yaml</span> is canonical, this page is its map.</p>
+  <p class="lede">One person, six homes, fifteen loops, five judgment-roles — and a meta-loop that audits all of it, which since 2026-08-04 can also convene the roles as a <em>council</em> to deliberate one decision, dissent preserved, Felix deciding. Everything below is, at bottom, text Claude reads and follows; the pieces differ in their <em>job</em>, not their substance. Rows win over diagrams: <span class="mono" style="font-size:.85em">inventory.yaml</span> is canonical, this page is its map.</p>
   <div class="stats" role="group" aria-label="System counts">
     <div class="stat"><b>5</b><span>primitives</span></div>
     <div class="stat"><b>4</b><span>roles</span></div>
@@ -382,7 +382,7 @@
   <div class="rolecards">
     <div class="rolecard">
       <h4><span class="dot" style="background:var(--chief)"></span>Chief of Staff</h4>
-      <p>Owns the inventory and the meta-calls: keep, merge, automate, retire; which tool for a role. Advises first, never touches; on Felix's confirmation, executes via worktree branch + draft PR — or better, delegates to the owning workflow with a brief.</p>
+      <p>Owns the inventory and the meta-calls: keep, merge, automate, retire; which tool for a role. Advises first, never touches; on Felix's confirmation, executes via worktree branch + draft PR — or better, delegates to the owning workflow with a brief. Three collaboration modes: <em>delegate</em> (a brief to one owner) · <em>audit</em> (facts checked from outside) · <em>deliberate</em> (<span class="mono" style="font-size:.85em">/council</span> — role seats argue blind from their own fact bases; Felix alone decides).</p>
       <p class="mono">home: ai-chief-of-staff · chief-of-staff.md</p>
     </div>
     <div class="rolecard">
@@ -468,7 +468,7 @@
       <div class="home-role">the office — the inventory and the audit machinery</div>
       <ul>
         <li><b>inventory.yaml</b> — single source of truth ("inventory or it doesn't exist")</li>
-        <li><b>python -m ai_chief_of_staff</b> — mechanical checks · <b>/audit</b> — judgment</li>
+        <li><b>python -m ai_chief_of_staff</b> — mechanical checks · <b>/audit</b> — judgment · <b>/council</b> — deliberation</li>
         <li><b>chief-of-staff.md · brand-coach.md (staged) · primitives.md · workflows.md</b></li>
       </ul>
     </div>
@@ -534,7 +534,7 @@
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">workflow-audit</span><span class="tag">ai-chief-of-staff · meta</span><span class="pill running">running</span></div>
-      <p class="flow-sum">HOW I work with AI — the meta-loop that keeps every flow inventoried, fact-checked, and judged. Listed in its own inventory, because a behavior can only be audited if it is listed.</p>
+      <p class="flow-sum">HOW I work with AI — the meta-loop that keeps every flow inventoried, fact-checked, and judged. Listed in its own inventory, because a behavior can only be audited if it is listed. Since 2026-08-04 it also convenes <span class="mono" style="font-size:.85em">/council</span> — deliberation: role seats spawned blind from their own doctrines and fact bases, one cross-examination round, a dissent-preserving synthesis; first convening 2026-08-04 (own-vs-access).</p>
       <div class="steps"><span class="step">inventory.yaml</span><span class="arr">→</span><span class="step">mechanical checks</span><span class="arr">→</span><span class="step">/audit judgment</span><span class="arr">→</span><span class="step">proposals</span><span class="arr">→</span><span class="step">Felix confirms</span><span class="arr">→</span><span class="step">worktree + draft PR</span><span class="arr">→</span><span class="step loopback">↺ back into the inventory</span></div>
     </div>
 
@@ -787,6 +787,6 @@
 
 <footer class="col">
   <p><span class="mono">sources: inventory.yaml (canonical — rows win over diagrams) · workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>Compiled by the Chief of Staff, 2026-07-07; regenerated 2026-07-07 (personal-brand and the Brand Coach join), 2026-07-12 (career-strategy joins with its three edges; personal-brand flips to running; /aim replaces the frozen learn-to-ship agent as Route B's topic-picker), 2026-07-20 (career-strategy flips to running on its three pieces of usage evidence; attention-portfolio and money join — both designed 07-12 but missed by that regeneration, which is why the audit now checks atlas coverage against the inventory; the Treasurer is carded as the fifth judgment-role), and 2026-08-03 (daily-review widens to review-cadence — the Saturday weekly and monthly life review join the row; attention-portfolio and money flip to running on their usage evidence; job_hunting is renamed career everywhere the map names a home). If this page and a row disagree, the row wins — fix the page.</p>
+  <p>Compiled by the Chief of Staff, 2026-07-07; regenerated 2026-07-07 (personal-brand and the Brand Coach join), 2026-07-12 (career-strategy joins with its three edges; personal-brand flips to running; /aim replaces the frozen learn-to-ship agent as Route B's topic-picker), 2026-07-20 (career-strategy flips to running on its three pieces of usage evidence; attention-portfolio and money join — both designed 07-12 but missed by that regeneration, which is why the audit now checks atlas coverage against the inventory; the Treasurer is carded as the fifth judgment-role), and 2026-08-03 (daily-review widens to review-cadence — the Saturday weekly and monthly life review join the row; attention-portfolio and money flip to running on their usage evidence; job_hunting is renamed career everywhere the map names a home), and 2026-08-04 (targeted: /council — the deliberation mode — joins the lede, the Chief role card, the ai-chief-of-staff home card, and the workflow-audit flow card; an entry point of that row, not a new loop). If this page and a row disagree, the row wins — fix the page.</p>
 </footer>
 </body></html>
