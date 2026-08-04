@@ -7,6 +7,8 @@
 <link rel="alternate" hreflang="zh" href="https://canglang.netlify.app/zh/atlas/">
 <script>(()=>{const s=localStorage.getItem("theme");document.documentElement.dataset.theme=s||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");})();</script>
 </head><body>
+  <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
+<meta charset="utf-8">
 <style>
   :root {
     --page:      #f7f5ef;
@@ -139,8 +141,12 @@
   th { text-align: left; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: .45rem .6rem; border-bottom: 1px solid var(--baseline); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
   td { padding: .5rem .6rem; border-bottom: 1px solid var(--hairline); vertical-align: top; }
   td.mono { font-size: .8rem; }
+  .tablewrap { overflow-x: auto; }
 
   .dot { display: inline-block; width: .62em; height: .62em; border-radius: 50%; margin-right: .38em; vertical-align: baseline; position: relative; top: .02em; }
+
+  .callout { border: 1px solid var(--hairline); border-left: 3px solid var(--chief); background: var(--panel); padding: .8rem 1rem; font-size: .9rem; color: var(--ink-2); margin: 1.1rem 0; }
+  .callout b { color: var(--ink); }
 
   /* home cards */
   .homes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); }
@@ -169,7 +175,7 @@
 
   /* system map */
   .map-scroll { overflow-x: auto; border: 1px solid var(--hairline); background: var(--panel); }
-  .map { position: relative; width: 1080px; height: 916px; margin: 0 auto; }
+  .map { position: relative; width: 1080px; height: 1010px; margin: 0 auto; }
   .map svg.underlay { position: absolute; inset: 0; }
   .node {
     position: absolute; width: 204px; background: var(--page);
@@ -205,17 +211,17 @@
 </style>
 
 <header class="mast col">
-  <p style="margin:0 0 1.2rem; display:flex; justify-content:space-between"><a href="/zh/blog" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none">&#8592; canglang.social</a><a href="/atlas/" hreflang="en" style="font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--hairline);padding:.1rem .5rem">EN</a></p>
-  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译、2026-08-04 重新生成自 inventory.yaml、workflows.md、primitives.md</span>
+  <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译 · 2026-08-04 重新生成——自 inventory.yaml、workflows.md、primitives.md</span>
   <h1>行 <span style="font-size:0.5em;color:inherit;opacity:0.6">系统图谱</span></h1>
-  <p class="lede">一个人、六个驻地、十五个循环、五个判断型角色——外加一个审计这一切的元循环；自 2026-08-04 起，它还能把各角色召集为<em>议会</em>，就同一个决定进行审议——异议被保留，决定只由 Felix 做出。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
+  <p class="lede">一个人、八个驻地、十五个循环、五个判断型角色、七种有名字的协作模式——外加一个审计这一切的元循环；自 2026-08-04 起，它还能把各角色召集为<em>议会</em>，就同一个决定进行审议——异议被保留，决定由 Felix 做出。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。行胜过图：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
   <div class="stats" role="group" aria-label="系统统计">
     <div class="stat"><b>5</b><span>原语</span></div>
-    <div class="stat"><b>4</b><span>角色</span></div>
+    <div class="stat"><b>5</b><span>角色</span></div>
+    <div class="stat"><b>7</b><span>模式</span></div>
     <div class="stat"><b>15</b><span>工作流</span></div>
     <div class="stat"><b>14</b><span>运行中</span></div>
     <div class="stat"><b>1</b><span>待建</span></div>
-    <div class="stat"><b>6</b><span>驻地</span></div>
+    <div class="stat"><b>8</b><span>驻地</span></div>
   </div>
 </header>
 
@@ -297,11 +303,11 @@
 <section class="col" id="roles">
   <span class="eyebrow"><span class="secno">§2</span> · 判断力所在</span>
   <h2>五个判断型角色</h2>
-  <p class="kicker">角色出现在判断力汇聚的地方；任务是程序性的地方，命令就够了。这就是为什么系统大体是「工作流 + 命令」、角色恰好只有五个——也是为什么 <span class="mono" style="font-size:.85em">/scout</span> 或 <span class="mono" style="font-size:.85em">/tailor</span> 从来不需要人格面具。幕僚长从外部审计其余几个——对自己的作为，它是<em>幕僚长，而非审计员</em>。</p>
+  <p class="kicker">角色出现在判断力汇聚的地方；任务是程序性的地方，命令就够了。这就是为什么系统大体是「工作流 + 命令」、角色恰好只有五个——也是为什么 <span class="mono" style="font-size:.85em">/scout</span> 或 <span class="mono" style="font-size:.85em">/tailor</span> 从来不需要人格面具。幕僚长从外部审计其余四个——对自己的作为，它是<em>幕僚长，而非审计员</em>——并且自 2026-08-04 起，还能以主席身份把它们召集成一个议会：各席位盲写立场、一轮交叉质询、异议被保留，决定只由 Felix 一人做出。</p>
 
   <figure class="fig-breakout">
     <div class="panel">
-      <svg viewBox="0 0 940 400" width="940" height="400" role="img" aria-label="角色图谱：幕僚长审计图书馆员、编辑、品牌教练，以及它自己那一行。命令与会话扮演各个角色；品牌教练把博客文案的修改转交编辑。">
+      <svg viewBox="0 0 940 420" width="940" height="420" role="img" aria-label="角色图谱：幕僚长审计图书馆员、编辑、品牌教练、司库，以及它自己那一行。命令与会话扮演各个角色；品牌教练把博客文案的修改转交编辑。">
         <defs>
           <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--chief)" stroke-width="1.6"/>
@@ -312,76 +318,90 @@
         </defs>
 
         <!-- chief -->
-        <rect x="358" y="34" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--chief)" stroke-width="1.6"/>
-        <circle cx="378" cy="56" r="4" fill="var(--chief)"/>
-        <text x="390" y="60" font-size="13" font-weight="700" fill="var(--ink)">幕僚长 Chief of Staff</text>
-        <text x="374" y="80" font-size="10" fill="var(--ink-2)">工作流清单 + 元策略</text>
-        <text x="374" y="95" font-size="10" fill="var(--muted)">保留 · 合并 · 自动化 · 退役</text>
+        <rect x="355" y="30" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--chief)" stroke-width="1.6"/>
+        <circle cx="375" cy="52" r="4" fill="var(--chief)"/>
+        <text x="387" y="56" font-size="13" font-weight="700" fill="var(--ink)">幕僚长 Chief of Staff</text>
+        <text x="371" y="76" font-size="10" fill="var(--ink-2)">工作流清单 + 元策略</text>
+        <text x="371" y="91" font-size="10" fill="var(--muted)">保留 · 合并 · 自动化 · 退役</text>
 
         <!-- self-audit loop -->
-        <path d="M 588,56 C 660,42 660,110 592,100" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
-        <text x="668" y="80" font-size="9.5" fill="var(--chief-text)">审计（自己那行）</text>
+        <path d="M 585,50 C 655,36 655,102 589,94" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="662" y="74" font-size="9.5" fill="var(--chief-text)">审计（自己那行）</text>
 
-        <!-- /audit wears chief -->
-        <rect x="120" y="52" width="150" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
-        <text x="195" y="73" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/audit</text>
-        <path d="M 274,69 L 354,72" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
-        <text x="298" y="60" font-size="9" fill="var(--muted)">扮演</text>
+        <!-- /audit + /council wear chief -->
+        <rect x="100" y="44" width="170" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="185" y="65" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/audit · /council（主席）</text>
+        <path d="M 274,61 L 351,64" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <text x="298" y="52" font-size="9" fill="var(--muted)">扮演</text>
 
+        <!-- seat row -->
         <!-- librarian -->
-        <rect x="46" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--vault)" stroke-width="1.4"/>
-        <circle cx="66" cy="218" r="4" fill="var(--vault)"/>
-        <text x="78" y="222" font-size="13" font-weight="700" fill="var(--ink)">图书馆员 Librarian</text>
-        <text x="62" y="242" font-size="10" fill="var(--ink-2)">约定 · 漂移 · 采集</text>
-        <text x="62" y="257" font-size="10" fill="var(--muted)">自托管：[[Wiki/Librarian]]</text>
+        <rect x="28" y="216" width="205" height="84" rx="2" fill="var(--page)" stroke="var(--vault)" stroke-width="1.4"/>
+        <circle cx="48" cy="238" r="4" fill="var(--vault)"/>
+        <text x="60" y="242" font-size="13" font-weight="700" fill="var(--ink)">图书馆员 Librarian</text>
+        <text x="44" y="262" font-size="10" fill="var(--ink-2)">约定 · 漂移 · 采集</text>
+        <text x="44" y="277" font-size="9.5" fill="var(--muted)">知识库：[[Wiki/Librarian]]</text>
 
         <!-- editor -->
-        <rect x="355" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--blog)" stroke-width="1.4"/>
-        <circle cx="375" cy="218" r="4" fill="var(--blog)"/>
-        <text x="387" y="222" font-size="13" font-weight="700" fill="var(--ink)">编辑 Editor</text>
-        <text x="371" y="242" font-size="10" fill="var(--ink-2)">风格 · 草稿 · 策展</text>
-        <text x="371" y="257" font-size="10" fill="var(--muted)">editor.md · 绝不代笔</text>
+        <rect x="258" y="216" width="205" height="84" rx="2" fill="var(--page)" stroke="var(--blog)" stroke-width="1.4"/>
+        <circle cx="278" cy="238" r="4" fill="var(--blog)"/>
+        <text x="290" y="242" font-size="13" font-weight="700" fill="var(--ink)">编辑 Editor</text>
+        <text x="274" y="262" font-size="10" fill="var(--ink-2)">风格 · 草稿 · 策展</text>
+        <text x="274" y="277" font-size="9.5" fill="var(--muted)">editor.md · 绝不代笔</text>
 
         <!-- brand coach (staged, no own home yet) -->
-        <rect x="664" y="196" width="230" height="84" rx="2" fill="var(--page)" stroke="var(--baseline)" stroke-width="1.4" stroke-dasharray="6 4"/>
-        <circle cx="684" cy="218" r="4" fill="var(--ghost)"/>
-        <text x="696" y="222" font-size="13" font-weight="700" fill="var(--ink)">品牌教练 Brand Coach</text>
-        <text x="680" y="242" font-size="10" fill="var(--ink-2)">形象 · 魅力 · 社交策略</text>
-        <text x="680" y="257" font-size="10" fill="var(--muted)">brand-coach.md · 已就绪</text>
+        <rect x="488" y="216" width="205" height="84" rx="2" fill="var(--page)" stroke="var(--baseline)" stroke-width="1.4" stroke-dasharray="6 4"/>
+        <circle cx="508" cy="238" r="4" fill="var(--ghost)"/>
+        <text x="520" y="242" font-size="13" font-weight="700" fill="var(--ink)">品牌教练 Brand Coach</text>
+        <text x="504" y="262" font-size="10" fill="var(--ink-2)">形象 · 魅力 · 社交策略</text>
+        <text x="504" y="277" font-size="9.5" fill="var(--muted)">brand-coach.md · 已就绪</text>
+
+        <!-- treasurer -->
+        <rect x="718" y="216" width="205" height="84" rx="2" fill="var(--page)" stroke="var(--forge)" stroke-width="1.4"/>
+        <circle cx="738" cy="238" r="4" fill="var(--forge)"/>
+        <text x="750" y="242" font-size="13" font-weight="700" fill="var(--ink)">司库 Treasurer</text>
+        <text x="734" y="262" font-size="10" fill="var(--ink-2)">跑道 · 门槛备忘录</text>
+        <text x="734" y="277" font-size="9.5" fill="var(--muted)">money/treasurer.md · 私有</text>
 
         <!-- audit edges -->
-        <path d="M 392,118 C 320,150 260,168 200,192" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
-        <text x="272" y="152" font-size="9.5" fill="var(--chief-text)">审计</text>
-        <line x1="472" y1="118" x2="471" y2="192" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
-        <text x="479" y="152" font-size="9.5" fill="var(--chief-text)">审计</text>
-        <path d="M 556,118 C 640,150 700,168 762,192" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
-        <text x="672" y="152" font-size="9.5" fill="var(--chief-text)">审计</text>
+        <path d="M 390,114 C 300,150 200,182 138,212" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="242" y="155" font-size="9.5" fill="var(--chief-text)">审计</text>
+        <path d="M 445,114 C 420,150 392,182 368,212" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="398" y="155" font-size="9.5" fill="var(--chief-text)">审计</text>
+        <path d="M 505,114 C 530,150 558,182 582,212" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="556" y="155" font-size="9.5" fill="var(--chief-text)">审计</text>
+        <path d="M 560,114 C 660,150 758,182 818,212" fill="none" stroke="var(--chief)" stroke-width="1.3" marker-end="url(#ahr)"/>
+        <text x="712" y="155" font-size="9.5" fill="var(--chief-text)">审计</text>
 
         <!-- brand coach routes fixes to editor -->
-        <path d="M 700,284 C 650,306 540,306 496,288" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
-        <text x="600" y="316" font-size="9" fill="var(--muted)" text-anchor="middle">转交修改：博客文案 → 编辑</text>
+        <path d="M 560,306 C 520,332 436,332 400,308" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <text x="478" y="348" font-size="9" fill="var(--muted)" text-anchor="middle">转交修改：博客文案 → 编辑</text>
 
         <!-- wear chips -->
-        <rect x="46" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
-        <text x="161" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">图书馆员会话</text>
-        <path d="M 161,332 L 161,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <rect x="28" y="360" width="205" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="130" y="381" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">图书馆员会话</text>
+        <path d="M 100,356 L 100,306" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
 
-        <rect x="355" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
-        <text x="470" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/draft · /refine · /publish</text>
-        <path d="M 400,332 L 400,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <rect x="258" y="360" width="205" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="360" y="381" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">/draft · /refine · /publish</text>
+        <path d="M 300,356 L 300,306" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
 
-        <rect x="664" y="336" width="230" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
-        <text x="779" y="357" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">品牌教练会话</text>
-        <path d="M 779,332 L 779,286" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+        <rect x="488" y="360" width="205" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="590" y="381" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">品牌教练会话</text>
+        <path d="M 640,356 L 640,306" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
+
+        <rect x="718" y="360" width="205" height="34" rx="2" fill="none" stroke="var(--baseline)" stroke-dasharray="4 3"/>
+        <text x="820" y="381" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">司库会话 · 备忘录</text>
+        <path d="M 820,356 L 820,306" fill="none" stroke="var(--edge)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ahd)"/>
       </svg>
     </div>
-    <figcaption>图 2 —— 角色图谱，2026-07-07 编辑成为第三个角色时定型；品牌教练同日加入。司库（2026-07-12）是第五个席位，已列于下方卡片，但在 money 循环真正运行前不进入本图——本图画的是在用的角色，不是设计出来的角色。红实线 = 审计 · 虚线 = 命令/会话扮演该角色。（workflows.md）</figcaption>
+    <figcaption>图 2 —— 角色图谱，2026-07-07 编辑成为第三个角色时定型。司库（2026-07-12 设计）随本次重新生成加入本图：money 循环已于 2026-08-03 翻转为运行中，而本图画的是在用的角色，不是设计出来的角色。在 /council 里，各席位作为 agent 盲启动；幕僚长会话担任主席——搭框架、传阅、做综合，从不投票——唯一的决定者是 Felix。红实线 = 审计 · 虚线 = 命令/会话扮演该角色。（workflows.md）</figcaption>
   </figure>
 
   <div class="rolecards">
     <div class="rolecard">
       <h4><span class="dot" style="background:var(--chief)"></span>幕僚长</h4>
-      <p>拥有清单和各项元决策：保留、合并、自动化、退役；某个角色该配哪种工具。先建议、绝不直接动手；经 Felix 确认后，通过 worktree 分支 + 草稿 PR 执行——或者更好：带着任务简报，委派给拥有该事务的工作流。协作模式（完整分类见 workflows.md）：<em>委派</em> · <em>审计</em> · <em>裁断</em> · <em>审议</em>（<span class="mono" style="font-size:.85em">/council</span>——各席位只凭自己的事实底座盲写立场）· <em>流水线</em>，另有<em>广播</em>（部分实现）与<em>咨询</em>（刻意未建）；每种模式下，决定都只由 Felix 做出。</p>
+      <p>拥有清单和各项元决策：保留、合并、自动化、退役；某个角色该配哪种工具；决策层的解剖结构。先建议、绝不直接动手；经 Felix 确认后，通过 worktree 分支 + 草稿 PR 执行——或者更好：带着任务简报，委派给拥有该事务的工作流。同时也是横跨各决策层的地面策略（ground-strategy）席位。</p>
       <p class="mono">驻地：ai-chief-of-staff · chief-of-staff.md</p>
     </div>
     <div class="rolecard">
@@ -401,26 +421,53 @@
     </div>
     <div class="rolecard">
       <h4><span class="dot" style="background:var(--forge)"></span>司库 Treasurer</h4>
-      <p>拥有金钱事实文件、门槛备忘录（每笔 ¥5,000 及以上的支出，以及每个重大决策），还有每月复盘中"当下'富有'意味着什么"这一追问。范围是生活而非工作：不做日常记账，不追求超额收益——把收入当作杠杆来用，那是 career-strategy 的事。这里的一切永不公开。</p>
-      <p class="mono">驻地：money · treasurer.md（2026-07-12）</p>
+      <p>拥有金钱事实文件、门槛备忘录（每笔 ¥5,000 及以上的支出，以及每个重大决策），还有每月复盘中「当下『富有』意味着什么」这一追问——有日期的答案只追加、不覆盖。范围是生活而非工作：不做日常记账，不追求超额收益——把收入当作杠杆来用，那是 career-strategy 的事。这里的一切永不公开。</p>
+      <p class="mono">驻地：money · treasurer.md（2026-07-12；循环自 2026-08-02 起运行）</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 3 · HOMES & ASSETS ============ -->
+<!-- ============ 3 · COLLABORATION MODES ============ -->
+<section class="col" id="modes">
+  <span class="eyebrow"><span class="secno">§3</span> · 各席位如何协作</span>
+  <h2>七种协作模式</h2>
+  <p class="kicker">2026-08-04 命名——模式是一个工作流<em>形状</em>的一部分，所以它住在 workflows.md 里、紧挨着各循环图。先问「这是哪种模式？」，再问「用哪个工具？」。五种在运行，一种部分实现，一种刻意未建。每种模式下，决定都只由 Felix 一人做出。</p>
+
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>#</th><th>模式</th><th>状态</th><th>形状</th><th>运行驻地</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">1</td><td><strong>委派</strong></td><td class="mono">运行中</td><td>简报 → 拥有者在自己的仓库里执行</td><td class="mono">TODO.md 条目，经草稿 PR 送达（载体规则见下）</td></tr>
+      <tr><td class="mono">2</td><td><strong>审计</strong></td><td class="mono">运行中</td><td>从外部核查事实；绝不编辑对方拥有的文件</td><td class="mono">/audit + 机械检查器</td></tr>
+      <tr><td class="mono">3</td><td><strong>裁断</strong></td><td class="mono">运行中</td><td>幕僚长裁定两个席位互相重叠的主张</td><td class="mono">行级重叠：条目 / 边界规则——首例：learning-loop vs wiki-management，2026-07-05；直到 2026-08-04 才得名</td></tr>
+      <tr><td class="mono">4</td><td><strong>审议</strong></td><td class="mono">运行中</td><td>席位盲启动，一轮交叉质询，异议被保留</td><td class="mono">/council——首次召集 2026-08-04（拥有-还是-使用权）</td></tr>
+      <tr><td class="mono">5</td><td><strong>流水线</strong></td><td class="mono">运行中</td><td>单向数据边；以制品协作，不共享会话</td><td class="mono">权威边表（§7）</td></tr>
+      <tr><td class="mono">6</td><td><strong>广播</strong></td><td class="mono">部分实现</td><td>事实变更向依赖它的各界面传播</td><td class="mono">/next 的到期扫描（仅限日期）</td></tr>
+      <tr><td class="mono">7</td><td><strong>咨询</strong></td><td class="mono">未建</td><td>一个席位、一个问题，不开全体议会</td><td class="mono">改走拥有席位自己的仪式（司库备忘录、/crossroads）</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <b>委派载体规则</b>（2026-08-04 统一）：委派的简报落为<b>拥有者仓库里的一条 TODO.md 条目，由草稿 PR 送达</b>；与项目无关的生活事项仍走日志。GitHub issue 作为内部委派渠道退役——载体是文件，因为每个读取界面（/next、各级回顾、审计）读的都是文件，从不读 issue API。每份简报都带五个字段：<span class="mono" style="font-size:.85em">FROM · ASK · OWNER · DONE-WHEN · REPORT-BACK</span>。
+  </div>
+  <p class="kicker" style="font-size:.9rem"><strong>广播维持部分实现</strong>：日期之外的传播是手动的（career 改名清扫）；出现第三次手动清扫，即触发设计一项检查。<strong>咨询维持未建</strong>：单席位的问题路由到拥有席位自己的仪式；若第二次为单席位问题召集议会，即触发重新考虑。</p>
+</section>
+
+<!-- ============ 4 · HOMES & ASSETS ============ -->
 <section class="wide" id="homes">
   <div class="col" style="margin-bottom:1.3rem">
-    <span class="eyebrow"><span class="secno">§3</span> · 东西住在哪里</span>
-    <h2>六个驻地及其资产</h2>
-    <p class="kicker">每个工作流都有一个 <span class="mono" style="font-size:.85em">owner_repo</span>——它的驻地——每个驻地存放着它的循环所依赖的资产：命令、提示词、登记表、守则文件。本页处处以颜色标识驻地。</p>
+    <span class="eyebrow"><span class="secno">§4</span> · 东西住在哪里</span>
+    <h2>八个驻地及其资产</h2>
+    <p class="kicker">每个工作流都有一个 <span class="mono" style="font-size:.85em">owner_repo</span>——它的驻地——每个驻地存放着它的循环所依赖的资产：命令、提示词、登记表、守则文件。本页处处以颜色标识驻地；两个私有的单循环仓库（money、attention-portfolio）借用办公室红——调色板不添新色。</p>
   </div>
 
   <div class="homes">
     <div class="home">
       <div class="home-name"><span class="dot" style="background:var(--agentkit)"></span>agent-kit</div>
-      <div class="home-role">共享工具箱——提示词、技能、片段；4 个循环住在这里</div>
+      <div class="home-role">共享工具箱——提示词、技能、片段；3 个循环住在这里</div>
       <ul>
-        <li><b>prompts/</b> — about-me · daily-review · chief-of-staff · prompt-engineer（提示词库）</li>
+        <li><b>prompts/</b> — about-me · chief-of-staff（聊天界面）· prompt-engineer（daily-review 于 2026-08-04 退役——已迁入幕僚长仓库）</li>
         <li><b>snippets/</b> — about-me.md（CC @import）· 部署加载器</li>
         <li><b>plugins/core/skills/</b> — learn · explain · prompt-engineer</li>
       </ul>
@@ -436,7 +483,7 @@
     </div>
     <div class="home">
       <div class="home-name"><span class="dot" style="background:var(--jobhunt)"></span>career</div>
-      <div class="home-role">战役——简历内容 + 求职申请流水线</div>
+      <div class="home-role">战役——简历内容、求职申请流水线、人生路径地图（2026-08-03 由 job_hunting 改名而来）</div>
       <ul>
         <li><b>master.md</b> — 简历唯一取材的事实来源</li>
         <li><b>build_resumes.py</b> + base/ 分赛道简历</li>
@@ -449,37 +496,56 @@
       <div class="home-role">汇聚点——持久知识落在这里；约定自托管</div>
       <ul>
         <li><b>journals/</b> — 每日页面；#inbox 采集 · 会话日志 · 每日回顾</li>
-        <li><b>pages/</b> — 主题页 · [[Tasks]] 看板 · [[Wiki/Librarian]] + [[Wiki/Conventions]]</li>
+        <li><b>pages/</b> — 主题页 · [[Tasks]] 看板 · [[Learning/Queue]] · [[Wiki/Librarian]] + [[Wiki/Conventions]]</li>
         <li><b>#card</b> — 原生 SRS（当初拒绝 Obsidian 的原因）</li>
       </ul>
     </div>
     <div class="home">
       <div class="home-name"><span class="dot" style="background:var(--blog)"></span>blog</div>
-      <div class="home-role">舞台——Astro 6 个人站点；项目打头，文章在 /writing</div>
+      <div class="home-role">舞台——Astro 个人站点；项目打头，文章在 /writing</div>
       <ul>
         <li><b>editor.md</b> — 编辑的守则</li>
         <li><b>/draft /refine /publish</b> + drafts/（在内容 glob 之外）</li>
-        <li><b>weekly-review</b> — 拥有 Astro 发布步骤</li>
+        <li><b>每周发布步骤</b> — 已毕业的周回顾的博客草稿落在这里</li>
       </ul>
     </div>
     <div class="home">
       <div class="home-name"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</div>
-      <div class="home-role">办公室——清单与审计机器</div>
+      <div class="home-role">办公室——清单、审计机器、回顾节奏</div>
       <ul>
         <li><b>inventory.yaml</b> — 唯一事实来源（「不在清单上，就不存在」）</li>
-        <li><b>python -m ai_chief_of_staff</b> — 机械检查 · <b>/audit</b> — 判断 · <b>/council</b> — 审议</li>
-        <li><b>chief-of-staff.md · brand-coach.md（已就绪）· primitives.md · workflows.md</b></li>
+        <li><b>python -m ai_chief_of_staff</b> — 机械检查（audit-kernel）· <b>/audit</b> — 判断 · <b>/council</b> — 审议</li>
+        <li><b>/daily-review /weekly-review /monthly-review</b> — 全部三级回顾节奏 · <b>/triage /aim /card-check /next</b> — 学习循环的薄命令</li>
+        <li><b>chief-of-staff.md · brand-coach.md（已就绪）· decision-layers.md · primitives.md · workflows.md</b></li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--chief)"></span>money</div>
+      <div class="home-role">账本——私有仓库；这里的一切永不公开</div>
+      <ul>
+        <li><b>treasurer.md</b> — 第五个判断型角色的守则</li>
+        <li><b>facts.yaml</b> — 金钱事实的唯一所有者（跑道三数于 2026-08-02 填齐）</li>
+        <li><b>memos/</b> — 过门槛的决策，皆有日期</li>
+      </ul>
+    </div>
+    <div class="home">
+      <div class="home-name"><span class="dot" style="background:var(--chief)"></span>attention-portfolio</div>
+      <div class="home-role">空闲时间账本——私有仓库；平台导出数据是个人行为数据</div>
+      <ul>
+        <li><b>interests.yaml</b> — 选项清单；裁定仅限 Felix（invest / timebox / incubate / not-now）</li>
+        <li><b>scripts/distill.py</b> — 重新生成品味地图（跨 7 个平台 4,616 条数据，聚成 15 个主题）</li>
+        <li><b>spec.md + TODO.md</b> — 连接契约 + 季度审计的锚点</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ============ 4 · WORKFLOWS ============ -->
+<!-- ============ 5 · WORKFLOWS ============ -->
 <section class="wide" id="workflows">
   <div class="col" style="margin-bottom:1.3rem">
-    <span class="eyebrow"><span class="secno">§4</span> · 循环</span>
+    <span class="eyebrow"><span class="secno">§5</span> · 循环</span>
     <h2>十五个工作流</h2>
-    <p class="kicker">十四个运行中，一个待建。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
+    <p class="kicker">十四个运行中，一个待建——按清单顺序排列，以元循环收尾。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
   </div>
 
   <div class="flows">
@@ -491,8 +557,8 @@
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">learning-loop</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">任何有趣的东西都变成持久知识——在任意会话里采集一行 #inbox，分诊到一条路线，且每条路线都终结于检索尾巴。三条规则：注意力就是我的全部所需 · 产出是唯一重要的东西 · 检索本身就是学习。</p>
-      <div class="steps"><span class="step">采集 #inbox</span><span class="arr">→</span><span class="step">分诊</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B 练习——/aim 选题（ragx → ragr）</span><span class="arr">·</span><span class="step">C 材料</span><span class="arr">·</span><span class="step">D 剂量</span><span class="arr">→</span><span class="step">回忆</span><span class="arr">→</span><span class="step">卡片（人工把关）</span><span class="arr">→</span><span class="step">日志记录</span></div>
+      <p class="flow-sum">任何有趣的东西都变成持久知识——在任意会话里采集一行 #inbox，分诊到一条路线，且每条路线都终结于检索尾巴。三条规则：注意力就是我的全部所需 · 产出是唯一重要的东西 · 检索本身就是学习。幕僚长借给这个循环四条薄命令：<span class="mono" style="font-size:.85em">/triage · /aim · /card-check · /next</span>——从已冻结的 learn-to-ship agent 中去自动化出来的判断型工作。</p>
+      <div class="steps"><span class="step">采集 #inbox</span><span class="arr">→</span><span class="step">/triage</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B 练习——/aim 选题（ragx → ragr）</span><span class="arr">·</span><span class="step">C 材料</span><span class="arr">·</span><span class="step">D 剂量</span><span class="arr">→</span><span class="step">回忆</span><span class="arr">→</span><span class="step">卡片（人工把关）</span><span class="arr">→</span><span class="step">日志记录</span></div>
     </div>
 
     <div class="flow">
@@ -509,101 +575,106 @@
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">job-pipeline</span><span class="tag">career</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">拿下工作——对着真实 JD 侦察、匹配、定制、面试。侦察现已改为 Felix 手动执行（定时 agent 已退役——侦察是判断型工作）。</p>
+      <p class="flow-sum">拿下工作——对着真实 JD 侦察、匹配、定制、面试。侦察由 Felix 手动执行（定时 agent 已退役——侦察是判断型工作）。</p>
       <div class="steps"><span class="step">/scout</span><span class="arr">→</span><span class="step">/match</span><span class="arr">→</span><span class="step">/tailor</span><span class="arr">→</span><span class="step">/interview</span><span class="arr">+</span><span class="step">节奏: /daily · /review（周六）· /strategy</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">prompt-lifecycle</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">提示词作为有版本的资产——工程化一次，存进一个库，经薄加载器部署，绝不复制粘贴。</p>
+      <p class="flow-sum">提示词作为有版本的资产——工程化一次，存进一个库，经薄加载器部署，绝不复制粘贴。自 2026-07-20 起，<span class="mono" style="font-size:.85em">last-tested</span> 只被审计、不被轻信：当某个提示词的最新提交晚于它上一次真实会话时，检查器会发出警告。</p>
       <div class="steps"><span class="step">粗糙想法</span><span class="arr">→</span><span class="step">core:prompt-engineer</span><span class="arr">→</span><span class="step">prompts/ 库</span><span class="arr">→</span><span class="step">薄加载器</span><span class="arr">→</span><span class="step">真实会话 → 更新 last-tested</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">review-cadence</span><span class="tag">agent-kit + ai-chief-of-staff</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">有意识地收束每一天、每一周、每一月——晚间引导式回顾（由 Felix 在 Cowork 里运行；2026-07-07 去自动化：反思是判断型工作）、带幕僚长事实块的周六 /weekly-review，以及 /monthly-review 月度人生复盘。2026-08-03 从仅每日扩展而来：那天发现周与月两个仪式真实存在，却未入册。</p>
-      <div class="steps"><span class="step">prompts/daily-review.md——晚间收束</span><span class="arr">→</span><span class="step">/weekly-review（周六）→ 知识库页 + blog PR</span><span class="arr">→</span><span class="step">/monthly-review → reports/ + 下一个锚点</span></div>
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">review-cadence</span><span class="tag">ai-chief-of-staff 命令 · Felix 亲自运行</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">有意识地收束每一天、每一周、每一月——每一级喂养下一级。三级现在都是幕僚长命令：晚间 <span class="mono" style="font-size:.85em">/daily-review</span>（2026-08-04 从 Cowork 迁来；agent-kit 里的提示词已退役——只留一个家，不留粘贴副本）、周六 <span class="mono" style="font-size:.85em">/weekly-review</span>（2026-07-12 从 blog 毕业）、月度 <span class="mono" style="font-size:.85em">/monthly-review</span>（2026-08-02/03 首跑）。全程 Felix 亲自运行：反思是判断型工作，2026-07-07 去自动化——而且在回顾之内，每个日期与钟点都由 Felix 指定，绝不由 AI 指定。</p>
+      <div class="steps"><span class="step">/daily-review——晚间收束 → 日志</span><span class="arr">→</span><span class="step">/weekly-review（周六）→ 知识库页 + blog 草稿 PR</span><span class="arr">→</span><span class="step">/monthly-review → reports/ + 下一个锚点</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--vault)"></span><span class="flow-name">wiki-management</span><span class="tag">知识库 · 图书馆员</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">知识库如何保持一致——页面命名、日志格式、采集流水线、内容归属。管约定，不管内容：它是一套标准，不是步骤循环，所以没有流程图也照样运行。</p>
+      <p class="flow-sum">知识库如何保持一致——页面命名、日志格式、采集流水线、内容归属。管约定，不管内容：它是一套标准，不是步骤循环，所以没有流程图也照样运行。幕僚长从外部审计（check_page_h1）；修复仍由图书馆员在 Logseq 内完成。</p>
       <div class="steps"><span class="step">[[Wiki/Conventions]]</span><span class="arr">·</span><span class="step">漂移清扫</span><span class="arr">·</span><span class="step">Siri 采集 → [[inbox/mobile]] → [[inbox]]</span></div>
     </div>
 
     <div class="flow">
-      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">workflow-audit</span><span class="tag">ai-chief-of-staff · 元循环</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我如何与 AI 协作——让每个流程都入册、经事实核查、被判断的元循环。它列在自己的清单里，因为一种行为只有先列出来，才谈得上被审计。自 2026-08-04 起，它还召集 <span class="mono" style="font-size:.85em">/council</span>——审议模式：各角色席位仅凭自身职责文与事实底座盲写立场，一轮交叉质询，综合稿保留异议；首次召集于 2026-08-04（拥有-还是-使用权）。</p>
-      <div class="steps"><span class="step">inventory.yaml</span><span class="arr">→</span><span class="step">机械检查</span><span class="arr">→</span><span class="step">/audit 判断</span><span class="arr">→</span><span class="step">提案</span><span class="arr">→</span><span class="step">Felix 确认</span><span class="arr">→</span><span class="step">worktree + 草稿 PR</span><span class="arr">→</span><span class="step loopback">↺ 回到清单</span></div>
-    </div>
-
-    <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--blog)"></span><span class="flow-name">publishing-loop</span><span class="tag">blog · 编辑</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我在公开场合说什么——草稿被润色成母语级英文文章，策展进以项目为主的站点，每页一种语言。第一个完整循环已跑通：《How I Work with AI》（英文 + 中文）内嵌了这份图谱；站点现以案例研究页领衔（ragx · learn-to-ship），并配有策展的 /writing。</p>
+      <p class="flow-sum">我在公开场合说什么——草稿被润色成母语级英文文章，策展进以项目为主的站点，每页一种语言。站点以案例研究页领衔（ragx · learn-to-ship），并配有策展的 /writing；已发布的文章是有日期的快照，绝不是派生视图。</p>
       <div class="steps"><span class="step">/draft</span><span class="arr">→</span><span class="step">/refine（编辑过审）</span><span class="arr">→</span><span class="step">/publish（astro check → build）</span><span class="arr">→</span><span class="step">策展 /writing</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">personal-brand</span><span class="tag">尚无驻地 · 品牌教练</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我给人的观感——一个刻意经营的公开形象与魅力：取材自档案事实，呈现于各社交平台，并按节奏做由外向内的审计。2026-07-07 起运行中：首次 BUILD 会话已把定位、形象支柱与各平台简介写入 brand-records.md。</p>
+      <p class="flow-sum">我给人的观感——一个刻意经营的公开形象与魅力：取材自档案事实，呈现于各社交平台，并按节奏做由外向内的审计。2026-07-07 起运行：首次 BUILD 会话已把定位、形象支柱与各平台简介写入 brand-records.md。品牌检查搭载在月度复盘上（2026-08-03）。</p>
       <div class="steps"><span class="step">BUILD: 定位 · 形象支柱 · 简介 · 魅力练习</span><span class="arr">→</span><span class="step">PRESENT: 平台策略 · 分发文章/案例研究</span><span class="arr">→</span><span class="step">AUDIT: 由外向内，一双招聘官的眼睛</span><span class="arr">→</span><span class="step loopback">↺ 回到 BUILD</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--jobhunt)"></span><span class="flow-name">career-strategy</span><span class="tag">career · 战略师席位</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。自 2026-07-20 起运行；已执行三次重评分，包括一次诚实的判负：Toptal 筛选 2026-07-21 被拒，判定<em>错误</em>并执行了预设的搁置默认；而 fte-human-contact 提前 119 天判定<em>正确</em>。这一层还在 2026-08-03 给自己的驻地改了名：job_hunting → career。</p>
+      <p class="flow-sum">这一切最终通向哪里——每条人生路径（就业、自由职业、做产品、深造、迁居）都化为可证伪、有日期、会被打分的检查点，姿态只由 Felix 一人设定。自 2026-07-20 起运行；地图上有 7 条路径，重评分是诚实的：Toptal 筛选判定<em>错误</em>（2026-07-21 被拒，执行了预设的搁置默认），fte-human-contact 提前 119 天判定<em>正确</em>。这一层还在 2026-08-03 给自己的驻地改了名：job_hunting → career。</p>
       <div class="steps"><span class="step">data/career-map.yaml</span><span class="arr">→</span><span class="step">/crossroads——重型测绘，约每年两次，Felix 亲自运行</span><span class="arr">→</span><span class="step">每月重评分（约 10 分钟）</span><span class="arr">→</span><span class="step">pursuing 姿态 → strategy.md 使命行</span><span class="arr">→</span><span class="step loopback">↺ 打分后的检查点重绘地图</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">attention-portfolio</span><span class="tag">attention-portfolio · 独立仓库</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">我的空闲时间用来做什么——把收藏与阅读数据蒸馏成一张品味地图，在季度审计中用"无人强迫的时间"这一证据检验它，再折算成每周小时数；裁定只由 Felix 一人设定。它是第三个决策层，因而共用同一套解剖结构：一份幕僚长从不编辑的选项清单、一个仅限 Felix 的裁定枚举，以及一条自杀判据。自 2026-07-23 起运行：跨 7 个平台采集 4,616 条数据，生成 15 个主题的品味地图，并完成了首次季度审计——10 项裁定由 Felix 亲自设定。</p>
+      <p class="flow-sum">我的空闲时间用来做什么——把收藏与阅读数据蒸馏成一张品味地图，在季度审计中用「无人强迫的时间」这一证据检验它，再折算成每周小时数；裁定只由 Felix 一人设定。它是第三个决策层，因而共用同一套解剖结构：一份幕僚长从不编辑的选项清单、一个仅限 Felix 的裁定枚举，以及一条自杀判据。自 2026-07-23 起运行：跨 7 个平台的 4,616 条数据、15 个主题的品味地图，以及首次季度审计——10 项裁定，其中 invest：workout 5.5 小时 + english 5 小时。</p>
       <div class="steps"><span class="step">采集：平台导出 · 开源路线</span><span class="arr">→</span><span class="step">蒸馏：主题聚类，数量 × 新近度 × 跨平台</span><span class="arr">→</span><span class="step">审计：近 30 天里无人强迫的时间</span><span class="arr">→</span><span class="step">分配：每周小时数</span><span class="arr">→</span><span class="step loopback">↺ 每季一次，Felix 亲自运行</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">money</span><span class="tag">money · 司库</span><span class="pill running">运行中</span></div>
-      <p class="flow-sum">什么让我保持偿付能力——金钱事实由一个文件独家持有，每一笔超过门槛的支出都以备忘录决策，每月复盘重新追问"当下'富有'意味着什么"，并把有日期的答案追加进去。范围是生活，不是工作：不做日常记账，也不追求超额收益。第五个判断型角色席位。自 2026-08-02 起运行：跑道三数已填、三份带日期的备忘录已决策、首次月度复盘已执行。</p>
-      <div class="steps"><span class="step">facts.yaml——金钱事实的唯一所有者</span><span class="arr">→</span><span class="step">门槛备忘录（≥ ¥5,000 或重大决策）</span><span class="arr">→</span><span class="step">月度复盘：快照 +「现在'富有'意味着什么」</span><span class="arr">→</span><span class="step loopback">↺ 有日期的答案只追加，不覆盖</span></div>
+      <p class="flow-sum">什么让我保持偿付能力——金钱事实由一个文件独家持有，每笔过门槛的支出都以备忘录决策，月度复盘重新追问「当下『富有』意味着什么」并把有日期的答案追加进去。范围是生活，不是工作；不做日常记账，也不追求超额收益。自 2026-08-02 起运行：跑道三数已填、三份带日期的备忘录已决策、首次月度复盘已执行。</p>
+      <div class="steps"><span class="step">facts.yaml——金钱事实的唯一所有者</span><span class="arr">→</span><span class="step">门槛备忘录（≥ ¥5,000 或重大决策）</span><span class="arr">→</span><span class="step">月度复盘：快照 +「现在『富有』意味着什么」</span><span class="arr">→</span><span class="step loopback">↺ 有日期的答案只追加，不覆盖</span></div>
     </div>
 
     <div class="flow">
       <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">file-management</span><span class="tag">尚无驻地</span><span class="pill wanted">待建 · 未设计</span></div>
       <p class="flow-sum">文件住在哪里——一套横跨 Drive、GitHub 和本地/外置卷的统一存放策略。设计出来之前：没有入口，也没有图。</p>
     </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--chief)"></span><span class="flow-name">workflow-audit</span><span class="tag">ai-chief-of-staff · 元循环</span><span class="pill running">运行中</span></div>
+      <p class="flow-sum">我如何与 AI 协作——让每个流程都入册、经事实核查、被判断的元循环。它列在自己的清单里，因为一种行为只有先列出来，才谈得上被审计；机械检查器已于 2026-08-03 采用共享的 audit-kernel。自 2026-08-04 起，这一行还承载 <span class="mono" style="font-size:.85em">/council</span>——按需审议：拥有职责文与自有事实底座的席位被盲启动（事实以证人身份列席；入席的只有判断），一轮交叉质询，然后是保留异议的综合稿——一份带分级收束、立场翻转记录与重启条件的决策包，绝不是裁决。首次召集于 2026-08-04（拥有-还是-使用权）；决定只由 Felix 做出，且决定回流到拥有它的仪式。</p>
+      <div class="steps"><span class="step">inventory.yaml</span><span class="arr">→</span><span class="step">机械检查（audit-kernel）</span><span class="arr">→</span><span class="step">/audit 判断</span><span class="arr">·</span><span class="step">/council 审议（按需）</span><span class="arr">→</span><span class="step">提案</span><span class="arr">→</span><span class="step">Felix 确认</span><span class="arr">→</span><span class="step">worktree + 草稿 PR</span><span class="arr">→</span><span class="step loopback">↺ 回到清单</span></div>
+    </div>
   </div>
 </section>
 
-<!-- ============ 5 · PROJECTS & OUTPUTS ============ -->
+<!-- ============ 6 · PROJECTS & OUTPUTS ============ -->
 <section class="col" id="projects">
-  <span class="eyebrow"><span class="secno">§5</span> · 产出什么</span>
+  <span class="eyebrow"><span class="secno">§6</span> · 产出什么</span>
   <h2>项目与其他产出</h2>
   <p class="kicker">循环存在，就是为了产出东西。项目是 project-loop 的产出，登记在 <span class="mono" style="font-size:.85em">forge/registry/projects.yaml</span>；其他每个循环也都终结于一件制品——Felix 的规则 2：<em>产出是唯一重要的东西，而且只算我自己生成的产出。</em></p>
+  <div class="tablewrap">
   <table>
     <thead><tr><th>产出</th><th>由谁产出</th><th>落在哪里</th></tr></thead>
     <tbody>
-      <tr><td><strong>项目</strong> — ragx（RAG 练习构建）· ragr（重建考试）· logx · learn-to-ship（首个 /ideate 选中项）</td><td class="mono"><span class="dot" style="background:var(--forge)"></span>project-loop + learning-loop 路线 B</td><td class="mono">forge registry</td></tr>
+      <tr><td><strong>项目</strong> — ragx（RAG 练习构建）· ragr（重建考试）· logx · learn-to-ship（首个 /ideate 选中项，已冻结为作品集制品）</td><td class="mono"><span class="dot" style="background:var(--forge)"></span>project-loop + learning-loop 路线 B</td><td class="mono">forge registry</td></tr>
       <tr><td><strong>案例研究</strong> — 评审过的项目写成的证据</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>career-loop</td><td class="mono">forge career/portfolio/</td></tr>
       <tr><td><strong>定制简历</strong> — 带日期、经 lint、按 JD 定制</td><td class="mono"><span class="dot" style="background:var(--jobhunt)"></span>job-pipeline（基于 career-loop 的底版）</td><td class="mono">career</td></tr>
       <tr><td><strong>Anki 卡片 + 会话日志</strong> — 人工把关、记入日志</td><td class="mono"><span class="dot" style="background:var(--agentkit)"></span>learning-loop 检索尾巴</td><td class="mono">知识库 journals/ + 卡组</td></tr>
       <tr><td><strong>文章 + 个人站点</strong> — 母语级英文，每页一种语言</td><td class="mono"><span class="dot" style="background:var(--blog)"></span>publishing-loop</td><td class="mono">blog src/content/</td></tr>
       <tr><td><strong>品牌界面</strong> — LinkedIn + 各平台简介，平台原生分发</td><td class="mono"><span class="dot" style="background:var(--ghost)"></span>personal-brand</td><td class="mono">各平台</td></tr>
-      <tr><td><strong>审计报告 + 提案</strong> — 保留 / 合并 / 自动化 / 退役</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>workflow-audit</td><td class="mono">ai-chief-of-staff reports/</td></tr>
+      <tr><td><strong>回顾页 + 事实块</strong> — 每日的日志收束、每周的知识库页 + 博客草稿、每月的人生页</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>review-cadence</td><td class="mono">知识库 + reports/</td></tr>
+      <tr><td><strong>金钱备忘录 + 有日期的「富有」答案</strong> — 门槛决策，只追加</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>money</td><td class="mono">money memos/ + facts.yaml</td></tr>
+      <tr><td><strong>品味地图 + 每周小时数裁定</strong> — Felix 设定，每季一次</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>attention-portfolio</td><td class="mono">interests.yaml</td></tr>
+      <tr><td><strong>审计报告、提案 + 议会记录</strong> — 保留 / 合并 / 自动化 / 退役；保留异议的决策包</td><td class="mono"><span class="dot" style="background:var(--chief)"></span>workflow-audit</td><td class="mono">ai-chief-of-staff reports/</td></tr>
     </tbody>
   </table>
+  </div>
 </section>
 
-<!-- ============ 6 · SYSTEM MAP ============ -->
+<!-- ============ 7 · SYSTEM MAP ============ -->
 <section class="wide" id="map">
   <div class="col" style="margin-bottom:1.3rem">
-    <span class="eyebrow"><span class="secno">§6</span> · <span class="thread">全局棋盘</span></span>
+    <span class="eyebrow"><span class="secno">§7</span> · <span class="thread">全局棋盘</span></span>
     <h2>系统地图</h2>
-    <p class="kicker">循环之间如何互相喂养：agent-kit 的生产循环在左，forge 工坊居中，求职战役在右，知识库作为汇聚点垫底——外面围着幕僚长的<span style="color:var(--chief-text)">审计边界</span>。边界内的每个节点，都是清单里的一行。</p>
+    <p class="kicker">循环之间如何互相喂养：agent-kit 的生产循环与个人账本在左，forge 工坊居中，求职战役在右，知识库作为汇聚点垫底——外面围着幕僚长的<span style="color:var(--chief-text)">审计边界</span>。边界内的每个节点，都是清单里的一行。这次重绘补上了记录在案的缺口：<span class="mono" style="font-size:.85em">attention-portfolio</span> 与 <span class="mono" style="font-size:.85em">money</span> 现在有了地图节点，不再只有流程卡。</p>
   </div>
 
   <div class="map-scroll">
-    <div class="map" role="img" aria-label="系统地图：十二个工作流节点按驻地分组，由喂养箭头相连，整体包在幕僚长的审计边界内，Logseq 知识库作为汇聚带垫底。">
-      <svg class="underlay" viewBox="0 0 1080 916" width="1080" height="916" aria-hidden="true">
+    <div class="map" role="img" aria-label="系统地图：十四个运行中的工作流节点外加一个待建节点，按驻地分组，由喂养箭头相连，整体包在幕僚长的审计边界内，Logseq 知识库作为汇聚带垫底。">
+      <svg class="underlay" viewBox="0 0 1080 1010" width="1080" height="1010" aria-hidden="true">
         <defs>
           <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,1 L9,5 L0,9" fill="none" stroke="var(--edge)" stroke-width="1.6"/>
@@ -614,7 +685,7 @@
         </defs>
 
         <!-- audit perimeter -->
-        <rect x="20" y="60" width="1040" height="830" rx="6" fill="none" stroke="var(--chief)" stroke-width="1.3" stroke-dasharray="7 5"/>
+        <rect x="20" y="60" width="1040" height="930" rx="6" fill="none" stroke="var(--chief)" stroke-width="1.3" stroke-dasharray="7 5"/>
         <text x="1046" y="84" font-size="10" fill="var(--chief-text)" text-anchor="end">边界内每个节点都是 inventory.yaml 里的一行</text>
 
         <!-- 1 prompt-lifecycle -> profile-loop -->
@@ -637,7 +708,7 @@
         <line x1="894" y1="288" x2="894" y2="366" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
         <text x="904" y="332" font-size="10" fill="var(--ink-2)">简历底版</text>
 
-        <!-- 6 job-pipeline -> project-loop (dashed, demand) -->
+        <!-- 6 job-pipeline -> project-loop (dashed, demand read by /ideate) -->
         <path d="M 786,430 C 720,444 690,412 654,380" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
         <text x="636" y="450" font-size="10" fill="var(--muted)">需求信号 → /ideate</text>
 
@@ -645,16 +716,16 @@
         <path d="M 998,252 C 1040,330 1040,480 1000,556" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
         <text x="1014" y="516" font-size="10" fill="var(--ink-2)" text-anchor="end">案例文案 → 站点</text>
 
-        <!-- 8 learning-loop -> publishing-loop (dashed) -->
+        <!-- 8 learning-loop -> publishing-loop (dashed, aspirational) -->
         <path d="M 256,522 C 520,606 660,600 784,578" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
-        <text x="500" y="618" font-size="10" fill="var(--muted)">公开学习的草稿</text>
+        <text x="500" y="622" font-size="10" fill="var(--muted)">公开学习的草稿</text>
 
-        <!-- 9 learning-loop -> vault -->
-        <path d="M 152,540 C 168,630 240,724 326,760" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
-        <text x="176" y="584" font-size="10" fill="var(--vault)">检索尾巴 → 日志 + 卡片</text>
+        <!-- 9 learning-loop -> vault (sink) -->
+        <path d="M 250,532 C 400,570 430,660 445,738" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
+        <text x="462" y="660" font-size="10" fill="var(--vault)">检索尾巴 → 日志 + 卡片</text>
 
-        <!-- 10 review-cadence -> vault -->
-        <path d="M 256,656 C 292,692 310,722 328,748" fill="none" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
+        <!-- 10 review-cadence -> vault (sink) -->
+        <line x1="254" y1="796" x2="326" y2="796" stroke="var(--vault)" stroke-width="1.4" marker-end="url(#mv)"/>
 
         <!-- 11 publishing-loop -> personal-brand -->
         <line x1="890" y1="626" x2="890" y2="694" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
@@ -664,13 +735,13 @@
         <path d="M 996,738 C 1058,660 1058,510 998,446" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
         <text x="1010" y="494" font-size="10" fill="var(--ink-2)" text-anchor="end">面向招聘官的界面（LinkedIn）</text>
 
-        <!-- 13 profile-loop -> personal-brand (read-only, along the bottom) -->
-        <path d="M 256,396 C 300,540 302,700 344,858 C 500,886 720,878 868,798" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
-        <text x="470" y="876" font-size="10" fill="var(--muted)">档案事实为人设托底——绝不编造</text>
+        <!-- 13 profile-loop -> personal-brand (read-only, down the left rail and along the bottom) -->
+        <path d="M 48,404 C 34,470 34,560 34,650 C 34,800 70,952 250,964 C 430,976 620,968 800,944 C 824,936 830,860 870,798" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="430" y="938" font-size="10" fill="var(--muted)" text-anchor="middle">档案事实为人设托底——绝不编造</text>
 
         <!-- 14 project-loop -> learning-loop (chief /aim is Route B's focus-director) -->
         <path d="M 430,332 C 372,372 320,432 258,470" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
-        <text x="268" y="402" font-size="10" fill="var(--ink-2)">/aim 选出下一个练习主题</text>
+        <text x="268" y="402" font-size="10" fill="var(--ink-2)">/aim 选出下一个主题</text>
 
         <!-- 15 career-loop -> career-strategy (read-only: fit facts) -->
         <line x1="800" y1="202" x2="800" y2="170" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
@@ -684,13 +755,21 @@
         <path d="M 906,140 C 1040,170 1046,300 998,388" fill="none" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
         <text x="1056" y="128" font-size="10" fill="var(--ink-2)" text-anchor="end">pursuing 姿态</text>
         <text x="1056" y="141" font-size="10" fill="var(--ink-2)" text-anchor="end">→ /strategy 使命行</text>
+
+        <!-- 18 vault -> attention-portfolio (read-only: taste evidence) -->
+        <path d="M 330,762 C 300,730 275,700 254,674" fill="none" stroke="var(--edge)" stroke-width="1.3" stroke-dasharray="4 4" marker-end="url(#ma)"/>
+        <text x="298" y="748" font-size="10" fill="var(--muted)" text-anchor="end">品味证据（只读）</text>
+
+        <!-- 19 attention-portfolio -> learning-loop (quarterly winners via /triage gate) -->
+        <line x1="110" y1="612" x2="110" y2="552" stroke="var(--edge)" stroke-width="1.4" marker-end="url(#ma)"/>
+        <text x="122" y="585" font-size="10" fill="var(--ink-2)">季度胜出者 → /triage 闸门（上限 5）</text>
       </svg>
 
       <!-- meta node on the perimeter -->
       <div class="node meta" style="left:428px; top:22px; width:230px">
         <div class="nn">workflow-audit <span style="color:var(--chief-text)">· 元循环</span></div>
         <div class="nh" style="color:var(--chief-text)">ai-chief-of-staff</div>
-        <div class="nd">清单 → 检查 → /audit → 提案 → Felix 确认 → 草稿 PR</div>
+        <div class="nd">清单 → 检查 → /audit · /council → 提案 → Felix 确认 → 草稿 PR</div>
       </div>
 
       <!-- ghost: file-management -->
@@ -716,10 +795,17 @@
         <div class="nh" style="color:var(--agentkit)">agent-kit</div>
         <div class="nd">#inbox → 分诊 → 路线 A–D → 回忆 · 卡片 · 日志</div>
       </div>
-      <div class="node" style="left:48px; top:592px">
+
+      <!-- personal ledgers, left-bottom -->
+      <div class="node" style="left:48px; top:612px">
+        <div class="nn">attention-portfolio</div>
+        <div class="nh" style="color:var(--chief-text)">独立仓库 · 私有</div>
+        <div class="nd">采集 → 蒸馏 → 审计 → 分配 ↺ 每季一次</div>
+      </div>
+      <div class="node" style="left:48px; top:755px">
         <div class="nn">review-cadence</div>
-        <div class="nh" style="color:var(--agentkit)">agent-kit + 幕僚长 · Felix 亲自运行</div>
-        <div class="nd">晚间收束 → 周六周回顾 → 月度复盘</div>
+        <div class="nh" style="color:var(--chief-text)">ai-chief-of-staff · Felix 亲自运行</div>
+        <div class="nd">/daily-review → /weekly-review（周六）→ /monthly-review</div>
       </div>
 
       <!-- forge center -->
@@ -730,7 +816,7 @@
         <div class="nd" style="border-top:1px dotted var(--hairline); margin-top:.35rem; padding-top:.3rem">产出：ragx · ragr · logx · learn-to-ship</div>
       </div>
 
-      <!-- career-strategy (running) — the life-path layer above the campaign -->
+      <!-- career-strategy — the life-path layer above the campaign -->
       <div class="node" style="left:672px; top:84px; width:230px">
         <div class="nn">career-strategy</div>
         <div class="nh" style="color:var(--jobhunt)">career · 战略师席位</div>
@@ -751,7 +837,7 @@
       <div class="node" style="left:790px; top:534px">
         <div class="nn">publishing-loop</div>
         <div class="nh" style="color:var(--blog)">blog · 编辑</div>
-        <div class="nd">/draft → /refine → /publish → 策展 /writing · 首个产出：本图谱 + 它的文章</div>
+        <div class="nd">/draft → /refine → /publish → 策展 /writing</div>
       </div>
 
       <!-- personal-brand (running; doctrine staged in ai-chief-of-staff, no home repo yet) -->
@@ -759,6 +845,13 @@
         <div class="nn">personal-brand</div>
         <div class="nh" style="color:var(--ghost)">品牌教练 · 尚无驻地</div>
         <div class="nd">BUILD → PRESENT → AUDIT ↺ · 形象 · 平台 · 由外向内</div>
+      </div>
+
+      <!-- money, bottom-right: no canonical edges yet -->
+      <div class="node" style="left:856px; top:858px; width:190px">
+        <div class="nn">money</div>
+        <div class="nh" style="color:var(--chief-text)">money · 司库</div>
+        <div class="nd">facts.yaml → 备忘录 → 月度复盘 ↺</div>
       </div>
 
       <!-- vault band -->
@@ -775,18 +868,50 @@
     <span class="lg"><span class="dot" style="background:var(--jobhunt)"></span>career</span>
     <span class="lg"><span class="dot" style="background:var(--vault)"></span>知识库</span>
     <span class="lg"><span class="dot" style="background:var(--blog)"></span>blog</span>
-    <span class="lg"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff</span>
+    <span class="lg"><span class="dot" style="background:var(--chief)"></span>ai-chief-of-staff · money · attention-portfolio（私有，办公室红）</span>
     <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--edge)" stroke-width="1.5"/></svg>喂养</span>
     <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--edge)" stroke-width="1.5" stroke-dasharray="4 3"/></svg>只读 / 愿景</span>
+    <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--vault)" stroke-width="1.5"/></svg>汇聚 → 知识库</span>
     <span class="lg"><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="var(--chief)" stroke-width="1.5" stroke-dasharray="6 4"/></svg>审计边界</span>
     <span class="lg">实线卡 = 运行中 · 虚线卡 = 待建</span>
   </div>
-  <p class="kicker" style="margin-top:1rem; font-size:.9rem">读图方法：证据自左向右流动——学习与档案知识喂养 career-loop，career-loop 喂养 job-pipeline，而流水线的需求数据（虚线）流回 <span class="mono" style="font-size:.85em">/ideate</span>，合上最外圈：<em>市场想要什么，决定接下来造什么</em>。发布的作品继续流入品牌循环，由它按平台原生方式分发，并维护流水线所依赖的、面向招聘官的界面。所有持久的东西，最终都沉入知识库。</p>
+  <p class="kicker" style="margin-top:1rem; font-size:.9rem">读图方法：证据自左向右流动——学习与档案知识喂养 career-loop，career-loop 喂养 job-pipeline，而流水线的需求数据（虚线）流回 <span class="mono" style="font-size:.85em">/ideate</span>，合上最外圈：<em>市场想要什么，决定接下来造什么</em>。发布的作品继续流入品牌循环，由它按平台原生方式分发，并维护流水线所依赖的、面向招聘官的界面。所有持久的东西最终都沉入知识库；知识库的日志又以只读方式回流，成为注意力组合的品味证据，而季度胜出者再经 /triage 闸门重新进入学习队列。money 节点的孤立是有意为之：权威边表尚未为它记录任何跨循环的边。</p>
+  <p class="mono" style="font-size:.72rem;color:var(--muted);letter-spacing:.02em;margin-top:.55rem">图 3 —— 系统地图，随本次重新生成于 2026-08-04 重绘：attention-portfolio 与 money 加入本图，补上自 2026-07-20 起记录在 atlas/README.md 里的布局缺口。（inventory.yaml · workflows.md 边表）</p>
+
+  <h3>权威边表</h3>
+  <p class="kicker" style="font-size:.9rem">上面的地图是这张表的一个视图（workflows.md，权威——若有出入，以表为准；循环自身形状里隐含的汇聚边也被显式列出）。</p>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>从 → 到</th><th>流动的是什么</th><th>类型</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">project-loop → career-loop</td><td>评审过的项目喂进证据（案例研究）</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">project-loop → learning-loop</td><td>焦点导演的角色——幕僚长 /aim 依据 career 的差距地图为下一个练习主题排序，提案到 Learning/Queue</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">learning-loop → career-loop</td><td>面试 / JD 所需的词汇</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">profile-loop → career-loop</td><td>档案知识；职业事实「只」经 master.md 进入</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">career-loop → job-pipeline</td><td>简历底版</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">prompt-lifecycle → profile-loop</td><td>提示词驱动 cowork/claude.ai 的部署</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">career-loop → publishing-loop</td><td>案例文案 → 公开站点（事实留在 forge）</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">learning-loop → publishing-loop</td><td>公开学习的草稿</td><td class="mono">愿景</td></tr>
+      <tr><td class="mono">publishing-loop → personal-brand</td><td>已发布文章 → 分发</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">profile-loop → personal-brand</td><td>档案事实为人设托底（绝不编造）</td><td class="mono">只读</td></tr>
+      <tr><td class="mono">personal-brand → job-pipeline</td><td>面向招聘官的界面（LinkedIn）</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">career-loop → career-strategy</td><td>契合度证据：地图引用 master.md 的事实——地图只指向，从不复制</td><td class="mono">只读</td></tr>
+      <tr><td class="mono">profile-loop → career-strategy</td><td>身份事实（master-profile）为地图的契合与风险主张托底</td><td class="mono">只读</td></tr>
+      <tr><td class="mono">career-strategy → job-pipeline</td><td>pursuing 姿态——由 /strategy 在刷新时读取，作为 strategy.md 的使命行；不直接读 /aim 或差距地图</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">job-pipeline → project-loop</td><td>劳动力市场的需求信号，由 /ideate 读取</td><td class="mono">只读</td></tr>
+      <tr><td class="mono">learning-loop → vault</td><td>检索尾巴：日志记录 + 卡片</td><td class="mono">汇聚</td></tr>
+      <tr><td class="mono">review-cadence → vault</td><td>晚间回顾追加进日志；周回顾编纂一个知识库页</td><td class="mono">汇聚</td></tr>
+      <tr><td class="mono">vault → attention-portfolio</td><td>inbox 想法行 + 日志被读作品味证据（显示性偏好）；从不写知识库</td><td class="mono">只读</td></tr>
+      <tr><td class="mono">attention-portfolio → learning-loop</td><td>学习型的季度审计胜出者被提案为 Learning/Queue 候选——经 /triage 闸门，遵守上限 5</td><td class="mono">喂养</td></tr>
+      <tr><td class="mono">workflow-audit → 每一行</td><td>审计边界——包含它自己那一行</td><td class="mono">元</td></tr>
+    </tbody>
+  </table>
+  </div>
 </section>
 
 <footer class="col">
   <p><span class="mono">来源：inventory.yaml（权威——行胜过图）· workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>由幕僚长编译于 2026-07-07；2026-07-07（personal-brand 与品牌教练加入）与 2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship 出任路线 B 的选题者），2026-07-20（career-strategy 凭三项使用证据翻转为运行中；attention-portfolio 与 money 加入——两者均于 07-12 设计，却被那次重新生成漏掉，这也是审计从此开始校验图对清单的覆盖的原因；司库作为第五个判断型角色列卡），以及 2026-08-03（daily-review 扩展为 review-cadence——周六周回顾与月度复盘并入该行；attention-portfolio 与 money 凭各自的使用证据翻转为运行中；地图上凡提及驻地处 job_hunting 均改名为 career）四次重新生成；另于 2026-08-04 定向更新：/council（审议模式）加入导语、幕僚长角色卡、驻地卡与 workflow-audit 流程卡——它是该行的一个入口点，不是新循环。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+  <p>由幕僚长编译于 2026-07-07；历次重新生成：2026-07-07（personal-brand 与品牌教练加入）、2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship agent 出任路线 B 的选题者）、2026-07-20（career-strategy 翻转为运行中；attention-portfolio 与 money 以流程卡形式加入；司库作为第五个判断型角色列卡）、2026-08-03（daily-review 扩展为 review-cadence；attention-portfolio 与 money 翻转为运行中；job_hunting 改名 career）、2026-08-04（定向更新：/council 加入导语与各卡），以及同日 2026-08-04 的一次完整重建：协作模式分类法获得自己的一节（§3）；money 已在运行，司库随之加入角色图谱；回顾节奏搬家为幕僚长命令（/daily-review 同日从 Cowork 迁来）；attention-portfolio 与 money 终于获得地图节点及其权威边（补上 2026-08-03 记录在案的布局缺口）；驻地从六个增至八个；权威边表印在它所治理的地图旁边。若本页与某一行不一致，以行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
 </footer>
 
 </body></html>
