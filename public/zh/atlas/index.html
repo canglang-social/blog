@@ -214,14 +214,14 @@
   <span class="eyebrow">ai-chief-of-staff · <span class="thread">系统图谱</span> · 2026-07-07 编译 · 2026-08-04 重新生成——自 inventory.yaml、workflows.md、primitives.md</span>
   <!-- 行 = xíng（知行合一：博客是知，图谱是行）。Felix 定名 2026-08-04 — 不是"行胜过图"的 háng，永不"修正"为其他标题；表格行一律写作 表行/那一行。 -->
   <h1>行 <span style="font-size:0.5em;color:inherit;opacity:0.6">系统图谱</span></h1>
-  <p class="lede">一个人、八个驻地、十五个循环、五个判断型角色、七种有名字的协作模式——外加一个审计这一切的元循环；自 2026-08-04 起，它还能把各角色召集为<em>议会</em>，就某一项决定进行审议——异议被保留，决定由 Felix 做出。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。表行胜过图示：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
+  <p class="lede">一个人、八个驻地、十七个循环、五个判断型角色、七种有名字的协作模式——外加一个审计这一切的元循环；自 2026-08-04 起，它还能把各角色召集为<em>议会</em>，就某一项决定进行审议——异议被保留，决定由 Felix 做出。下面的一切，归根结底都是 Claude 读取并遵循的文本；各个部件的差别在于<em>职责</em>，不在本质。表行胜过图示：<span class="mono" style="font-size:.85em">inventory.yaml</span> 是权威，本页只是它的地图。</p>
   <div class="stats" role="group" aria-label="系统统计">
     <div class="stat"><b>5</b><span>原语</span></div>
     <div class="stat"><b>5</b><span>角色</span></div>
     <div class="stat"><b>7</b><span>模式</span></div>
-    <div class="stat"><b>15</b><span>工作流</span></div>
+    <div class="stat"><b>17</b><span>工作流</span></div>
     <div class="stat"><b>14</b><span>运行中</span></div>
-    <div class="stat"><b>1</b><span>待建</span></div>
+    <div class="stat"><b>3</b><span>待建</span></div>
     <div class="stat"><b>8</b><span>驻地</span></div>
   </div>
 </header>
@@ -545,8 +545,8 @@
 <section class="wide" id="workflows">
   <div class="col" style="margin-bottom:1.3rem">
     <span class="eyebrow"><span class="secno">§5</span> · 循环</span>
-    <h2>十五个工作流</h2>
-    <p class="kicker">十四个运行中，一个待建——按清单顺序排列，以元循环收尾。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
+    <h2>十七个工作流</h2>
+    <p class="kicker">十四个运行中，三个待建——按清单顺序排列，以元循环收尾。每一行对应清单里它的 <span class="mono" style="font-size:.85em">summary:</span>；步骤芯片是 workflows.md 里该循环的真实形状。</p>
   </div>
 
   <div class="flows">
@@ -560,6 +560,16 @@
       <div class="flow-head"><span class="dot" style="background:var(--agentkit)"></span><span class="flow-name">learning-loop</span><span class="tag">agent-kit</span><span class="pill running">运行中</span></div>
       <p class="flow-sum">任何有趣的东西都变成持久知识——在任意会话里采集一行 #inbox，分诊到一条路线，且每条路线都终结于检索尾巴。三条规则：注意力就是我的全部所需 · 产出是唯一重要的东西 · 检索本身就是学习。幕僚长借给这个循环四条薄命令：<span class="mono" style="font-size:.85em">/triage · /aim · /card-check · /next</span>——从已冻结的 learn-to-ship agent 中收回人工判断（去自动化）的工作。</p>
       <div class="steps"><span class="step">采集 #inbox</span><span class="arr">→</span><span class="step">/triage</span><span class="arr">→</span><span class="step">A /core:explain</span><span class="arr">·</span><span class="step">B 练习——/aim 选题（ragx → ragr）</span><span class="arr">·</span><span class="step">C 材料</span><span class="arr">·</span><span class="step">D 剂量</span><span class="arr">→</span><span class="step">回忆</span><span class="arr">→</span><span class="step">卡片（人工把关）</span><span class="arr">→</span><span class="step">日志记录</span></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">english</span><span class="tag">尚无驻地 · 守则在知识库 · 演练在 career · 卡片在 Anki</span><span class="pill wanted">待建 · 已决策，尚未开跑</span></div>
+      <p class="flow-sum">把英语<em>说</em>到「语言不再是我丢掉面试的原因」——一段被安置好的每日练习，外加一位付费的人类对手方：他纠错、维护跨会话的错题账本、并替我持有那个计数。清单里的第 16 条表行，2026-08-07 落定：Felix 否决了复盘记录「挂靠、不新开」的默认选项，裁定英语是一个独立项目——刻意<em>不</em>归 career 所有，因为把口语降级为「生活方式时段」（2026-07-11）正是「让它从属于求职」的产物，而十天后就来了那次因语言而被拒。<span class="mono" style="font-size:.85em">owner_repo: null</span> 沿用 review-cadence / wiki-management 的先例——守则住在知识库、演练住在 career、卡片住在 Anki；不新开仓库，也不新写守则文件，这是 Felix 自己定的范围。90 天的交付物不是一项技能，而是一个 0 到 12 之间的数字：出席的外教课次数，由外教持有，永远不由 Felix 自己持有。待建而非运行中——跑起来之前不画图。</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-head"><span class="dot" style="background:var(--ghost)"></span><span class="flow-name">connections</span><span class="tag">尚无驻地</span><span class="pill wanted">待建 · 占位，待面谈定框</span></div>
+      <p class="flow-sum">承载事业、金钱与情感生活的那些关系——刻意去建立与维护，而不是任由「谁碰巧还没断联」来决定。清单里的第 17 条表行，2026-08-09 在分诊时开出，源自 Felix 自己 2026-08-06 的一条采集：那次扫描发现整份清单里没有任何一条表行覆盖「关系」——一条对不上任何表行的采集，是那一行缺席的信号，不是采集是噪音的信号。它<em>刻意只是一个占位</em>——<span class="mono" style="font-size:.85em">owner_repo: null</span>、<span class="mono" style="font-size:.85em">entry_points: []</span>——因为实质内容必须由 Felix 提供，而定框面谈尚未发生；用幕僚长的猜测把它填满，只会重演英语复盘所指认的那种失败：一份写「关于他」而不是「出自他」的文档。留待那次面谈回答的问题：这里的「连接」指什么；金钱与情感这两半是一条表行还是两条共用一个名字；当下的真实状态究竟如何；以及这到底是一个建设项目还是一套维护节奏。刻意不归 career 所有——和英语踩过的是同一个坑。</p>
     </div>
 
     <div class="flow">
@@ -912,7 +922,7 @@
 
 <footer class="col">
   <p><span class="mono">来源：inventory.yaml（权威——表行胜过图示）· workflows.md · primitives.md · chief-of-staff.md</span></p>
-  <p>由幕僚长编译于 2026-07-07；历次重新生成：2026-07-07（personal-brand 与品牌教练加入）、2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship agent 出任路线 B 的选题者）、2026-07-20（career-strategy 翻转为运行中；attention-portfolio 与 money 以流程卡形式加入；司库作为第五个判断型角色以卡片列入）、2026-08-03（daily-review 扩展为 review-cadence；attention-portfolio 与 money 翻转为运行中；job_hunting 改名 career）、2026-08-04（定向更新：/council 加入导语与各卡），以及同日 2026-08-04 的一次完整重建：协作模式分类法获得自己的一节（§3）；money 已在运行，司库随之加入角色图谱；回顾节奏搬家为幕僚长命令（/daily-review 同日从 Cowork 迁来）；attention-portfolio 与 money 终于获得地图节点及其权威边（补上 2026-08-03 记录在案的布局缺口）；驻地从六个增至八个；权威边表印在它所治理的地图旁边。若本页与清单中的某一行不一致，以那一行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
+  <p>由幕僚长编译于 2026-07-07；历次重新生成：2026-07-07（personal-brand 与品牌教练加入）、2026-07-12（career-strategy 携三条边加入；personal-brand 翻转为运行中；/aim 接替已冻结的 learn-to-ship agent 出任路线 B 的选题者）、2026-07-20（career-strategy 翻转为运行中；attention-portfolio 与 money 以流程卡形式加入；司库作为第五个判断型角色以卡片列入）、2026-08-03（daily-review 扩展为 review-cadence；attention-portfolio 与 money 翻转为运行中；job_hunting 改名 career）、2026-08-04（定向更新：/council 加入导语与各卡），以及同日 2026-08-04 的一次完整重建：协作模式分类法获得自己的一节（§3）；money 已在运行，司库随之加入角色图谱；回顾节奏搬家为幕僚长命令（/daily-review 同日从 Cowork 迁来）；attention-portfolio 与 money 终于获得地图节点及其权威边（补上 2026-08-03 记录在案的布局缺口）；驻地从六个增至八个；权威边表印在它所治理的地图旁边。2026-08-09 定向更新：<span class="mono" style="font-size:.85em">english</span>（第 16 条表行，2026-08-07）与 <span class="mono" style="font-size:.85em">connections</span>（第 17 条，2026-08-09）以流程卡形式加入 §5，计数随之从 15 个工作流、1 个待建变为 17 个工作流、3 个待建——两者都是<em>待建</em>：没有驻地仓库、没有设计好的循环形状、权威边表里也没有任何一条边，因此在具备之前不给它们地图节点，也不给边表行；地图图示仍只画十四个运行中节点加一个待建节点，这一布局缺口记录在 atlas/README.md。若本页与清单中的某一行不一致，以那一行为准——请修正本页。本页为 <a href="/atlas/">英文版</a> 的中文翻译；如有出入，以英文版与清单为准。</p>
 </footer>
 
 </body></html>
