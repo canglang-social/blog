@@ -22,3 +22,16 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# unfinished writing (decided 2026-08-10, TODO.md item 1)
+# This repo is PUBLIC and editor.md defines it as a curated,
+# hiring-manager-visible surface. drafts/ holds work in progress, so
+# committing it would publish unfinished writing on exactly the surface
+# built to show finished work. It was previously neither tracked nor
+# ignored — an undefined state that looked handled and wasn't.
+# Backup: the vault, not a new mechanism. Anything in here worth keeping
+# gets pasted to [[Writing/Seeds]], which is already synced.
+drafts/
+
+# git worktrees created for cross-repo PRs
+.git-worktrees/
