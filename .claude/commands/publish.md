@@ -23,6 +23,23 @@ bypass it.
    - **`authorship::`** — `felix-draft` / `ai-draft` / `mixed`
      (editor.md §Authorship). If the field is missing from the draft, ASK
      before publishing; do not infer it from the prose;
+   - **Write `authorship::` as a Logseq PROPERTY LINE at the END of the
+     block — never at the start of a block, and never wrapped in `**` or
+     backticks.** Logseq parses `key:: value` at the START of a block as a
+     property declaration; a bolded or backticked token there is rejected
+     as an invalid property name, and Logseq silently drops characters when
+     it re-serialises the block. On 2026-08-12 that destroyed 13 characters
+     mid-sentence in the provenance block for
+     `2026-08-12-say-it-in-your-first-language` — the one record that has to
+     survive step 4's deletion — and the damage was invisible in the app,
+     which rendered an "Invalid property names" error in place of the text.
+     The same string mid-sentence is safe. Block-initial is the entire
+     difference. Correct shape:
+
+     ```
+     - **Authorship and disclosure.** Body written by the Editor …
+       authorship:: ai-draft
+     ```
    - for `ai-draft` / `mixed`, the **source trace**: which sentences are
      the Editor's own wording or inference, and every claim that could not
      be corroborated, named. Say these out loud to Felix here — an
