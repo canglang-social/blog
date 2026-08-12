@@ -157,12 +157,34 @@ another repo is not a handoff — see the note at the bottom.
       is not missing — it is scattered across `[[JOB/2606Hunting]]`, the
       2026-06-29→07-02 daily reviews, and the 2026-06-28 post. **It is
       an assembly job, not a from-scratch one.**
+      AMENDED 2026-08-12 — **one of the two constraints above is gone.**
+      Felix retired the never-ghostwrite rule (*"drop the 永不代笔. we can
+      mark them in private — ai or me draft"*); `editor.md` §Authorship
+      v0.2 replaces the ban with a private per-piece `authorship::` mark.
+      So "neither can be finished by an agent" is **no longer true** —
+      `How I hunt a job using AI.md` can be marked `ai-draft` and written,
+      and the brief above already established that its material is an
+      ASSEMBLY job (scattered across `[[JOB/2606Hunting]]`, the
+      2026-06-29→07-02 daily reviews and the 2026-06-28 post), which is
+      the shape an agent is actually good at.
+      WHAT DOES NOT CHANGE: the **wait** call. That was never justified by
+      the ghostwrite rule — it rests on the cadence finding (drafts started
+      ABOUT a topic stall) and on the learning cost, which is now Felix's
+      to weigh rather than the Editor's to enforce. **So this is now a
+      choice, not a block**, and it is his: mark it `ai-draft` and let the
+      assembly happen, or keep waiting for an R1 entry. `How to study.md`
+      (20 words, no structure) is unaffected either way.
       **中文摘要** — 保持开着，而且**现在的正确动作是等**。理由不是优先级，
       是机制：为话题开的草稿会停住，骑着刚做完的事写的会发出去；这两篇都是
       前一种，其中一篇已经压了 **40 天**。等 `/seed-check` 或 R1 触发器给
       入口，别靠意志力硬救。好消息是空section的原料并不缺，散在
       `[[JOB/2606Hunting]]`、6/29–7/2 的日复盘和 6/28 那篇文章里——
-      **这是组装，不是从零写。**
+      **这是组装，不是从零写。2026-08-12 补充：两条约束里去掉了一条**——
+      「永不代笔」已废，`editor.md` §Authorship v0.2 改成每篇私下标
+      `authorship::`。所以「AI 补不了」这句**不再成立**，那篇可以标
+      `ai-draft` 直接组装出来。**但「等」这个判断不变**——它本来就不是靠
+      代笔禁令撑着的，它靠的是节奏发现和学习成本，而学习成本现在归你权衡。
+      **也就是说：这从「被挡住」变成了「你来选」。**
 
       ARCHIVED — the brief's original wording.
       ~~两篇真草稿分别缺什么 —— 这是要你写的.~~
