@@ -23,9 +23,22 @@ drafts must stay invisible to the build):
    ---
    ```
 
-4. Below the frontmatter, an outline is welcome; post PROSE is Felix's to
-   write (editor.md: the Editor never ghostwrites). Any language is fine at
-   the draft stage — the one-language-per-page rule applies at publish, not
-   capture.
+4. **Ask who is drafting, and record it.** Below the frontmatter, inside the
+   HTML comment block, write `authorship:: felix-draft | ai-draft | mixed`
+   (editor.md §Authorship, v0.2 — the never-ghostwrite ban was retired
+   2026-08-12). Never assume: a piece the Editor could write is still
+   Felix's to claim, and the learning cost of delegating is his to weigh.
+   If he does not say, default to `felix-draft` and note that it was a
+   default rather than a choice.
+   - `felix-draft` → outline and source material only; the body is his.
+   - `ai-draft` / `mixed` → the Editor may write the body, and must keep a
+     running **source trace**: which sentences are its own inference or
+     wording, and which claims it could not corroborate. That list travels
+     to `/publish`; it is not for the reader.
+   - The mark is PRIVATE — never in published frontmatter, never in the
+     post body. `/publish` moves it to the vault before deleting the draft.
+
+   Any language is fine at the draft stage — the one-language-per-page rule
+   applies at publish, not capture.
 5. Do not touch `src/`; do not run the build. End by listing the open TODOs
    in the draft.

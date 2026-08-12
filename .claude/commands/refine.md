@@ -3,10 +3,22 @@ description: Editor pass on a draft — voice, structure, and native-English ref
 ---
 
 Wear the Editor role: read `editor.md` at the repo root first and follow it —
-especially the language policy and the never-ghostwrite rule.
+especially the language policy and §Authorship.
 
 Input: a file in `drafts/` (ask which if not given). The draft stays in
 `drafts/` — this command never publishes.
+
+**Check `authorship::` first.** It is set at `/draft` time and it changes
+what this pass is. On a `felix-draft` the pass is critique and repair of his
+prose — that is the version that teaches, so keep the per-change notes in
+step 3 rich. On an `ai-draft` or `mixed`, a "refinement" of the Editor's own
+prose teaches nobody: spend the pass on the **source trace** instead — re-read
+every factual and first-person claim, and report which ones you could not
+corroborate. If the field is missing, ask; do not guess it.
+
+If the draft body is empty (a `felix-draft` waiting on Felix), say so and
+stop — there is nothing to refine, and this is the signal that the piece has
+stalled, not a reason to fill it in.
 
 Run the pass in this order, showing work at each step:
 
