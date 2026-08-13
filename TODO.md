@@ -275,3 +275,55 @@ command and the daily ripeness signal that now feed this repo's `/draft`).
       RAGX 核心件盘点出结果之后才写得出来**，因为结果就是材料；盘点不跑就没有这
       篇文章，而这也是诚实的答案。**它还有一个具名读者**——2026-08-13 微信里朋友
       直接说「那你试试，我想知道过程和结果」。**现在不要动笔**，触发条件是盘点完成。
+
+- [ ] **SERIES — "when the agents you delegated to go silent"**, Felix's own
+      plan, stated 2026-08-13 at the close of the triage session: *"i hope to
+      do a review for this session first, then do a research/survey for same
+      problem others have meet, then research how others solve it, and try to
+      fix it better, and maybe give some feedback into claude code office…
+      but, it's ok to post one blog first and update the series later."*
+      WHY THIS ONE IS DIFFERENT FROM THE TWO STALLED DRAFTS ABOVE. This repo's
+      own cadence finding is that drafts started ABOUT a topic stall while
+      drafts riding just-finished work ship. This rides work finished the same
+      day, and **the assembly is already done**: the full write-up lives at
+      `ai-chief-of-staff/reports/2026-08-13-agent-fanout-and-resume.md` with
+      the sequence, verbatim transcript evidence, four mechanisms, the four
+      diagnostic commands, and the numbers. Post 1 is an assembly job, not a
+      from-scratch one — which is the shape the brief above says actually
+      ships.
+      THE SPINE, in Felix's order. **(1) Review** — done; the record is it.
+      **(2) Survey whether others hit this** — and the sharpening offered at
+      the time: check the `anthropics/claude-code` issue tracker FIRST, before
+      any general web search, because "is this already filed" changes both the
+      post and the feedback. **(3) Survey how they solve it.** **(4) Build a
+      better fix** — if this happens it creates its own object in `agent-kit`
+      or `forge` at that time, not now. **(5) Feedback upstream to Anthropic.**
+      THE FRAMING THAT MAKES THE FEEDBACK DEFENSIBLE, worth carrying into
+      both the post and the report: notifications flowing to the spawner
+      rather than to the root is plausibly **by design, not a bug**, and a
+      feedback item that says "my agents got lost" invites that answer. The
+      narrower and much stronger claim is that **there is no way to see that
+      an agent completed and its result went nowhere** — silence and "checked,
+      found nothing" are indistinguishable, so the failure has no negative
+      signal to trip on. That is the sentence to lead with.
+      PUBLISH ORDER IS SETTLED: post 1 goes out before the survey is finished;
+      the series updates behind it. Felix's call, made explicitly.
+      OWNER: **Felix** on when post 1 is drafted and on whether step 4
+      happens at all; the assistant drafts from the record on his word. NOT
+      started on assistant initiative, because the brief above rules that
+      drafts revived by willpower are the known failure mode and this repo
+      waits for `/seed-check` or the R1 trigger.
+      **中文摘要** — **系列：「当你委派出去的 agent 沉默了」**，你自己 2026-08-13
+      定的计划：先复盘本次会话 → 调研别人是否遇到过 → 调研别人怎么解 → 尝试做一个
+      更好的解法 → 反馈给 Claude Code 官方；并且**先发第一篇、系列后续再补**。
+      **它和上面两篇卡住的草稿不一样**：本仓库自己的结论是「为话题开的草稿会停住，
+      骑着刚做完的事写的会发出去」，而这一篇骑的是当天刚做完的事，**而且组装已经
+      完成**——完整复盘在 `ai-chief-of-staff/reports/2026-08-13-agent-fanout-and-
+      resume.md`，含时序、原文 transcript 证据、四条机制、四个诊断命令和数字。
+      **两处收紧**：第 2 步先查 `anthropics/claude-code` 的 issue 列表再铺开搜；
+      给官方的反馈**不要写成「我的 agent 丢了」**（通知流向生成者很可能是设计如此，
+      这么写等于送对方一个现成回答），要写成**「没有任何办法看出一个 agent 完成了、
+      而它的结果去了没人的地方」——沉默与『查过了没有』无法区分，这个失败没有负向
+      信号**。**发布顺序已定**：第一篇先发，系列在后面补。**归你决定**何时起草，
+      助手按你的话从记录里组装；**不自作主张开头**，因为上面那条 brief 判定「靠意志力
+      硬救的草稿」正是已知的失败模式。
