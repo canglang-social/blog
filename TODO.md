@@ -238,3 +238,40 @@ no owner is not a plan."*
 Upstream context, if useful: `ai-chief-of-staff/reports/2026-08-10-writing-cadence-design.md`
 (the diagnosis of what actually ships), and PR #124 there (the `/seed-check`
 command and the daily ripeness signal that now feed this repo's `/draft`).
+
+- [ ] **CONDITIONAL post candidate — "how to hold it in the AI era"**, routed
+      by `/triage` 2026-08-13 from Felix's own capture of [[2026-08-12]]:
+      *"AI 写的代码我一直知道是 AI 写的，问题是我还握不握得住；2026-08-12 的
+      drill 用中文和英文都讲不出 RAG chunking，答案是握不住。接下来几天解这个，
+      **有结果就分享**。"*
+      WHY THIS ROUTES HERE AND NOT TO career. The content-gap half is already
+      owned — `career/TODO.md` carries "The interview gap is CONTENT, not
+      English" as a durable owner line, and the next action (a 15-min RAGX
+      core-piece inventory marking each piece mine / library /
+      AI-written-and-never-held) lives on the day plan. That half needs
+      nothing from this repo. The half with no home anywhere is the last
+      four characters: **有结果就分享** — a publish intent that appears in no
+      file.
+      WHY IT IS EXACTLY THE ENTRY THE OPEN BRIEF ABOVE IS WAITING FOR. That
+      brief's ruling is that drafts started ABOUT a topic stall while drafts
+      riding just-finished work ship, and it says the correct action is to
+      WAIT for an entry of the second kind rather than revive by willpower.
+      This is structurally the second kind: it **cannot be written until the
+      inventory produces a result**, because the result is the material. If
+      the inventory never runs, there is no post — and that is the honest
+      answer rather than a stalled draft.
+      IT ALSO HAS A NAMED READER, which the other candidates do not. A WeChat
+      conversation Felix captured on 2026-08-13 (vault journal, screenshot)
+      has a friend asking him for exactly this write-up — *"那你试试，我想知道
+      过程和结果"* — about the adjacent job-hunt-automation experiment. An
+      audience of one who asked by name is a stronger ripeness signal than
+      any topic score.
+      DO NOT START IT NOW. The trigger is the inventory finishing, not this
+      line existing. `/seed-check` or the `/daily-review` R1 signal should be
+      what picks it up.
+      **中文摘要** — **条件式文章候选**：「AI 时代我还握不握得住」。内容缺口那一半
+      已有 career 的持久 owner 行认领，这里只要**「有结果就分享」**那一半——那个
+      发表意图在任何文件里都没有。它正好是上面那条 brief 在等的入口：**必须等
+      RAGX 核心件盘点出结果之后才写得出来**，因为结果就是材料；盘点不跑就没有这
+      篇文章，而这也是诚实的答案。**它还有一个具名读者**——2026-08-13 微信里朋友
+      直接说「那你试试，我想知道过程和结果」。**现在不要动笔**，触发条件是盘点完成。
