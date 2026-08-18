@@ -53,6 +53,21 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm astro -- --help` | Get help using the Astro CLI                     |
 
+## AI editorial workflow
+
+Repository guidance is canonical in `AGENTS.md`, and editorial judgment and
+privacy rules are canonical in `editor.md`. From a fresh Codex workspace, use
+the repo-scoped skills discovered under `.agents/skills/`:
+
+- `$blog-draft` to capture a private draft;
+- `$blog-refine` to run the Editor pass without publishing;
+- `$blog-publish` to move an approved draft into the content collection after
+  provenance and validation gates pass.
+
+Claude's `/draft`, `/refine`, and `/publish` commands are thin adapters to the
+same workflows. Repository publishing does not deploy the website or post to
+external platforms.
+
 ## 👀 Want to learn more?
 
 Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

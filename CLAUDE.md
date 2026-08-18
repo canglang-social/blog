@@ -1,6 +1,12 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Read `AGENTS.md` first. It is the canonical provider-neutral repository
+guidance and owns commands, architecture, editorial discovery, and safety
+boundaries. The files under `.claude/commands/` are Claude-specific thin
+adapters to the canonical skills under `.agents/skills/`.
+
+The details below are retained as an architecture reference for Claude Code;
+if they conflict with `AGENTS.md` or `editor.md`, those canonical files win.
 
 ## Commands
 
