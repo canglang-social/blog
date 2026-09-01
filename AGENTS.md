@@ -39,16 +39,17 @@ and pass-through assets in `public/`.
 Codex discovers the repository skills below from `.agents/skills/`. Invoke
 them directly in a fresh Codex task:
 
-- `$blog-draft` (`.agents/skills/blog-draft/SKILL.md`) captures a schema-ready
-  private draft.
-- `$blog-refine` (`.agents/skills/blog-refine/SKILL.md`) performs the Editor
-  pass without publishing.
-- `$blog-publish` (`.agents/skills/blog-publish/SKILL.md`) moves an approved
-  draft into the public collection after
-  provenance, disclosure, schema, and build gates pass.
+- `$blog-draft` (`.agents/skills/blog-draft/SKILL.md`) loads the canonical
+  `workflows/draft.md` contract for a schema-ready private draft.
+- `$blog-refine` (`.agents/skills/blog-refine/SKILL.md`) loads the canonical
+  `workflows/refine.md` contract for the Editor pass without publishing.
+- `$blog-publish` (`.agents/skills/blog-publish/SKILL.md`) loads the canonical
+  `workflows/publish.md` contract for moving an approved draft into the public
+  collection after provenance, disclosure, schema, and build gates pass.
 
-Claude slash commands in `.claude/commands/` are thin adapters to the same
-canonical skills. Do not maintain a second workflow implementation there.
+Codex skills and Claude slash commands in `.claude/commands/` are thin adapters
+to the same provider-neutral workflows. Do not maintain a second workflow
+implementation in either adapter.
 
 ## Safety and ownership boundaries
 
