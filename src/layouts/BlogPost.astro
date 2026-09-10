@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { isRasterImage } from '../lib/social-card.mjs';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -35,7 +36,7 @@ const t = useTranslations(lang);
     <BaseHead
       title={title}
       description={description}
-      image={ogImage ?? heroImage}
+      image={isRasterImage(ogImage) ? ogImage : heroImage}
       type="article"
       lang={lang}
       publishedTime={pubDate}
