@@ -3,7 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
-import FallbackImage from '../assets/blog-placeholder-1.jpg';
+import { CARD_WIDTH, CARD_HEIGHT, generatedCardPath, isRasterImage } from '../lib/social-card.mjs';
 import { defaultLang, useTranslations, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -22,17 +22,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
 	title,
 	description,
-	image = FallbackImage,
+	image,
 	type = 'website',
 	lang = defaultLang,
 	publishedTime,
 	updatedTime,
 } = Astro.props;
 
-// Share crawlers don't render SVG previews, and auto-rasterizing loses CSS
-// variables (all-black output). SVG-hero posts should set a raster `ogImage`
-// in frontmatter; otherwise fall back to the site placeholder.
-const shareImage = image.format === 'svg' ? FallbackImage : image;
+// Keep authored raster images; otherwise use the build-generated localized card.
+const shareImage = isRasterImage(image) ? image! : {
+  src: generatedCardPath({ title, lang, pathname: Astro.url.pathname }),
+  width: CARD_WIDTH,
+  height: CARD_HEIGHT,
+};
 const imageURL = new URL(shareImage.src, Astro.site);
 const ogLocale = lang === 'zh' ? 'zh_CN' : 'en_US';
 const siteName = useTranslations(lang)('site.title');
@@ -86,6 +88,7 @@ const siteName = useTranslations(lang)('site.title');
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageURL} />
+<meta property="og:image:alt" content={title} />
 <meta property="og:image:width" content={String(shareImage.width)} />
 <meta property="og:image:height" content={String(shareImage.height)} />
 {publishedTime && (
@@ -101,3 +104,4 @@ const siteName = useTranslations(lang)('site.title');
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
+<meta name="twitter:image:alt" content={title} />
