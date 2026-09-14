@@ -12,7 +12,7 @@ const a=art[project.id as keyof typeof art];
     <div class="exhibit-mount"><Artwork id={project.id as keyof typeof art} lang={lang} eager={index<3}/></div>
     <div class="exhibit-label"><div class="exhibit-state"><span class:list={['exhibit-status',w.status]}>{labels[w.status][lang]}</span><span class="token-number" title={lang==='zh'?'近 30 天已记录 AI token':'Recorded AI tokens in the last 30 days'}>{tokenLabel(w.usage.recent,lang)}{w.usage.coverage==='partial'?(lang==='zh'?' · 部分':' · partial'):''}</span></div><div class="exhibit-title"><h3>{w.inscription[lang]}</h3><p>{w.name[lang]}</p></div></div>
     <p class="exhibit-summary">{w.summary[lang]}</p>
-    {w.pauseReason&&<p class="exhibit-pause">{w.pauseReason[lang]}</p>}
+    {w.status==='paused'&&w.pauseReason&&<p class="exhibit-pause">{w.pauseReason[lang]}</p>}
     <div class="exhibit-topics">{w.topics.map(t=><span class="gallery-tag">{topics[t]?.[lang]??t}</span>)}</div>
   </a>
 </article>

@@ -3,11 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const input = process.argv[2];
-if (!input) throw new Error('Usage: node scripts/import-work-usage.mjs <sanitized-public-usage.json>');
-const packet = JSON.parse(fs.readFileSync(input, 'utf8'));
+export function importUsage(packet, root = fileURLToPath(new URL('../src/content/projects/', import.meta.url))) {
 if (packet.schema_version !== 1 || !Array.isArray(packet.works)) throw new Error('Unsupported usage packet');
-const root = fileURLToPath(new URL('../src/content/projects/', import.meta.url));
 const pending = [];
 const seen = new Set();
 for (const row of packet.works) {
@@ -29,9 +26,20 @@ for (const row of packet.works) {
   if(!match)throw new Error(`No gallery record: ${row.work_id}`);
   const gallery=JSON.parse(match[1]);
   if(gallery.usage?.measuredAt&&usage.measuredAt&&Date.parse(gallery.usage.measuredAt)>Date.parse(usage.measuredAt))throw new Error('Refusing older snapshot');
+  if(gallery.usage?.coverage&&gallery.usage.coverage!=='unknown'&&unknown)throw new Error('Unknown snapshot cannot erase recorded usage');
+  if(usage.recent!==null&&usage.lifetime!==null&&usage.recent>usage.lifetime)throw new Error('Recent usage exceeds lifetime');
+  if(usage.recentCached!=null&&usage.recent!=null&&usage.recentCached>usage.recent)throw new Error('Cache exceeds recent total');
+  if(usage.lifetimeCached!=null&&usage.lifetime!=null&&usage.lifetimeCached>usage.lifetime)throw new Error('Cache exceeds lifetime total');
   gallery.usage=usage;
   const next=before.slice(0,match.index)+'gallery: '+JSON.stringify(gallery,null,2).replaceAll('\n','\n  ')+'\n---'+before.slice(match.index+match[0].length);
   if(next!==before)pending.push([filename,next]);
 }
 for(const [filename,next] of pending)fs.writeFileSync(filename,next);
-console.log(`Updated ${pending.length} work records; no private source fields imported.`);
+return pending.length;
+}
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const input = process.argv[2];
+  if (!input) throw new Error('Usage: node scripts/import-work-usage.mjs <sanitized-public-usage.json>');
+  const count = importUsage(JSON.parse(fs.readFileSync(input, 'utf8')));
+  console.log(`Updated ${count} work records; no private source fields imported.`);
+}
