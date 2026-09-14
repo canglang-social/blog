@@ -8,6 +8,61 @@ metricNote: deterministic ranking, gated by a hermetic CI eval on every push.
 demoUrl: https://vegekiwi-learn-to-ship.hf.space
 repoUrl: https://github.com/canglang-social/learn-to-ship
 order: 2
+gallery: {
+    "name": {
+      "en": "Learn to Ship",
+      "zh": "Learn to Ship"
+    },
+    "inscription": {
+      "en": "Learning toward a result",
+      "zh": "学以致用"
+    },
+    "kind": "project",
+    "status": "archived",
+    "statusCheckedAt": "2026-09-14",
+    "topics": [
+      "learning",
+      "tools"
+    ],
+    "summary": {
+      "en": "A small agent that ranks what to study by the gap each item can help close.",
+      "zh": "一个小型智能体，按每项学习能够弥补的差距，排列下一步该学什么。"
+    },
+    "purpose": {
+      "en": "Connect learning choices to a specific outcome, with a reason that can be inspected and a ranking that can be reproduced.",
+      "zh": "把学习选择与具体成果连接起来，让排序可以复现，让理由可以检查。"
+    },
+    "contribution": {
+      "en": "I built a deterministic ranker that reads gap data through an MCP tool, with a golden evaluation and a cloud demo using a fictional learner.",
+      "zh": "我构建了通过 MCP 工具读取差距数据的确定性排序器，并配备固定评测与使用虚构学习者数据的云端演示。"
+    },
+    "milestones": [
+      {
+        "id": "learn-to-ship-article",
+        "date": "2026-07-06",
+        "title": {
+          "en": "The tool recommended building itself",
+          "zh": "工具建议先把自己造出来"
+        },
+        "body": {
+          "en": "Published the story of the first version: ranking study items, keeping private data separate, and shipping an end-to-end agent.",
+          "zh": "发布首版故事：为学习项排序、分离私人数据，并交付一个端到端智能体。"
+        }
+      }
+    ],
+    "relatedSlugs": [
+      "2026-07-06-learning-to-ship"
+    ],
+    "links": [
+      {
+        "label": {
+          "en": "View source",
+          "zh": "查看代码"
+        },
+        "url": "https://github.com/canglang-social/learn-to-ship"
+      }
+    ]
+  }
 ---
 
 Not the most interesting thing to study, the highest-leverage one.

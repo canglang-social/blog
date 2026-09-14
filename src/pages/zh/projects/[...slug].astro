@@ -1,0 +1,9 @@
+---
+import { galleryWorks } from '../../../lib/gallery';
+import Detail from '../../../components/gallery/Detail.astro';
+export async function getStaticPaths() {return (await galleryWorks()).map(project=>({params:{slug:project.id},props:{project}}));}
+const {project}=Astro.props;
+---
+<Detail project={project} lang="zh" hasCaseStudy={false}>
+
+</Detail>

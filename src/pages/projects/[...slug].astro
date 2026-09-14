@@ -1,19 +1,11 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Project from '../../layouts/Project.astro';
-
-export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map((project) => ({
-    params: { slug: project.id },
-    props: project,
-  }));
-}
-
-const project = Astro.props;
-const { Content } = await render(project);
+import { render } from 'astro:content';
+import { galleryWorks } from '../../lib/gallery';
+import Detail from '../../components/gallery/Detail.astro';
+export async function getStaticPaths() {return (await galleryWorks()).map(project=>({params:{slug:project.id},props:{project}}));}
+const {project}=Astro.props;
+const {Content}=await render(project);
 ---
-
-<Project {...project.data}>
+<Detail project={project} lang="en" hasCaseStudy={['ragx','learn-to-ship'].includes(project.id)}>
   <Content />
-</Project>
+</Detail>
