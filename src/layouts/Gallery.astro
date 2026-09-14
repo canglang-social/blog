@@ -26,26 +26,41 @@ const base=prefix(lang), zh=lang==='zh';
     <nav aria-label={zh?'主导航':'Main navigation'}>
       {[[zh?'知':'Writing',`${base}/blog/`,zh?'知 · 博客文章':'Writing'],[zh?'行':'Atlas',`${base}/atlas/`,zh?'行 · 实践地图':'Atlas'],[zh?'工':'Works',`${base}/projects/`,zh?'工 · 项目作品':'Works'],[zh?'吾':'About',`${base}/about/`,zh?'吾 · 关于我':'About']].map(([label,href,meaning])=><a href={href} title={meaning} aria-label={meaning} aria-current={Astro.url.pathname===href?'page':undefined}>{label}</a>)}
     </nav>
-    <div class="gallery-preferences"><a data-gallery-language href={switchUrl} lang={zh?'en':'zh'}>{zh?'English':'中文'}</a><label class="theme-choice"><span class="sr-only">{zh?'艺术主题':'Art theme'}</span><select autocomplete="off" id="gallery-theme" aria-label={zh?'艺术主题':'Art theme'}><option value="landscape">{zh?'中国山水':'Chinese landscape'}</option><option value="yokai">{zh?'日本 · 百鬼夜行':'Japanese yokai'}</option></select></label></div>
+    <div class="gallery-preferences">
+      <div class="gallery-social" aria-label={zh?'其他平台':'Elsewhere'}>
+        <a href="https://github.com/canglang-social" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub <span aria-hidden="true">↗</span></a>
+        <a href="https://x.com/canglang_so" target="_blank" rel="noopener noreferrer" aria-label="X">X <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="preference-pair language-pair" role="group" aria-label={zh?'语言':'Language'}>
+        {zh ? <span aria-current="true" lang="zh">中</span> : <a data-gallery-language href={switchUrl} lang="zh" aria-label="切换为中文">中</a>}
+        <span class="preference-divider" aria-hidden="true">/</span>
+        {zh ? <a data-gallery-language href={switchUrl} lang="en" aria-label="Switch to English">EN</a> : <span aria-current="true" lang="en">EN</span>}
+      </div>
+      <div class="preference-pair art-pair" id="gallery-theme" role="group" aria-label={zh?'画境':'Art theme'}>
+        <button type="button" data-art-choice="landscape" aria-pressed="true" title={zh?'中国山水':'Chinese landscape'}>{zh?'山水':'Landscape'}</button>
+        <span class="preference-divider" aria-hidden="true">/</span>
+        <button type="button" data-art-choice="yokai" aria-pressed="false" title={zh?'日本 · 百鬼夜行':'Japanese yokai'}>{zh?'百鬼':'Yokai'}</button>
+      </div>
+    </div>
   </header>
   <main id="main" class="gallery-main" tabindex="-1"><slot/></main>
-  <footer class="gallery-footer shell"><span>{zh?'沧浪 · 因好奇而构建，仍在慢慢展开。':'Felix Han · Built with curiosity. Still unfolding.'}</span><a href="#main">{zh?'回到开卷处':'Back to the beginning'}</a></footer>
+  <footer class="gallery-footer shell"><span>{zh?'沧浪 · 因好奇而构建，仍在慢慢展开。':'Felix Han · Built with curiosity. Still unfolding.'}</span><div class="gallery-footer-links"><a href="https://github.com/canglang-social" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://x.com/canglang_so" target="_blank" rel="noopener noreferrer">X ↗</a><a href="#main">{zh?'回到开卷处':'Back to the beginning'}</a></div></footer>
   <script>
-    const control=document.querySelector<HTMLSelectElement>('#gallery-theme')!;
+    const control=document.querySelector<HTMLElement>('#gallery-theme')!;
     function applyTheme(value:string){
-      const night=value==='yokai';document.documentElement.dataset.artTheme=night?'yokai':'landscape';document.documentElement.dataset.theme=night?'dark':'light';control.value=night?'yokai':'landscape';
-      try{localStorage.setItem('gallery-art-theme',control.value);const back=document.querySelector<HTMLAnchorElement>('#gallery-back');const saved=JSON.parse(sessionStorage.getItem('gallery-return')||'null');if(back&&saved&&/^\/(zh\/)?(projects\/)?(\?.*)?$/.test(saved.url)&&saved.url.startsWith('/zh/')===(document.documentElement.lang==='zh')){const url=new URL(saved.url,location.origin);url.searchParams.set('art',control.value);saved.url=url.pathname+url.search;sessionStorage.setItem('gallery-return',JSON.stringify(saved));back.href=saved.url}}catch{}
+      const night=value==='yokai';document.documentElement.dataset.artTheme=night?'yokai':'landscape';document.documentElement.dataset.theme=night?'dark':'light';control.dataset.value=night?'yokai':'landscape';for(const button of control.querySelectorAll<HTMLButtonElement>('[data-art-choice]'))button.setAttribute('aria-pressed',String(button.dataset.artChoice===control.dataset.value!));
+      try{localStorage.setItem('gallery-art-theme',control.dataset.value!);const back=document.querySelector<HTMLAnchorElement>('#gallery-back');const saved=JSON.parse(sessionStorage.getItem('gallery-return')||'null');if(back&&saved&&/^\/(zh\/)?(projects\/)?(\?.*)?$/.test(saved.url)&&saved.url.startsWith('/zh/')===(document.documentElement.lang==='zh')){const url=new URL(saved.url,location.origin);url.searchParams.set('art',control.dataset.value!);saved.url=url.pathname+url.search;sessionStorage.setItem('gallery-return',JSON.stringify(saved));back.href=saved.url}}catch{}
       for(const source of document.querySelectorAll<HTMLSourceElement>('[data-yokai-source]'))source.media=night?'all':'not all';
       for(const img of document.querySelectorAll<HTMLImageElement>('[data-day-alt]'))img.alt=(night?img.dataset.nightAlt:img.dataset.dayAlt)!;
       for(const link of document.querySelectorAll<HTMLAnchorElement>('[data-art-original]'))link.href=(night?link.dataset.nightHref:link.dataset.dayHref)!;
     }
     applyTheme(document.documentElement.dataset.artTheme||'landscape');
-    if((performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type==='back_forward'){const url=new URL(location.href);url.searchParams.set('art',control.value);history.replaceState(history.state,'',url)}
+    if((performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type==='back_forward'){const url=new URL(location.href);url.searchParams.set('art',control.dataset.value!);history.replaceState(history.state,'',url)}
     try{localStorage.setItem('gallery-language',document.documentElement.lang)}catch{}
-    control.addEventListener('change',()=>{applyTheme(control.value);try{localStorage.setItem('gallery-art-theme',control.value)}catch{}const url=new URL(location.href);url.searchParams.set('art',control.value);history.replaceState(history.state,'',url);syncLanguageLink()});
+    for(const button of control.querySelectorAll<HTMLButtonElement>('[data-art-choice]'))button.addEventListener('click',()=>{const value=button.dataset.artChoice!;applyTheme(value);const url=new URL(location.href);url.searchParams.set('art',value);history.replaceState(history.state,'',url);syncLanguageLink()});
     function restorePreference(){let value=document.documentElement.dataset.artTheme||'landscape';try{value=localStorage.getItem('gallery-art-theme')||value}catch{}applyTheme(value);const url=new URL(location.href);url.searchParams.set('art',value);history.replaceState(history.state,'',url);syncLanguageLink()}
     window.addEventListener('popstate',restorePreference);
-    window.addEventListener('pageshow',event=>{if(event.persisted)restorePreference();syncLanguageLink();requestAnimationFrame(()=>{control.value=document.documentElement.dataset.artTheme||'landscape'})});
+    window.addEventListener('pageshow',event=>{if(event.persisted)restorePreference();syncLanguageLink();requestAnimationFrame(()=>{control.dataset.value=document.documentElement.dataset.artTheme||'landscape'})});
     function syncLanguageLink(){const a=document.querySelector<HTMLAnchorElement>('[data-gallery-language]');if(a){const url=new URL(a.href);url.search=location.search;url.hash=location.hash;a.href=url.href}}
     syncLanguageLink();window.addEventListener('hashchange',syncLanguageLink);window.addEventListener('gallery:statechange',syncLanguageLink);
     for(const img of document.querySelectorAll<HTMLImageElement>('.exhibit-mount img,.detail-exhibit img')){

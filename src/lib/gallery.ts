@@ -4,9 +4,11 @@ import river from '../assets/gallery/scroll-landscape.png';
 import mountains from '../assets/gallery/landscape.png';
 import ragx from '../assets/projects/ragx-eval-dashboard.png';
 import learning from '../assets/projects/learn-to-ship-ranked.png';
-import procession from '../assets/gallery/yokai-procession.png';
-import shrine from '../assets/gallery/yokai-mountain.png';
-import bridge from '../assets/gallery/yokai-bridge.png';
+import kitsune from '../assets/gallery/portrait-kitsune.png';
+import tengu from '../assets/gallery/portrait-tengu.png';
+import kasa from '../assets/gallery/portrait-kasa.png';
+import chochin from '../assets/gallery/portrait-chochin.png';
+import kappa from '../assets/gallery/portrait-kappa.png';
 import type { Lang } from '../i18n/ui';
 
 export const art = {
@@ -17,9 +19,15 @@ export const art = {
   'field-notes': { image:river, mount:'#efe6d5', alt:{en:'A quiet river between mountains',zh:'山间静水'}, generated:true },
 };
 export const nightArt = {
-  'work-board':{image:bridge,alt:{en:'A lantern-lit yokai procession crossing a bridge toward a cedar shrine',zh:'提灯的百鬼队伍过桥，走向杉林中的神社'}},
-  'speaking-worlds':{image:procession,alt:{en:'Fox and umbrella spirits beneath a shrine gate and moon',zh:'月下鸟居旁的狐灵与伞妖'}},
-  'field-notes':{image:shrine,alt:{en:'Lantern spirits on a mountain path',zh:'山路上的灯火与鬼神'}},
+  'work-board':{image:kitsune,alt:{en:'A fox spirit carrying a lantern',zh:'提灯的狐灵'}},
+  'speaking-worlds':{image:tengu,alt:{en:'A tengu with a feather fan beneath cedar trees',zh:'杉树下手执羽扇的天狗'}},
+  'field-notes':{image:chochin,alt:{en:'A glowing lantern spirit beside a shrine',zh:'神社旁发光的灯笼妖'}},
+};
+// Portraits identify works in the yokai gallery. Detail pages retain real project evidence.
+export const cardNightArt = {
+  ...nightArt,
+  ragx:{image:kappa,alt:{en:'A kappa beside a moonlit stream',zh:'月下溪边的河童'}},
+  'learn-to-ship':{image:kasa,alt:{en:'A one-eyed umbrella yokai on shrine steps',zh:'神社石阶上的独眼伞妖'}},
 };
 export const labels = {
   active: {en:'In focus',zh:'专 · 正在投入'}, exploring:{en:'Exploring',zh:'探 · 探索中'},

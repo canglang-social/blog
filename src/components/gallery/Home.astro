@@ -12,8 +12,17 @@ const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，
 <Gallery lang={lang} title={title} description={description} switchUrl={`${zh?'':'/zh'}${board?'/projects/':'/'}`}>
   <section class="gallery-intro shell"><div><h1>{title}</h1><p>{description}</p><a href={`${base}/about/`}>{zh?'知吾者':'About me'}</a></div><span class="gallery-inscription" aria-hidden="true">{zh?'所作 · 所思':'Work, unfolding'}</span></section>
   <section class="exhibition shell" aria-label={zh?'作品展':'Work exhibition'}>
-    <div class="exhibition-heading"><h2>{zh?'工':'Works'}</h2>{!board&&<a href={`${base}/projects/`}>{zh?'按主题与状态浏览':'Browse by topic or status'}</a>}</div>
-    {board&&<form class="gallery-filters" role="search"><label>{zh?'状态':'Status'}<select name="status"><option value="all">{zh?'全部':'All'}</option>{Object.entries(labels).map(([id,label])=><option value={id}>{label[lang]}</option>)}</select></label><label>{zh?'主题':'Topic'}<select name="topic"><option value="all">{zh?'全部':'All'}</option>{Object.entries(topics).map(([id,label])=><option value={id}>{label[lang]}</option>)}</select></label><button type="reset">{zh?'清除筛选':'Clear filters'}</button><output aria-live="polite"></output></form>}
+    <div class="exhibition-heading"><h2>{zh?'工':'Works'}</h2>{!board&&<a href={`${base}/projects/`}>{zh?'按主题与状态浏览':'Browse by topic or status'}</a>}
+    {board&&<form class="gallery-filters" role="search" aria-label={zh?'筛选作品':'Filter works'}>
+      {(['status','topic'] as const).map(key=><details class="filter-menu" data-filter={key}>
+        <summary><span class="filter-kind">{key==='status'?(zh?'状态':'Status'):(zh?'主题':'Topic')}</span><span data-filter-caption>{zh?'全部':'All'}</span><span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+        <div class="filter-options">
+          {[['all',zh?'全部':'All'],...Object.entries(key==='status'?labels:topics).map(([id,label])=>[id,label[lang]])].map(([id,label])=><label><input type="radio" name={key} value={id} checked={id==='all'}/><span>{label}</span><span class="filter-check" aria-hidden="true">✓</span></label>)}
+        </div>
+      </details>)}
+      <button class="filter-reset" type="reset">{zh?'重置':'Reset'}</button><output aria-live="polite"></output>
+    </form>}
+    </div>
     <div class="masonry">{projects.map((p,index)=><WorkCard project={p} lang={lang} index={index}/>)}</div>
     <p class="gallery-empty" hidden>{zh?'当前筛选下没有作品。试试其他主题或清除筛选。':'No works match. Try another topic or clear the filters.'}</p>
     <p class="gallery-footnote">{zh?'— 表示用量尚未记录，并非零。底板高度参考近 30 天已记录的 AI token，用量不代表作品价值。':'— means usage is not yet recorded, not zero. Mount height reflects recorded AI tokens over 30 days, not the value of a work.'}</p>
@@ -31,15 +40,25 @@ const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，
   }
   function applyFilters(){
     if(!form){layout();return}
-    const params=new URLSearchParams(location.search), status=form.elements.namedItem('status') as HTMLSelectElement, topic=form.elements.namedItem('topic') as HTMLSelectElement;
-    status.value=[...status.options].some(o=>o.value===params.get('status'))?params.get('status')!:'all';
-    topic.value=[...topic.options].some(o=>o.value===params.get('topic'))?params.get('topic')!:'all';
-    for(const card of cards) card.hidden=!(status.value==='all'||card.dataset.status===status.value)||!(topic.value==='all'||card.dataset.topics!.split(' ').includes(topic.value));
+    const params=new URLSearchParams(location.search), chosen:Record<string,string>={};
+    for(const key of ['status','topic']){
+      const radios=[...form.querySelectorAll<HTMLInputElement>(`input[name="${key}"]`)];
+      chosen[key]=radios.some(r=>r.value===params.get(key))?params.get(key)!:'all';
+      for(const radio of radios)radio.checked=radio.value===chosen[key];
+      form.querySelector(`[data-filter="${key}"] [data-filter-caption]`)!.textContent=radios.find(r=>r.checked)!.nextElementSibling!.textContent;
+    }
+    for(const card of cards)card.hidden=!(chosen.status==='all'||card.dataset.status===chosen.status)||!(chosen.topic==='all'||card.dataset.topics!.split(' ').includes(chosen.topic));
+    (form.querySelector('.filter-reset') as HTMLButtonElement).hidden=chosen.status==='all'&&chosen.topic==='all';
     const count=cards.filter(c=>!c.hidden).length;form.querySelector('output')!.textContent=`${count} ${document.documentElement.lang==='zh'?'个作品':'works'}`;
     (document.querySelector('.gallery-empty') as HTMLElement).hidden=count>0;layout();
   }
-  form?.addEventListener('change',()=>{const url=new URL(location.href);for(const key of ['status','topic']){const value=(form.elements.namedItem(key) as HTMLSelectElement).value;if(value==='all')url.searchParams.delete(key);else url.searchParams.set(key,value)}history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
+  form?.addEventListener('change',()=>{for(const menu of form.querySelectorAll<HTMLDetailsElement>('details[open]')){menu.open=false;menu.querySelector('summary')?.focus()}const url=new URL(location.href);for(const key of ['status','topic']){const value=(form.querySelector(`input[name="${key}"]:checked`) as HTMLInputElement).value;if(value==='all')url.searchParams.delete(key);else url.searchParams.set(key,value)}history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
   form?.addEventListener('reset',()=>{const url=new URL(location.href);url.searchParams.delete('status');url.searchParams.delete('topic');history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
+  for(const menu of form?.querySelectorAll<HTMLDetailsElement>('details')||[]){
+    menu.addEventListener('toggle',()=>{if(menu.open)for(const other of form!.querySelectorAll<HTMLDetailsElement>('details'))if(other!==menu)other.open=false});
+    menu.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary')?.focus()}});
+  }
+  document.addEventListener('click',event=>{for(const menu of form?.querySelectorAll<HTMLDetailsElement>('details[open]')||[])if(!menu.contains(event.target as Node))menu.open=false});
   window.addEventListener('popstate',applyFilters);
   let width=0;new ResizeObserver(()=>{if(width!==grid.clientWidth){width=grid.clientWidth;layout()}}).observe(grid);
   document.fonts.ready.then(layout);window.addEventListener('pageshow',layout);
