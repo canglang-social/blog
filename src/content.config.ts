@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { gallerySchema } from './lib/gallery-schema';
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
@@ -39,6 +40,7 @@ const projects = defineCollection({
 		demoUrl: z.url().optional(),
 		repoUrl: z.url().optional(),
 		order: z.number().default(0),
+		gallery: gallerySchema.optional(),
 	}),
 });
 

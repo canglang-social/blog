@@ -8,6 +8,58 @@ metricNote: on a 45-case eval it scores itself — live on GKE, behind a CI pipe
 demoUrl: https://ragx.felixhan.dev
 repoUrl: https://github.com/canglang-social/ragx
 order: 1
+gallery: {
+    "name": {
+      "en": "RAGX",
+      "zh": "RAGX"
+    },
+    "inscription": {
+      "en": "Answers with evidence",
+      "zh": "循文问答"
+    },
+    "kind": "project",
+    "status": "archived",
+    "statusCheckedAt": "2026-09-14",
+    "topics": [
+      "tools"
+    ],
+    "summary": {
+      "en": "Questions about financial filings, answered with citations and measured against a fixed evaluation set.",
+      "zh": "向财务报告提问，用引用核对答案，以固定评测集衡量质量。"
+    },
+    "purpose": {
+      "en": "Make facts buried in long reports and dense financial tables easier to find and verify.",
+      "zh": "让长篇报告和密集财务表格中的事实更容易被找到、核对。"
+    },
+    "contribution": {
+      "en": "I built a retrieval and answer evaluation harness, table-row descriptions for search, and a deployment pipeline gated by evaluation results. The published case study reports retrieval of 0.97 and answer accuracy of 0.98 on 45 cases.",
+      "zh": "我构建了检索与答案评测、面向搜索的表格行描述，以及以评测结果把关的部署流程。已发布案例记录：在 45 个测试案例上，检索得分为 0.97，答案准确率为 0.98。"
+    },
+    "milestones": [
+      {
+        "id": "ragx-case-study",
+        "date": null,
+        "title": {
+          "en": "Measuring each change",
+          "zh": "用评测比较改动"
+        },
+        "body": {
+          "en": "The case study traces improvements from the baseline through hybrid search, contextual retrieval, reranking, and table-row descriptions. It also records limitations of reproducibility and testing.",
+          "zh": "案例回顾了从基线到混合搜索、上下文检索、重排与表格行描述的改进，也记录了可复现性和测试方面的局限。"
+        }
+      }
+    ],
+    "relatedSlugs": [],
+    "links": [
+      {
+        "label": {
+          "en": "View source",
+          "zh": "查看代码"
+        },
+        "url": "https://github.com/canglang-social/ragx"
+      }
+    ]
+  }
 ---
 
 RAGX answers questions about 10-K filings — "what was Costco's 2023 revenue?" —

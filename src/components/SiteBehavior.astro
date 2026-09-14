@@ -1,0 +1,23 @@
+  <script>
+    const control=document.querySelector<HTMLElement>('#gallery-theme')!;
+    function applyTheme(value:string){
+      const night=value==='yokai';document.documentElement.dataset.artTheme=night?'yokai':'landscape';document.documentElement.dataset.theme=night?'dark':'light';control.dataset.value=night?'yokai':'landscape';for(const button of control.querySelectorAll<HTMLButtonElement>('[data-art-choice]'))button.setAttribute('aria-pressed',String(button.dataset.artChoice===control.dataset.value!));
+      try{localStorage.setItem('gallery-art-theme',control.dataset.value!);const back=document.querySelector<HTMLAnchorElement>('#gallery-back');const saved=JSON.parse(sessionStorage.getItem('gallery-return')||'null');if(back&&saved&&/^\/(zh\/)?(projects\/)?(\?.*)?$/.test(saved.url)&&saved.url.startsWith('/zh/')===(document.documentElement.lang==='zh')){const url=new URL(saved.url,location.origin);url.searchParams.set('art',control.dataset.value!);saved.url=url.pathname+url.search;sessionStorage.setItem('gallery-return',JSON.stringify(saved));back.href=saved.url}}catch{}
+      for(const source of document.querySelectorAll<HTMLSourceElement>('[data-yokai-source]'))source.media=night?'all':'not all';
+      for(const img of document.querySelectorAll<HTMLImageElement>('[data-day-alt]'))img.alt=(night?img.dataset.nightAlt:img.dataset.dayAlt)!;
+      for(const link of document.querySelectorAll<HTMLAnchorElement>('[data-art-original]'))link.href=(night?link.dataset.nightHref:link.dataset.dayHref)!;
+    }
+    applyTheme(document.documentElement.dataset.artTheme||'landscape');
+    if((performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type==='back_forward'){const url=new URL(location.href);url.searchParams.set('art',control.dataset.value!);history.replaceState(history.state,'',url)}
+    try{localStorage.setItem('gallery-language',document.documentElement.lang)}catch{}
+    for(const button of control.querySelectorAll<HTMLButtonElement>('[data-art-choice]'))button.addEventListener('click',()=>{const value=button.dataset.artChoice!;applyTheme(value);const url=new URL(location.href);url.searchParams.set('art',value);history.replaceState(history.state,'',url);syncLanguageLink()});
+    function restorePreference(){let value=document.documentElement.dataset.artTheme||'landscape';try{value=localStorage.getItem('gallery-art-theme')||value}catch{}applyTheme(value);const url=new URL(location.href);url.searchParams.set('art',value);history.replaceState(history.state,'',url);syncLanguageLink()}
+    window.addEventListener('popstate',restorePreference);
+    window.addEventListener('pageshow',event=>{if(event.persisted)restorePreference();syncLanguageLink();requestAnimationFrame(()=>{control.dataset.value=document.documentElement.dataset.artTheme||'landscape'})});
+    function syncLanguageLink(){const a=document.querySelector<HTMLAnchorElement>('[data-gallery-language]');if(a){const url=new URL(a.href);url.search=location.search;url.hash=location.hash;a.href=url.href}}
+    syncLanguageLink();window.addEventListener('hashchange',syncLanguageLink);window.addEventListener('gallery:statechange',syncLanguageLink);
+    for(const img of document.querySelectorAll<HTMLImageElement>('.exhibit-mount img,.detail-exhibit img')){
+      const fallback=()=>{img.hidden=true;const mount=img.closest('.exhibit-mount')||img.closest('[data-art-original]');if(mount&&!mount.querySelector('.art-fallback')){const caption=document.createElement('span');caption.className='art-fallback';caption.textContent=(document.documentElement.lang==='zh'?'图片暂不可用：':'Image unavailable: ')+img.alt;mount.append(caption)}};
+      img.addEventListener('load',()=>{if(img.naturalWidth){img.hidden=false;(img.closest('.exhibit-mount')||img.closest('[data-art-original]'))?.querySelector('.art-fallback')?.remove()}});img.addEventListener('error',fallback);if(img.complete&&!img.naturalWidth)fallback();
+    }
+  </script>

@@ -1,0 +1,69 @@
+---
+import Gallery from '../../layouts/Gallery.astro';
+import WorkCard from './WorkCard.astro';
+import { galleryWorks, labels, topics, prefix } from '../../lib/gallery';
+import type { Lang } from '../../i18n/ui';
+interface Props {lang:Lang;board?:boolean}
+const {lang,board=false}=Astro.props, zh=lang==='zh', base=prefix(lang);
+const projects=await galleryWorks();
+const title=board?(zh?'工 · 项目作品':'Works'):(zh?'山水之间，事有回响。':'A work in progress.');
+const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，记录沿途的发现。':'I’m Felix. I build with AI, follow questions, and write along the way.';
+---
+<Gallery lang={lang} title={title} description={description} switchUrl={`${zh?'':'/zh'}${board?'/projects/':'/'}`}>
+  <section class="gallery-intro shell"><div><h1>{title}</h1><p>{description}</p><a href={`${base}/about/`}>{zh?'知吾者':'About me'}</a></div><span class="gallery-inscription" aria-hidden="true">{zh?'所作 · 所思':'Work, unfolding'}</span></section>
+  <section class="exhibition shell" aria-label={zh?'作品展':'Work exhibition'}>
+    <div class="exhibition-heading"><h2>{zh?'工':'Works'}</h2>{!board&&<a href={`${base}/projects/`}>{zh?'按主题与状态浏览':'Browse by topic or status'}</a>}
+    {board&&<form class="gallery-filters" role="search" aria-label={zh?'筛选作品':'Filter works'}>
+      {(['status','topic'] as const).map(key=><details class="filter-menu" data-filter={key}>
+        <summary><span class="filter-kind">{key==='status'?(zh?'状态':'Status'):(zh?'主题':'Topic')}</span><span data-filter-caption>{zh?'全部':'All'}</span><span class="filter-chevron" aria-hidden="true">⌄</span></summary>
+        <div class="filter-options">
+          {[['all',zh?'全部':'All'],...Object.entries(key==='status'?labels:topics).map(([id,label])=>[id,label[lang]])].map(([id,label])=><label><input type="radio" name={key} value={id} checked={id==='all'}/><span>{label}</span><span class="filter-check" aria-hidden="true">✓</span></label>)}
+        </div>
+      </details>)}
+      <button class="filter-reset" type="reset">{zh?'重置':'Reset'}</button><output aria-live="polite"></output>
+    </form>}
+    </div>
+    <div class="masonry">{projects.map((p,index)=><WorkCard project={p} lang={lang} index={index}/>)}</div>
+    <p class="gallery-empty" hidden>{zh?'当前筛选下没有作品。试试其他主题或清除筛选。':'No works match. Try another topic or clear the filters.'}</p>
+    <p class="gallery-footnote">{zh?'— 表示用量尚未记录，并非零。底板高度参考近 30 天已记录的 AI token，用量不代表作品价值。':'— means usage is not yet recorded, not zero. Mount height reflects recorded AI tokens over 30 days, not the value of a work.'}</p>
+  </section>
+</Gallery>
+<script>
+  const grid=document.querySelector<HTMLElement>('.masonry')!;
+  const cards=[...grid.querySelectorAll<HTMLElement>('.exhibition-card')];
+  const form=document.querySelector<HTMLFormElement>('.gallery-filters');
+  function layout(){
+    const gap=48, width=grid.clientWidth, cols=Math.max(1,Math.min(5,Math.floor((width+gap)/368))), cw=(width-gap*(cols-1))/cols;
+    const heights=Array(cols).fill(0);grid.classList.add('laid-out');grid.dataset.columns=String(cols);
+    for(const card of cards.filter(c=>!c.hidden)){card.style.width=`${cw}px`;const col=heights.indexOf(Math.min(...heights));card.style.left=`${col*(cw+gap)}px`;card.style.top=`${heights[col]}px`;heights[col]+=card.offsetHeight+gap}
+    grid.style.height=`${Math.max(0,...heights.map(h=>h-gap))}px`;
+  }
+  function applyFilters(){
+    if(!form){layout();return}
+    const params=new URLSearchParams(location.search), chosen:Record<string,string>={};
+    for(const key of ['status','topic']){
+      const radios=[...form.querySelectorAll<HTMLInputElement>(`input[name="${key}"]`)];
+      chosen[key]=radios.some(r=>r.value===params.get(key))?params.get(key)!:'all';
+      for(const radio of radios)radio.checked=radio.value===chosen[key];
+      form.querySelector(`[data-filter="${key}"] [data-filter-caption]`)!.textContent=radios.find(r=>r.checked)!.nextElementSibling!.textContent;
+    }
+    for(const card of cards)card.hidden=!(chosen.status==='all'||card.dataset.status===chosen.status)||!(chosen.topic==='all'||card.dataset.topics!.split(' ').includes(chosen.topic));
+    (form.querySelector('.filter-reset') as HTMLButtonElement).hidden=chosen.status==='all'&&chosen.topic==='all';
+    const count=cards.filter(c=>!c.hidden).length;form.querySelector('output')!.textContent=`${count} ${document.documentElement.lang==='zh'?'个作品':'works'}`;
+    (document.querySelector('.gallery-empty') as HTMLElement).hidden=count>0;layout();
+  }
+  form?.addEventListener('change',()=>{for(const menu of form.querySelectorAll<HTMLDetailsElement>('details[open]')){menu.open=false;menu.querySelector('summary')?.focus()}const url=new URL(location.href);for(const key of ['status','topic']){const value=(form.querySelector(`input[name="${key}"]:checked`) as HTMLInputElement).value;if(value==='all')url.searchParams.delete(key);else url.searchParams.set(key,value)}history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
+  form?.addEventListener('reset',()=>{const url=new URL(location.href);url.searchParams.delete('status');url.searchParams.delete('topic');history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
+  for(const menu of form?.querySelectorAll<HTMLDetailsElement>('details')||[]){
+    menu.addEventListener('toggle',()=>{if(menu.open)for(const other of form!.querySelectorAll<HTMLDetailsElement>('details'))if(other!==menu)other.open=false});
+    menu.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary')?.focus()}});
+  }
+  document.addEventListener('click',event=>{for(const menu of form?.querySelectorAll<HTMLDetailsElement>('details[open]')||[])if(!menu.contains(event.target as Node))menu.open=false});
+  window.addEventListener('popstate',applyFilters);
+  let width=0;new ResizeObserver(()=>{if(width!==grid.clientWidth){width=grid.clientWidth;layout()}}).observe(grid);
+  document.fonts.ready.then(layout);window.addEventListener('pageshow',layout);
+  for(const img of grid.querySelectorAll('img')){img.addEventListener('load',layout);img.addEventListener('error',()=>{img.closest('.exhibit-mount')?.classList.add('image-unavailable');layout()})}
+  grid.addEventListener('click',e=>{const link=(e.target as Element).closest<HTMLAnchorElement>('.exhibit-link');if(link)try{sessionStorage.setItem('gallery-return',JSON.stringify({url:location.pathname+location.search,y:scrollY,work:link.closest<HTMLElement>('[data-work]')!.dataset.work}))}catch{}});
+  applyFilters();
+  try{const saved=JSON.parse(sessionStorage.getItem('gallery-return')||'null');if(saved?.url===location.pathname+location.search&&sessionStorage.getItem('gallery-restore')==='yes'){sessionStorage.removeItem('gallery-restore');requestAnimationFrame(()=>{layout();scrollTo(0,saved.y);cards.find(c=>c.dataset.work===saved.work)?.querySelector('a')?.focus({preventScroll:true})})}}catch{}
+</script>

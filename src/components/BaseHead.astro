@@ -43,8 +43,8 @@ const siteName = useTranslations(lang)('site.title');
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="/cang-seal.svg" />
+
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link
 	rel="alternate"
@@ -55,15 +55,9 @@ const siteName = useTranslations(lang)('site.title');
 <meta name="generator" content={Astro.generator} />
 
 <!-- Theme: set before paint to avoid a flash -->
-<script is:inline>
-	(() => {
-		const stored = localStorage.getItem('theme');
-		const theme =
-			stored ||
-			(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-		document.documentElement.dataset.theme = theme;
-	})();
-</script>
+  <script is:inline>
+    (()=>{let saved;try{saved=localStorage.getItem('gallery-art-theme')}catch{}const query=new URLSearchParams(location.search).get('art');const restoring=performance.getEntriesByType('navigation')[0]?.type==='back_forward';const theme=((restoring?saved:query)||saved)==='yokai'?'yokai':'landscape';document.documentElement.dataset.artTheme=theme;document.documentElement.dataset.theme=theme==='yokai'?'dark':'light'})();
+  </script>
 <meta name="theme-color" content="#f7f5ef" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#121210" media="(prefers-color-scheme: dark)" />
 

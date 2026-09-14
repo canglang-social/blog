@@ -1,0 +1,27 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Lang } from '../i18n/ui';
+import type { ImageMetadata } from 'astro';
+import rich from '../assets/gallery/scroll-rich.png';
+import '../styles/gallery.css';
+interface Props { lang:Lang; title:string; description:string; switchUrl:string; image?:ImageMetadata }
+const {lang,title,description,switchUrl,image=rich}=Astro.props;
+const zh=lang==='zh';
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <BaseHead title={`${title} — ${zh?'沧浪':'Felix Han'}`} description={description} lang={lang} image={image}/>
+
+  <link rel="alternate" hreflang={zh?'en':'zh'} href={new URL(switchUrl,Astro.site)}/>
+  <link rel="icon" type="image/svg+xml" href="/cang-seal.svg"/>
+</head>
+<body class="gallery-site">
+  <Header lang={lang} switchUrl={switchUrl}/>
+  <main id="main" class="gallery-main" tabindex="-1"><slot/></main>
+  <Footer lang={lang}/>
+
+</body>
+</html>

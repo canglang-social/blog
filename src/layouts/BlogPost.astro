@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { isRasterImage } from '../lib/social-card.mjs';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -29,6 +29,9 @@ const {
   translationUrl,
 } = Astro.props;
 const t = useTranslations(lang);
+const isAbout=Astro.url.pathname.replace(/\/$/,'').endsWith('/about');
+const slug=Astro.url.pathname.replace(/^\/(zh\/)?blog\//,'').replace(/\/$/,'');
+const relatedWorks=isAbout?[]:(await getCollection('projects')).filter(p=>p.data.gallery?.relatedSlugs.includes(slug));
 ---
 
 <html lang={lang}>
@@ -117,11 +120,11 @@ const t = useTranslations(lang);
     </style>
   </head>
 
-  <body>
+  <body class="gallery-site reading-site">
     <Header lang={lang} switchUrl={translationUrl} />
-    <main>
+    <main id="main" tabindex="-1">
       <article>
-        <a class="back-link" href={localeUrl(lang, '/blog')}>{t('post.back')}</a>
+        {!isAbout&&<a class="back-link" href={localeUrl(lang, '/blog')}>{t('post.back')}</a>}
         {
           heroImage && (
             <div class="hero-image">
@@ -135,7 +138,7 @@ const t = useTranslations(lang);
           )
         }
         <div class="title">
-          <div class="date">
+          {!isAbout&&<div class="date">
             <FormattedDate date={pubDate} lang={lang} />
             {
               updatedDate && (
@@ -144,7 +147,7 @@ const t = useTranslations(lang);
                 </span>
               )
             }
-          </div>
+          </div>}
           <h1>{title}</h1>
           {
             tags && tags.length > 0 && (
@@ -161,6 +164,7 @@ const t = useTranslations(lang);
         <div class="prose">
           <slot />
         </div>
+        {relatedWorks.length>0&&<aside class="related-works"><h2>{lang==='zh'?'相关作品':'Related works'}</h2>{relatedWorks.map(p=><a href={localeUrl(lang,`/projects/${p.id}/`)}>{p.data.gallery!.name[lang]} <span aria-hidden="true">↗</span></a>)}</aside>}
       </article>
     </main>
     <Footer lang={lang} />
