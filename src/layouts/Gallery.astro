@@ -1,72 +1,27 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import type { Lang } from '../i18n/ui';
 import type { ImageMetadata } from 'astro';
 import rich from '../assets/gallery/scroll-rich.png';
-import { prefix } from '../lib/gallery';
 import '../styles/gallery.css';
 interface Props { lang:Lang; title:string; description:string; switchUrl:string; image?:ImageMetadata }
 const {lang,title,description,switchUrl,image=rich}=Astro.props;
-const base=prefix(lang), zh=lang==='zh';
+const zh=lang==='zh';
 ---
 <!doctype html>
 <html lang={lang}>
 <head>
   <BaseHead title={`${title} — ${zh?'沧浪':'Felix Han'}`} description={description} lang={lang} image={image}/>
-  <script is:inline>
-    (()=>{let saved;try{saved=localStorage.getItem('gallery-art-theme')}catch{}const query=new URLSearchParams(location.search).get('art');const restoring=performance.getEntriesByType('navigation')[0]?.type==='back_forward';const theme=((restoring?saved:query)||saved)==='yokai'?'yokai':'landscape';document.documentElement.dataset.artTheme=theme;document.documentElement.dataset.theme=theme==='yokai'?'dark':'light'})();
-  </script>
+
   <link rel="alternate" hreflang={zh?'en':'zh'} href={new URL(switchUrl,Astro.site)}/>
   <link rel="icon" type="image/svg+xml" href="/cang-seal.svg"/>
 </head>
 <body class="gallery-site">
-  <a class="gallery-skip" href="#main">{zh?'跳到正文':'Skip to content'}</a>
-  <header class="gallery-header shell">
-    <a class="gallery-brand" href={`${base}/`}><img src="/cang-seal.svg" alt="" width="40" height="42"/><span>{zh?'沧浪':'Felix Han'}</span></a>
-    <nav aria-label={zh?'主导航':'Main navigation'}>
-      {[[zh?'知':'Writing',`${base}/blog/`,zh?'知 · 博客文章':'Writing'],[zh?'行':'Atlas',`${base}/atlas/`,zh?'行 · 实践地图':'Atlas'],[zh?'工':'Works',`${base}/projects/`,zh?'工 · 项目作品':'Works'],[zh?'吾':'About',`${base}/about/`,zh?'吾 · 关于我':'About']].map(([label,href,meaning])=><a href={href} title={meaning} aria-label={meaning} aria-current={Astro.url.pathname===href?'page':undefined}>{label}</a>)}
-    </nav>
-    <div class="gallery-preferences">
-      <div class="gallery-social" aria-label={zh?'其他平台':'Elsewhere'}>
-        <a href="https://github.com/canglang-social" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub <span aria-hidden="true">↗</span></a>
-        <a href="https://x.com/canglang_so" target="_blank" rel="noopener noreferrer" aria-label="X">X <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="preference-pair language-pair" role="group" aria-label={zh?'语言':'Language'}>
-        {zh ? <span aria-current="true" lang="zh">中</span> : <a data-gallery-language href={switchUrl} lang="zh" aria-label="切换为中文">中</a>}
-        <span class="preference-divider" aria-hidden="true">/</span>
-        {zh ? <a data-gallery-language href={switchUrl} lang="en" aria-label="Switch to English">EN</a> : <span aria-current="true" lang="en">EN</span>}
-      </div>
-      <div class="preference-pair art-pair" id="gallery-theme" role="group" aria-label={zh?'画境':'Art theme'}>
-        <button type="button" data-art-choice="landscape" aria-pressed="true" title={zh?'中国山水':'Chinese landscape'}>{zh?'山水':'Landscape'}</button>
-        <span class="preference-divider" aria-hidden="true">/</span>
-        <button type="button" data-art-choice="yokai" aria-pressed="false" title={zh?'日本 · 百鬼夜行':'Japanese yokai'}>{zh?'百鬼':'Yokai'}</button>
-      </div>
-    </div>
-  </header>
+  <Header lang={lang} switchUrl={switchUrl}/>
   <main id="main" class="gallery-main" tabindex="-1"><slot/></main>
-  <footer class="gallery-footer shell"><span>{zh?'沧浪 · 因好奇而构建，仍在慢慢展开。':'Felix Han · Built with curiosity. Still unfolding.'}</span><div class="gallery-footer-links"><a href="https://github.com/canglang-social" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://x.com/canglang_so" target="_blank" rel="noopener noreferrer">X ↗</a><a href="#main">{zh?'回到开卷处':'Back to the beginning'}</a></div></footer>
-  <script>
-    const control=document.querySelector<HTMLElement>('#gallery-theme')!;
-    function applyTheme(value:string){
-      const night=value==='yokai';document.documentElement.dataset.artTheme=night?'yokai':'landscape';document.documentElement.dataset.theme=night?'dark':'light';control.dataset.value=night?'yokai':'landscape';for(const button of control.querySelectorAll<HTMLButtonElement>('[data-art-choice]'))button.setAttribute('aria-pressed',String(button.dataset.artChoice===control.dataset.value!));
-      try{localStorage.setItem('gallery-art-theme',control.dataset.value!);const back=document.querySelector<HTMLAnchorElement>('#gallery-back');const saved=JSON.parse(sessionStorage.getItem('gallery-return')||'null');if(back&&saved&&/^\/(zh\/)?(projects\/)?(\?.*)?$/.test(saved.url)&&saved.url.startsWith('/zh/')===(document.documentElement.lang==='zh')){const url=new URL(saved.url,location.origin);url.searchParams.set('art',control.dataset.value!);saved.url=url.pathname+url.search;sessionStorage.setItem('gallery-return',JSON.stringify(saved));back.href=saved.url}}catch{}
-      for(const source of document.querySelectorAll<HTMLSourceElement>('[data-yokai-source]'))source.media=night?'all':'not all';
-      for(const img of document.querySelectorAll<HTMLImageElement>('[data-day-alt]'))img.alt=(night?img.dataset.nightAlt:img.dataset.dayAlt)!;
-      for(const link of document.querySelectorAll<HTMLAnchorElement>('[data-art-original]'))link.href=(night?link.dataset.nightHref:link.dataset.dayHref)!;
-    }
-    applyTheme(document.documentElement.dataset.artTheme||'landscape');
-    if((performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type==='back_forward'){const url=new URL(location.href);url.searchParams.set('art',control.dataset.value!);history.replaceState(history.state,'',url)}
-    try{localStorage.setItem('gallery-language',document.documentElement.lang)}catch{}
-    for(const button of control.querySelectorAll<HTMLButtonElement>('[data-art-choice]'))button.addEventListener('click',()=>{const value=button.dataset.artChoice!;applyTheme(value);const url=new URL(location.href);url.searchParams.set('art',value);history.replaceState(history.state,'',url);syncLanguageLink()});
-    function restorePreference(){let value=document.documentElement.dataset.artTheme||'landscape';try{value=localStorage.getItem('gallery-art-theme')||value}catch{}applyTheme(value);const url=new URL(location.href);url.searchParams.set('art',value);history.replaceState(history.state,'',url);syncLanguageLink()}
-    window.addEventListener('popstate',restorePreference);
-    window.addEventListener('pageshow',event=>{if(event.persisted)restorePreference();syncLanguageLink();requestAnimationFrame(()=>{control.dataset.value=document.documentElement.dataset.artTheme||'landscape'})});
-    function syncLanguageLink(){const a=document.querySelector<HTMLAnchorElement>('[data-gallery-language]');if(a){const url=new URL(a.href);url.search=location.search;url.hash=location.hash;a.href=url.href}}
-    syncLanguageLink();window.addEventListener('hashchange',syncLanguageLink);window.addEventListener('gallery:statechange',syncLanguageLink);
-    for(const img of document.querySelectorAll<HTMLImageElement>('.exhibit-mount img,.detail-exhibit img')){
-      const fallback=()=>{img.hidden=true;const mount=img.closest('.exhibit-mount')||img.closest('[data-art-original]');if(mount&&!mount.querySelector('.art-fallback')){const caption=document.createElement('span');caption.className='art-fallback';caption.textContent=(document.documentElement.lang==='zh'?'图片暂不可用：':'Image unavailable: ')+img.alt;mount.append(caption)}};
-      img.addEventListener('load',()=>{if(img.naturalWidth){img.hidden=false;(img.closest('.exhibit-mount')||img.closest('[data-art-original]'))?.querySelector('.art-fallback')?.remove()}});img.addEventListener('error',fallback);if(img.complete&&!img.naturalWidth)fallback();
-    }
-  </script>
+  <Footer lang={lang}/>
+
 </body>
 </html>

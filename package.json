@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "test": "node --test tests/*.test.mjs",
-    "build": "astro build && node scripts/check-social-previews.mjs",
+    "build": "astro build && node scripts/integrate-atlas-shell.mjs && node scripts/check-social-previews.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

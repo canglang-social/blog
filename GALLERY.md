@@ -25,3 +25,9 @@ The importer writes only approved aggregate fields into the same project record 
 English and Chinese galleries each support Chinese landscape and Japanese yokai art themes. Language follows the route; art choice is independently saved and can be linked with `?art=landscape` or `?art=yokai`. The yokai gallery gives each of the five cards a distinct character portrait. Landscape cards retain their original paintings/screenshots; real project screenshots remain in both versions of the detail pages. Both controls preserve the work, filters and section context. New-tab language links include current query/hash, and browser Back restores the selected art preference. The gallery's permanent destinations are `/` and `/zh/`; project links remain `/projects/<id>/` with translated summaries at `/zh/projects/<id>/`.
 
 Retain prior deployment/commit as rollback reference. A successful local build does not establish public deployment or social-profile changes.
+
+## Shared site presentation
+
+Header, Footer and SiteBehavior serve both reading pages and the work gallery. BaseHead applies the same saved art choice before paint. Article related-work links are derived from gallery.relatedSlugs; About omits article-only dates and back links.
+
+The owner-generated public Atlas files remain the content source. After Astro builds, scripts/integrate-atlas-shell.mjs composes their dist copies with the shared rendered navigation, footer and theme behavior. Use pnpm build and pnpm preview when reviewing Atlas integration; do not manually edit dist or copy the shared navigation into the source Atlas HTML.

@@ -48,9 +48,9 @@ const tags = [...counts.entries()]
     <link rel="alternate" hreflang="en" href={new URL('/blog/', Astro.site)} />
     <link rel="alternate" hreflang="zh" href={new URL('/zh/blog/', Astro.site)} />
   </head>
-  <body>
+  <body class="gallery-site reading-site">
     <Header lang={lang} />
-    <main>
+    <main id="main" tabindex="-1">
       <header class="page-head">
         <h1>{t('blog.heading')}</h1>
         <div class="poem-wrap">
@@ -61,7 +61,7 @@ const tags = [...counts.entries()]
 
       {
         tags.length > 0 && (
-          <div class="filters" role="group" aria-label={t('blog.filterLabel')}>
+          <details class="writing-filters"><summary>{lang==='zh'?'按主题浏览':'Browse by topic'}</summary><div class="filters" role="group" aria-label={t('blog.filterLabel')}>
             <button class="chip is-active" data-filter="*" type="button">
               {t('blog.all')}
             </button>
@@ -70,7 +70,7 @@ const tags = [...counts.entries()]
                 {tag}
               </button>
             ))}
-          </div>
+          </div></details>
         )
       }
 
@@ -121,10 +121,13 @@ const tags = [...counts.entries()]
           if (empty) empty.hidden = visible !== 0;
         };
         chips.forEach((chip) => {
-          chip.addEventListener('click', () =>
-            apply(chip.getAttribute('data-filter')),
-          );
+          chip.addEventListener('click', () => {
+            const value=chip.getAttribute('data-filter');const url=new URL(location.href);
+            if(value==='*')url.searchParams.delete('tag');else url.searchParams.set('tag',value);
+            history.pushState(null,'',url);apply(value);window.dispatchEvent(new Event('gallery:statechange'));
+          });
         });
+        window.addEventListener('popstate',()=>apply(new URLSearchParams(location.search).get('tag')||'*'));
         // Honor a ?tag= link coming from a post page.
         const wanted = new URLSearchParams(location.search).get('tag');
         if (wanted && [...chips].some((c) => c.getAttribute('data-filter') === wanted)) {

@@ -76,3 +76,13 @@ html[data-art-theme=yokai] .exhibit-mount img{box-shadow:3px 6px 16px #0005}
 .filter-options label:has(input:focus-visible){outline:1px solid var(--accent);outline-offset:-1px}
 .gallery-filters .filter-reset{font:inherit;color:var(--muted);background:none;border:0;padding:10px 0;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:700px){.exhibition-heading{flex-wrap:wrap;gap:12px}.gallery-filters{gap:16px;flex-wrap:wrap;font-size:12px}.filter-menu summary{gap:6px}.filter-chevron{margin-left:2px}.gallery-filters output{display:none}.filter-options{min-width:180px}.gallery-footer-links{gap:20px}}
+
+.gallery-footer-links .social-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:var(--muted)}
+.gallery-footer-links .social-icon:hover{color:var(--heading);background:var(--surface)}
+.reading-site main{padding-top:60px}.reading-site main:focus{outline:none}
+.reading-site{--surface-hover:var(--surface);--shadow:0 6px 20px #0001}
+html[data-art-theme=landscape] .gallery-site{--accent:#a53932;--accent-soft:#a539320d}
+@media(max-width:700px){.reading-site main{padding-top:32px}}
+
+.related-works{margin-top:48px;padding-top:24px;border-top:1px solid var(--border)}.related-works h2{font-size:18px;font-weight:400}.related-works a{display:block;padding-block:10px;text-underline-offset:5px}
+.writing-filters{margin-bottom:28px}.writing-filters summary{cursor:pointer;color:var(--muted);font-size:14px;padding-block:12px}.writing-filters .filters{padding-top:16px}
