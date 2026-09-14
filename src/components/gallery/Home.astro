@@ -38,8 +38,8 @@ const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，
     const count=cards.filter(c=>!c.hidden).length;form.querySelector('output')!.textContent=`${count} ${document.documentElement.lang==='zh'?'个作品':'works'}`;
     (document.querySelector('.gallery-empty') as HTMLElement).hidden=count>0;layout();
   }
-  form?.addEventListener('change',()=>{const url=new URL(location.href);for(const key of ['status','topic']){const value=(form.elements.namedItem(key) as HTMLSelectElement).value;if(value==='all')url.searchParams.delete(key);else url.searchParams.set(key,value)}history.pushState(null,'',url);applyFilters()});
-  form?.addEventListener('reset',()=>{const url=new URL(location.href);url.search='';history.pushState(null,'',url);applyFilters()});
+  form?.addEventListener('change',()=>{const url=new URL(location.href);for(const key of ['status','topic']){const value=(form.elements.namedItem(key) as HTMLSelectElement).value;if(value==='all')url.searchParams.delete(key);else url.searchParams.set(key,value)}history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
+  form?.addEventListener('reset',()=>{const url=new URL(location.href);url.searchParams.delete('status');url.searchParams.delete('topic');history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
   window.addEventListener('popstate',applyFilters);
   let width=0;new ResizeObserver(()=>{if(width!==grid.clientWidth){width=grid.clientWidth;layout()}}).observe(grid);
   document.fonts.ready.then(layout);window.addEventListener('pageshow',layout);

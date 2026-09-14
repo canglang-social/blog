@@ -4,6 +4,9 @@ import river from '../assets/gallery/scroll-landscape.png';
 import mountains from '../assets/gallery/landscape.png';
 import ragx from '../assets/projects/ragx-eval-dashboard.png';
 import learning from '../assets/projects/learn-to-ship-ranked.png';
+import procession from '../assets/gallery/yokai-procession.png';
+import shrine from '../assets/gallery/yokai-mountain.png';
+import bridge from '../assets/gallery/yokai-bridge.png';
 import type { Lang } from '../i18n/ui';
 
 export const art = {
@@ -12,6 +15,11 @@ export const art = {
   ragx: { image:ragx, mount:'#e9edf2', alt:{en:'RAGX evaluation history',zh:'RAGX 评估历史界面'}, generated:false },
   'learn-to-ship': { image:learning, mount:'#e6eeeb', alt:{en:'Ranked study recommendations',zh:'学习建议排序界面'}, generated:false },
   'field-notes': { image:river, mount:'#efe6d5', alt:{en:'A quiet river between mountains',zh:'山间静水'}, generated:true },
+};
+export const nightArt = {
+  'work-board':{image:bridge,alt:{en:'A lantern-lit yokai procession crossing a bridge toward a cedar shrine',zh:'提灯的百鬼队伍过桥，走向杉林中的神社'}},
+  'speaking-worlds':{image:procession,alt:{en:'Fox and umbrella spirits beneath a shrine gate and moon',zh:'月下鸟居旁的狐灵与伞妖'}},
+  'field-notes':{image:shrine,alt:{en:'Lantern spirits on a mountain path',zh:'山路上的灯火与鬼神'}},
 };
 export const labels = {
   active: {en:'In focus',zh:'专 · 正在投入'}, exploring:{en:'Exploring',zh:'探 · 探索中'},

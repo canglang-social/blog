@@ -13,6 +13,9 @@ const base=prefix(lang), zh=lang==='zh';
 <html lang={lang}>
 <head>
   <BaseHead title={`${title} — ${zh?'沧浪':'Felix Han'}`} description={description} lang={lang} image={image}/>
+  <script is:inline>
+    (()=>{let saved;try{saved=localStorage.getItem('gallery-art-theme')}catch{}const query=new URLSearchParams(location.search).get('art');const restoring=performance.getEntriesByType('navigation')[0]?.type==='back_forward';const theme=((restoring?saved:query)||saved)==='yokai'?'yokai':'landscape';document.documentElement.dataset.artTheme=theme;document.documentElement.dataset.theme=theme==='yokai'?'dark':'light'})();
+  </script>
   <link rel="alternate" hreflang={zh?'en':'zh'} href={new URL(switchUrl,Astro.site)}/>
   <link rel="icon" type="image/svg+xml" href="/cang-seal.svg"/>
 </head>
@@ -23,18 +26,31 @@ const base=prefix(lang), zh=lang==='zh';
     <nav aria-label={zh?'主导航':'Main navigation'}>
       {[[zh?'知':'Writing',`${base}/blog/`,zh?'知 · 博客文章':'Writing'],[zh?'行':'Atlas',`${base}/atlas/`,zh?'行 · 实践地图':'Atlas'],[zh?'工':'Works',`${base}/projects/`,zh?'工 · 项目作品':'Works'],[zh?'吾':'About',`${base}/about/`,zh?'吾 · 关于我':'About']].map(([label,href,meaning])=><a href={href} title={meaning} aria-label={meaning} aria-current={Astro.url.pathname===href?'page':undefined}>{label}</a>)}
     </nav>
-    <div class="gallery-preferences"><a data-gallery-language href={switchUrl} lang={zh?'en':'zh'}>{zh?'English':'中文'}</a><button id="gallery-theme" type="button" aria-label={zh?'切换明暗主题':'Toggle light and dark theme'} aria-pressed="false">{zh?'明暗':'Light / dark'}</button></div>
+    <div class="gallery-preferences"><a data-gallery-language href={switchUrl} lang={zh?'en':'zh'}>{zh?'English':'中文'}</a><label class="theme-choice"><span class="sr-only">{zh?'艺术主题':'Art theme'}</span><select autocomplete="off" id="gallery-theme" aria-label={zh?'艺术主题':'Art theme'}><option value="landscape">{zh?'中国山水':'Chinese landscape'}</option><option value="yokai">{zh?'日本 · 百鬼夜行':'Japanese yokai'}</option></select></label></div>
   </header>
   <main id="main" class="gallery-main" tabindex="-1"><slot/></main>
   <footer class="gallery-footer shell"><span>{zh?'沧浪 · 因好奇而构建，仍在慢慢展开。':'Felix Han · Built with curiosity. Still unfolding.'}</span><a href="#main">{zh?'回到开卷处':'Back to the beginning'}</a></footer>
   <script>
-    const button=document.querySelector<HTMLButtonElement>('#gallery-theme');
-    const sync=()=>button?.setAttribute('aria-pressed',String(document.documentElement.dataset.theme==='dark'));
-    sync();button?.addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('theme',next)}catch{}sync()});
-    document.querySelector<HTMLAnchorElement>('[data-gallery-language]')?.addEventListener('click',event=>{const a=event.currentTarget as HTMLAnchorElement;const url=new URL(a.href);url.search=location.search;url.hash=location.hash;a.href=url.href});
+    const control=document.querySelector<HTMLSelectElement>('#gallery-theme')!;
+    function applyTheme(value:string){
+      const night=value==='yokai';document.documentElement.dataset.artTheme=night?'yokai':'landscape';document.documentElement.dataset.theme=night?'dark':'light';control.value=night?'yokai':'landscape';
+      try{localStorage.setItem('gallery-art-theme',control.value);const back=document.querySelector<HTMLAnchorElement>('#gallery-back');const saved=JSON.parse(sessionStorage.getItem('gallery-return')||'null');if(back&&saved&&/^\/(zh\/)?(projects\/)?(\?.*)?$/.test(saved.url)&&saved.url.startsWith('/zh/')===(document.documentElement.lang==='zh')){const url=new URL(saved.url,location.origin);url.searchParams.set('art',control.value);saved.url=url.pathname+url.search;sessionStorage.setItem('gallery-return',JSON.stringify(saved));back.href=saved.url}}catch{}
+      for(const source of document.querySelectorAll<HTMLSourceElement>('[data-yokai-source]'))source.media=night?'all':'not all';
+      for(const img of document.querySelectorAll<HTMLImageElement>('[data-day-alt]'))img.alt=(night?img.dataset.nightAlt:img.dataset.dayAlt)!;
+      for(const link of document.querySelectorAll<HTMLAnchorElement>('[data-art-original]'))link.href=(night?link.dataset.nightHref:link.dataset.dayHref)!;
+    }
+    applyTheme(document.documentElement.dataset.artTheme||'landscape');
+    if((performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming)?.type==='back_forward'){const url=new URL(location.href);url.searchParams.set('art',control.value);history.replaceState(history.state,'',url)}
+    try{localStorage.setItem('gallery-language',document.documentElement.lang)}catch{}
+    control.addEventListener('change',()=>{applyTheme(control.value);try{localStorage.setItem('gallery-art-theme',control.value)}catch{}const url=new URL(location.href);url.searchParams.set('art',control.value);history.replaceState(history.state,'',url);syncLanguageLink()});
+    function restorePreference(){let value=document.documentElement.dataset.artTheme||'landscape';try{value=localStorage.getItem('gallery-art-theme')||value}catch{}applyTheme(value);const url=new URL(location.href);url.searchParams.set('art',value);history.replaceState(history.state,'',url);syncLanguageLink()}
+    window.addEventListener('popstate',restorePreference);
+    window.addEventListener('pageshow',event=>{if(event.persisted)restorePreference();syncLanguageLink();requestAnimationFrame(()=>{control.value=document.documentElement.dataset.artTheme||'landscape'})});
+    function syncLanguageLink(){const a=document.querySelector<HTMLAnchorElement>('[data-gallery-language]');if(a){const url=new URL(a.href);url.search=location.search;url.hash=location.hash;a.href=url.href}}
+    syncLanguageLink();window.addEventListener('hashchange',syncLanguageLink);window.addEventListener('gallery:statechange',syncLanguageLink);
     for(const img of document.querySelectorAll<HTMLImageElement>('.exhibit-mount img,.detail-exhibit img')){
-      const fallback=()=>{img.hidden=true;const mount=img.closest('.exhibit-mount')||img.parentElement;if(mount&&!mount.querySelector('.art-fallback')){const caption=document.createElement('span');caption.className='art-fallback';caption.textContent=(document.documentElement.lang==='zh'?'图片暂不可用：':'Image unavailable: ')+img.alt;mount.append(caption)}};
-      img.addEventListener('error',fallback);if(img.complete&&!img.naturalWidth)fallback();
+      const fallback=()=>{img.hidden=true;const mount=img.closest('.exhibit-mount')||img.closest('[data-art-original]');if(mount&&!mount.querySelector('.art-fallback')){const caption=document.createElement('span');caption.className='art-fallback';caption.textContent=(document.documentElement.lang==='zh'?'图片暂不可用：':'Image unavailable: ')+img.alt;mount.append(caption)}};
+      img.addEventListener('load',()=>{if(img.naturalWidth){img.hidden=false;(img.closest('.exhibit-mount')||img.closest('[data-art-original]'))?.querySelector('.art-fallback')?.remove()}});img.addEventListener('error',fallback);if(img.complete&&!img.naturalWidth)fallback();
     }
   </script>
 </body>

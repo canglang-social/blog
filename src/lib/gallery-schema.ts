@@ -1,7 +1,7 @@
 import { z } from 'astro/zod';
 const text = z.object({ en: z.string().min(1), zh: z.string().min(1) });
 const count = z.number().int().nonnegative().nullable();
-const timestamp = z.string().datetime({ offset:true }).nullable();
+const timestamp = z.iso.datetime({ offset:true }).nullable();
 export const gallerySchema = z.object({
   name: text, inscription: text, summary: text, purpose: text, contribution: text,
   kind: z.enum(['project', 'task-group', 'writing-group']),

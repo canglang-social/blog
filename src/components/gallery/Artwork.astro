@@ -1,0 +1,15 @@
+---
+import {Image,getImage} from 'astro:assets';
+import {art,nightArt} from '../../lib/gallery';
+import type {Lang} from '../../i18n/ui';
+interface Props {id:keyof typeof art;lang:Lang;detail?:boolean;eager?:boolean}
+const {id,lang,detail=false,eager=false}=Astro.props;
+const day=art[id],night=id in nightArt?nightArt[id as keyof typeof nightArt]:null;
+const widths=detail?[480,800,1200]:[320,640,960];
+const sizes=detail?'(max-width:700px) 90vw, 55vw':'(max-width:700px) 75vw, (max-width:1200px) 35vw, 25vw';
+const versions=night?await Promise.all(widths.map(width=>getImage({src:night.image,width,format:'webp'}))):[];
+---
+<picture class="gallery-artwork">
+  {night&&<source data-yokai-source media="not all" srcset={versions.map((v,i)=>`${v.src} ${widths[i]}w`).join(', ')} sizes={sizes} type="image/webp"/>}
+  <Image src={day.image} alt={day.alt[lang]} data-day-alt={day.alt[lang]} data-night-alt={night?.alt[lang]??day.alt[lang]} widths={widths} sizes={sizes} width={detail?1000:640} format="webp" loading={eager?'eager':'lazy'}/>
+</picture>

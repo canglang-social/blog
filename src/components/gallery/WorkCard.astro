@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import Artwork from './Artwork.astro';
 import type { CollectionEntry } from 'astro:content';
 import type { Lang } from '../../i18n/ui';
 import { art, labels, topics, prefix, tokenLabel, activitySpace } from '../../lib/gallery';
@@ -9,7 +9,7 @@ const a=art[project.id as keyof typeof art];
 ---
 <article class="exhibition-card" data-work={project.id} data-status={w.status} data-topics={w.topics.join(' ')} style={`--mount:${a.mount};--activity-space:${activitySpace(w.usage.recent)}px`}>
   <a class="exhibit-link" href={`${prefix(lang)}/projects/${project.id}/`}>
-    <div class="exhibit-mount"><Image src={a.image} alt={a.alt[lang]} widths={[320,640,960]} sizes="(max-width:700px) 75vw, (max-width:1200px) 35vw, 25vw" width={640} format="webp" loading={index<3?'eager':'lazy'}/></div>
+    <div class="exhibit-mount"><Artwork id={project.id as keyof typeof art} lang={lang} eager={index<3}/></div>
     <div class="exhibit-label"><div class="exhibit-state"><span class:list={['exhibit-status',w.status]}>{labels[w.status][lang]}</span><span class="token-number" title={lang==='zh'?'近 30 天已记录 AI token':'Recorded AI tokens in the last 30 days'}>{tokenLabel(w.usage.recent,lang)}{w.usage.coverage==='partial'?(lang==='zh'?' · 部分':' · partial'):''}</span></div><div class="exhibit-title"><h3>{w.inscription[lang]}</h3><p>{w.name[lang]}</p></div></div>
     <p class="exhibit-summary">{w.summary[lang]}</p>
     {w.pauseReason&&<p class="exhibit-pause">{w.pauseReason[lang]}</p>}

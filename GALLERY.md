@@ -22,6 +22,6 @@ The importer writes only approved aggregate fields into the same project record 
 
 ## Release scope
 
-English and Chinese galleries are implemented. The current visual switch changes light/dark presentation; it does not claim to implement the separate Japanese yokai art direction. That theme remains a later design release. The gallery's permanent destinations are `/` and `/zh/`; project links remain `/projects/<id>/` with translated summaries at `/zh/projects/<id>/`.
+English and Chinese galleries each support Chinese landscape and Japanese yokai art themes. Language follows the route; art choice is independently saved and can be linked with `?art=landscape` or `?art=yokai`. Three generated covers switch artwork; real project screenshots retain their original content. Both controls preserve the work, filters and section context. New-tab language links include current query/hash, and browser Back restores the selected art preference. The gallery's permanent destinations are `/` and `/zh/`; project links remain `/projects/<id>/` with translated summaries at `/zh/projects/<id>/`.
 
 Retain prior deployment/commit as rollback reference. A successful local build does not establish public deployment or social-profile changes.
