@@ -78,11 +78,10 @@ export const labels = {
   active: {en:'In focus',zh:'专 · 正在投入'}, exploring:{en:'Exploring',zh:'探 · 探索中'},
   paused:{en:'Paused',zh:'歇 · 暂时搁置'}, archived:{en:'Archived',zh:'藏 · 已归档'}, unknown:{en:'Status unconfirmed',zh:'近况待记'},
 };
-export const topics:Record<string,{en:string;zh:string}> = {
-  research:{en:'Research',zh:'研究'}, engineering:{en:'Engineering',zh:'工程'}, games:{en:'Games',zh:'游戏'}, hardware:{en:'Hardware',zh:'硬件'},
-  tools:{en:'AI tools',zh:'AI 工具'}, learning:{en:'Learning',zh:'学习'},
-  design:{en:'Design',zh:'设计'}, language:{en:'Language',zh:'语言'}, writing:{en:'Writing',zh:'写作'},
-};
+// Canonical public topic IDs match existing blog/Logseq vocabulary.
+export const topics:Record<string,{en:string;zh:string}> = Object.fromEntries(
+  ["agents", "ai", "career", "edu", "english", "learning", "machine-learning", "rag", "reflection", "science", "tools", "wish-studio", "workflow"].map(tag=>[tag,{en:tag,zh:tag}])
+);
 export const prefix = (lang:Lang) => lang === 'zh' ? '/zh' : '';
 export const tokenLabel = (n:number|null,lang:Lang) => n === null ? '—' : new Intl.NumberFormat(lang === 'zh' ? 'zh-CN':'en-US',{notation:'compact',maximumFractionDigits:1}).format(n);
 export const activitySpace = (n:number|null) => n === null || n === 0 ? 0 : n < 100000 ? 40 : n < 500000 ? 80 : n < 1000000 ? 120 : 160;

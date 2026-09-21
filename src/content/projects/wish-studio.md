@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "design"
-  ],
+  "topics": ["ai", "wish-studio"],
   "summary": {
     "en": "A service for turning personal wishes into small games, gifts, illustrations and useful tools.",
     "zh": "把个人愿望做成小游戏、礼物、插画和实用工具的服务。"

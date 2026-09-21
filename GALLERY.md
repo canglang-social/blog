@@ -31,3 +31,9 @@ Retain prior deployment/commit as rollback reference. A successful local build d
 Header, Footer and SiteBehavior serve both reading pages and the work gallery. BaseHead applies the same saved art choice before paint. Article related-work links are derived from gallery.relatedSlugs; About omits article-only dates and back links.
 
 The owner-generated public Atlas files remain the content source. After Astro builds, scripts/integrate-atlas-shell.mjs composes their dist copies with the shared rendered navigation, footer and theme behavior. Use pnpm build and pnpm preview when reviewing Atlas integration; do not manually edit dist or copy the shared navigation into the source Atlas HTML.
+
+## Public tags
+
+Work `topics` use the same lowercase identifiers as blog tags and existing Logseq subject tags: for example `ai`, `english`, `workflow`, `rag`, `science`, and `machine-learning`. Display the identifiers unchanged in both locales; do not translate them into a second vocabulary. `learning` follows the blog topic; Logseq `learn` is a capture/workflow type, not an automatic rename target. Private routing markers (`inbox`, `card`, etc.) are not public topics. Logseq itself is not modified or synchronized by website builds.
+
+Card/detail tags link to `/projects/?tag=<id>` and blog tags to `/blog/?tag=<id>`, with locale and art preference retained. Gallery filters accept legacy `topic` URLs; new links use `tag`. Keep tag links outside whole-card links so clicks and keyboard navigation reach the filter instead of the detail page.

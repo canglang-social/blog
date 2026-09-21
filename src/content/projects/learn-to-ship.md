@@ -20,10 +20,7 @@ gallery: {
     "kind": "project",
     "status": "archived",
     "statusCheckedAt": "2026-09-14",
-    "topics": [
-      "learning",
-      "tools"
-    ],
+    "topics": ["ai", "agents", "learning"],
     "summary": {
       "en": "A small agent that ranks what to study by the gap each item can help close.",
       "zh": "一个小型智能体，按每项学习能够弥补的差距，排列下一步该学什么。"

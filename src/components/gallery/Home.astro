@@ -13,7 +13,7 @@ const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，
   <section class="gallery-intro shell"><div><h1>{title}</h1><p>{description}</p><a href={`${base}/about/`}>{zh?'知吾者':'About me'}</a></div><span class="gallery-inscription" aria-hidden="true">{zh?'所作 · 所思':'Work, unfolding'}</span></section>
   <section class="exhibition shell" aria-label={zh?'作品展':'Work exhibition'}>
     <div class="exhibition-heading"><h2>{zh?'工':'Works'}</h2>{!board&&<a href={`${base}/projects/`}>{zh?'按主题与状态浏览':'Browse by topic or status'}</a>}
-    {board&&<form class="gallery-filters" role="search" aria-label={zh?'筛选作品':'Filter works'}>
+    {<form class="gallery-filters" role="search" aria-label={zh?'筛选作品':'Filter works'}>
       {(['status','topic'] as const).map(key=><details class="filter-menu" data-filter={key}>
         <summary><span class="filter-kind">{key==='status'?(zh?'状态':'Status'):(zh?'主题':'Topic')}</span><span data-filter-caption>{zh?'全部':'All'}</span><span class="filter-chevron" aria-hidden="true">⌄</span></summary>
         <div class="filter-options">
@@ -41,9 +41,11 @@ const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，
   function applyFilters(){
     if(!form){layout();return}
     const params=new URLSearchParams(location.search), chosen:Record<string,string>={};
+    const legacy:Record<string,string>={research:'science',engineering:'tools',games:'ai',hardware:'tools',design:'tools',language:'english'};
+    const old=params.get('topic');if(!params.has('tag')&&old)params.set('tag',legacy[old]||old);
     for(const key of ['status','topic']){
       const radios=[...form.querySelectorAll<HTMLInputElement>(`input[name="${key}"]`)];
-      chosen[key]=radios.some(r=>r.value===params.get(key))?params.get(key)!:'all';
+      chosen[key]=radios.some(r=>r.value===params.get(key==='topic'?'tag':key))?params.get(key==='topic'?'tag':key)!:'all';
       for(const radio of radios)radio.checked=radio.value===chosen[key];
       form.querySelector(`[data-filter="${key}"] [data-filter-caption]`)!.textContent=radios.find(r=>r.checked)!.nextElementSibling!.textContent;
     }
@@ -52,8 +54,8 @@ const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，
     const count=cards.filter(c=>!c.hidden).length;form.querySelector('output')!.textContent=`${count} ${document.documentElement.lang==='zh'?'个作品':'works'}`;
     (document.querySelector('.gallery-empty') as HTMLElement).hidden=count>0;layout();
   }
-  form?.addEventListener('change',()=>{for(const menu of form.querySelectorAll<HTMLDetailsElement>('details[open]')){menu.open=false;menu.querySelector('summary')?.focus()}const url=new URL(location.href);for(const key of ['status','topic']){const value=(form.querySelector(`input[name="${key}"]:checked`) as HTMLInputElement).value;if(value==='all')url.searchParams.delete(key);else url.searchParams.set(key,value)}history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
-  form?.addEventListener('reset',()=>{const url=new URL(location.href);url.searchParams.delete('status');url.searchParams.delete('topic');history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
+  form?.addEventListener('change',()=>{for(const menu of form.querySelectorAll<HTMLDetailsElement>('details[open]')){menu.open=false;menu.querySelector('summary')?.focus()}const url=new URL(location.href);for(const key of ['status','topic']){const value=(form.querySelector(`input[name="${key}"]:checked`) as HTMLInputElement).value;const param=key==='topic'?'tag':key;if(value==='all')url.searchParams.delete(param);else url.searchParams.set(param,value);if(key==='topic')url.searchParams.delete('topic')}history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
+  form?.addEventListener('reset',()=>{const url=new URL(location.href);url.searchParams.delete('status');url.searchParams.delete('topic');url.searchParams.delete('tag');history.pushState(null,'',url);window.dispatchEvent(new Event('gallery:statechange'));applyFilters()});
   for(const menu of form?.querySelectorAll<HTMLDetailsElement>('details')||[]){
     menu.addEventListener('toggle',()=>{if(menu.open)for(const other of form!.querySelectorAll<HTMLDetailsElement>('details'))if(other!==menu)other.open=false});
     menu.addEventListener('keydown',event=>{if(event.key==='Escape'){menu.open=false;menu.querySelector('summary')?.focus()}});

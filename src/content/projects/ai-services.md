@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["ai", "workflow"],
   "summary": {
     "en": "Exploring how to turn concrete AI and software needs into scoped, verifiable delivery.",
     "zh": "探索如何把具体 AI 与软件需求转成范围清晰、可核验的交付。"

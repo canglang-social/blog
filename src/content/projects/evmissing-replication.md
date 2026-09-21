@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "research"
-  ],
+  "topics": ["science"],
   "summary": {
     "en": "A partial computational replication of two block-maxima applications with missing observations.",
     "zh": "对含缺失观测的两个区组极大值应用进行部分计算复现。"

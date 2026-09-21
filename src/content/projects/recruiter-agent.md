@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["ai", "agents"],
   "summary": {
     "en": "A deterministic assistant that answers questions from an explicitly supplied fact snapshot.",
     "zh": "根据明确提供的事实快照回答问题的确定性助手。"

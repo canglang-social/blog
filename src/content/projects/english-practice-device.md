@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "hardware"
-  ],
+  "topics": ["english", "tools"],
   "summary": {
     "en": "A practice experience connecting listening, repetition, saved attempts and review.",
     "zh": "连接聆听、跟读、练习记录与回顾的练习体验。"

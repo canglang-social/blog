@@ -17,9 +17,7 @@ gallery: {
   "kind": "task-group",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "engineering"
-  ],
+  "topics": ["tools", "learning"],
   "summary": {
     "en": "Small Rust and log-parsing experiments, grouped as one developing body of work.",
     "zh": "把 Rust 与日志解析的小实验汇成一组持续积累的作品。"

@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "hardware"
-  ],
+  "topics": ["ai", "tools"],
   "summary": {
     "en": "An interactive side display for task summaries, details and replies.",
     "zh": "用于查看任务摘要、详情并输入回复的交互副屏。"

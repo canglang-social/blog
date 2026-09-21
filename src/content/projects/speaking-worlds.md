@@ -17,10 +17,7 @@ gallery: {
     "kind": "project",
     "status": "paused",
     "statusCheckedAt": "2026-09-14",
-    "topics": [
-      "tools",
-      "language"
-    ],
+    "topics": ["ai", "english"],
     "summary": {
       "en": "An experimental adventure game where speaking to characters can change the story.",
       "zh": "一个实验性的冒险游戏：与角色说话，让话语改变故事。"

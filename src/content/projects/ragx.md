@@ -20,9 +20,7 @@ gallery: {
     "kind": "project",
     "status": "archived",
     "statusCheckedAt": "2026-09-14",
-    "topics": [
-      "tools"
-    ],
+    "topics": ["ai", "rag"],
     "summary": {
       "en": "Questions about financial filings, answered with citations and measured against a fixed evaluation set.",
       "zh": "向财务报告提问，用引用核对答案，以固定评测集衡量质量。"
