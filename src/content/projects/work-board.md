@@ -17,10 +17,7 @@ gallery: {
     "kind": "project",
     "status": "active",
     "statusCheckedAt": "2026-09-14",
-    "topics": [
-      "design",
-      "tools"
-    ],
+    "topics": ["ai", "workflow"],
     "summary": {
       "en": "A personal exhibition of projects, questions, and writing, with room for the story behind each work.",
       "zh": "把项目、问题与文章放进个人作品展，也为每件作品留下讲述过程的空间。"

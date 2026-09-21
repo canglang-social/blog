@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["ai", "agents", "workflow"],
   "summary": {
     "en": "Reusable AI skills, prompts and plugins, kept together in a versioned marketplace.",
     "zh": "将可复用的 AI 技能、提示词与插件放进版本化的工具集。"

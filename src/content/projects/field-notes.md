@@ -17,10 +17,7 @@ gallery: {
     "kind": "writing-group",
     "status": "active",
     "statusCheckedAt": "2026-09-14",
-    "topics": [
-      "tools",
-      "learning"
-    ],
+    "topics": ["ai", "reflection"],
     "summary": {
       "en": "Stories about learning, building, and the moments when working with AI needs a closer look.",
       "zh": "记录学习与构建，也记录那些需要停下来细看 AI 协作的时刻。"

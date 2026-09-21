@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["ai", "agents", "workflow"],
   "summary": {
     "en": "A fictional-company experiment connecting sales handoff, IT support and project coordination.",
     "zh": "以虚构公司为场景，连接销售交接、IT 支持和项目协调的实验。"

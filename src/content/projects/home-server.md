@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "hardware"
-  ],
+  "topics": ["tools"],
   "summary": {
     "en": "Exploring a small home server and the useful service it should provide.",
     "zh": "探索一台小型家庭服务器，以及它应当提供的实际服务。"

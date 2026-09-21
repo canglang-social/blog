@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["career", "workflow"],
   "summary": {
     "en": "A reusable text-based workflow for career facts, job descriptions, resumes and interview preparation.",
     "zh": "围绕事实、职位描述、简历与面试准备的可复用文本工作流。"

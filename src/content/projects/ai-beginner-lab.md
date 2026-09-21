@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "learning"
-  ],
+  "topics": ["ai", "machine-learning", "learning"],
   "summary": {
     "en": "Small experiments for understanding AI systems from parameters and training to tools and products.",
     "zh": "通过小实验理解 AI 系统，从参数和训练逐步走向工具与产品。"

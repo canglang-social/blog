@@ -17,9 +17,7 @@ gallery: {
   "kind": "writing-group",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "writing"
-  ],
+  "topics": ["reflection"],
   "summary": {
     "en": "Writing about making things, learning, attention and the decisions along the way.",
     "zh": "记录创造、学习、注意力，以及沿途的选择。"

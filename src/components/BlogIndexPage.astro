@@ -86,14 +86,14 @@ const tags = [...counts.entries()]
                 {post.data.description && (
                   <p class="desc">{post.data.description}</p>
                 )}
+              </a>
                 {(post.data.tags ?? []).length > 0 && (
                   <div class="tags">
                     {post.data.tags.map((tag) => (
-                      <span class="tag">{tag}</span>
+                      <a class="tag" data-topic-link href={`${localeUrl(lang, "/blog/")}?tag=${encodeURIComponent(tag)}`}>{tag}</a>
                     ))}
                   </div>
                 )}
-              </a>
             </li>
           ))
         }
@@ -203,7 +203,7 @@ const tags = [...counts.entries()]
   .post-list li + li {
     border-top: 1px solid var(--border);
   }
-  .post-list a {
+  .post-list li > a {
     display: block;
     padding: 1.5rem 1.25rem;
     margin-inline: -1.25rem;
@@ -211,7 +211,7 @@ const tags = [...counts.entries()]
     text-decoration: none;
     transition: background-color 0.15s ease;
   }
-  .post-list a:hover {
+  .post-list li > a:hover {
     background: var(--surface-hover);
   }
   .post-list .date {
@@ -226,7 +226,7 @@ const tags = [...counts.entries()]
     color: var(--heading);
     transition: color 0.15s ease;
   }
-  .post-list a:hover .title {
+  .post-list li > a:hover .title {
     color: var(--accent);
   }
   .post-list .desc {
@@ -236,17 +236,21 @@ const tags = [...counts.entries()]
     line-height: 1.6;
   }
   .tags {
+    margin-bottom: 1.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
   }
   .tag {
+    display: inline-block;
+    text-decoration: none;
     font-size: 0.75rem;
     color: var(--muted);
     background: var(--surface-hover);
     border-radius: 3px;
     padding: 0.15rem 0.55rem;
   }
+  .tag:hover { text-decoration: underline; text-underline-offset: 3px; }
   .empty {
     color: var(--muted);
     padding: 2rem 0;

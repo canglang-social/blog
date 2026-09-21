@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["ai", "agents"],
   "summary": {
     "en": "An experiment in context-aware reply drafts and verifiable messaging actions.",
     "zh": "探索有上下文的回复草稿，以及可核验的消息操作。"

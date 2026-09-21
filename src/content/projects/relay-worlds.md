@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "games"
-  ],
+  "topics": ["ai"],
   "summary": {
     "en": "An experiment in shared fiction where individual contributions change a common story.",
     "zh": "让每个人的贡献改变共同故事的协作叙事实验。"

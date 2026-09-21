@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "hardware"
-  ],
+  "topics": ["tools"],
   "summary": {
     "en": "A playful desk-object concept combining a black record and a rainbow pixel backdrop.",
     "zh": "将黑胶唱片与彩虹像素背景结合的趣味桌面摆件概念。"

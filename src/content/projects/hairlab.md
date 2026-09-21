@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "design"
-  ],
+  "topics": ["ai", "tools"],
   "summary": {
     "en": "A virtual hairstyle try-on prototype for exploring a hairstyle catalog and image previews.",
     "zh": "通过发型目录与图片预览探索造型的虚拟试戴原型。"

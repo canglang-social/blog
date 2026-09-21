@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["ai", "workflow"],
   "summary": {
     "en": "A personal system for coordinating parallel work, reviews, decisions and follow-through.",
     "zh": "协调并行工作、复盘、决策和后续行动的个人系统。"

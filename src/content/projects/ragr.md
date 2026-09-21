@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "learning"
-  ],
+  "topics": ["ai", "rag", "learning"],
   "summary": {
     "en": "A small exploration of retrieval-augmented generation and similarity calculations.",
     "zh": "围绕检索增强生成与相似度计算的小型探索。"

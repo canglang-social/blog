@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "research"
-  ],
+  "topics": ["ai", "agents", "science"],
   "summary": {
     "en": "A design for research answers that cite a retrievable corpus and decline unsupported conclusions.",
     "zh": "让研究回答引用可检索语料，并拒绝无证据结论的设计探索。"

@@ -86,3 +86,5 @@ html[data-art-theme=landscape] .gallery-site{--accent:#a53932;--accent-soft:#a53
 
 .related-works{margin-top:48px;padding-top:24px;border-top:1px solid var(--border)}.related-works h2{font-size:18px;font-weight:400}.related-works a{display:block;padding-block:10px;text-underline-offset:5px}
 .writing-filters{margin-bottom:28px}.writing-filters summary{cursor:pointer;color:var(--muted);font-size:14px;padding-block:12px}.writing-filters .filters{padding-top:16px}
+
+.gallery-site a.gallery-tag {display:inline-block;text-decoration:none;min-height:24px;box-sizing:border-box}.gallery-site a.gallery-tag:hover {text-decoration:underline;text-underline-offset:3px;color:var(--ink)}

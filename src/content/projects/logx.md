@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "engineering"
-  ],
+  "topics": ["tools"],
   "summary": {
     "en": "A Rust command-line tool for parsing, filtering and aggregating logs.",
     "zh": "用于解析、筛选和聚合日志的 Rust 命令行工具。"

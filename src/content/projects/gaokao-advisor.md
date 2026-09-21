@@ -17,9 +17,7 @@ gallery: {
   "kind": "project",
   "status": "unknown",
   "statusCheckedAt": null,
-  "topics": [
-    "tools"
-  ],
+  "topics": ["ai", "edu"],
   "summary": {
     "en": "An experimental university-application planning tool with data provenance and risk tiers.",
     "zh": "带数据来源说明与风险分层的高考志愿规划实验工具。"
