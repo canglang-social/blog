@@ -34,14 +34,38 @@ gallery: {
       "zh": "我通过与 AI 协作确定产品与视觉方向：山水意境的画廊、独立展品、清晰状态，以及展开项目故事的详情页。"
     },
     "focus": {
-      "en": "Bringing real content, token attribution, and interaction design together in the personal website.",
-      "zh": "把真实内容、token 归属与交互设计一同接入个人网站。"
+      "en": "The bilingual gallery is live, with project stories, related writing, and independent landscape and yokai themes. The work now includes refining the published experience and keeping its records current.",
+      "zh": "中英文画廊已上线，包含项目故事、相关文章，以及独立切换的山水与百鬼主题。现在的工作也包括完善线上体验、维护作品记录。"
     },
     "next": {
       "en": "Can visitors understand both the work and its current state without reading a task log?",
       "zh": "不必阅读任务日志，访客能否看懂作品本身和它的当前状态？"
     },
     "milestones": [
+      {
+        "id": "gallery-social-links",
+        "date": "2026-09-21",
+        "title": {
+          "en": "Connected to public profiles",
+          "zh": "连接社交主页"
+        },
+        "body": {
+          "en": "The website link is now present on both GitHub and X. The gallery usage explanation also moved to the bottom of the page.",
+          "zh": "GitHub 与 X 主页均已提供网站链接；画廊的用量说明也已移至页尾。"
+        }
+      },
+      {
+        "id": "gallery-production-launch",
+        "date": "2026-09-14",
+        "title": {
+          "en": "The gallery goes live",
+          "zh": "作品展上线"
+        },
+        "body": {
+          "en": "Published five works with English and Chinese detail pages, landscape and yokai themes, and shared navigation across the gallery and existing blog. Token figures remain a dated, partial snapshot.",
+          "zh": "五项作品及其中英文详情页正式上线，支持山水与百鬼主题，并与原有博客共用导航。Token 用量仍为注明日期的部分记录快照。"
+        }
+      },
       {
         "id": "gallery-data-integration",
         "date": "2026-09-14",
