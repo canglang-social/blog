@@ -9,7 +9,7 @@ const projects=await galleryWorks();
 const title=board?(zh?'工 · 项目作品':'Works'):(zh?'山水之间，事有回响。':'A work in progress.');
 const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，记录沿途的发现。':'I’m Felix. I build with AI, follow questions, and write along the way.';
 ---
-<Gallery lang={lang} title={title} description={description} switchUrl={`${zh?'':'/zh'}${board?'/projects/':'/'}`}>
+<Gallery usageNote lang={lang} title={title} description={description} switchUrl={`${zh?'':'/zh'}${board?'/projects/':'/'}`}>
   <section class="gallery-intro shell"><div><h1>{title}</h1><p>{description}</p><a href={`${base}/about/`}>{zh?'知吾者':'About me'}</a></div><span class="gallery-inscription" aria-hidden="true">{zh?'所作 · 所思':'Work, unfolding'}</span></section>
   <section class="exhibition shell" aria-label={zh?'作品展':'Work exhibition'}>
     <div class="exhibition-heading"><h2>{zh?'工':'Works'}</h2>{!board&&<a href={`${base}/projects/`}>{zh?'按主题与状态浏览':'Browse by topic or status'}</a>}
@@ -25,7 +25,7 @@ const description=zh?'我是沧浪。用 AI 构建作品，沿着问题探索，
     </div>
     <div class="masonry">{projects.map((p,index)=><WorkCard project={p} lang={lang} index={index}/>)}</div>
     <p class="gallery-empty" hidden>{zh?'当前筛选下没有作品。试试其他主题或清除筛选。':'No works match. Try another topic or clear the filters.'}</p>
-    <p class="gallery-footnote">{zh?'— 表示用量尚未记录，并非零。底板高度参考近 30 天已记录的 AI token，用量不代表作品价值。':'— means usage is not yet recorded, not zero. Mount height reflects recorded AI tokens over 30 days, not the value of a work.'}</p>
+
   </section>
 </Gallery>
 <script>

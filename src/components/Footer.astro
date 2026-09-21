@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '../i18n/ui';
-interface Props{lang?:Lang}
-const {lang='en'}=Astro.props,zh=lang==='zh';
+interface Props{lang?:Lang;usageNote?:boolean}
+const {lang='en',usageNote=false}=Astro.props,zh=lang==='zh';
 ---
 <footer class="gallery-footer shell">
   <span>{zh?'沧浪 · 因好奇而构建，仍在慢慢展开。':'Felix Han · Built with curiosity. Still unfolding.'}</span>
@@ -15,4 +15,5 @@ const {lang='en'}=Astro.props,zh=lang==='zh';
     <a class="social-icon" href="https://x.com/canglang_so" target="_blank" rel="noopener noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.3l8.2-9.4L.8 2h6.5l4.5 6.8L18.9 2ZM17.8 20h1.7L6.2 4H4.4l13.4 16Z"/></svg></a>
     <a href="#main">{zh?'回到开卷处':'Back to the beginning'}</a>
   </div>
+  {usageNote&&<p class="gallery-footnote">{zh?'— 表示用量尚未记录，并非零。底板高度参考近 30 天已记录的 AI token，用量不代表作品价值。':'— means usage is not yet recorded, not zero. Mount height reflects recorded AI tokens over 30 days, not the value of a work.'}</p>}
 </footer>
