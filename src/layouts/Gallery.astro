@@ -6,8 +6,8 @@ import type { Lang } from '../i18n/ui';
 import type { ImageMetadata } from 'astro';
 import rich from '../assets/gallery/scroll-rich.png';
 import '../styles/gallery.css';
-interface Props { lang:Lang; title:string; description:string; switchUrl:string; image?:ImageMetadata }
-const {lang,title,description,switchUrl,image=rich}=Astro.props;
+interface Props { lang:Lang; title:string; description:string; switchUrl:string; image?:ImageMetadata; usageNote?:boolean }
+const {lang,title,description,switchUrl,image=rich,usageNote=false}=Astro.props;
 const zh=lang==='zh';
 ---
 <!doctype html>
@@ -21,7 +21,7 @@ const zh=lang==='zh';
 <body class="gallery-site">
   <Header lang={lang} switchUrl={switchUrl}/>
   <main id="main" class="gallery-main" tabindex="-1"><slot/></main>
-  <Footer lang={lang}/>
+  <Footer lang={lang} usageNote={usageNote}/>
 
 </body>
 </html>
